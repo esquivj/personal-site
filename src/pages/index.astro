@@ -95,12 +95,6 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Projects -->
-  <section>
-    <h2>Projects</h2>
-    <p class="text-muted empty-state">Coming soon</p>
-  </section>
-
   <!-- Writing -->
   <section>
     <h2>Writing</h2>
@@ -111,8 +105,27 @@ import Layout from '../layouts/Layout.astro';
   <!-- Stack -->
   <section>
     <h2>Stack</h2>
-    <p class="text-muted empty-state">The tools, apps, gear, and setup I use everyday.</p>
+    <div class="stack-preview">
+      <img src="/images/stack/cursor.png" alt="Cursor" class="stack-preview-icon" />
+      <img src="/images/stack/obsidian.png" alt="Obsidian" class="stack-preview-icon" />
+      <img src="/images/stack/linear.png" alt="Linear" class="stack-preview-icon" />
+      <img src="/images/stack/ghostty.png" alt="Ghostty" class="stack-preview-icon" />
+      <img src="/images/stack/spotify.png" alt="Spotify" class="stack-preview-icon" />
+    </div>
     <a href="/stack" class="section-link">View all ↗</a>
+  </section>
+
+  <!-- Speaking -->
+  <section>
+    <h2>Speaking</h2>
+    <a href="https://youtu.be/CYTEW2VF4n8" target="_blank" rel="noopener" class="speaking-preview">
+      <img src="/images/dao-talk-thumbnail.png" alt="DAO Talk" class="speaking-preview-thumb" />
+      <div class="speaking-preview-info">
+        <span class="speaking-preview-title">Governance Solution Providers & DAO Marketing</span>
+        <span class="speaking-preview-host">DAO Talk by Tally</span>
+      </div>
+    </a>
+    <a href="/speaking" class="section-link">View all ↗</a>
   </section>
 
   <!-- Now -->
@@ -333,5 +346,64 @@ import Layout from '../layouts/Layout.astro';
   .section-link:hover {
     color: #c4c4c4;
     text-decoration: underline;
+  }
+
+  /* Stack preview */
+  .stack-preview {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stack-preview-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 22%;
+    object-fit: contain;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.05),
+      0 1px 3px rgba(0, 0, 0, 0.3),
+      0 0 0 0.5px rgba(255, 255, 255, 0.03);
+  }
+
+  /* Speaking preview */
+  .speaking-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+  }
+
+  .speaking-preview:hover {
+    background-color: #141414;
+  }
+
+  .speaking-preview-thumb {
+    width: 80px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .speaking-preview-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .speaking-preview-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #e5e5e5;
+  }
+
+  .speaking-preview-host {
+    font-size: 0.75rem;
+    color: #999999;
   }
 </style>

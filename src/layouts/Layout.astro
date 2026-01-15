@@ -54,6 +54,9 @@ const {
   <body>
     <div class="container">
       <slot />
+      <footer class="footer">
+        <p>© 2025 Juan Esquivel</p>
+      </footer>
     </div>
   </body>
 </html>
@@ -122,5 +125,16 @@ const {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 1rem;
+  }
+
+  .footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .footer p {
+    font-size: 0.8125rem;
+    color: #404040;
   }
 </style>
