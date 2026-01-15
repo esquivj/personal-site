@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Speaking - Juan Esquivel">
+  <nav class="nav">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/writing" class="nav-link">Writing</a>
+    <a href="/stack" class="nav-link">Stack</a>
+    <a href="/speaking" class="nav-link active">Speaking</a>
+    <a href="/now" class="nav-link">Now</a>
+    <a href="/about" class="nav-link">About</a>
+  </nav>
+
+  <header class="page-header">
+    <h1>Speaking</h1>
+    <p class="subtitle">Podcasts, interviews, and talks.</p>
+  </header>
+
+  <section>
+    <div class="speaking-list">
+      <a href="https://youtu.be/CYTEW2VF4n8" target="_blank" rel="noopener" class="speaking-item">
+        <div class="speaking-info">
+          <span class="speaking-title">Governance Solution Providers & DAO Marketing</span>
+          <span class="speaking-host">DAO Talk by Tally</span>
+        </div>
+        <span class="speaking-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: #c4c4c4;
+  }
+
+  .nav-link.active {
+    color: #e5e5e5;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e5e5e5;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #999999;
+    font-size: 1rem;
+  }
+
+  .speaking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .speaking-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+  }
+
+  .speaking-item:hover {
+    background-color: #141414;
+  }
+
+  .speaking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    flex-grow: 1;
+  }
+
+  .speaking-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #e5e5e5;
+  }
+
+  .speaking-host {
+    font-size: 0.8125rem;
+    color: #999999;
+  }
+
+  .speaking-arrow {
+    color: #525252;
+    font-size: 0.875rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .speaking-item:hover .speaking-arrow {
+    color: #c4c4c4;
+  }
+</style>
