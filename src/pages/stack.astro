@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Stack - Juan Esquivel">
+  <header class="page-header">
+    <a href="/" class="back-link">&larr; Back</a>
+    <h1>Stack</h1>
+    <p class="subtitle">Tools, apps, and setup I use daily.</p>
+  </header>
+
+  <nav class="nav">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/writing" class="nav-link">Writing</a>
+    <a href="/stack" class="nav-link active">Stack</a>
+    <a href="/now" class="nav-link">Now</a>
+    <a href="/about" class="nav-link">About</a>
+  </nav>
+
+  <section>
+    <p class="empty-state">Coming soon.</p>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #525252;
+    margin-bottom: 1rem;
+  }
+
+  .back-link:hover {
+    color: #a3a3a3;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e5e5e5;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #737373;
+    font-size: 1rem;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: #a3a3a3;
+  }
+
+  .nav-link.active {
+    color: #e5e5e5;
+  }
+
+  .empty-state {
+    color: #525252;
+  }
+</style>
