@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
   <!-- Single rounded rectangle chain link -->
-  <rect x="24" y="16" width="80" height="96" rx="40" stroke="currentColor" stroke-width="14" fill="none"/>
+  <rect x="24" y="16" width="80" height="96" rx="40" stroke="currentColor" stroke-width="8" fill="none"/>
   <rect x="44" y="44" width="40" height="40" rx="20" fill="#0a0a0a"/>
   <style>
     rect:first-of-type { stroke: #FFF; }
