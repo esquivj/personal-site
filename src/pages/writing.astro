@@ -3,12 +3,6 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Writing - Juan Esquivel">
-  <header class="page-header">
-    <a href="/" class="back-link">&larr; Back</a>
-    <h1>Writing</h1>
-    <p class="subtitle">Thoughts on storytelling, crypto marketing, and building brands.</p>
-  </header>
-
   <nav class="nav">
     <a href="/" class="nav-link">Home</a>
     <a href="/writing" class="nav-link active">Writing</a>
@@ -18,25 +12,27 @@ import Layout from '../layouts/Layout.astro';
     <a href="/about" class="nav-link">About</a>
   </nav>
 
+  <header class="page-header">
+    <h1>Writing</h1>
+    <p class="subtitle">Thoughts on storytelling, crypto marketing, and building brands.</p>
+  </header>
+
   <section>
     <p class="empty-state">Coming soon.</p>
   </section>
 </Layout>
 
 <style>
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
   .page-header {
-    margin-bottom: 2rem;
-  }
-
-  .back-link {
-    display: inline-block;
-    font-size: 0.875rem;
-    color: #525252;
-    margin-bottom: 1rem;
-  }
-
-  .back-link:hover {
-    color: #c4c4c4;
+    margin-bottom: 3rem;
   }
 
   h1 {
@@ -49,14 +45,6 @@ import Layout from '../layouts/Layout.astro';
   .subtitle {
     color: #999999;
     font-size: 1rem;
-  }
-
-  .nav {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #1a1a1a;
   }
 
   .nav-link {
