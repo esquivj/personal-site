@@ -68,7 +68,7 @@ import Layout from '../layouts/Layout.astro';
         <span class="stack-arrow">↗</span>
       </a>
       <a href="https://linear.app" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/linear.svg" alt="Linear" class="stack-icon" />
+        <img src="/images/stack/linear.png" alt="Linear" class="stack-icon" />
         <div class="stack-info">
           <span class="stack-name">Linear</span>
           <span class="stack-desc">Project and task management</span>
@@ -91,6 +91,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <span class="stack-arrow">↗</span>
       </a>
+      <a href="https://culturedcode.com/things/" target="_blank" rel="noopener" class="stack-item">
+        <img src="/images/stack/things.png" alt="Things 3" class="stack-icon" />
+        <div class="stack-info">
+          <span class="stack-name">Things 3</span>
+          <span class="stack-desc">Task management</span>
+        </div>
+        <span class="stack-arrow">↗</span>
+      </a>
     </div>
   </section>
 
@@ -99,7 +107,7 @@ import Layout from '../layouts/Layout.astro';
     <h2>Browsing & Research</h2>
     <div class="stack-list">
       <a href="https://www.diabrowser.com" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/dia.svg" alt="Dia" class="stack-icon" />
+        <img src="/images/stack/dia.png" alt="Dia" class="stack-icon" />
         <div class="stack-info">
           <span class="stack-name">Dia</span>
           <span class="stack-desc">Web browser</span>
@@ -107,7 +115,7 @@ import Layout from '../layouts/Layout.astro';
         <span class="stack-arrow">↗</span>
       </a>
       <a href="https://eagle.cool" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/eagle.svg" alt="Eagle" class="stack-icon" />
+        <img src="/images/stack/eagle.png" alt="Eagle" class="stack-icon" />
         <div class="stack-info">
           <span class="stack-name">Eagle</span>
           <span class="stack-desc">Image and video library</span>
@@ -231,13 +239,16 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .stack-icon {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
     border-radius: 22%;
     object-fit: contain;
-    background-color: #1a1a1a;
-    padding: 4px;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.05),
+      0 1px 3px rgba(0, 0, 0, 0.3),
+      0 0 0 0.5px rgba(255, 255, 255, 0.03);
   }
 
   .stack-info {
