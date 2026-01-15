@@ -3,12 +3,6 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Stack - Juan Esquivel">
-  <header class="page-header">
-    <a href="/" class="back-link">&larr; Back</a>
-    <h1>Stack</h1>
-    <p class="subtitle">Tools, apps, and setup I use daily.</p>
-  </header>
-
   <nav class="nav">
     <a href="/" class="nav-link">Home</a>
     <a href="/writing" class="nav-link">Writing</a>
@@ -17,43 +11,145 @@ import Layout from '../layouts/Layout.astro';
     <a href="/about" class="nav-link">About</a>
   </nav>
 
+  <header class="page-header">
+    <h1>Stack</h1>
+    <p class="subtitle">Tools, apps, and gear that power my day-to-day.</p>
+  </header>
+
+  <!-- Development -->
   <section>
-    <p class="empty-state">Coming soon.</p>
+    <h2>Development</h2>
+    <div class="stack-list">
+      <a href="https://claude.ai/code" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Claude Code</span>
+          <span class="stack-desc">AI coding assistant</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://cursor.com" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Cursor</span>
+          <span class="stack-desc">AI-powered code editor</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://ghostty.org" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Ghostty</span>
+          <span class="stack-desc">Terminal emulator</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+    </div>
   </section>
+
+  <!-- Productivity -->
+  <section>
+    <h2>Productivity</h2>
+    <div class="stack-list">
+      <a href="https://obsidian.md" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Obsidian</span>
+          <span class="stack-desc">Knowledge management</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://notion.so" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Notion</span>
+          <span class="stack-desc">Docs and wikis</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://linear.app" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Linear</span>
+          <span class="stack-desc">Project and task management</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://amie.so" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Amie</span>
+          <span class="stack-desc">Calendar</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://granola.ai" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Granola</span>
+          <span class="stack-desc">AI meeting notes</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Browsing & Research -->
+  <section>
+    <h2>Browsing & Research</h2>
+    <div class="stack-list">
+      <a href="https://dia.browser" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Dia</span>
+          <span class="stack-desc">Web browser</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://eagle.cool" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Eagle</span>
+          <span class="stack-desc">Image and video library</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Communication -->
+  <section>
+    <h2>Communication</h2>
+    <div class="stack-list">
+      <a href="https://www.beeper.com" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Beeper</span>
+          <span class="stack-desc">All-in-one messaging</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+      <a href="https://notion.so/product/mail" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Notion Mail</span>
+          <span class="stack-desc">Email client</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Music -->
+  <section>
+    <h2>Music</h2>
+    <div class="stack-list">
+      <a href="https://spotify.com" target="_blank" rel="noopener" class="stack-item">
+        <div class="stack-info">
+          <span class="stack-name">Spotify</span>
+          <span class="stack-desc">Music streaming</span>
+        </div>
+        <span class="stack-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <p class="coming-soon">Hardware, supplements, and gear coming soon.</p>
 </Layout>
 
 <style>
-  .page-header {
-    margin-bottom: 2rem;
-  }
-
-  .back-link {
-    display: inline-block;
-    font-size: 0.875rem;
-    color: #525252;
-    margin-bottom: 1rem;
-  }
-
-  .back-link:hover {
-    color: #a3a3a3;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #e5e5e5;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: #737373;
-    font-size: 1rem;
-  }
-
   .nav {
     display: flex;
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #1a1a1a;
   }
@@ -72,7 +168,85 @@ import Layout from '../layouts/Layout.astro';
     color: #e5e5e5;
   }
 
-  .empty-state {
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e5e5e5;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #737373;
+    font-size: 1rem;
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  section h2 {
+    font-size: 0.875rem;
+    font-weight: 500;
     color: #525252;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .stack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+  }
+
+  .stack-item:hover {
+    background-color: #141414;
+  }
+
+  .stack-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .stack-name {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #e5e5e5;
+  }
+
+  .stack-desc {
+    font-size: 0.8125rem;
+    color: #737373;
+  }
+
+  .stack-arrow {
+    color: #525252;
+    font-size: 0.875rem;
+  }
+
+  .stack-item:hover .stack-arrow {
+    color: #a3a3a3;
+  }
+
+  .coming-soon {
+    color: #525252;
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-top: 2rem;
   }
 </style>
