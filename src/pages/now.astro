@@ -5,9 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Now - Juan Esquivel">
   <nav class="nav">
     <a href="/" class="nav-link">Home</a>
-    <a href="/now" class="nav-link active">Now</a>
     <a href="/writing" class="nav-link">Writing</a>
     <a href="/stack" class="nav-link">Stack</a>
+    <a href="/now" class="nav-link active">Now</a>
     <a href="/about" class="nav-link">About</a>
   </nav>
 
@@ -28,7 +28,25 @@ import Layout from '../layouts/Layout.astro';
 
   <section>
     <h2>Life</h2>
-    <p>Recently moved to Lisbon. Lifting weights consistently. Watching Entourage. Listening to Deftones.</p>
+    <p>Recently moved to Lisbon. Lifting weights consistently.</p>
+  </section>
+
+  <section>
+    <h2>Listening</h2>
+    <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="listening-link">Deftones, Junior H, Peso Pluma ↗</a>
+  </section>
+
+  <section class="watching-section">
+    <h2>Watching</h2>
+
+    <h3>Movies</h3>
+    <a href="https://letterboxd.com/cadena/" target="_blank" rel="noopener" class="letterboxd-link">One Battle After Another, Bugonia, Weapons ↗</a>
+
+    <h3>Shows</h3>
+    <p class="watching-text">Entourage, Pluribus, IT: Welcome to Derry</p>
+
+    <h3>Creators</h3>
+    <p class="watching-text">George Heaton, Kai Cenat, Agent00, Daniel Simmons, Sam Sulek</p>
   </section>
 
   <p class="last-updated">Last updated: January 2026</p>
@@ -50,7 +68,7 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .nav-link:hover {
-    color: #a3a3a3;
+    color: #c4c4c4;
   }
 
   .nav-link.active {
@@ -69,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .subtitle {
-    color: #737373;
+    color: #999999;
     font-size: 1rem;
   }
 
@@ -87,7 +105,7 @@ import Layout from '../layouts/Layout.astro';
   }
 
   section p {
-    color: #a3a3a3;
+    color: #c4c4c4;
     font-size: 1rem;
     line-height: 1.6;
   }
@@ -97,5 +115,45 @@ import Layout from '../layouts/Layout.astro';
     font-size: 0.8125rem;
     font-style: italic;
     margin-top: 3rem;
+  }
+
+  /* Watching */
+  .watching-section h3 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #999999;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .watching-section h3:first-of-type {
+    margin-top: 0;
+  }
+
+  .watching-text {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .letterboxd-link {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .letterboxd-link:hover {
+    color: #00E054;
+  }
+
+  /* Listening */
+  .listening-link {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .listening-link:hover {
+    color: #1DB954;
   }
 </style>
