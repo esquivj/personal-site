@@ -13,6 +13,7 @@ import Layout from '../layouts/Layout.astro';
   </nav>
 
   <header class="page-header">
+    <a href="/" class="back-link">← Home</a>
     <h1>Writing</h1>
     <p class="subtitle">Thoughts on storytelling, crypto marketing, and building brands.</p>
   </header>
@@ -33,6 +34,17 @@ import Layout from '../layouts/Layout.astro';
 
   .page-header {
     margin-bottom: 3rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #525252;
+    margin-bottom: 1rem;
+  }
+
+  .back-link:hover {
+    color: #c4c4c4;
   }
 
   h1 {
