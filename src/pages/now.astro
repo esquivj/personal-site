@@ -3,12 +3,6 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Now - Juan Esquivel">
-  <header class="page-header">
-    <a href="/" class="back-link">&larr; Back</a>
-    <h1>Now</h1>
-    <p class="subtitle">What I'm working on, watching, and listening to.</p>
-  </header>
-
   <nav class="nav">
     <a href="/" class="nav-link">Home</a>
     <a href="/writing" class="nav-link">Writing</a>
@@ -17,43 +11,34 @@ import Layout from '../layouts/Layout.astro';
     <a href="/about" class="nav-link">About</a>
   </nav>
 
+  <header class="page-header">
+    <h1>Now</h1>
+    <p class="subtitle">What I'm focused on at the moment.</p>
+  </header>
+
   <section>
-    <p class="empty-state">Coming soon.</p>
+    <h2>Work</h2>
+    <p>I run marketing at StableLab, a crypto company helping on-chain businesses with growth intelligence. I spend a lot of time thinking about how to tell stories that actually land in crypto.</p>
   </section>
+
+  <section>
+    <h2>Building</h2>
+    <p>Building a personal brand. Trying to connect with people who think about this stuff the same way I do and inspiring people in crypto to care about storytelling.</p>
+  </section>
+
+  <section>
+    <h2>Life</h2>
+    <p>Recently moved to Lisbon. Lifting weights consistently. Watching Entourage. Listening to Deftones.</p>
+  </section>
+
+  <p class="last-updated">Last updated: January 2026</p>
 </Layout>
 
 <style>
-  .page-header {
-    margin-bottom: 2rem;
-  }
-
-  .back-link {
-    display: inline-block;
-    font-size: 0.875rem;
-    color: #525252;
-    margin-bottom: 1rem;
-  }
-
-  .back-link:hover {
-    color: #a3a3a3;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #e5e5e5;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: #737373;
-    font-size: 1rem;
-  }
-
   .nav {
     display: flex;
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #1a1a1a;
   }
@@ -72,7 +57,45 @@ import Layout from '../layouts/Layout.astro';
     color: #e5e5e5;
   }
 
-  .empty-state {
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e5e5e5;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #737373;
+    font-size: 1rem;
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  section h2 {
+    font-size: 0.875rem;
+    font-weight: 500;
     color: #525252;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  section p {
+    color: #a3a3a3;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .last-updated {
+    color: #404040;
+    font-size: 0.8125rem;
+    font-style: italic;
+    margin-top: 3rem;
   }
 </style>
