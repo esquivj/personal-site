@@ -91,6 +91,10 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
         <p>© 2025 Juan Esquivel</p>
       </footer>
     </div>
+    <script>
+      import { inject } from '@vercel/analytics';
+      inject();
+    </script>
   </body>
 </html>
 
