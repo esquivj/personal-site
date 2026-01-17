@@ -1,0 +1,54 @@
+# robots.txt for juanesquivel.xyz
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://juanesquivel.xyz/sitemap-index.xml
+
+# AI Crawlers - Explicitly allowed for discoverability
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Meta
+User-agent: FacebookBot
+Allow: /
+
+# Common Crawl (used for training data)
+User-agent: CCBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+# Bing/Microsoft
+User-agent: bingbot
+Allow: /
+
+# LLMs.txt for AI systems
+# See: https://juanesquivel.xyz/llms.txt

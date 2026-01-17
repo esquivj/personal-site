@@ -1,8 +1,57 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Juan Esquivel",
+  "url": "https://juanesquivel.xyz",
+  "image": "https://juanesquivel.xyz/images/avatar.jpg",
+  "description": "Lore maximalist. Head of Marketing at StableLab. Building brand, narrative, and lore in crypto.",
+  "jobTitle": "Head of Marketing",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "StableLab",
+    "url": "https://stablelab.xyz"
+  },
+  "address": {
+    "@type": "Place",
+    "name": "Lisbon, Portugal"
+  },
+  "sameAs": [
+    "https://x.com/0xCadena",
+    "https://www.linkedin.com/in/esquivj/",
+    "https://github.com/esquivj",
+    "https://www.cosmos.so/cadena"
+  ],
+  "knowsAbout": [
+    "Crypto Marketing",
+    "Brand Strategy",
+    "Content Marketing",
+    "DAO Governance",
+    "Web3",
+    "Storytelling"
+  ]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Juan Esquivel",
+  "url": "https://juanesquivel.xyz",
+  "description": "Personal website of Juan Esquivel - lore maximalist and Head of Marketing at StableLab",
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel"
+  }
+};
 ---
 
-<Layout>
+<Layout canonicalPath="/">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  </Fragment>
   <!-- Navigation -->
   <nav class="nav">
     <button class="nav-toggle" aria-label="Toggle menu">

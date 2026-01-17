@@ -1,8 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Juan Esquivel's Stack",
+  "url": "https://juanesquivel.xyz/stack",
+  "description": "Tools, apps, and gear that Juan Esquivel uses daily for development, productivity, and creativity.",
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  }
+};
 ---
 
-<Layout title="Stack - Juan Esquivel">
+<Layout
+  title="Stack - Juan Esquivel"
+  description="Tools, apps, and gear that power Juan Esquivel's day-to-day. Development tools, productivity apps, and creative software."
+  canonicalPath="/stack"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  </Fragment>
   <nav class="nav">
     <button class="nav-toggle" aria-label="Toggle menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

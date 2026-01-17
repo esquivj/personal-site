@@ -1,8 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Speaking - Juan Esquivel",
+  "url": "https://juanesquivel.xyz/speaking",
+  "description": "Podcasts, interviews, and talks by Juan Esquivel on crypto marketing, DAO governance, and brand building.",
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  }
+};
 ---
 
-<Layout title="Speaking - Juan Esquivel">
+<Layout
+  title="Speaking - Juan Esquivel"
+  description="Podcasts, interviews, and talks by Juan Esquivel on crypto marketing, DAO governance, and brand building."
+  canonicalPath="/speaking"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  </Fragment>
   <nav class="nav">
     <button class="nav-toggle" aria-label="Toggle menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
