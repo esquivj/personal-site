@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Juan Esquivel//Flighty Update Reminder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:20260401T100000
+DTEND:20260401T103000
+RRULE:FREQ=MONTHLY;INTERVAL=3;BYMONTHDAY=1
+DTSTAMP:20260118T000000Z
+UID:flighty-update-reminder@juanesquivel.xyz
+SUMMARY:Update Flighty Travel Stats
+DESCRIPTION:Quarterly reminder to update travel stats on personal website.\n\nSteps:\n1. Export flights from Flighty (Settings > Account Data > Export Your Flights)\n2. Run: npx tsx scripts/update-travels.ts /path/to/FlightyExport.csv\n3. Deploy the site
+LOCATION:
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
