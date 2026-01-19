@@ -1,0 +1,290 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const post = {
+  title: "Lorem Ipsum Dolor Sit Amet Consectetur",
+  subtitle: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+  date: "2026.01.19",
+  readingTime: "RT: 8 MIN",
+  cover: "/images/sample-cover.jpg"
+};
+---
+
+<Layout
+  title={`${post.title} - Juan Esquivel`}
+  description={post.subtitle}
+  type="article"
+  image={post.cover}
+  canonicalPath="/writing/sample-post"
+>
+  <nav class="nav">
+    <a href="/writing" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Writing
+    </a>
+  </nav>
+
+  <article class="post">
+    {post.cover && (
+      <figure class="post-cover">
+        <img src={post.cover} alt="" />
+      </figure>
+    )}
+
+    <header class="post-header">
+      <h1 class="post-title">{post.title}</h1>
+      <p class="post-subtitle">{post.subtitle}</p>
+      <div class="post-meta">
+        <time>{post.date}</time>
+        <span class="separator">·</span>
+        <span>{post.readingTime}</span>
+      </div>
+    </header>
+
+    <div class="post-content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+      <h2>Excepteur Sint Occaecat</h2>
+
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+
+      <blockquote>
+        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.
+      </blockquote>
+
+      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+
+      <h2>Neque Porro Quisquam</h2>
+
+      <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+
+      <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+
+      <ul>
+        <li>Temporibus autem quibusdam et aut officiis</li>
+        <li>Debitis aut rerum necessitatibus saepe</li>
+        <li>Eveniet ut et voluptates repudiandae sint</li>
+        <li>Molestiae non recusandae itaque earum</li>
+      </ul>
+
+      <h2>Quis Autem Vel Eum</h2>
+
+      <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
+
+      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+
+      <h3>Similique Sunt in Culpa</h3>
+
+      <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+
+      <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
+
+      <hr />
+
+      <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+
+      <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+
+      <p><strong>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit.</strong></p>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .nav {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #e5e5e5;
+  }
+
+  .back-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .post {
+    max-width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-cover {
+    margin: 0 0 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .post-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1.125rem;
+    color: #999999;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+  }
+
+  .separator {
+    color: #333;
+  }
+
+  .post-content {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content blockquote {
+    border-left: 2px solid #404040;
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #a3a3a3;
+    background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .post-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content li {
+    margin-bottom: 0.5rem;
+    color: #c4c4c4;
+  }
+
+  .post-content li::marker {
+    color: #525252;
+  }
+
+  .post-content hr {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 3rem 0;
+  }
+
+  .post-content strong {
+    color: #e5e5e5;
+    font-weight: 700;
+  }
+
+  .post-content a {
+    color: #e5e5e5;
+    text-decoration: underline;
+    text-decoration-color: #525252;
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .post-content a:hover {
+    text-decoration-color: #e5e5e5;
+  }
+
+  .post-content code {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    background: rgba(255,255,255,0.06);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: #e5e5e5;
+  }
+
+  .post-content pre {
+    background: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .back-link:focus-visible {
+    outline: 2px solid #525252;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.625rem;
+    }
+
+    .post-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>

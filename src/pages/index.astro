@@ -118,10 +118,16 @@ const websiteSchema = {
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
         </svg>
       </a>
-      <a href="mailto:juanesquivel138@gmail.com" aria-label="Email">
+      <button class="social-link-btn" data-copy="juanesquivel138@gmail.com" aria-label="Copy email to clipboard">
         <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect width="20" height="16" x="2" y="4" rx="2"/>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        <span class="copy-toast">Copied!</span>
+      </button>
+      <a href="https://etherscan.io/address/0xfE9D3B6F60F5cA2c76b4B682E497cF04E26E7257" target="_blank" rel="noopener" aria-label="Ethereum (juanesquivel.eth)">
+        <svg class="social-icon" viewBox="0 0 320 512" fill="currentColor">
+          <path d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"/>
         </svg>
       </a>
     </div>
@@ -233,21 +239,18 @@ const websiteSchema = {
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .nav-link:hover {
-    color: #e5e5e5;
-  }
-
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.active::after {
     transform: scaleX(1);
     transform-origin: left;
   }
 
-  .nav-link.active {
-    color: #e5e5e5;
+  .nav-link:hover {
+    color: #FF6B00;
   }
 
-  .nav-link.active::after {
-    transform: scaleX(1);
+  .nav-link.active {
+    color: #FF6B00;
   }
 
   /* Mobile navigation */
@@ -315,6 +318,29 @@ const websiteSchema = {
     font-weight: 700;
     color: #e5e5e5;
     letter-spacing: -0.03em;
+    cursor: default;
+    position: relative;
+  }
+
+  .name:hover {
+    animation: glitch 0.3s ease;
+  }
+
+  @keyframes glitch {
+    0%, 100% {
+      text-shadow: none;
+      transform: translateX(0);
+    }
+    25% {
+      text-shadow: -1px 0 rgba(255, 107, 0, 0.7), 1px 0 rgba(0, 255, 255, 0.7);
+    }
+    50% {
+      text-shadow: 1px 0 rgba(255, 107, 0, 0.7), -1px 0 rgba(0, 255, 255, 0.7);
+      transform: translateX(0.5px);
+    }
+    75% {
+      text-shadow: -0.5px 0 rgba(255, 107, 0, 0.5), 0.5px 0 rgba(0, 255, 255, 0.5);
+    }
   }
 
   .signature {
@@ -380,8 +406,45 @@ const websiteSchema = {
     color: #ffffff;
   }
 
-  .social-links a[aria-label="Email"]:hover {
+  .social-links a[aria-label*="Ethereum"]:hover {
+    color: #627EEA;
+  }
+
+  .social-link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #525252;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .social-link-btn:hover {
     color: #EA4335;
+    transform: translateY(-2px);
+  }
+
+  .copy-toast {
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6875rem;
+    color: #e5e5e5;
+    background: #1a1a1a;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .social-link-btn.copied .copy-toast {
+    opacity: 1;
   }
 
   .social-icon {
@@ -506,5 +569,16 @@ const websiteSchema = {
   const navLinks = document.querySelector('.nav-links');
   toggle?.addEventListener('click', () => {
     navLinks?.classList.toggle('open');
+  });
+
+  // Copy to clipboard
+  const copyBtn = document.querySelector('[data-copy]');
+  copyBtn?.addEventListener('click', async () => {
+    const text = copyBtn.getAttribute('data-copy');
+    if (text) {
+      await navigator.clipboard.writeText(text);
+      copyBtn.classList.add('copied');
+      setTimeout(() => copyBtn.classList.remove('copied'), 1500);
+    }
   });
 </script>
