@@ -158,34 +158,35 @@ const websiteSchema = {
         <span class="work-date">2022</span>
       </a>
     </div>
+    <a href="/JUAN-ESQUIVEL-resume.pdf" target="_blank" rel="noopener" class="section-link">View resume <span class="arrow">→</span></a>
   </section>
 
   <!-- Writing -->
   <section>
     <h2>Writing</h2>
     <p class="text-muted empty-state">My thoughts on storytelling, crypto marketing, building brands, and working at a startup.</p>
-    <a href="/writing" class="section-link">View all <span class="arrow">↗</span></a>
+    <a href="/writing" class="section-link">Explore <span class="arrow">→</span></a>
   </section>
 
   <!-- Stack -->
   <section>
     <h2>Stack</h2>
     <p class="text-muted empty-state">The tools, apps, gear, and setup I use everyday.</p>
-    <a href="/stack" class="section-link">View all <span class="arrow">↗</span></a>
+    <a href="/stack" class="section-link">Explore <span class="arrow">→</span></a>
   </section>
 
   <!-- Speaking -->
   <section>
     <h2>Speaking</h2>
     <p class="text-muted empty-state">Podcasts, interviews, and talks.</p>
-    <a href="/speaking" class="section-link">View all <span class="arrow">↗</span></a>
+    <a href="/speaking" class="section-link">Explore <span class="arrow">→</span></a>
   </section>
 
   <!-- Now -->
   <section>
     <h2>Now</h2>
     <p class="text-muted empty-state">What I'm working on, watching, and listening to.</p>
-    <a href="/now" class="section-link">View all <span class="arrow">↗</span></a>
+    <a href="/now" class="section-link">Explore <span class="arrow">→</span></a>
   </section>
 </Layout>
 
@@ -539,19 +540,21 @@ const websiteSchema = {
     align-items: center;
     gap: 0.25rem;
     margin-top: 0.5rem;
-    padding: 0.375rem 0.625rem;
+    padding: 0.375rem 1rem 0.375rem 0.625rem;
     margin-left: -0.625rem;
     font-size: 0.875rem;
-    color: #525252;
+    color: #FF6B00;
     font-weight: 700;
     border-radius: 6px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .section-link:hover {
-    color: #e5e5e5;
-    background-color: rgba(255, 255, 255, 0.04);
+  .section-link:hover,
+  .section-link:active {
+    color: #FF6B00;
+    background-color: rgba(255, 107, 0, 0.08);
     padding-left: 0.875rem;
+    padding-right: 1.25rem;
   }
 
   .section-link .arrow {
@@ -560,7 +563,7 @@ const websiteSchema = {
   }
 
   .section-link:hover .arrow {
-    transform: translate(3px, -3px);
+    transform: translateX(4px);
   }
 </style>
 
