@@ -1,0 +1,306 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const post = {
+  title: "The best crypto founders and leaders do this on podcasts",
+  subtitle: "What I learned from interviewing nearly 30 guests on StablePod",
+  date: "2026.01.22",
+  publishedTime: "2026-01-22",
+  readingTime: "RT: 5 MIN",
+  cover: "/images/podcast-tips-cover.jpg"
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.title,
+  "description": post.subtitle,
+  "image": `https://juanesquivel.xyz${post.cover}`,
+  "datePublished": post.publishedTime,
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://juanesquivel.xyz/writing/podcast-tips-crypto-founders"
+  }
+};
+---
+
+<Layout
+  title={`${post.title} - Juan Esquivel`}
+  description={post.subtitle}
+  type="article"
+  image={post.cover}
+  publishedTime={post.publishedTime}
+  canonicalPath="/writing/podcast-tips-crypto-founders"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <nav class="nav">
+    <a href="/writing" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Writing
+    </a>
+  </nav>
+
+  <article class="post">
+    {post.cover && (
+      <figure class="post-cover">
+        <img src={post.cover} alt="" />
+      </figure>
+    )}
+
+    <header class="post-header">
+      <h1 class="post-title">{post.title}</h1>
+      <p class="post-subtitle">{post.subtitle}</p>
+      <div class="post-meta">
+        <time>{post.date}</time>
+      </div>
+    </header>
+
+    <div class="post-content">
+      <p>Podcasts are raw. You're telling your story and giving your personality at the same time. When you write, you can sometimes soften yourself. When you speak, it comes through whether you want it to or not.</p>
+
+      <p>That's what I noticed after cohosting StablePod, where we interviewed nearly 30 crypto founders, leaders, and operators. I think podcasts and video content in general are the best crypto storytelling formats we have in 2026.</p>
+
+      <p>Here's what I saw the best guests do, and what I learned that might help you show up better.</p>
+
+      <h2>What to do when you get on one</h2>
+
+      <p>Most founders want to talk about their journey and what they're building. But they might struggle because they don't practice enough. If you're lucky enough to frequent the podcast circuit, you get reps. If not, find other ways—conference talks, company all hands, whatever. The skill compounds.</p>
+
+      <p>The best guests were eager to share their mission and story and invited those who were aligned to come follow them. Truth lands better than a pitch. When you're honest about what you're building and why, people feel it.</p>
+
+      <p>They showed their authentic personality. If you're ruthlessly unapologetic or you're just a nonchalant technical builder, show it off. It's what makes you you. Audiences connect with real personality over polished messaging. Shoutout Seraphim and Marc Zeller, two hilarious individuals we had on as guests.</p>
+
+      <p>Know what you want to get out of it. Even if you didn't seek out the podcast, think about what would make the episode valuable for you. Maybe it's teasing something coming up, getting reps at describing your story, or just reaching a new audience. Align with your marketing team on a few talking points. The best episodes have value for both sides.</p>
+
+      <p>Make it a conversation. Some of the best episodes we recorded happened when guests asked us questions back. It takes pressure off and creates a more interesting dynamic. You're not there to be interviewed at. You're there to have a real exchange.</p>
+
+      <h2>What I learned on the other side of the mic</h2>
+
+      <p>When we started the podcast I'll admit I didn't know a heck of a lot about what it takes to be a good interviewer. I thought the episode quality would mostly be determined by the guest and their personality. I was wrong. The guest does have a big influence, but the host's job is bigger than I expected. You have to find the right way to make your guests comfortable, get them willing to share more than they've maybe shared before, ask the right questions in the right order and in the right form.</p>
+
+      <p>As we did more episodes, I got better. One day I came across Andrew Warner's famous book <em>Stop Asking Questions</em>. The book confirmed a lot of what I was already learning through reps:</p>
+
+      <ul>
+        <li>Build trust with guests so they open up to you</li>
+        <li>Don't blindside them with loaded questions</li>
+        <li>Try not to ask simple yes or no questions. These can lead nowhere</li>
+        <li>People don't always remember the "biggest lesson" or the "most impactful moment" so set up the question so they can actually answer it</li>
+      </ul>
+
+      <p>Why does this matter if you're a founder? Knowing how interviews work helps you steer toward the stories you want to tell. You don't have to wait for the perfect question. Have two or three stories ready that you can reach for when the conversation opens up.</p>
+
+      <p>And the most important thing I learned: the rules and frameworks are there but build intuition for when it's okay to break them because interesting random things can come out of it.</p>
+
+      <p>As the industry keeps maturing, being a founder who takes storytelling seriously, in whatever format, will place you ahead of the crowd.</p>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .nav {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #e5e5e5;
+  }
+
+  .back-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .post {
+    max-width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-cover {
+    margin: 0 0 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .post-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1.125rem;
+    color: #999999;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+  }
+
+  .separator {
+    color: #333;
+  }
+
+  .post-content {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content blockquote {
+    border-left: 2px solid #404040;
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #a3a3a3;
+    background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .post-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content li {
+    margin-bottom: 0.5rem;
+    color: #c4c4c4;
+  }
+
+  .post-content li::marker {
+    color: #525252;
+  }
+
+  .post-content hr {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 3rem 0;
+  }
+
+  .post-content strong {
+    color: #e5e5e5;
+    font-weight: 700;
+  }
+
+  .post-content a {
+    color: #e5e5e5;
+    text-decoration: underline;
+    text-decoration-color: #525252;
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .post-content a:hover {
+    text-decoration-color: #e5e5e5;
+  }
+
+  .post-content code {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    background: rgba(255,255,255,0.06);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: #e5e5e5;
+  }
+
+  .post-content pre {
+    background: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .back-link:focus-visible {
+    outline: 2px solid #525252;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.625rem;
+    }
+
+    .post-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
