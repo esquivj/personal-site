@@ -1,0 +1,303 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const post = {
+  title: "Crypto-native isn't everything. But it's still something.",
+  subtitle: "Why being native to this industry still matters in an increasingly changing landscape",
+  date: "2026.01.27",
+  publishedTime: "2026-01-27",
+  readingTime: "RT: 3 MIN",
+  cover: "/images/crypto-native-cover.webp"
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.title,
+  "description": post.subtitle,
+  "image": `https://juanesquivel.xyz${post.cover}`,
+  "datePublished": post.publishedTime,
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://juanesquivel.xyz/writing/crypto-native"
+  }
+};
+---
+
+<Layout
+  title={`${post.title} - Juan Esquivel`}
+  description={post.subtitle}
+  type="article"
+  image={post.cover}
+  publishedTime={post.publishedTime}
+  canonicalPath="/writing/crypto-native"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <nav class="nav">
+    <a href="/writing" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Writing
+    </a>
+  </nav>
+
+  <article class="post">
+    {post.cover && (
+      <figure class="post-cover">
+        <img src={post.cover} alt="" />
+      </figure>
+    )}
+
+    <header class="post-header">
+      <h1 class="post-title">{post.title}</h1>
+      <p class="post-subtitle">{post.subtitle}</p>
+      <div class="post-meta">
+        <time>{post.date}</time>
+      </div>
+    </header>
+
+    <div class="post-content">
+      <p>Been in this space since 2021. Being crypto-native isn't the flex it used to be. But it's still an advantage.</p>
+
+      <h2>For the Individual</h2>
+
+      <p>It helps you distinguish vaporware from real products. Mostly. You've been around long enough to see what ships and what doesn't. This helps when you're looking to join a team, work with someone, or bet your time on something.</p>
+
+      <p>It helps you distinguish hype cycles from real value. You've seen people and companies chase trends. You build an understanding of what is often just hype and what might be worth the effort.</p>
+
+      <p>You know the players. Who's credible, who's actually built things. You can spot the other natives in the space vs the tourists.</p>
+
+      <p>If you're still around after so much pain, you're a sadist or you just really believe in the technology and its potential.</p>
+
+      <h2>For the Teams</h2>
+
+      <p>They speak the language. If you're still ecosystem-facing (which most teams are even with increasing institutional adoption), natives understand the culture, what resonates and what falls flat.</p>
+
+      <p>They come with network. They've built relationships with founders, contributors, operators. They've connected with people across CT, conferences, and Telegram group chats.</p>
+
+      <p>They attract other natives. Crypto-native talent wants to work with people who get it. Hiring one makes it easier to hire the next.</p>
+
+      <p>They're not here short-term. They already survived the cycles. They're not leaving when it gets hard.</p>
+
+      <h2>The Trend is Real</h2>
+
+      <p>Trad (web2) talent has been coming in for years. Across different cycles, in different waves, in different amounts. The roles are following the product adoption curve and who's buying. More product marketing, more enterprise sales, more fintech customers that didn't really exist five years ago.</p>
+
+      <p>Our companies have matured. They'll naturally need functions crypto-natives never had to fill. Many incumbents sit at the intersection of ecosystem and institutions. They need both languages. This isn't a bad thing. It's a sign the industry is actually going somewhere.</p>
+
+      <h2>The Point</h2>
+
+      <p>Crypto-native doesn't mean you've got it all. It means you've built intuition for what's real in an industry that's filled with noise. That has to be worth something?</p>
+
+      <p>But intuition alone isn't enough. The industry is going to keep changing. The natives who stay relevant aren't the ones who rest on "I was here early." They're the ones who keep learning.</p>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .nav {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #e5e5e5;
+  }
+
+  .back-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .post {
+    max-width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-cover {
+    margin: 0 0 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .post-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1.125rem;
+    color: #999999;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+  }
+
+  .separator {
+    color: #333;
+  }
+
+  .post-content {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content blockquote {
+    border-left: 2px solid #404040;
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #a3a3a3;
+    background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .post-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content li {
+    margin-bottom: 0.5rem;
+    color: #c4c4c4;
+  }
+
+  .post-content li::marker {
+    color: #525252;
+  }
+
+  .post-content hr {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 3rem 0;
+  }
+
+  .post-content strong {
+    color: #e5e5e5;
+    font-weight: 700;
+  }
+
+  .post-content a {
+    color: #e5e5e5;
+    text-decoration: underline;
+    text-decoration-color: #525252;
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .post-content a:hover {
+    text-decoration-color: #e5e5e5;
+  }
+
+  .post-content code {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    background: rgba(255,255,255,0.06);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: #e5e5e5;
+  }
+
+  .post-content pre {
+    background: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .back-link:focus-visible {
+    outline: 2px solid #525252;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.625rem;
+    }
+
+    .post-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
