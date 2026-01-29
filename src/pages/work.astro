@@ -1,381 +1,1274 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Work data structured for cards and modals
+const heroWork = [
+  {
+    id: 'stablepod',
+    title: 'StablePod',
+    subtitle: 'Podcast',
+    icon: '🎙️',
+    description: '29 episodes with founders from Morpho, Euler, Gnosis, Uniswap Foundation, Ethena, and dYdX.',
+    metric: '29 episodes',
+    metricSecondary: '29 guests',
+    image: '/work/stablepod-cover.jpg',
+    color: '#1DB954',
+    modal: {
+      fullDescription: 'Co-hosted 29 episodes with crypto founders and protocol leaders. Guests included founders of Morpho, Euler, and Gnosis, and leadership from Uniswap Foundation, Optimism Foundation, and dYdX Foundation.',
+      role: 'Producer, co-host, guest booking, promotion',
+      metrics: [
+        { label: 'Episodes', value: '29' },
+        { label: 'Unique Guests', value: '29' },
+        { label: 'Duration', value: '2023–2025' },
+      ],
+      guests: 'Paul Frambot (Morpho), Michael Bentley (Euler), Stefan George (Gnosis), Devin Walsh (Uniswap Foundation), Seraphim (Ethena), Jeff "Jiho" Zerlin (Axie), Joshua Watts (dYdX), Justine Humenansky (Optimism), Matt Dobel (Gauntlet), Jack Purdy (Messari), and more.',
+      links: [
+        { label: 'Archive Site', url: 'https://stablepod.vercel.app', primary: true },
+        { label: 'Spotify', url: 'https://open.spotify.com/show/4LZVPrxKohIaLjgvQRbVwI' },
+        { label: 'YouTube', url: 'https://www.youtube.com/@StableLabxyz' },
+        { label: 'Apple Podcasts', url: 'https://podcasts.apple.com/us/podcast/stablepod/id1695253636' },
+      ],
+    },
+  },
+  {
+    id: 'newsletter',
+    title: 'Governance Lab',
+    subtitle: 'Newsletter',
+    icon: '📨',
+    description: 'Built from zero to 920+ subscribers with 38% open rate (2x industry benchmark).',
+    metric: '121 issues',
+    metricSecondary: '2+ years',
+    image: '/work/governance-lab-cover.jpg',
+    color: '#6366f1',
+    modal: {
+      fullDescription: 'Published 121 editions of Governance Lab, a weekly newsletter covering DAO governance across Aave, Lido, Compound, Optimism, and Arbitrum. Built from zero to 920+ subscribers with 38% open rate (2x industry benchmark).',
+      role: 'Editorial direction, writing, curation, distribution',
+      metrics: [
+        { label: 'Issues Published', value: '121' },
+        { label: 'Subscribers', value: '920+' },
+        { label: 'Open Rate', value: '38%' },
+        { label: 'vs. Industry', value: '2x benchmark' },
+      ],
+      highlights: 'Each issue included 3 deep-dive governance analyses, curated links, a Proposal Tracker with vote summaries, and "From the Lab" section featuring StableLab work.',
+      links: [
+        { label: 'Read on Substack', url: 'https://stablelab.substack.com', primary: true },
+      ],
+    },
+  },
+  {
+    id: 'team-swag',
+    title: 'Team Swag',
+    subtitle: 'Creative Direction',
+    icon: '🎨',
+    description: 'Creative directed internal swag for team offsites and conferences.',
+    metric: '8 items',
+    image: '/work/swag/G38s2xAbUAckcN8.jpeg',
+    color: '#8B5CF6',
+    previewImages: [
+      '/work/swag/G38s2xAbUAckcN8.jpeg',
+      '/work/swag/G4CFb5KaQAAudN8.jpeg',
+      '/work/swag/Gb3M36_bwAQzwTy.jpeg',
+    ],
+    extraCount: 5,
+    modal: {
+      fullDescription: 'Creative directed internal swag for team offsites and conferences. Worked with in-house designer on concepts, managed production, and coordinated distribution with vendor.',
+      role: 'Creative direction, project management, vendor coordination',
+      images: [
+        '/work/swag/G38s2xAbUAckcN8.jpeg',
+        '/work/swag/G4CFb5KaQAAudN8.jpeg',
+        '/work/swag/Gb3M36_bwAQzwTy.jpeg',
+        '/work/swag/GbxxrkraMAEk-N6.jpeg',
+        '/work/swag/GE1n8HsacAAogMP.jpeg',
+        '/work/swag/GgEpB6qW8AAkzuw.jpeg',
+        '/work/swag/SL KL Offsite Stickers and Camera.jpg',
+        '/work/swag/3DF2A30A-03E2-4B17-BCAC-618CF29C719C_1_105_c.jpg',
+      ],
+    },
+  },
+];
+
+const campaigns = [
+  {
+    id: 'forse-launch',
+    title: 'Forse Launch',
+    subtitle: 'Brand Development',
+    icon: '🚀',
+    description: 'First product launch for a services company transitioning to product. Naming → brand → positioning → launch.',
+    metric: 'End-to-end',
+    image: '/work/forse-landing.png',
+    color: '#FF6B00',
+    modal: {
+      fullDescription: 'Led the full product launch for Forse, a new product from StableLab. Owned the entire marketing arc from naming workshops with founders through brand identity development, positioning strategy, and go-to-market execution.',
+      role: 'Marketing lead — naming, brand identity, positioning, all launch collateral, GTM materials',
+      highlights: 'First product launch for a company transitioning from services to product. Launch campaign included blog post, social announcement, and network activation through existing relationships.',
+      links: [
+        { label: 'Landing Page', url: 'https://forse.io', primary: true },
+        { label: 'Launch Post', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
+        { label: 'Launch Tweet', url: 'https://x.com/Forseapp/status/1805611411252576653' },
+      ],
+    },
+  },
+  {
+    id: 'forse-rebrand',
+    title: 'Forse Rebrand',
+    subtitle: 'Strategic Pivot',
+    icon: '🔄',
+    description: 'Learned from market feedback, adapted strategy, executed full rebrand under pressure.',
+    metric: 'Full rebrand',
+    image: '/work/forse-landing.png',
+    color: '#FF6B00',
+    modal: {
+      fullDescription: 'Led strategic repositioning after initial DAO-focused positioning wasn\'t finding product-market fit. Executed a full visual rebrand (dark to light theme) and refreshed all messaging to target a broader audience.',
+      role: 'Strategy, new positioning, visual rebrand direction, landing page copy',
+      highlights: 'Shows ability to learn from market feedback, adapt strategy, and execute a full rebrand under pressure.',
+    },
+  },
+  {
+    id: 'scroll-dacc',
+    title: 'Scroll D/Acc',
+    subtitle: 'Program Marketing',
+    icon: '📣',
+    description: 'Amplified 8-week delegate training program. Drove applications and visibility.',
+    metric: '80 applicants',
+    color: '#fcb69f',
+    modal: {
+      fullDescription: 'Marketing and content support for an 8-week delegate training program run in partnership with Scroll, SEEDGov, Factory Labs, Proxy, and Open Source Observer. Drove program awareness and applications.',
+      role: 'Marketing, content creation, program promotion',
+      metrics: [
+        { label: 'Applicants', value: '80' },
+        { label: 'Completion Rate', value: '72.4%' },
+        { label: 'Attendance', value: '69%' },
+        { label: 'SCR Delegated', value: '100,000' },
+      ],
+      highlights: 'Curriculum was open-sourced for other DAOs to reuse. Combined live workshops, Kahoot reviews, and practical exercises.',
+      links: [
+        { label: 'Curriculum Hub', url: 'https://scrollzkp.notion.site/Scroll-Delegate-Accelerator-D-Acc-1f47792d22af80d5b53bce40a3e4eea1', primary: true },
+        { label: 'Final Report', url: 'https://forum.scroll.io/t/scroll-delegate-accelerator-program-final-report-open-source-curriculum/1325' },
+      ],
+    },
+  },
+  {
+    id: 'governance-gathering',
+    title: 'A Governance Gathering',
+    subtitle: 'Side Event',
+    icon: '🎪',
+    description: 'Happy hour side event at EthCC [7] Brussels. 4 co-hosts, network-driven distribution.',
+    metric: '150+ attendees',
+    image: '/work/governance-gathering.avif',
+    color: '#7c3aed',
+    modal: {
+      fullDescription: 'Initiated and project-managed a happy hour networking event during EthCC [7] in Brussels, July 2024. Brought together partners, clients, and governance leaders. Co-hosted with UMA, Wormhole, and Tally. Coordinated with Eventflare for venue, logistics, and video coverage.',
+      role: 'Initiated idea, project management, co-host sourcing, budget management, event coordination',
+      metrics: [
+        { label: 'Attendees', value: '150+' },
+        { label: 'Registrations', value: '258' },
+        { label: 'Co-hosts', value: '4' },
+        { label: 'Event', value: 'EthCC [7]' },
+      ],
+      cohosts: 'UMA, Wormhole, Tally',
+      highlights: 'Part of StableLab\'s largest conference presence (10 team members). Built working relationship with Eventflare and strengthened partnerships with Gauntlet, Karpatkey, and Spark.',
+      images: [
+        '/work/agg/event-4.jpg',
+        '/work/agg/event-5.jpg',
+        '/work/agg/event-6.jpg',
+        '/work/agg/event-1.jpeg',
+        '/work/agg/event-2.jpeg',
+        '/work/agg/event-3.jpeg',
+      ],
+      links: [
+        { label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true },
+      ],
+    },
+  },
+];
+
+const visualWork = {
+  landingPages: [
+    { title: 'Forse.io', description: 'Product landing page — positioning and copy', image: '/work/forse-landing.png', url: '/work/forse-landing.png' },
+    { title: 'StableLab.xyz', description: 'Services landing page — positioning and copy', image: '/work/stablelab-landing.png', url: '/work/stablelab-landing.png' },
+  ],
+  onePagers: [
+    { title: 'Forse Insights', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-insights.png', url: '/work/forse-insights.png' },
+    { title: 'Grants Management', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-grants.png', url: '/work/forse-grants.png' },
+    { title: 'Grants (Visual)', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-grants-visual.png', url: '/work/forse-grants-visual.png' },
+    { title: 'Incentive Optimization', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-incentive.png', url: '/work/forse-incentive.png' },
+  ],
+};
+
+const teamVideos = [
+  {
+    title: 'Memories of Bodrum',
+    description: 'Cinematic recap of our team offsite in Bodrum, Turkey.',
+    year: '2025',
+    youtubeId: 'R8k1o2b9HhU',
+  },
+  {
+    title: 'A Year in Review 2024',
+    description: 'End-of-year recap video covering StableLab\'s 2024 highlights.',
+    year: '2024',
+    youtubeId: '0jjzvV1jUQM',
+  },
+  {
+    title: 'Memories of Phuket',
+    description: 'Cinematic team culture video from Phuket offsite.',
+    year: '2024',
+    youtubeId: 'lQtC02UaiuQ',
+  },
+  {
+    title: 'Phuket Team Offsite',
+    description: 'Full documentary-style coverage of the Phuket 2024 offsite.',
+    year: '2024',
+    youtubeId: '7MW6yNj45po',
+  },
+  {
+    title: 'In Conversation w/ Gustav',
+    description: 'Interview with CEO & Co-founder Gustav Arentoft at Phuket offsite.',
+    year: '2024',
+    youtubeId: 'bdQxQ71DIJE',
+  },
+  {
+    title: 'Kuala Lumpur Offsite',
+    description: 'Team offsite highlights from Kuala Lumpur 2024.',
+    year: '2024',
+    youtubeId: 'jbgb3jXZA0o',
+  },
+];
 ---
 
-<Layout title="Work Archive — Juan Esquivel" description="Archive of marketing work at StableLab and Forse.">
+<Layout title="Work — Juan Esquivel" description="Marketing work from StableLab and Forse. Podcasts, newsletters, campaigns, and product launches.">
   <header class="header">
     <a href="/" class="back-link">← Back</a>
   </header>
 
   <main>
-    <h1>Work Archive</h1>
-    <p class="intro">A collection of marketing work from my time at StableLab and Forse. Landing pages, one-pagers, and podcast appearances.</p>
+    <h1>Work</h1>
+    <p class="intro">Selected marketing work from my time leading marketing at StableLab and Forse (2023–2025).</p>
 
-    <!-- Landing Pages -->
+    <!-- Hero Cards -->
+    <section class="section hero-section">
+      <h2>Featured Work</h2>
+      <div class="hero-grid">
+        {heroWork.map((item) => (
+          <button
+            class="hero-card"
+            data-modal={item.id}
+            style={`--accent: ${item.color}`}
+          >
+            {item.previewImages ? (
+              <div class="hero-image swag-hero-preview">
+                <img src={item.previewImages[0]} alt={item.title} loading="lazy" class="swag-preview-main" />
+                <div class="swag-preview-stack">
+                  <img src={item.previewImages[1]} alt={item.title} loading="lazy" />
+                  <img src={item.previewImages[2]} alt={item.title} loading="lazy" />
+                </div>
+                <div class="swag-preview-count">+{item.extraCount}</div>
+              </div>
+            ) : (
+              <div class="hero-image">
+                <img src={item.image} alt={item.title} loading="lazy" />
+              </div>
+            )}
+            <div class="hero-content">
+              <div class="hero-header">
+                <h3>{item.title}</h3>
+                <span class="hero-badge">{item.subtitle}</span>
+              </div>
+              <p class="hero-description">{item.description}</p>
+              <div class="hero-metrics">
+                <span class="metric-primary">{item.metric}</span>
+                {item.metricSecondary && <span class="metric-secondary">{item.metricSecondary}</span>}
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Campaigns -->
+    <section class="section">
+      <h2>Campaigns & Programs</h2>
+      <div class="campaign-grid">
+        {campaigns.map((item) => (
+          <button
+            class="campaign-card"
+            data-modal={item.id}
+            style={`--accent: ${item.color}`}
+          >
+            <div class="campaign-image">
+              {item.image ? (
+                <img src={item.image} alt={item.title} loading="lazy" />
+              ) : (
+                <div class="campaign-placeholder" style={`--accent: ${item.color}`}>
+                  <span>{item.icon}</span>
+                </div>
+              )}
+            </div>
+            <div class="campaign-content">
+              <div class="campaign-header">
+                <h3>{item.title}</h3>
+                <span class="campaign-badge">{item.metric}</span>
+              </div>
+              <p class="campaign-subtitle">{item.subtitle}</p>
+              <p class="campaign-description">{item.description}</p>
+            </div>
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Visual Work -->
     <section class="section">
       <h2>Landing Pages</h2>
-      <div class="work-grid">
-        <a href="/work/forse-landing.png" target="_blank" class="work-item">
-          <img src="/work/forse-landing.png" alt="Forse.io landing page" loading="lazy" />
-          <div class="work-meta">
-            <h3>Forse.io</h3>
-            <p>The Intelligence Layer Fueling Web3 Growth</p>
-          </div>
-        </a>
-        <a href="/work/stablelab-landing.png" target="_blank" class="work-item">
-          <img src="/work/stablelab-landing.png" alt="StableLab landing page" loading="lazy" />
-          <div class="work-meta">
-            <h3>StableLab.xyz</h3>
-            <p>The Leading Provider of Decentralized Governance Solutions</p>
-          </div>
-        </a>
+      <div class="visual-grid">
+        {visualWork.landingPages.map((item) => (
+          <a href={item.url} target="_blank" class="visual-card">
+            <img src={item.image} alt={item.title} loading="lazy" />
+            <div class="visual-meta">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
 
-    <!-- One Pagers -->
     <section class="section">
-      <h2>One Pagers</h2>
-      <div class="work-grid">
-        <a href="/work/forse-insights.png" target="_blank" class="work-item">
-          <img src="/work/forse-insights.png" alt="Forse Insights one-pager" loading="lazy" />
-          <div class="work-meta">
-            <h3>Forse Insights</h3>
-            <p>Prove what drives your protocol's growth</p>
-          </div>
-        </a>
-        <a href="/work/forse-grants.png" target="_blank" class="work-item">
-          <img src="/work/forse-grants.png" alt="Forse Grants Management one-pager" loading="lazy" />
-          <div class="work-meta">
-            <h3>Grants Management</h3>
-            <p>Automate Grants. Measure Impact.</p>
-          </div>
-        </a>
-        <a href="/work/forse-grants-visual.png" target="_blank" class="work-item">
-          <img src="/work/forse-grants-visual.png" alt="Forse Grants Management Visual one-pager" loading="lazy" />
-          <div class="work-meta">
-            <h3>Grants Management (Visual)</h3>
-            <p>For Reviewers and Builders</p>
-          </div>
-        </a>
-        <a href="/work/forse-incentive.png" target="_blank" class="work-item">
-          <img src="/work/forse-incentive.png" alt="Forse Incentive Optimization one-pager" loading="lazy" />
-          <div class="work-meta">
-            <h3>Incentive Optimization</h3>
-            <p>Dynamic Incentive Optimization</p>
-          </div>
-        </a>
+      <h2>Sales One-Pagers</h2>
+      <p class="section-subtitle">Sales enablement collateral created to support Sales-led GTM.</p>
+      <div class="visual-grid visual-grid-4">
+        {visualWork.onePagers.map((item) => (
+          <a href={item.url} target="_blank" class="visual-card visual-card-small">
+            <img src={item.image} alt={item.title} loading="lazy" />
+            <div class="visual-meta">
+              <h3>{item.title}</h3>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
 
-    <!-- Podcasts -->
+    <!-- Team Culture Videos -->
     <section class="section">
-      <h2>Podcasts</h2>
-      <p class="section-subtitle">StablePod — conversations with builders across DeFi and governance</p>
-      <div class="podcast-grid">
-        <a href="https://open.spotify.com/episode/0h9zgFuFY5bK2oQBqxKxw2" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/o2QZ1F-Thpw/maxresdefault.jpg" alt="Keel episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Keel</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/6Tt8JjHKIGpH5AzDJgN9aI" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/nimnohm7aNI/maxresdefault.jpg" alt="Spark episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Spark</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/2IJz5dEj87zKxR2wYUmjQ9" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/jiRXXKpt2bc/maxresdefault.jpg" alt="Near Foundation episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Near Foundation</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/54ulhE3dVk6sBLsL00tR47" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/03f00BO1CSI/maxresdefault.jpg" alt="LlamaRisk episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>LlamaRisk</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/2qKMMNCMb9MTa2I8jlsYcO" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/pI4nzZpLaaE/maxresdefault.jpg" alt="Aragon episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Aragon</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/1vw9ZizztIgZtmtVCTvPrj" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/Ytf7xjIqBbM/maxresdefault.jpg" alt="Reserve episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Reserve</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/2HYnOfoe01EZLCZ2FRPjMb" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/MtRdtwUVpo0/maxresdefault.jpg" alt="Summer.fi episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Summer.fi</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/1sei4z2ekM8vPU6qQV4k7a" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/gvn1KmLo-uI/maxresdefault.jpg" alt="M^0 episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>M^0</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/4aD5DP8xQMeLwEBjstgwaJ" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/d-C3rVL35V0/maxresdefault.jpg" alt="Messari episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Messari</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/0QOTbVTqbF4CCpb1V8aZd8" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/2YCfCsUHZAk/maxresdefault.jpg" alt="dYdX episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>dYdX</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/6Z4trusizpFVTwy0BNOChb" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/JUh7MljeWDc/maxresdefault.jpg" alt="Gnosis episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Gnosis</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/45QU8FXbbP1z2YqsnSi4sd" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/5V6j7XWXRAc/maxresdefault.jpg" alt="Euler episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Euler</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/4usScRwVg3mXVfhVjVkBv5" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/eP7gWBFnIvI/maxresdefault.jpg" alt="Tally episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Tally</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/2lgVUqZgYl8c5Yl8wNwzGK" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/hnWdYGT8_hc/maxresdefault.jpg" alt="Morpho episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Morpho</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/04GAmJI9bH7Ry1hl9iSh15" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/j51Lw33XvXU/maxresdefault.jpg" alt="Ethena episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Ethena</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/4GZ3TmF6xAdYTVgOdnO5yC" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/FcvuDgvVvw8/maxresdefault.jpg" alt="Keyrock episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Keyrock</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/5iygEIgY98HYYMvBiC24id" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/3UB52b6FPc0/maxresdefault.jpg" alt="Chronicle episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Chronicle</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/1gMyJALPh8K4kEf3m3aZ4M" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/VjCoVTka0Hk/maxresdefault.jpg" alt="Ronin episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Ronin</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/2vKPZRXgoKACPDIDUk2POh" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/9tLJ_JZE_mw/maxresdefault.jpg" alt="Karpatkey episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Karpatkey</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/1O0tlnpAn1E5MkPKrbNDFO" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/M8nSyQCm9iw/maxresdefault.jpg" alt="Ajna episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Ajna</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/5Y0d1A22I5UMtpj6mGP0an" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/RCiP9GHDM2s/maxresdefault.jpg" alt="Optimism episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Optimism</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/4T0X19ObRHa668qz3Dfq2M" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/9sCikzxmvOc/maxresdefault.jpg" alt="Gauntlet episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Gauntlet</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/5WmMcOXGUIq8bUgphhfBT2" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/CmbtRvRUUyc/maxresdefault.jpg" alt="Uniswap episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Uniswap</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/0FQKfRdblBTATCIYhxFXBk" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/N0cvNLf6wuU/maxresdefault.jpg" alt="DELV episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>DELV</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/3tgKHnJc4mQNYZLy2fMRaW" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/BaZTTYtXYtU/maxresdefault.jpg" alt="Phoenix Labs episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Phoenix Labs</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/68kfSF6uSLEb4uHadtGB4J" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/pRbMvfE6OuU/maxresdefault.jpg" alt="Jokerace episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Jokerace</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/24uAVn65l8fBQuWM87mAUs" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/0pJS5DCDBm0/maxresdefault.jpg" alt="Aave episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Aave</span></div>
-        </a>
-        <a href="https://open.spotify.com/episode/1PodrWEv0uFXGKnRmzIRUN" target="_blank" class="podcast-card">
-          <img src="https://img.youtube.com/vi/FGRzTmgRJz4/maxresdefault.jpg" alt="Introducing StablePod episode" loading="lazy" />
-          <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="podcast-meta"><span>Introducing StablePod</span></div>
-        </a>
+      <h2>Team Culture</h2>
+      <p class="section-subtitle">Behind-the-scenes videos capturing team offsites and culture.</p>
+      <div class="team-video-grid">
+        {teamVideos.map((video) => (
+          <a href={`https://youtu.be/${video.youtubeId}`} target="_blank" class="team-video-card">
+            <img src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`} alt={video.title} loading="lazy" />
+            <div class="team-video-play">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="team-video-info">
+              <h3>{video.title}</h3>
+              <p>{video.description}</p>
+              <span class="team-video-year">{video.year}</span>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
+
   </main>
+
+  <!-- Modal Container -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="modal-content" id="modalContent">
+        <!-- Content injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Data -->
+  <script define:vars={{ heroWork, campaigns }}>
+    window.workData = [...heroWork, ...campaigns].reduce((acc, item) => {
+      acc[item.id] = item;
+      return acc;
+    }, {});
+  </script>
 </Layout>
 
 <style>
   .header {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .back-link {
-    font-size: 0.875rem;
-    color: #a3a3a3;
-    transition: color 0.15s ease;
+    font-size: 0.8125rem;
+    color: #666;
+    transition: color 0.2s ease;
+    letter-spacing: 0.02em;
   }
 
   .back-link:hover {
-    color: #ffffff;
+    color: #a3a3a3;
   }
 
   h1 {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
   }
 
   .intro {
-    color: #a3a3a3;
-    margin-bottom: 3rem;
-    font-size: 0.9375rem;
+    color: #666;
+    margin-bottom: 5rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    max-width: 540px;
   }
 
   .section {
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
   }
 
   .section h2 {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #525252;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #444;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
   }
 
   .section-subtitle {
-    color: #737373;
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
+    color: #555;
+    font-size: 0.9375rem;
+    margin-bottom: 2rem;
+    margin-top: -1rem;
+    line-height: 1.5;
   }
 
-  .work-grid {
+  .inline-link {
+    color: #a3a3a3;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .inline-link:hover {
+    color: #fff;
+  }
+
+  /* Hero Cards */
+  .hero-section {
+    margin-bottom: 6rem;
+  }
+
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-card {
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .hero-card:hover {
+    background: #0f0f0f;
+    border-color: #252525;
+  }
+
+  .hero-image {
+    width: 200px;
+    min-width: 200px;
+    height: 150px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .hero-card:hover .hero-image img {
+    transform: scale(1.03);
+  }
+
+  .hero-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .hero-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .hero-header h3 {
+    font-size: 1.1875rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-badge {
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.5rem;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+  }
+
+  .hero-description {
+    font-size: 0.9375rem;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero-metrics {
+    display: flex;
+    gap: 1.25rem;
+    align-items: baseline;
+  }
+
+  .metric-primary {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #888;
+  }
+
+  .metric-secondary {
+    font-size: 0.8125rem;
+    color: #555;
+  }
+
+  @media (max-width: 540px) {
+    .hero-card {
+      flex-direction: column;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 160px;
+    }
+  }
+
+  /* Campaign Cards */
+  .campaign-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
-  @media (max-width: 600px) {
-    .work-grid {
+  @media (max-width: 540px) {
+    .campaign-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .work-item {
-    display: block;
-    border: 1px solid #262626;
-    border-radius: 8px;
+  .campaign-card {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
     overflow: hidden;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
   }
 
-  .work-item:hover {
-    border-color: #404040;
-    transform: translateY(-2px);
+  .campaign-card:hover {
+    background: #0f0f0f;
+    border-color: #252525;
   }
 
-  .work-item img {
+  .campaign-image {
+    height: 120px;
+    overflow: hidden;
+  }
+
+  .campaign-image img {
     width: 100%;
-    height: 200px;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
+  }
+
+  .campaign-card:hover .campaign-image img {
+    transform: scale(1.03);
+  }
+
+  .campaign-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    opacity: 0.6;
+  }
+
+  .campaign-content {
+    padding: 1.25rem;
+  }
+
+  .campaign-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .campaign-header h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .campaign-badge {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: #555;
+    white-space: nowrap;
+  }
+
+  .campaign-subtitle {
+    font-size: 0.6875rem;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.625rem;
+  }
+
+  .campaign-description {
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* Visual Work Cards */
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .visual-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    .visual-grid {
+      grid-template-columns: 1fr;
+    }
+    .visual-grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .visual-card {
+    display: block;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .visual-card:hover {
+    background: #0f0f0f;
+    border-color: #252525;
+  }
+
+  .visual-card img {
+    width: 100%;
+    height: 160px;
     object-fit: cover;
     object-position: top;
     display: block;
   }
 
-  .work-meta {
-    padding: 1rem;
-    background: #141414;
+  .visual-card-small img {
+    height: 120px;
   }
 
-  .work-meta h3 {
-    font-size: 0.9375rem;
-    font-weight: 600;
+  .visual-card img {
+    transition: transform 0.4s ease;
+  }
+
+  .visual-card:hover img {
+    transform: scale(1.03);
+  }
+
+  .visual-meta {
+    padding: 1rem;
+    background: transparent;
+  }
+
+  .visual-meta h3 {
+    font-size: 0.875rem;
+    font-weight: 500;
     margin-bottom: 0.25rem;
   }
 
-  .work-meta p {
+  .visual-meta p {
     font-size: 0.8125rem;
-    color: #a3a3a3;
+    color: #555;
   }
 
-  .podcast-grid {
+  /* Team Culture Videos */
+  .team-video-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 
   @media (max-width: 600px) {
-    .podcast-grid {
+    .team-video-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .team-video-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .podcast-card {
+  .team-video-card {
     position: relative;
-    display: block;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
     overflow: hidden;
-    aspect-ratio: 16/9;
+    transition: all 0.3s ease;
   }
 
-  .podcast-card img {
+  .team-video-card:hover {
+    background: #0f0f0f;
+    border-color: #252525;
+  }
+
+  .team-video-card img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16/9;
     object-fit: cover;
-    transition: transform 0.3s ease, filter 0.3s ease;
+    display: block;
+    transition: transform 0.4s ease;
   }
 
-  .podcast-card:hover img {
-    transform: scale(1.05);
-    filter: brightness(0.7);
+  .team-video-card:hover img {
+    transform: scale(1.03);
   }
 
-  .play-overlay {
+  .team-video-play {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
+    background: rgba(0, 0, 0, 0.3);
   }
 
-  .play-overlay svg {
-    width: 64px;
-    height: 64px;
-    color: #1DB954;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
-  }
-
-  .podcast-card:hover .play-overlay {
+  .team-video-card:hover .team-video-play {
     opacity: 1;
   }
 
-  .podcast-meta {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 2rem 1rem 1rem;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  .team-video-play svg {
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
   }
 
-  .podcast-meta span {
-    font-size: 0.9375rem;
+  .team-video-info {
+    padding: 1rem;
+  }
+
+  .team-video-info h3 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.375rem;
+    color: #e5e5e5;
+  }
+
+  .team-video-info p {
+    font-size: 0.8125rem;
+    color: #555;
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+  }
+
+  .team-video-year {
+    font-size: 0.6875rem;
+    color: #444;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* Swag Hero Preview */
+  .swag-hero-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    padding: 0;
+    position: relative;
+  }
+
+  .swag-hero-preview .swag-preview-main {
+    grid-row: span 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swag-hero-preview .swag-preview-stack {
+    display: contents;
+  }
+
+  .swag-hero-preview .swag-preview-stack img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swag-preview-count {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
     font-weight: 600;
     color: #fff;
   }
+
+  /* Modal - using :global for dynamically injected content */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+    max-width: 520px;
+    width: 100%;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    transform: translateY(16px);
+    opacity: 0;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .modal::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modal-backdrop.active .modal {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.15s ease;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    color: #999;
+    background: #222;
+    border-color: #333;
+  }
+
+  .modal-close svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .modal-content {
+    padding: 0;
+  }
+
+  :global(.modal-image) {
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+  }
+
+  :global(.modal-image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  :global(.modal-body) {
+    padding: 1.5rem;
+  }
+
+  :global(.modal-header) {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-right: 2.5rem;
+  }
+
+  :global(.modal-icon) {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  :global(.modal-header-text) {
+    flex: 1;
+  }
+
+  :global(.modal-title) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #fff;
+  }
+
+  :global(.modal-subtitle) {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  :global(.modal-description) {
+    font-size: 0.875rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  :global(.modal-metrics) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  :global(.modal-metric) {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+
+  :global(.modal-metric-value) {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+
+  :global(.modal-metric-label) {
+    font-size: 0.625rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  :global(.modal-sections) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  :global(.modal-section) {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  :global(.modal-section-title) {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.modal-section-content) {
+    font-size: 0.8125rem;
+    color: #999;
+    line-height: 1.5;
+  }
+
+  :global(.modal-links) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  :global(.modal-link) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    text-decoration: none;
+  }
+
+  :global(.modal-link-primary) {
+    background: #fff;
+    color: #000;
+  }
+
+  :global(.modal-link-primary:hover) {
+    background: #e5e5e5;
+    color: #000;
+  }
+
+  :global(.modal-link-secondary) {
+    background: #1a1a1a;
+    color: #888;
+    border: 1px solid #2a2a2a;
+  }
+
+  :global(.modal-link-secondary:hover) {
+    color: #bbb;
+    border-color: #3a3a3a;
+    background: #222;
+  }
+
+  :global(.modal-link svg) {
+    width: 14px;
+    height: 14px;
+  }
+
+  :global(.modal-gallery) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  :global(.modal-gallery-item) {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  :global(.modal-gallery-item img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  :global(.modal-gallery-item:hover img) {
+    transform: scale(1.05);
+  }
 </style>
+
+<script>
+  const backdrop = document.getElementById('modalBackdrop');
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const modalClose = document.getElementById('modalClose');
+
+  // Open modal on card click
+  document.querySelectorAll('[data-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.getAttribute('data-modal');
+      const data = (window as any).workData[id];
+      if (data) openModal(data);
+    });
+  });
+
+  // Close modal
+  modalClose?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function openModal(data: any) {
+    const m = data.modal;
+    if (!m || !modalContent) return;
+
+    const icon = data.icon || '📁';
+
+    const metricsHtml = m.metrics ? `
+      <div class="modal-metrics">
+        ${m.metrics.map((metric: any) => `
+          <div class="modal-metric">
+            <div class="modal-metric-value">${metric.value}</div>
+            <div class="modal-metric-label">${metric.label}</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    // Build sections array
+    const sections = [];
+    if (m.role) {
+      sections.push({ title: 'Role', content: m.role });
+    }
+    if (m.cohosts) {
+      sections.push({ title: 'Co-hosts', content: m.cohosts });
+    }
+    if (m.guests) {
+      sections.push({ title: 'Notable Guests', content: m.guests });
+    }
+    if (m.highlights) {
+      sections.push({ title: 'Highlights', content: m.highlights });
+    }
+
+    const sectionsHtml = sections.length ? `
+      <div class="modal-sections">
+        ${sections.map(s => `
+          <div class="modal-section">
+            <div class="modal-section-title">${s.title}</div>
+            <div class="modal-section-content">${s.content}</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const linksHtml = m.links ? `
+      <div class="modal-links">
+        ${m.links.map((link: any) => `
+          <a href="${link.url}" target="_blank" class="modal-link ${link.primary ? 'modal-link-primary' : 'modal-link-secondary'}">
+            ${link.label}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        `).join('')}
+      </div>
+    ` : '';
+
+    // Handle image gallery for swag, single hero image for others
+    const hasGallery = m.images && m.images.length > 0;
+
+    const heroImageHtml = (!hasGallery && data.image) ? `
+      <div class="modal-image">
+        <img src="${data.image}" alt="${data.title}" />
+      </div>
+    ` : '';
+
+    const galleryHtml = hasGallery ? `
+      <div class="modal-gallery">
+        ${m.images.map((src: string) => `
+          <div class="modal-gallery-item">
+            <img src="${src}" alt="${data.title}" />
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    modalContent.innerHTML = `
+      ${heroImageHtml}
+      <div class="modal-body">
+        <div class="modal-header">
+          <div class="modal-icon" style="background: ${data.color}20;">${icon}</div>
+          <div class="modal-header-text">
+            <h2 class="modal-title">${data.title}</h2>
+            <span class="modal-subtitle">${data.subtitle}</span>
+          </div>
+        </div>
+        <p class="modal-description">${m.fullDescription}</p>
+        ${metricsHtml}
+        ${sectionsHtml}
+        ${galleryHtml}
+        ${linksHtml}
+      </div>
+    `;
+
+    backdrop?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop?.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
