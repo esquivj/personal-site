@@ -119,6 +119,20 @@ const productLaunch = [
       },
     },
   },
+  {
+    id: 'product-marketing',
+    title: 'Product Marketing Materials',
+    subtitle: 'Early Strategy',
+    icon: '📋',
+    description: 'Early positioning documents, strategy decks, and launch planning materials.',
+    metric: 'Placeholder',
+    color: '#FF6B00',
+    modal: {
+      fullDescription: 'Placeholder — Early product marketing materials including positioning documents, strategy decks, competitive analysis, and launch planning. Add Notion docs and strategy materials here.',
+      role: 'Positioning, strategy, competitive analysis',
+      highlights: 'TODO: Add early positioning docs, Notion strategy materials, launch collateral drafts.',
+    },
+  },
 ];
 
 // =============================================================================
@@ -147,26 +161,25 @@ const salesLed = [
     },
   },
   {
-    id: 'scroll-dacc',
-    title: 'Scroll D/Acc',
-    subtitle: 'Partner Program',
-    icon: '📣',
-    description: 'Partnered with Scroll on delegate training. Drove 80 applicants.',
-    metric: '80 applicants',
-    color: '#fcb69f',
+    id: 'landing-pages',
+    title: 'Landing Pages',
+    subtitle: 'GTM Collateral',
+    icon: '🌐',
+    description: 'Positioning and copy for product and services landing pages.',
+    metric: '2 pages',
+    image: '/work/forse-landing.png',
+    color: '#3b82f6',
     modal: {
-      fullDescription: 'Marketing support for an 8-week delegate training program with Scroll, SEEDGov, Factory Labs, Proxy, and Open Source Observer. Partnership-driven distribution — proof points through collaboration.',
-      role: 'Marketing, content creation, program promotion',
-      metrics: [
-        { label: 'Applicants', value: '80' },
-        { label: 'Completion Rate', value: '72.4%' },
-        { label: 'Attendance', value: '69%' },
-        { label: 'SCR Delegated', value: '100,000' },
+      fullDescription: 'Wrote positioning and copy for both Forse (product) and StableLab (services) landing pages. Worked with designer on messaging hierarchy and conversion flow.',
+      role: 'Positioning, copywriting, messaging hierarchy',
+      highlights: 'Forse.io focused on product value prop and use cases. StableLab.xyz focused on services credibility and partnership signals.',
+      images: [
+        '/work/forse-landing.png',
+        '/work/stablelab-landing.png',
       ],
-      highlights: 'Co-marketing with ecosystem partners. We open-sourced the curriculum.',
       links: [
-        { label: 'Curriculum Hub', url: 'https://scrollzkp.notion.site/Scroll-Delegate-Accelerator-D-Acc-1f47792d22af80d5b53bce40a3e4eea1', primary: true },
-        { label: 'Final Report', url: 'https://forum.scroll.io/t/scroll-delegate-accelerator-program-final-report-open-source-curriculum/1325' },
+        { label: 'Forse.io', url: 'https://forse.io', primary: true },
+        { label: 'StableLab.xyz', url: 'https://stablelab.xyz' },
       ],
     },
   },
@@ -194,34 +207,9 @@ const salesLed = [
 ];
 
 // =============================================================================
-// PHASE 1: BUILDING TRUST — Services era thought leadership
+// PHASE 1: HERO ITEMS — Flagship thought leadership from services era
 // =============================================================================
-const trustBuilding = [
-  {
-    id: 'newsletter',
-    title: 'Governance Lab',
-    subtitle: 'Thought Leadership',
-    icon: '📨',
-    description: 'Made governance work visible. 121 issues, 38% open rate (2x industry benchmark).',
-    metric: '121 issues',
-    metricSecondary: '2+ years',
-    image: '/work/governance-lab-cover.jpg',
-    color: '#6366f1',
-    modal: {
-      fullDescription: 'The governance analysts did the work — votes, rationales, proposals. My job was making sure that work built reputation beyond the forums. Published 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum.',
-      role: 'Editorial direction, writing, curation, distribution',
-      metrics: [
-        { label: 'Issues Published', value: '121' },
-        { label: 'Subscribers', value: '920+' },
-        { label: 'Open Rate', value: '38%' },
-        { label: 'vs. Industry', value: '2x benchmark' },
-      ],
-      highlights: 'Phase 1 was trust-building, not lead gen. Each issue included governance analyses, curated links, and a Proposal Tracker with vote summaries.',
-      links: [
-        { label: 'Read on Substack', url: 'https://stablelab.substack.com', primary: true },
-      ],
-    },
-  },
+const phase1Heroes = [
   {
     id: 'stablepod',
     title: 'StablePod',
@@ -232,6 +220,7 @@ const trustBuilding = [
     metricSecondary: '29 guests',
     image: '/work/stablepod-cover.jpg',
     color: '#1DB954',
+    badge: '2023–2025',
     modal: {
       fullDescription: 'Co-hosted 29 episodes with crypto founders and protocol leaders. The guests did the talking for us: Morpho, Euler, Gnosis, Uniswap Foundation, Optimism Foundation, dYdX Foundation.',
       role: 'Producer, co-host, guest booking, promotion',
@@ -246,6 +235,32 @@ const trustBuilding = [
         { label: 'Spotify', url: 'https://open.spotify.com/show/4LZVPrxKohIaLjgvQRbVwI' },
         { label: 'YouTube', url: 'https://www.youtube.com/@StableLabxyz' },
         { label: 'Apple Podcasts', url: 'https://podcasts.apple.com/us/podcast/stablepod/id1695253636' },
+      ],
+    },
+  },
+  {
+    id: 'newsletter',
+    title: 'Governance Lab',
+    subtitle: 'Newsletter',
+    icon: '📨',
+    description: 'Made governance work visible. 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum.',
+    metric: '121 issues',
+    metricSecondary: '38% open rate',
+    image: '/work/governance-lab-cover.jpg',
+    color: '#6366f1',
+    badge: 'Newsletter',
+    modal: {
+      fullDescription: 'The governance analysts did the work — votes, rationales, proposals. My job was making sure that work built reputation beyond the forums. Published 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum.',
+      role: 'Editorial direction, writing, curation, distribution',
+      metrics: [
+        { label: 'Issues Published', value: '121' },
+        { label: 'Subscribers', value: '920+' },
+        { label: 'Open Rate', value: '38%' },
+        { label: 'vs. Industry', value: '2x benchmark' },
+      ],
+      highlights: 'Phase 1 was trust-building, not lead gen. Each issue included governance analyses, curated links, and a Proposal Tracker with vote summaries.',
+      links: [
+        { label: 'Read on Substack', url: 'https://stablelab.substack.com', primary: true },
       ],
     },
   },
@@ -335,12 +350,7 @@ const behindTheScenes = {
   },
 };
 
-const visualWork = {
-  landingPages: [
-    { title: 'Forse.io', description: 'Product landing page — positioning and copy', image: '/work/forse-landing.png', url: '/work/forse-landing.png' },
-    { title: 'StableLab.xyz', description: 'Services landing page — positioning and copy', image: '/work/stablelab-landing.png', url: '/work/stablelab-landing.png' },
-  ],
-};
+// visualWork removed - landing pages moved to Phase 3
 
 const teamVideos = [
   {
@@ -417,62 +427,6 @@ const teamVideos = [
       </div>
     </div>
 
-    <!-- Flagship Work -->
-    <section class="section flagship-section">
-      <h2>Flagship Work</h2>
-      <p class="section-subtitle">The work I'm proudest of. Built from zero, sustained over years.</p>
-      <div class="flagship-grid">
-        <button class="flagship-card" data-modal="stablepod" style="--accent: #1DB954">
-          <div class="flagship-image">
-            <img src="/work/stablepod-cover.jpg" alt="StablePod" loading="lazy" />
-          </div>
-          <div class="flagship-content">
-            <div class="flagship-header">
-              <h3>StablePod</h3>
-              <span class="flagship-badge">2023–2025</span>
-            </div>
-            <p class="flagship-description">29 episodes with crypto founders and protocol leaders. The guest list was the credibility signal: Morpho, Euler, Gnosis, Uniswap Foundation, Optimism, Ethena, dYdX.</p>
-            <div class="flagship-metrics">
-              <div class="flagship-metric">
-                <span class="flagship-metric-value">29</span>
-                <span class="flagship-metric-label">Episodes</span>
-              </div>
-              <div class="flagship-metric">
-                <span class="flagship-metric-value">29</span>
-                <span class="flagship-metric-label">Guests</span>
-              </div>
-            </div>
-          </div>
-        </button>
-        <button class="flagship-card" data-modal="newsletter" style="--accent: #6366f1">
-          <div class="flagship-image">
-            <img src="/work/governance-lab-cover.jpg" alt="Governance Lab Newsletter" loading="lazy" />
-          </div>
-          <div class="flagship-content">
-            <div class="flagship-header">
-              <h3>Governance Lab</h3>
-              <span class="flagship-badge">Newsletter</span>
-            </div>
-            <p class="flagship-description">Made governance work visible. 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum. Built from zero with organic growth only.</p>
-            <div class="flagship-metrics">
-              <div class="flagship-metric">
-                <span class="flagship-metric-value">121</span>
-                <span class="flagship-metric-label">Issues</span>
-              </div>
-              <div class="flagship-metric">
-                <span class="flagship-metric-value">38%</span>
-                <span class="flagship-metric-label">Open Rate</span>
-              </div>
-              <div class="flagship-metric">
-                <span class="flagship-metric-value">920+</span>
-                <span class="flagship-metric-label">Subscribers</span>
-              </div>
-            </div>
-          </div>
-        </button>
-      </div>
-    </section>
-
     <!-- Phase 1: Building Trust -->
     <section class="section phase-section">
       <div class="phase-header">
@@ -486,7 +440,36 @@ const teamVideos = [
         <span class="insight-label">The insight</span>
         <p>The governance analysts did the work. My job was making sure the work got seen. Content showed we knew what we were talking about.</p>
       </div>
-      <p class="phase-note">See <strong>Flagship Work</strong> above for StablePod and Governance Lab Newsletter—the main outputs from this phase.</p>
+
+      <!-- Phase 1 Heroes: StablePod & Newsletter -->
+      <div class="flagship-grid" style="margin-left: 2rem; margin-bottom: 2rem;">
+        {phase1Heroes.map((item) => (
+          <button class="flagship-card" data-modal={item.id} style={`--accent: ${item.color}`}>
+            <div class="flagship-image">
+              <img src={item.image} alt={item.title} loading="lazy" />
+            </div>
+            <div class="flagship-content">
+              <div class="flagship-header">
+                <h3>{item.title}</h3>
+                <span class="flagship-badge">{item.badge}</span>
+              </div>
+              <p class="flagship-description">{item.description}</p>
+              <div class="flagship-metrics">
+                <div class="flagship-metric">
+                  <span class="flagship-metric-value">{item.metric.split(' ')[0]}</span>
+                  <span class="flagship-metric-label">{item.metric.split(' ').slice(1).join(' ')}</span>
+                </div>
+                {item.metricSecondary && (
+                  <div class="flagship-metric">
+                    <span class="flagship-metric-value">{item.metricSecondary.split(' ')[0]}</span>
+                    <span class="flagship-metric-label">{item.metricSecondary.split(' ').slice(1).join(' ')}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
 
       <div class="campaign-grid" style="margin-left: 2rem;">
         {servicesMarketing.map((item) => (
@@ -604,17 +587,8 @@ const teamVideos = [
     <!-- Supporting Work -->
     <section class="section">
       <h2>Supporting Work</h2>
-      <p class="section-subtitle">Landing pages, sales collateral, and internal creative.</p>
+      <p class="section-subtitle">Events, internal creative, and team culture.</p>
       <div class="visual-grid visual-grid-2">
-        {visualWork.landingPages.map((item) => (
-          <a href={item.url} target="_blank" class="visual-card">
-            <img src={item.image} alt={item.title} loading="lazy" />
-            <div class="visual-meta">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          </a>
-        ))}
         <button class="visual-card" data-modal="governance-gathering">
           <img src={supportingWork.governanceGathering.image} alt="A Governance Gathering" loading="lazy" />
           <div class="visual-meta">
@@ -685,8 +659,8 @@ const teamVideos = [
   </div>
 
   <!-- Modal Data -->
-  <script define:vars={{ servicesMarketing, productLaunch, salesLed, trustBuilding, supportingWork, behindTheScenes }}>
-    window.workData = [...servicesMarketing, ...productLaunch, ...salesLed, ...trustBuilding, supportingWork.governanceGathering, supportingWork.swag, behindTheScenes].reduce((acc, item) => {
+  <script define:vars={{ servicesMarketing, productLaunch, salesLed, phase1Heroes, supportingWork, behindTheScenes }}>
+    window.workData = [...phase1Heroes, ...servicesMarketing, ...productLaunch, ...salesLed, supportingWork.governanceGathering, supportingWork.swag, behindTheScenes].reduce((acc, item) => {
       acc[item.id] = item;
       return acc;
     }, {});
