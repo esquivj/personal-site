@@ -1,20 +1,217 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Work data structured for cards and modals
-const heroWork = [
+// =============================================================================
+// PHASE 1: SERVICES — Building trust through governance work
+// =============================================================================
+const servicesMarketing = [
+  {
+    id: 'proposal-comms',
+    title: 'Proposal Amplification',
+    subtitle: 'Governance Comms',
+    icon: '📢',
+    description: 'Every proposal got a comms strategy. Forum posts, vote pushes, outcome announcements.',
+    metric: '100+ proposals',
+    image: '/work/proposals/unichain.jpg',
+    color: '#6366f1',
+    modal: {
+      fullDescription: 'Custom comms strategy for every governance proposal the team submitted. Each proposal required a different approach based on the DAO, the stakes, and what it would take to pass.',
+      role: 'Comms strategy, copywriting, distribution timing',
+      highlights: 'Touchpoints across the lifecycle: forum post announcement, temp check promotion, on-chain vote push, passed/outcome announcement. Range from single post to multi-post campaigns depending on significance.',
+      images: [
+        '/work/proposals/unichain.jpg',
+        '/work/proposals/gnosis.jpg',
+        '/work/proposals/scroll.jpg',
+        '/work/proposals/compound.jpg',
+        '/work/proposals/livepeer.jpg',
+        '/work/proposals/reserve.jpg',
+      ],
+    },
+  },
+  {
+    id: 'conference-marketing',
+    title: 'Conference Presence',
+    subtitle: 'Event Marketing',
+    icon: '🎤',
+    description: 'Promoted team attendance at EthCC, Devconnect, Token2049, Korea Blockchain Week. Speaking slots, side events, BD support.',
+    metric: '5+ events/year',
+    image: '/work/conferences/token2049.png',
+    color: '#6366f1',
+    modal: {
+      fullDescription: 'Marketing support for conference presence. Promoted speaking engagements, created assets for side event participation, amplified team attendance to signal we were active and embedded in the ecosystem.',
+      role: 'Content creation, social promotion, asset creation, BD support',
+      highlights: 'Conferences attended: EthCC (Paris), Devconnect, Token2049 (Singapore & Dubai), Consensus, Korea Blockchain Week, RWA Summit Seoul, DAO Tokyo.',
+      images: [
+        '/work/conferences/token2049.png',
+        '/work/conferences/token2049-2025.jpg',
+        '/work/conferences/ethcc-paris.png',
+        '/work/conferences/consensus.png',
+        '/work/conferences/devconnect-2025.jpg',
+        '/work/conferences/kbw-2025.jpg',
+        '/work/conferences/rwa-summit.png',
+      ],
+    },
+  },
+];
+
+// =============================================================================
+// PHASE 2: PRODUCT LAUNCH — Services → Product transition
+// =============================================================================
+const productLaunch = [
+  {
+    id: 'forse-launch',
+    title: 'Forse Launch',
+    subtitle: 'Services → Product',
+    icon: '🚀',
+    description: 'Led GTM for a services company launching its first product. "Built by StableLab" let us use the reputation we\'d already earned.',
+    metric: 'Full GTM',
+    image: '/work/forse-landing.png',
+    color: '#FF6B00',
+    modal: {
+      fullDescription: 'Led the full product launch for Forse, StableLab\'s first product. The play was simple: people trusted StableLab, so we made sure they knew who built this.',
+      role: 'Marketing lead — naming, brand identity, positioning, all launch collateral, GTM execution',
+      highlights: 'First product launch for a company transitioning from services to product. Owned entire arc from naming workshops through launch campaign including blog post, social announcement, and network activation.',
+      links: [
+        { label: 'Landing Page', url: 'https://forse.io', primary: true },
+        { label: 'Launch Post', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
+        { label: 'Launch Tweet', url: 'https://x.com/Forseapp/status/1805611411252576653' },
+      ],
+    },
+  },
+  {
+    id: 'forse-rebrand',
+    title: 'Forse Rebrand',
+    subtitle: 'ICP Discovery',
+    icon: '🔄',
+    description: 'Discovered DAOs weren\'t the real buyer — foundations and labs were. Pivoted the messaging.',
+    metric: 'Strategic pivot',
+    image: '/work/forse-landing.png',
+    color: '#FF6B00',
+    modal: {
+      fullDescription: 'Initial DAO-focused positioning wasn\'t finding product-market fit. Discovered the real buyers were foundations and labs with budget authority, not DAOs themselves. Led strategic repositioning and full visual rebrand (dark to light theme) to target broader audience.',
+      role: 'Strategy, ICP redefinition, new positioning, visual rebrand direction, landing page copy',
+      highlights: 'The lesson: the people using governance tools weren\'t the ones buying them. We adapted messaging to speak to foundation operators.',
+      beforeAfter: {
+        before: { image: '/work/forse-old.png', label: 'Before', tagline: 'Empowering DAOs with Data-Driven Governance' },
+        after: { image: '/work/forse-new.png', label: 'After', tagline: 'The Intelligence Layer Fueling Web3 Growth' },
+      },
+    },
+  },
+];
+
+// =============================================================================
+// PHASE 3: SALES-LED GTM — Proof points, relationships, long cycles
+// =============================================================================
+const salesLed = [
+  {
+    id: 'sales-enablement',
+    title: 'Sales One-Pagers',
+    subtitle: 'Proof Points',
+    icon: '📄',
+    description: 'Collateral for long-cycle B2B sales. No A/B testing possible — had to get it right.',
+    metric: '4 assets',
+    image: '/work/forse-insights.png',
+    color: '#3b82f6',
+    modal: {
+      fullDescription: 'Created sales enablement materials for a sales-led GTM with long cycles and bespoke deal structures. In B2B with few deals and long timelines, you can\'t A/B test messaging — these had to work.',
+      role: 'Positioning, copywriting, layout direction',
+      highlights: 'Sales-led GTM means marketing\'s job is to arm sales, not generate inbound leads. These had to help close deals, not just explain the product.',
+      images: [
+        '/work/forse-insights.png',
+        '/work/forse-grants.png',
+        '/work/forse-grants-visual.png',
+        '/work/forse-incentive.png',
+      ],
+    },
+  },
+  {
+    id: 'scroll-dacc',
+    title: 'Scroll D/Acc',
+    subtitle: 'Partner Program',
+    icon: '📣',
+    description: 'Partnered with Scroll on delegate training. Drove 80 applicants.',
+    metric: '80 applicants',
+    color: '#fcb69f',
+    modal: {
+      fullDescription: 'Marketing support for an 8-week delegate training program with Scroll, SEEDGov, Factory Labs, Proxy, and Open Source Observer. Partnership-driven distribution — proof points through collaboration.',
+      role: 'Marketing, content creation, program promotion',
+      metrics: [
+        { label: 'Applicants', value: '80' },
+        { label: 'Completion Rate', value: '72.4%' },
+        { label: 'Attendance', value: '69%' },
+        { label: 'SCR Delegated', value: '100,000' },
+      ],
+      highlights: 'Co-marketing with ecosystem partners. We open-sourced the curriculum.',
+      links: [
+        { label: 'Curriculum Hub', url: 'https://scrollzkp.notion.site/Scroll-Delegate-Accelerator-D-Acc-1f47792d22af80d5b53bce40a3e4eea1', primary: true },
+        { label: 'Final Report', url: 'https://forum.scroll.io/t/scroll-delegate-accelerator-program-final-report-open-source-curriculum/1325' },
+      ],
+    },
+  },
+  {
+    id: 'content-strategy',
+    title: 'Content Under Constraints',
+    subtitle: 'Creative GTM',
+    icon: '✍️',
+    description: 'Long cycles and confidentiality meant getting creative about what we could publish.',
+    metric: '5 formats',
+    color: '#8b5cf6',
+    modal: {
+      fullDescription: 'Long sales cycles and few closing deals forced creative solutions. Existing work was often not co-marketing ready due to confidentiality or deal structures. Developed content categories that could ship without client sign-off while still signaling capability.',
+      role: 'Content strategy, writing, working with data analysts to fill gaps',
+      highlights: 'Created repeatable content formats: "Building Forse" (work behind the work), quasi case studies (analyst context filling gaps), product launches (ecosystem credibility), work highlights (anonymized differentiators), and rebrand announcements.',
+      blogPosts: [
+        { title: 'Building Forse: Data Stack', category: 'Work Behind the Work', image: 'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg', url: 'https://stablelab.xyz/blog/building-forse-the-data-stack-behind-our-terminals' },
+        { title: 'Measuring PYUSD Adoption', category: 'Quasi Case Study', image: 'https://framerusercontent.com/images/LGX66YflfGEGJHe68VvY5zlnsk.jpg', url: 'https://stablelab.xyz/blog/measuring-pyusd-adoption-tvl-cohorts-and-real-usage' },
+        { title: 'Forse Grants Platform', category: 'Product Launch', image: 'https://framerusercontent.com/images/iFPpzgtjT4lr3IhEhviIN5Vza4.jpg', url: 'https://stablelab.xyz/blog/introducing-the-forse-grants-management-platform' },
+        { title: 'GitHub Activity Index', category: 'Work Highlight', image: 'https://framerusercontent.com/images/rQ2C95NsHZuu3FBXPOcFyUHMx5s.jpg', url: 'https://stablelab.xyz/blog/the-github-activity-index-a-builder-momentum-signal' },
+        { title: 'Reintroducing Forse', category: 'Rebrand', image: 'https://framerusercontent.com/images/kteMB3ZICsVeoxEkZ5TAmEcec.jpg', url: 'https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth' },
+      ],
+    },
+  },
+];
+
+// =============================================================================
+// PHASE 1: BUILDING TRUST — Services era thought leadership
+// =============================================================================
+const trustBuilding = [
+  {
+    id: 'newsletter',
+    title: 'Governance Lab',
+    subtitle: 'Thought Leadership',
+    icon: '📨',
+    description: 'Made governance work visible. 121 issues, 38% open rate (2x industry benchmark).',
+    metric: '121 issues',
+    metricSecondary: '2+ years',
+    image: '/work/governance-lab-cover.jpg',
+    color: '#6366f1',
+    modal: {
+      fullDescription: 'The governance analysts did the work — votes, rationales, proposals. My job was making sure that work built reputation beyond the forums. Published 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum.',
+      role: 'Editorial direction, writing, curation, distribution',
+      metrics: [
+        { label: 'Issues Published', value: '121' },
+        { label: 'Subscribers', value: '920+' },
+        { label: 'Open Rate', value: '38%' },
+        { label: 'vs. Industry', value: '2x benchmark' },
+      ],
+      highlights: 'Phase 1 was trust-building, not lead gen. Each issue included governance analyses, curated links, and a Proposal Tracker with vote summaries.',
+      links: [
+        { label: 'Read on Substack', url: 'https://stablelab.substack.com', primary: true },
+      ],
+    },
+  },
   {
     id: 'stablepod',
     title: 'StablePod',
-    subtitle: 'Podcast',
+    subtitle: 'Credibility',
     icon: '🎙️',
-    description: '29 episodes with founders from Morpho, Euler, Gnosis, Uniswap Foundation, Ethena, and dYdX.',
+    description: '29 episodes with founders from Morpho, Euler, Gnosis, Uniswap Foundation, Ethena, dYdX.',
     metric: '29 episodes',
     metricSecondary: '29 guests',
     image: '/work/stablepod-cover.jpg',
     color: '#1DB954',
     modal: {
-      fullDescription: 'Co-hosted 29 episodes with crypto founders and protocol leaders. Guests included founders of Morpho, Euler, and Gnosis, and leadership from Uniswap Foundation, Optimism Foundation, and dYdX Foundation.',
+      fullDescription: 'Co-hosted 29 episodes with crypto founders and protocol leaders. The guests did the talking for us: Morpho, Euler, Gnosis, Uniswap Foundation, Optimism Foundation, dYdX Foundation.',
       role: 'Producer, co-host, guest booking, promotion',
       metrics: [
         { label: 'Episodes', value: '29' },
@@ -30,32 +227,46 @@ const heroWork = [
       ],
     },
   },
-  {
-    id: 'newsletter',
-    title: 'Governance Lab',
-    subtitle: 'Newsletter',
-    icon: '📨',
-    description: 'Built from zero to 920+ subscribers with 38% open rate (2x industry benchmark).',
-    metric: '121 issues',
-    metricSecondary: '2+ years',
-    image: '/work/governance-lab-cover.jpg',
-    color: '#6366f1',
+];
+
+// =============================================================================
+// SUPPORTING WORK
+// =============================================================================
+const supportingWork = {
+  governanceGathering: {
+    id: 'governance-gathering',
+    title: 'A Governance Gathering',
+    subtitle: 'Side Event',
+    icon: '🎪',
+    description: 'Networking event during EthCC Brussels. Co-hosted with UMA, Wormhole, Tally.',
+    metric: '150+ attendees',
+    image: '/work/governance-gathering.avif',
+    color: '#7c3aed',
     modal: {
-      fullDescription: 'Published 121 editions of Governance Lab, a weekly newsletter covering DAO governance across Aave, Lido, Compound, Optimism, and Arbitrum. Built from zero to 920+ subscribers with 38% open rate (2x industry benchmark).',
-      role: 'Editorial direction, writing, curation, distribution',
+      fullDescription: 'Initiated and project-managed a networking event during EthCC [7] in Brussels. Built credibility and relationships during the services era. Co-hosted with UMA, Wormhole, and Tally.',
+      role: 'Initiated idea, project management, co-host sourcing, budget management, event coordination',
       metrics: [
-        { label: 'Issues Published', value: '121' },
-        { label: 'Subscribers', value: '920+' },
-        { label: 'Open Rate', value: '38%' },
-        { label: 'vs. Industry', value: '2x benchmark' },
+        { label: 'Attendees', value: '150+' },
+        { label: 'Registrations', value: '258' },
+        { label: 'Co-hosts', value: '4' },
+        { label: 'Event', value: 'EthCC [7]' },
       ],
-      highlights: 'Each issue included 3 deep-dive governance analyses, curated links, a Proposal Tracker with vote summaries, and "From the Lab" section featuring StableLab work.',
+      cohosts: 'UMA, Wormhole, Tally',
+      highlights: 'Built partnerships with Gauntlet, Karpatkey, and Spark. Network-driven attendance through direct outreach.',
+      images: [
+        '/work/agg/event-4.jpg',
+        '/work/agg/event-5.jpg',
+        '/work/agg/event-6.jpg',
+        '/work/agg/event-1.jpeg',
+        '/work/agg/event-2.jpeg',
+        '/work/agg/event-3.jpeg',
+      ],
       links: [
-        { label: 'Read on Substack', url: 'https://stablelab.substack.com', primary: true },
+        { label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true },
       ],
     },
   },
-  {
+  swag: {
     id: 'team-swag',
     title: 'Team Swag',
     subtitle: 'Creative Direction',
@@ -85,113 +296,27 @@ const heroWork = [
       ],
     },
   },
-];
+};
 
-const campaigns = [
-  {
-    id: 'forse-launch',
-    title: 'Forse Launch',
-    subtitle: 'Brand Development',
-    icon: '🚀',
-    description: 'First product launch for a services company transitioning to product. Naming → brand → positioning → launch.',
-    metric: 'End-to-end',
-    image: '/work/forse-landing.png',
-    color: '#FF6B00',
-    modal: {
-      fullDescription: 'Led the full product launch for Forse, a new product from StableLab. Owned the entire marketing arc from naming workshops with founders through brand identity development, positioning strategy, and go-to-market execution.',
-      role: 'Marketing lead — naming, brand identity, positioning, all launch collateral, GTM materials',
-      highlights: 'First product launch for a company transitioning from services to product. Launch campaign included blog post, social announcement, and network activation through existing relationships.',
-      links: [
-        { label: 'Landing Page', url: 'https://forse.io', primary: true },
-        { label: 'Launch Post', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
-        { label: 'Launch Tweet', url: 'https://x.com/Forseapp/status/1805611411252576653' },
-      ],
-    },
+const behindTheScenes = {
+  id: 'behind-the-scenes',
+  title: 'Behind the Scenes',
+  subtitle: 'Content Capture',
+  icon: '📷',
+  description: 'Moments from offsites, conferences, and team life.',
+  image: '/work/behind-the-scenes.png',
+  color: '#ec4899',
+  modal: {
+    fullDescription: 'Pushed for content capture at every offsite. Started a disposable camera tradition with categories and prizes. These moments became fuel for posts, videos, and team culture.',
+    role: 'Initiated content capture culture, ran photo competitions, curated moments',
+    highlights: 'Created rituals that got the team documenting together. Built up a collection of real moments to pull from.',
   },
-  {
-    id: 'forse-rebrand',
-    title: 'Forse Rebrand',
-    subtitle: 'Strategic Pivot',
-    icon: '🔄',
-    description: 'Learned from market feedback, adapted strategy, executed full rebrand under pressure.',
-    metric: 'Full rebrand',
-    image: '/work/forse-landing.png',
-    color: '#FF6B00',
-    modal: {
-      fullDescription: 'Led strategic repositioning after initial DAO-focused positioning wasn\'t finding product-market fit. Executed a full visual rebrand (dark to light theme) and refreshed all messaging to target a broader audience.',
-      role: 'Strategy, new positioning, visual rebrand direction, landing page copy',
-      highlights: 'Shows ability to learn from market feedback, adapt strategy, and execute a full rebrand under pressure.',
-    },
-  },
-  {
-    id: 'scroll-dacc',
-    title: 'Scroll D/Acc',
-    subtitle: 'Program Marketing',
-    icon: '📣',
-    description: 'Amplified 8-week delegate training program. Drove applications and visibility.',
-    metric: '80 applicants',
-    color: '#fcb69f',
-    modal: {
-      fullDescription: 'Marketing and content support for an 8-week delegate training program run in partnership with Scroll, SEEDGov, Factory Labs, Proxy, and Open Source Observer. Drove program awareness and applications.',
-      role: 'Marketing, content creation, program promotion',
-      metrics: [
-        { label: 'Applicants', value: '80' },
-        { label: 'Completion Rate', value: '72.4%' },
-        { label: 'Attendance', value: '69%' },
-        { label: 'SCR Delegated', value: '100,000' },
-      ],
-      highlights: 'Curriculum was open-sourced for other DAOs to reuse. Combined live workshops, Kahoot reviews, and practical exercises.',
-      links: [
-        { label: 'Curriculum Hub', url: 'https://scrollzkp.notion.site/Scroll-Delegate-Accelerator-D-Acc-1f47792d22af80d5b53bce40a3e4eea1', primary: true },
-        { label: 'Final Report', url: 'https://forum.scroll.io/t/scroll-delegate-accelerator-program-final-report-open-source-curriculum/1325' },
-      ],
-    },
-  },
-  {
-    id: 'governance-gathering',
-    title: 'A Governance Gathering',
-    subtitle: 'Side Event',
-    icon: '🎪',
-    description: 'Happy hour side event at EthCC [7] Brussels. 4 co-hosts, network-driven distribution.',
-    metric: '150+ attendees',
-    image: '/work/governance-gathering.avif',
-    color: '#7c3aed',
-    modal: {
-      fullDescription: 'Initiated and project-managed a happy hour networking event during EthCC [7] in Brussels, July 2024. Brought together partners, clients, and governance leaders. Co-hosted with UMA, Wormhole, and Tally. Coordinated with Eventflare for venue, logistics, and video coverage.',
-      role: 'Initiated idea, project management, co-host sourcing, budget management, event coordination',
-      metrics: [
-        { label: 'Attendees', value: '150+' },
-        { label: 'Registrations', value: '258' },
-        { label: 'Co-hosts', value: '4' },
-        { label: 'Event', value: 'EthCC [7]' },
-      ],
-      cohosts: 'UMA, Wormhole, Tally',
-      highlights: 'Part of StableLab\'s largest conference presence (10 team members). Built working relationship with Eventflare and strengthened partnerships with Gauntlet, Karpatkey, and Spark.',
-      images: [
-        '/work/agg/event-4.jpg',
-        '/work/agg/event-5.jpg',
-        '/work/agg/event-6.jpg',
-        '/work/agg/event-1.jpeg',
-        '/work/agg/event-2.jpeg',
-        '/work/agg/event-3.jpeg',
-      ],
-      links: [
-        { label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true },
-      ],
-    },
-  },
-];
+};
 
 const visualWork = {
   landingPages: [
     { title: 'Forse.io', description: 'Product landing page — positioning and copy', image: '/work/forse-landing.png', url: '/work/forse-landing.png' },
     { title: 'StableLab.xyz', description: 'Services landing page — positioning and copy', image: '/work/stablelab-landing.png', url: '/work/stablelab-landing.png' },
-  ],
-  onePagers: [
-    { title: 'Forse Insights', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-insights.png', url: '/work/forse-insights.png' },
-    { title: 'Grants Management', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-grants.png', url: '/work/forse-grants.png' },
-    { title: 'Grants (Visual)', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-grants-visual.png', url: '/work/forse-grants-visual.png' },
-    { title: 'Incentive Optimization', description: 'Sales enablement for Sales-led GTM', image: '/work/forse-incentive.png', url: '/work/forse-incentive.png' },
   ],
 };
 
@@ -235,39 +360,168 @@ const teamVideos = [
 ];
 ---
 
-<Layout title="Work — Juan Esquivel" description="Marketing work from StableLab and Forse. Podcasts, newsletters, campaigns, and product launches.">
+<Layout title="Work — Juan Esquivel" description="B2B marketing across three phases: building trust, launching products, enabling sales.">
   <header class="header">
     <a href="/" class="back-link">← Back</a>
   </header>
 
   <main>
-    <h1>Work</h1>
-    <p class="intro">Selected marketing work from my time leading marketing at StableLab and Forse (2023–2025).</p>
+    <div class="page-intro">
+      <h1>Work</h1>
+      <p class="intro">At StableLab, I led marketing across three distinct business phases. Each required a different approach because the business context changed. That's the throughline.</p>
+    </div>
 
-    <!-- Hero Cards -->
-    <section class="section hero-section">
-      <h2>Featured Work</h2>
+    <!-- Phase Timeline -->
+    <div class="timeline">
+      <div class="timeline-phase">
+        <div class="timeline-dot dot-services"></div>
+        <div class="timeline-label">Services</div>
+        <div class="timeline-desc">Building Trust</div>
+        <div class="timeline-years">2023</div>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-phase">
+        <div class="timeline-dot dot-product"></div>
+        <div class="timeline-label">Product</div>
+        <div class="timeline-desc">Launch & Pivot</div>
+        <div class="timeline-years">2024</div>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-phase">
+        <div class="timeline-dot dot-sales"></div>
+        <div class="timeline-label">Sales-Led</div>
+        <div class="timeline-desc">GTM & Proof Points</div>
+        <div class="timeline-years">2024–25</div>
+      </div>
+    </div>
+
+    <!-- Flagship Work -->
+    <section class="section flagship-section">
+      <h2>Flagship Work</h2>
+      <p class="section-subtitle">The work I'm proudest of. Built from zero, sustained over years.</p>
+      <div class="flagship-grid">
+        <button class="flagship-card" data-modal="stablepod" style="--accent: #1DB954">
+          <div class="flagship-image">
+            <img src="/work/stablepod-cover.jpg" alt="StablePod" loading="lazy" />
+          </div>
+          <div class="flagship-content">
+            <div class="flagship-header">
+              <h3>StablePod</h3>
+              <span class="flagship-badge">2023–2025</span>
+            </div>
+            <p class="flagship-description">29 episodes with crypto founders and protocol leaders. The guest list was the credibility signal: Morpho, Euler, Gnosis, Uniswap Foundation, Optimism, Ethena, dYdX.</p>
+            <div class="flagship-metrics">
+              <div class="flagship-metric">
+                <span class="flagship-metric-value">29</span>
+                <span class="flagship-metric-label">Episodes</span>
+              </div>
+              <div class="flagship-metric">
+                <span class="flagship-metric-value">29</span>
+                <span class="flagship-metric-label">Guests</span>
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="flagship-card" data-modal="newsletter" style="--accent: #6366f1">
+          <div class="flagship-image">
+            <img src="/work/governance-lab-cover.jpg" alt="Governance Lab Newsletter" loading="lazy" />
+          </div>
+          <div class="flagship-content">
+            <div class="flagship-header">
+              <h3>Governance Lab</h3>
+              <span class="flagship-badge">Newsletter</span>
+            </div>
+            <p class="flagship-description">Made governance work visible. 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum. Built from zero with organic growth only.</p>
+            <div class="flagship-metrics">
+              <div class="flagship-metric">
+                <span class="flagship-metric-value">121</span>
+                <span class="flagship-metric-label">Issues</span>
+              </div>
+              <div class="flagship-metric">
+                <span class="flagship-metric-value">38%</span>
+                <span class="flagship-metric-label">Open Rate</span>
+              </div>
+              <div class="flagship-metric">
+                <span class="flagship-metric-value">920+</span>
+                <span class="flagship-metric-label">Subscribers</span>
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- Phase 1: Building Trust -->
+    <section class="section phase-section">
+      <div class="phase-header">
+        <div class="phase-number">01</div>
+        <div class="phase-title-block">
+          <h2>Building Trust</h2>
+          <p class="phase-context">Services business. Marketing wasn't about lead gen—it was making sure the governance work built reputation beyond the forums.</p>
+        </div>
+      </div>
+      <div class="phase-insight">
+        <span class="insight-label">The insight</span>
+        <p>The governance analysts did the work. My job was making sure the work got seen. Content showed we knew what we were talking about.</p>
+      </div>
+      <p class="phase-note">See <strong>Flagship Work</strong> above for StablePod and Governance Lab Newsletter—the main outputs from this phase.</p>
+
+      <div class="campaign-grid" style="margin-left: 2rem;">
+        {servicesMarketing.map((item) => (
+          <button
+            class="campaign-card"
+            data-modal={item.id}
+            style={`--accent: ${item.color}`}
+          >
+            <div class="campaign-image">
+              {item.image ? (
+                <img src={item.image} alt={item.title} loading="lazy" />
+              ) : (
+                <div class="campaign-placeholder" style={`--accent: ${item.color}`}>
+                  <span>{item.icon}</span>
+                </div>
+              )}
+            </div>
+            <div class="campaign-content">
+              <div class="campaign-header">
+                <h3>{item.title}</h3>
+                <span class="campaign-badge">{item.metric}</span>
+              </div>
+              <p class="campaign-subtitle">{item.subtitle}</p>
+              <p class="campaign-description">{item.description}</p>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <div class="partners-cloud">
+        <img src="/work/partners.png" alt="Protocols we worked with: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ others" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- Phase 2: Product Launch -->
+    <section class="section phase-section">
+      <div class="phase-header">
+        <div class="phase-number">02</div>
+        <div class="phase-title-block">
+          <h2>Product Launch</h2>
+          <p class="phase-context">Services company launches first product. The challenge: how do you market something new when your brand is known for something else?</p>
+        </div>
+      </div>
+      <div class="phase-insight">
+        <span class="insight-label">The insight</span>
+        <p>"Built by StableLab" became the positioning—borrowing trust from the services brand while building product credibility. Then we discovered DAOs weren't the real buyer. Foundations and labs were.</p>
+      </div>
       <div class="hero-grid">
-        {heroWork.map((item) => (
+        {productLaunch.map((item) => (
           <button
             class="hero-card"
             data-modal={item.id}
             style={`--accent: ${item.color}`}
           >
-            {item.previewImages ? (
-              <div class="hero-image swag-hero-preview">
-                <img src={item.previewImages[0]} alt={item.title} loading="lazy" class="swag-preview-main" />
-                <div class="swag-preview-stack">
-                  <img src={item.previewImages[1]} alt={item.title} loading="lazy" />
-                  <img src={item.previewImages[2]} alt={item.title} loading="lazy" />
-                </div>
-                <div class="swag-preview-count">+{item.extraCount}</div>
-              </div>
-            ) : (
-              <div class="hero-image">
-                <img src={item.image} alt={item.title} loading="lazy" />
-              </div>
-            )}
+            <div class="hero-image">
+              <img src={item.image} alt={item.title} loading="lazy" />
+            </div>
             <div class="hero-content">
               <div class="hero-header">
                 <h3>{item.title}</h3>
@@ -276,7 +530,6 @@ const teamVideos = [
               <p class="hero-description">{item.description}</p>
               <div class="hero-metrics">
                 <span class="metric-primary">{item.metric}</span>
-                {item.metricSecondary && <span class="metric-secondary">{item.metricSecondary}</span>}
               </div>
             </div>
           </button>
@@ -284,11 +537,21 @@ const teamVideos = [
       </div>
     </section>
 
-    <!-- Campaigns -->
-    <section class="section">
-      <h2>Campaigns & Programs</h2>
+    <!-- Phase 3: Sales-Led GTM -->
+    <section class="section phase-section">
+      <div class="phase-header">
+        <div class="phase-number">03</div>
+        <div class="phase-title-block">
+          <h2>Sales-Led GTM</h2>
+          <p class="phase-context">Enterprise B2B with long cycles. Marketing's job shifted from awareness to giving sales something to sell with.</p>
+        </div>
+      </div>
+      <div class="phase-insight">
+        <span class="insight-label">The insight</span>
+        <p>You can't A/B test with 10 deals a year. Buyers are cyclical—catch them at setup or re-architecture, not mid-flight. Public credibility (events, partnerships) enabled private sales conversations.</p>
+      </div>
       <div class="campaign-grid">
-        {campaigns.map((item) => (
+        {salesLed.map((item) => (
           <button
             class="campaign-card"
             data-modal={item.id}
@@ -316,10 +579,11 @@ const teamVideos = [
       </div>
     </section>
 
-    <!-- Visual Work -->
+    <!-- Supporting Work -->
     <section class="section">
-      <h2>Landing Pages</h2>
-      <div class="visual-grid">
+      <h2>Supporting Work</h2>
+      <p class="section-subtitle">Landing pages, sales collateral, and internal creative.</p>
+      <div class="visual-grid visual-grid-2">
         {visualWork.landingPages.map((item) => (
           <a href={item.url} target="_blank" class="visual-card">
             <img src={item.image} alt={item.title} loading="lazy" />
@@ -329,28 +593,42 @@ const teamVideos = [
             </div>
           </a>
         ))}
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Sales One-Pagers</h2>
-      <p class="section-subtitle">Sales enablement collateral created to support Sales-led GTM.</p>
-      <div class="visual-grid visual-grid-4">
-        {visualWork.onePagers.map((item) => (
-          <a href={item.url} target="_blank" class="visual-card visual-card-small">
-            <img src={item.image} alt={item.title} loading="lazy" />
-            <div class="visual-meta">
-              <h3>{item.title}</h3>
+        <button class="visual-card" data-modal="governance-gathering">
+          <img src={supportingWork.governanceGathering.image} alt="A Governance Gathering" loading="lazy" />
+          <div class="visual-meta">
+            <h3>A Governance Gathering</h3>
+            <p>Side event · 150+ attendees</p>
+          </div>
+        </button>
+        <button class="visual-card" data-modal="team-swag">
+          <div class="swag-visual-preview">
+            <img src={supportingWork.swag.previewImages[0]} alt="Team Swag" loading="lazy" class="swag-main" />
+            <div class="swag-stack">
+              <img src={supportingWork.swag.previewImages[1]} alt="Team Swag" loading="lazy" />
+              <img src={supportingWork.swag.previewImages[2]} alt="Team Swag" loading="lazy" />
             </div>
-          </a>
-        ))}
+          </div>
+          <div class="visual-meta">
+            <h3>Team Swag</h3>
+            <p>Creative direction for offsites</p>
+          </div>
+        </button>
       </div>
     </section>
 
-    <!-- Team Culture Videos -->
+    <!-- Storytelling -->
     <section class="section">
-      <h2>Team Culture</h2>
-      <p class="section-subtitle">Behind-the-scenes videos capturing team offsites and culture.</p>
+      <h2>Storytelling</h2>
+      <p class="section-subtitle">Behind-the-scenes videos and content captured during team offsites.</p>
+
+      <button class="bts-card" data-modal="behind-the-scenes">
+        <img src={behindTheScenes.image} alt="Behind the Scenes" loading="lazy" />
+        <div class="bts-overlay">
+          <h3>Behind the Scenes</h3>
+          <p>Moments from offsites, conferences, and team life</p>
+        </div>
+      </button>
+
       <div class="team-video-grid">
         {teamVideos.map((video) => (
           <a href={`https://youtu.be/${video.youtubeId}`} target="_blank" class="team-video-card">
@@ -385,8 +663,8 @@ const teamVideos = [
   </div>
 
   <!-- Modal Data -->
-  <script define:vars={{ heroWork, campaigns }}>
-    window.workData = [...heroWork, ...campaigns].reduce((acc, item) => {
+  <script define:vars={{ servicesMarketing, productLaunch, salesLed, trustBuilding, supportingWork, behindTheScenes }}>
+    window.workData = [...servicesMarketing, ...productLaunch, ...salesLed, ...trustBuilding, supportingWork.governanceGathering, supportingWork.swag, behindTheScenes].reduce((acc, item) => {
       acc[item.id] = item;
       return acc;
     }, {});
@@ -416,14 +694,261 @@ const teamVideos = [
     letter-spacing: -0.02em;
   }
 
-  .intro {
-    color: #666;
-    margin-bottom: 5rem;
-    font-size: 1.0625rem;
-    line-height: 1.6;
-    max-width: 540px;
+  .page-intro {
+    margin-bottom: 3rem;
   }
 
+  .intro {
+    color: #777;
+    margin-bottom: 3rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .intro strong {
+    color: #b3b3b3;
+    font-weight: 500;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 5rem;
+    padding: 2rem 0;
+  }
+
+  .timeline-phase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 100px;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    position: relative;
+  }
+
+  .dot-services {
+    background: #6366f1;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.5), 0 0 24px rgba(99, 102, 241, 0.25);
+  }
+
+  .dot-product {
+    background: #f97316;
+    box-shadow: 0 0 12px rgba(249, 115, 22, 0.5), 0 0 24px rgba(249, 115, 22, 0.25);
+  }
+
+  .dot-sales {
+    background: #22c55e;
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.5), 0 0 24px rgba(34, 197, 94, 0.25);
+  }
+
+  .timeline-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #e5e5e5;
+    margin-top: 0.25rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.75rem;
+    color: #555;
+  }
+
+  .timeline-years {
+    font-size: 0.6875rem;
+    color: #444;
+    margin-top: 0.25rem;
+  }
+
+  .timeline-line {
+    flex: 1;
+    height: 1px;
+    background: #222;
+    margin-top: 5px;
+    max-width: 80px;
+    min-width: 40px;
+  }
+
+  @media (max-width: 480px) {
+    .timeline {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .timeline-phase {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+      min-width: auto;
+    }
+
+    .timeline-line {
+      width: 1px;
+      height: 24px;
+      min-width: 1px;
+      max-width: 1px;
+      margin: 0;
+      margin-left: 4px;
+    }
+
+    .timeline-desc {
+      margin-top: 0;
+    }
+
+    .timeline-years {
+      margin-top: 0.125rem;
+    }
+  }
+
+  /* Phase section hero grid needs margin when following insight */
+  .phase-section .hero-grid {
+    margin-left: 2rem;
+  }
+
+  .phase-section .campaign-grid {
+    margin-left: 2rem;
+  }
+
+  @media (max-width: 540px) {
+    .phase-section .hero-grid,
+    .phase-section .campaign-grid {
+      margin-left: 0;
+    }
+  }
+
+  /* Flagship Section */
+  .flagship-section {
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .flagship-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 700px) {
+    .flagship-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .flagship-card {
+    display: flex;
+    flex-direction: column;
+    background: #0d0d0d;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .flagship-card:hover {
+    background: #111;
+    border-color: #2a2a2a;
+    transform: translateY(-2px);
+  }
+
+  .flagship-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .flagship-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .flagship-card:hover .flagship-image img {
+    transform: scale(1.03);
+  }
+
+  .flagship-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .flagship-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .flagship-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #f0f0f0;
+  }
+
+  .flagship-badge {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: #666;
+    padding: 0.25rem 0.625rem;
+    background: #1a1a1a;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .flagship-description {
+    font-size: 0.9375rem;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  .flagship-metrics {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .flagship-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .flagship-metric-value {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    letter-spacing: -0.02em;
+  }
+
+  .flagship-metric-label {
+    font-size: 0.6875rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Sections */
   .section {
     margin-bottom: 6rem;
   }
@@ -443,6 +968,116 @@ const teamVideos = [
     margin-bottom: 2rem;
     margin-top: -1rem;
     line-height: 1.5;
+  }
+
+  /* Phase Sections */
+  .phase-section {
+    margin-bottom: 5rem;
+  }
+
+  .phase-header {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .phase-number {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #333;
+    padding-top: 0.25rem;
+  }
+
+  .phase-title-block h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #e5e5e5;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase-context {
+    font-size: 0.9375rem;
+    color: #666;
+    line-height: 1.55;
+    max-width: 540px;
+  }
+
+  .phase-insight {
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+  }
+
+  .insight-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase-insight p {
+    font-size: 0.9375rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  .phase-note {
+    font-size: 0.875rem;
+    color: #555;
+    margin-left: 2rem;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border-left: 2px solid #1f1f1f;
+  }
+
+  .phase-note strong {
+    color: #777;
+    font-weight: 500;
+  }
+
+  @media (max-width: 540px) {
+    .phase-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .phase-insight,
+    .phase-note {
+      margin-left: 0;
+    }
+  }
+
+  .partners-cloud {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+  }
+
+  .partners-cloud:hover {
+    opacity: 1;
+  }
+
+  .partners-cloud img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 540px) {
+    .partners-cloud {
+      margin-left: 0;
+    }
   }
 
   .inline-link {
@@ -606,7 +1241,7 @@ const teamVideos = [
   }
 
   .campaign-image {
-    height: 120px;
+    aspect-ratio: 16/9;
     overflow: hidden;
   }
 
@@ -614,7 +1249,7 @@ const teamVideos = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
     transition: transform 0.4s ease;
   }
 
@@ -679,17 +1314,68 @@ const teamVideos = [
     gap: 1rem;
   }
 
+  .visual-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .visual-grid-4 {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .visual-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .visual-grid-2 .visual-card img {
+    height: 200px;
+  }
+
+  .visual-grid-2 .swag-visual-preview {
+    height: 200px;
   }
 
   @media (max-width: 600px) {
     .visual-grid {
       grid-template-columns: 1fr;
     }
+    .visual-grid-3 {
+      grid-template-columns: 1fr;
+    }
     .visual-grid-4 {
       grid-template-columns: repeat(2, 1fr);
     }
+    .visual-grid-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .swag-visual-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .swag-visual-preview .swag-main {
+    grid-row: span 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swag-visual-preview .swag-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .swag-visual-preview .swag-stack img {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    flex: 1;
   }
 
   .visual-card {
@@ -698,6 +1384,15 @@ const teamVideos = [
     border-radius: 6px;
     overflow: hidden;
     transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  button.visual-card {
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    width: 100%;
   }
 
   .visual-card:hover {
@@ -741,7 +1436,60 @@ const teamVideos = [
     color: #555;
   }
 
-  /* Team Culture Videos */
+  /* Behind the Scenes Card */
+  .bts-card {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #1a1a1a;
+    background: transparent;
+    font-family: inherit;
+    color: inherit;
+    text-align: left;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .bts-card:hover {
+    border-color: #2a2a2a;
+  }
+
+  .bts-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .bts-card:hover img {
+    transform: scale(1.02);
+  }
+
+  .bts-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .bts-overlay h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #fff;
+  }
+
+  .bts-overlay p {
+    font-size: 0.875rem;
+    color: #999;
+  }
+
+  /* Team Videos */
   .team-video-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1131,7 +1879,7 @@ const teamVideos = [
   }
 
   :global(.modal-gallery-item) {
-    aspect-ratio: 1;
+    aspect-ratio: 16/9;
     overflow: hidden;
     border-radius: 8px;
   }
@@ -1145,6 +1893,100 @@ const teamVideos = [
 
   :global(.modal-gallery-item:hover img) {
     transform: scale(1.05);
+  }
+
+  :global(.modal-blog-posts) {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  :global(.modal-blog-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  :global(.modal-blog-card) {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1a1a1a;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  :global(.modal-blog-card:hover) {
+    background: #222;
+    transform: translateY(-2px);
+  }
+
+  :global(.modal-blog-card img) {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+  }
+
+  :global(.modal-blog-info) {
+    padding: 0.625rem 0.75rem;
+  }
+
+  :global(.modal-blog-category) {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  :global(.modal-blog-info h4) {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ccc;
+    margin-top: 0.25rem;
+    line-height: 1.3;
+  }
+
+  :global(.modal-before-after) {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  :global(.before-after-grid) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  :global(.before-after-item) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  :global(.before-after-label) {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  :global(.before-after-item img) {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #222;
+  }
+
+  :global(.before-after-tagline) {
+    font-size: 0.6875rem;
+    color: #666;
+    line-height: 1.4;
+    font-style: italic;
   }
 </style>
 
@@ -1245,6 +2087,41 @@ const teamVideos = [
       </div>
     ` : '';
 
+    const blogPostsHtml = m.blogPosts ? `
+      <div class="modal-blog-posts">
+        <div class="modal-section-title">Content Shipped</div>
+        <div class="modal-blog-grid">
+          ${m.blogPosts.map((post: any) => `
+            <a href="${post.url}" target="_blank" class="modal-blog-card">
+              <img src="${post.image}" alt="${post.title}" />
+              <div class="modal-blog-info">
+                <span class="modal-blog-category">${post.category}</span>
+                <h4>${post.title}</h4>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    ` : '';
+
+    const beforeAfterHtml = m.beforeAfter ? `
+      <div class="modal-before-after">
+        <div class="modal-section-title">The Pivot</div>
+        <div class="before-after-grid">
+          <div class="before-after-item">
+            <span class="before-after-label">${m.beforeAfter.before.label}</span>
+            <img src="${m.beforeAfter.before.image}" alt="Before" />
+            <p class="before-after-tagline">${m.beforeAfter.before.tagline}</p>
+          </div>
+          <div class="before-after-item">
+            <span class="before-after-label">${m.beforeAfter.after.label}</span>
+            <img src="${m.beforeAfter.after.image}" alt="After" />
+            <p class="before-after-tagline">${m.beforeAfter.after.tagline}</p>
+          </div>
+        </div>
+      </div>
+    ` : '';
+
     modalContent.innerHTML = `
       ${heroImageHtml}
       <div class="modal-body">
@@ -1258,7 +2135,9 @@ const teamVideos = [
         <p class="modal-description">${m.fullDescription}</p>
         ${metricsHtml}
         ${sectionsHtml}
+        ${beforeAfterHtml}
         ${galleryHtml}
+        ${blogPostsHtml}
         ${linksHtml}
       </div>
     `;
