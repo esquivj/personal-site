@@ -56,8 +56,8 @@ const posts = [
 ---
 
 <Layout
-  title="Writing - Juan Esquivel"
-  description="Essays and thoughts on storytelling, crypto marketing, building brands, and working at startups by Juan Esquivel."
+  title="Writing — Essays on Crypto Marketing & Storytelling"
+  description="Essays and thoughts on storytelling, crypto marketing, building brands, and working at startups by Juan Esquivel. Ideas on narrative, brand strategy, and building in web3."
   canonicalPath="/writing"
 >
   <Fragment slot="head">
@@ -91,7 +91,7 @@ const posts = [
     {posts.map((post) => (
       <a href={`/writing/${post.slug}`} class="post-card">
         <div class="post-card-cover">
-          <img src={post.cover} alt="" />
+          <img src={post.cover} alt={post.title} width="640" height="360" />
         </div>
         <div class="post-card-content">
           <h2 class="post-card-title">{post.title}</h2>

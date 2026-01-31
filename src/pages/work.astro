@@ -2,225 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 
 // =============================================================================
-// PHASE 1: SERVICES — Building trust through governance work
+// DATA: All work items organized by phase
 // =============================================================================
-const servicesMarketing = [
-  {
-    id: 'proposal-comms',
-    title: 'Proposal Amplification',
-    subtitle: 'Governance Comms',
-    icon: '📢',
-    description: 'Every proposal got a comms strategy. Forum posts, vote pushes, outcome announcements.',
-    metric: '100+ proposals',
-    image: '/work/proposals/unichain.jpg',
-    color: '#6366f1',
-    modal: {
-      fullDescription: 'Custom comms strategy for every governance proposal the team submitted. Each proposal required a different approach based on the DAO, the stakes, and what it would take to pass.',
-      role: 'Comms strategy, copywriting, distribution timing',
-      highlights: 'Touchpoints across the lifecycle: forum post announcement, temp check promotion, on-chain vote push, passed/outcome announcement. Range from single post to multi-post campaigns depending on significance.',
-      images: [
-        '/work/proposals/unichain.jpg',
-        '/work/proposals/gnosis.jpg',
-        '/work/proposals/scroll.jpg',
-        '/work/proposals/compound.jpg',
-        '/work/proposals/livepeer.jpg',
-        '/work/proposals/reserve.jpg',
-      ],
-    },
-  },
-  {
-    id: 'conference-marketing',
-    title: 'Conference Presence',
-    subtitle: 'Event Marketing',
-    icon: '🎤',
-    description: 'Promoted team attendance at EthCC, Devconnect, Token2049, Korea Blockchain Week. Speaking slots, side events, BD support.',
-    metric: '5+ events/year',
-    image: '/work/conferences/token2049.png',
-    color: '#6366f1',
-    modal: {
-      fullDescription: 'Marketing support for conference presence. Promoted speaking engagements, created assets for side event participation, amplified team attendance to signal we were active and embedded in the ecosystem.',
-      role: 'Content creation, social promotion, asset creation, BD support',
-      highlights: 'Conferences attended: EthCC (Paris), Devconnect, Token2049 (Singapore & Dubai), Consensus, Korea Blockchain Week, RWA Summit Seoul, DAO Tokyo.',
-      images: [
-        '/work/conferences/token2049.png',
-        '/work/conferences/token2049-2025.jpg',
-        '/work/conferences/ethcc-paris.png',
-        '/work/conferences/consensus.png',
-        '/work/conferences/devconnect-2025.jpg',
-        '/work/conferences/kbw-2025.jpg',
-        '/work/conferences/rwa-summit.png',
-      ],
-    },
-  },
-  {
-    id: 'partnership-announcements',
-    title: 'Partnership Announcements',
-    subtitle: 'Network Building',
-    icon: '🤝',
-    description: 'Every new protocol engagement got a blog post. Each partnership was an opportunity to signal growing credibility.',
-    metric: '8+ announcements',
-    color: '#6366f1',
-    modal: {
-      fullDescription: 'Each new protocol partnership became content. Blog posts announcing engagements served dual purposes: inform the community and signal expanding network. The pattern: win engagement → write announcement → amplify across channels.',
-      role: 'Copywriting, positioning each engagement, coordinating with BD on timing',
-      highlights: 'Protocols announced: MakerDAO, Livepeer, RootstockCollective, Instadapp, Gitcoin, Ajna, Reserve, Polygon (via Stake Capital). Each post positioned StableLab\'s specific role and value-add.',
-      blogPosts: [
-        { title: 'MakerDAO Partnership', category: 'Business Development', image: 'https://framerusercontent.com/images/CKT1eSg11fQy2pD3yo1jezuu3rs.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
-        { title: 'Reserve Protocol', category: 'Governance Facilitator', image: 'https://framerusercontent.com/images/sb7bI3uPHf4fRe80YLiuXAQwA.jpg', url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement' },
-        { title: 'Livepeer Partnership', category: 'Governance & Ecosystem', image: 'https://framerusercontent.com/images/CKT1eSg11fQy2pD3yo1jezuu3rs.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-livepeer-to-enhance-governance-and-ecosystem-growth' },
-        { title: 'Gitcoin Partnership', category: 'DAO-to-DAO', image: 'https://framerusercontent.com/images/ZQCgy5eer5bblRTEQoa2yhSmGI.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships' },
-        { title: 'Ajna Grant Award', category: 'Grant Support', image: 'https://framerusercontent.com/images/SaTmJePthroEfYqf5VWkXnbAM.jpg', url: 'https://stablelab.xyz/blog/stablelab-awarded-grant-to-provide-grant-support-for-ajna-protocol' },
-        { title: 'Instadapp Partnership', category: 'Strategic Partnerships', image: 'https://framerusercontent.com/images/CKT1eSg11fQy2pD3yo1jezuu3rs.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships' },
-      ],
-    },
-  },
-];
 
-// =============================================================================
-// PHASE 2: PRODUCT LAUNCH — Services → Product transition
-// =============================================================================
-const productLaunch = [
-  {
-    id: 'forse-launch',
-    title: 'Forse Launch',
-    subtitle: 'Services → Product',
-    icon: '🚀',
-    description: 'Led GTM for a services company launching its first product. "Built by StableLab" let us use the reputation we\'d already earned.',
-    metric: 'Full GTM',
-    image: '/work/forse-landing.png',
-    color: '#FF6B00',
-    modal: {
-      fullDescription: 'Led the full product launch for Forse, StableLab\'s first product. The play was simple: people trusted StableLab, so we made sure they knew who built this.',
-      role: 'Marketing lead — naming, brand identity, positioning, all launch collateral, GTM execution',
-      highlights: 'First product launch for a company transitioning from services to product. Owned entire arc from naming workshops through launch campaign including blog post, social announcement, and network activation.',
-      links: [
-        { label: 'Landing Page', url: 'https://forse.io', primary: true },
-        { label: 'Launch Post', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
-        { label: 'Launch Tweet', url: 'https://x.com/Forseapp/status/1805611411252576653' },
-      ],
-    },
-  },
-  {
-    id: 'forse-rebrand',
-    title: 'Forse Rebrand',
-    subtitle: 'ICP Discovery',
-    icon: '🔄',
-    description: 'Discovered DAOs weren\'t the real buyer — foundations and labs were. Pivoted the messaging.',
-    metric: 'Strategic pivot',
-    image: '/work/forse-landing.png',
-    color: '#FF6B00',
-    modal: {
-      fullDescription: 'Initial DAO-focused positioning wasn\'t finding product-market fit. Discovered the real buyers were foundations and labs with budget authority, not DAOs themselves. Led strategic repositioning and full visual rebrand (dark to light theme) to target broader audience.',
-      role: 'Strategy, ICP redefinition, new positioning, visual rebrand direction, landing page copy',
-      highlights: 'The lesson: the people using governance tools weren\'t the ones buying them. We adapted messaging to speak to foundation operators.',
-      beforeAfter: {
-        before: { image: '/work/forse-old.png', label: 'Before', tagline: 'Empowering DAOs with Data-Driven Governance' },
-        after: { image: '/work/forse-new.png', label: 'After', tagline: 'The Intelligence Layer Fueling Web3 Growth' },
-      },
-    },
-  },
-  {
-    id: 'product-marketing',
-    title: 'Product Marketing Materials',
-    subtitle: 'Early Strategy',
-    icon: '📋',
-    description: 'Early positioning documents, strategy decks, and launch planning materials.',
-    metric: 'Placeholder',
-    color: '#FF6B00',
-    modal: {
-      fullDescription: 'Placeholder — Early product marketing materials including positioning documents, strategy decks, competitive analysis, and launch planning. Add Notion docs and strategy materials here.',
-      role: 'Positioning, strategy, competitive analysis',
-      highlights: 'TODO: Add early positioning docs, Notion strategy materials, launch collateral drafts.',
-    },
-  },
-];
-
-// =============================================================================
-// PHASE 3: SALES-LED GTM — Proof points, relationships, long cycles
-// =============================================================================
-const salesLed = [
-  {
-    id: 'sales-enablement',
-    title: 'Sales One-Pagers',
-    subtitle: 'Proof Points',
-    icon: '📄',
-    description: 'Collateral for long-cycle B2B sales. No A/B testing possible — had to get it right.',
-    metric: '4 assets',
-    image: '/work/forse-insights.png',
-    color: '#3b82f6',
-    modal: {
-      fullDescription: 'Created sales enablement materials for a sales-led GTM with long cycles and bespoke deal structures. In B2B with few deals and long timelines, you can\'t A/B test messaging — these had to work.',
-      role: 'Positioning, copywriting, layout direction',
-      highlights: 'Sales-led GTM means marketing\'s job is to arm sales, not generate inbound leads. These had to help close deals, not just explain the product.',
-      images: [
-        '/work/forse-insights.png',
-        '/work/forse-grants.png',
-        '/work/forse-grants-visual.png',
-        '/work/forse-incentive.png',
-      ],
-    },
-  },
-  {
-    id: 'landing-pages',
-    title: 'Landing Pages',
-    subtitle: 'GTM Collateral',
-    icon: '🌐',
-    description: 'Positioning and copy for product and services landing pages.',
-    metric: '2 pages',
-    image: '/work/forse-landing.png',
-    color: '#3b82f6',
-    modal: {
-      fullDescription: 'Wrote positioning and copy for both Forse (product) and StableLab (services) landing pages. Worked with designer on messaging hierarchy and conversion flow.',
-      role: 'Positioning, copywriting, messaging hierarchy',
-      highlights: 'Forse.io focused on product value prop and use cases. StableLab.xyz focused on services credibility and partnership signals.',
-      images: [
-        '/work/forse-landing.png',
-        '/work/stablelab-landing.png',
-      ],
-      links: [
-        { label: 'Forse.io', url: 'https://forse.io', primary: true },
-        { label: 'StableLab.xyz', url: 'https://stablelab.xyz' },
-      ],
-    },
-  },
-  {
-    id: 'content-strategy',
-    title: 'Content Under Constraints',
-    subtitle: 'Creative GTM',
-    icon: '✍️',
-    description: 'Long cycles and confidentiality meant getting creative about what we could publish.',
-    metric: '5 formats',
-    color: '#8b5cf6',
-    modal: {
-      fullDescription: 'Long sales cycles and few closing deals forced creative solutions. Existing work was often not co-marketing ready due to confidentiality or deal structures. Developed content categories that could ship without client sign-off while still signaling capability.',
-      role: 'Content strategy, writing, working with data analysts to fill gaps',
-      highlights: 'Created repeatable content formats: "Building Forse" (work behind the work), quasi case studies (analyst context filling gaps), product launches (ecosystem credibility), work highlights (anonymized differentiators), and rebrand announcements.',
-      blogPosts: [
-        { title: 'Building Forse: Data Stack', category: 'Work Behind the Work', image: 'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg', url: 'https://stablelab.xyz/blog/building-forse-the-data-stack-behind-our-terminals' },
-        { title: 'Measuring PYUSD Adoption', category: 'Quasi Case Study', image: 'https://framerusercontent.com/images/LGX66YflfGEGJHe68VvY5zlnsk.jpg', url: 'https://stablelab.xyz/blog/measuring-pyusd-adoption-tvl-cohorts-and-real-usage' },
-        { title: 'Forse Grants Platform', category: 'Product Launch', image: 'https://framerusercontent.com/images/iFPpzgtjT4lr3IhEhviIN5Vza4.jpg', url: 'https://stablelab.xyz/blog/introducing-the-forse-grants-management-platform' },
-        { title: 'GitHub Activity Index', category: 'Work Highlight', image: 'https://framerusercontent.com/images/rQ2C95NsHZuu3FBXPOcFyUHMx5s.jpg', url: 'https://stablelab.xyz/blog/the-github-activity-index-a-builder-momentum-signal' },
-        { title: 'Reintroducing Forse', category: 'Rebrand', image: 'https://framerusercontent.com/images/kteMB3ZICsVeoxEkZ5TAmEcec.jpg', url: 'https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth' },
-      ],
-    },
-  },
-];
-
-// =============================================================================
-// PHASE 1: HERO ITEMS — Flagship thought leadership from services era
-// =============================================================================
-const phase1Heroes = [
+// Phase 1: Services Era - Flagship content
+const flagshipWork = [
   {
     id: 'stablepod',
     title: 'StablePod',
-    subtitle: 'Credibility',
-    icon: '🎙️',
     description: '29 episodes with founders from Morpho, Euler, Gnosis, Uniswap Foundation, Ethena, dYdX.',
-    metric: '29 episodes',
-    metricSecondary: '29 guests',
+    metric: '29',
+    metricLabel: 'episodes',
     image: '/work/stablepod-cover.jpg',
     color: '#1DB954',
-    badge: '2023–2025',
+    icon: '🎙️',
+    subtitle: 'Podcast',
     modal: {
       fullDescription: 'Co-hosted 29 episodes with crypto founders and protocol leaders. The guests did the talking for us: Morpho, Euler, Gnosis, Uniswap Foundation, Optimism Foundation, dYdX Foundation.',
       role: 'Producer, co-host, guest booking, promotion',
@@ -234,31 +30,31 @@ const phase1Heroes = [
         { label: 'Archive Site', url: 'https://stablepod.vercel.app', primary: true },
         { label: 'Spotify', url: 'https://open.spotify.com/show/4LZVPrxKohIaLjgvQRbVwI' },
         { label: 'YouTube', url: 'https://www.youtube.com/@StableLabxyz' },
-        { label: 'Apple Podcasts', url: 'https://podcasts.apple.com/us/podcast/stablepod/id1695253636' },
       ],
     },
   },
   {
     id: 'newsletter',
     title: 'Governance Lab',
-    subtitle: 'Newsletter',
-    icon: '📨',
     description: 'Made governance work visible. 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum.',
-    metric: '121 issues',
-    metricSecondary: '38% open rate',
+    metric: '121',
+    metricLabel: 'issues',
+    metricSecondary: '38%',
+    metricSecondaryLabel: 'open rate',
     image: '/work/governance-lab-cover.jpg',
     color: '#6366f1',
-    badge: 'Newsletter',
+    icon: '📨',
+    subtitle: 'Newsletter',
     modal: {
       fullDescription: 'The governance analysts did the work — votes, rationales, proposals. My job was making sure that work built reputation beyond the forums. Published 121 editions covering Aave, Lido, Compound, Optimism, and Arbitrum.',
       role: 'Editorial direction, writing, curation, distribution',
       metrics: [
-        { label: 'Issues Published', value: '121' },
+        { label: 'Issues', value: '121' },
         { label: 'Subscribers', value: '920+' },
         { label: 'Open Rate', value: '38%' },
-        { label: 'vs. Industry', value: '2x benchmark' },
+        { label: 'vs. Industry', value: '2x' },
       ],
-      highlights: 'Phase 1 was trust-building, not lead gen. Each issue included governance analyses, curated links, and a Proposal Tracker with vote summaries.',
+      highlights: 'Each issue included governance analyses, curated links, and a Proposal Tracker with vote summaries.',
       links: [
         { label: 'Read on Substack', url: 'https://stablelab.substack.com', primary: true },
       ],
@@ -266,60 +62,228 @@ const phase1Heroes = [
   },
 ];
 
-// =============================================================================
-// SUPPORTING WORK
-// =============================================================================
+// Phase 1: Services Marketing
+const servicesWork = [
+  {
+    id: 'proposal-comms',
+    title: 'Proposal Amplification',
+    description: 'Custom comms strategy for every governance proposal.',
+    metric: '100+',
+    image: '/work/proposals/unichain.jpg',
+    color: '#6366f1',
+    icon: '📢',
+    subtitle: 'Governance Comms',
+    modal: {
+      fullDescription: 'Custom comms strategy for every governance proposal the team submitted. Each proposal required a different approach based on the DAO, the stakes, and what it would take to pass.',
+      role: 'Comms strategy, copywriting, distribution timing',
+      highlights: 'Touchpoints across the lifecycle: forum post announcement, temp check promotion, on-chain vote push, passed/outcome announcement.',
+      images: [
+        '/work/proposals/unichain.jpg',
+        '/work/proposals/gnosis.jpg',
+        '/work/proposals/scroll.jpg',
+        '/work/proposals/compound.jpg',
+        '/work/proposals/livepeer.jpg',
+        '/work/proposals/reserve.jpg',
+      ],
+    },
+  },
+  {
+    id: 'conference-marketing',
+    title: 'Conference Presence',
+    description: 'Event marketing for EthCC, Devconnect, Token2049, KBW.',
+    metric: '5+/yr',
+    image: '/work/conferences/token2049.jpg',
+    color: '#6366f1',
+    icon: '🎤',
+    subtitle: 'Event Marketing',
+    modal: {
+      fullDescription: 'Marketing support for conference presence. Promoted speaking engagements, created assets for side event participation, amplified team attendance.',
+      role: 'Content creation, social promotion, asset creation, BD support',
+      highlights: 'EthCC Paris, Devconnect, Token2049 (Singapore & Dubai), Consensus, Korea Blockchain Week, RWA Summit Seoul.',
+      images: [
+        '/work/conferences/token2049.jpg',
+        '/work/conferences/token2049-2025.jpg',
+        '/work/conferences/ethcc-paris.jpg',
+        '/work/conferences/consensus.jpg',
+        '/work/conferences/devconnect-2025.jpg',
+        '/work/conferences/kbw-2025.jpg',
+      ],
+    },
+  },
+  {
+    id: 'partnership-announcements',
+    title: 'Partnership Announcements',
+    description: 'Every new protocol engagement became a blog post.',
+    metric: '8+',
+    image: 'https://framerusercontent.com/images/sb7bI3uPHf4fRe80YLiuXAQwA.jpg',
+    color: '#6366f1',
+    icon: '🤝',
+    subtitle: 'Network Building',
+    modal: {
+      fullDescription: 'Each new protocol partnership became content. Blog posts announcing engagements served dual purposes: inform the community and signal expanding network.',
+      role: 'Copywriting, positioning each engagement, coordinating with BD',
+      highlights: 'MakerDAO, Livepeer, RootstockCollective, Instadapp, Gitcoin, Ajna, Reserve, Polygon.',
+      blogPosts: [
+        { title: 'MakerDAO Partnership', category: 'Business Development', image: 'https://framerusercontent.com/images/CKT1eSg11fQy2pD3yo1jezuu3rs.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
+        { title: 'Reserve Protocol', category: 'Governance Facilitator', image: 'https://framerusercontent.com/images/sb7bI3uPHf4fRe80YLiuXAQwA.jpg', url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement' },
+        { title: 'Livepeer Partnership', category: 'Governance & Ecosystem', image: 'https://framerusercontent.com/images/CKT1eSg11fQy2pD3yo1jezuu3rs.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-livepeer-to-enhance-governance-and-ecosystem-growth' },
+        { title: 'Gitcoin Partnership', category: 'DAO-to-DAO', image: 'https://framerusercontent.com/images/ZQCgy5eer5bblRTEQoa2yhSmGI.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships' },
+      ],
+    },
+  },
+];
+
+// Phase 2: Product Launch
+const productWork = [
+  {
+    id: 'forse-launch',
+    title: 'Forse Launch',
+    description: '"Built by StableLab" — borrowing trust from services to launch product.',
+    metric: 'GTM',
+    image: '/work/forse-landing.jpg',
+    color: '#FF6B00',
+    icon: '🚀',
+    subtitle: 'Services → Product',
+    modal: {
+      fullDescription: 'Led the full product launch for Forse, StableLab\'s first product. The play was simple: people trusted StableLab, so we made sure they knew who built this.',
+      role: 'Marketing lead — naming, brand identity, positioning, all launch collateral, GTM execution',
+      highlights: 'First product launch for a company transitioning from services to product. Owned entire arc from naming workshops through launch campaign.',
+      links: [
+        { label: 'Landing Page', url: 'https://forse.io', primary: true },
+        { label: 'Launch Post', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
+      ],
+    },
+  },
+  {
+    id: 'forse-rebrand',
+    title: 'Forse Rebrand',
+    description: 'Discovered DAOs weren\'t the buyer. Foundations and labs were.',
+    metric: 'Pivot',
+    image: '/work/forse-landing.jpg',
+    color: '#FF6B00',
+    icon: '🔄',
+    subtitle: 'ICP Discovery',
+    modal: {
+      fullDescription: 'Initial DAO-focused positioning wasn\'t finding product-market fit. Discovered the real buyers were foundations and labs with budget authority. Led strategic repositioning and full visual rebrand.',
+      role: 'Strategy, ICP redefinition, new positioning, visual rebrand direction',
+      highlights: 'The lesson: the people using governance tools weren\'t the ones buying them.',
+      beforeAfter: {
+        before: { image: '/work/forse-old.png', label: 'Before', tagline: 'Empowering DAOs with Data-Driven Governance' },
+        after: { image: '/work/forse-new.png', label: 'After', tagline: 'The Intelligence Layer Fueling Web3 Growth' },
+      },
+    },
+  },
+];
+
+// Phase 3: Sales-Led GTM
+const salesWork = [
+  {
+    id: 'sales-enablement',
+    title: 'Sales One-Pagers',
+    description: 'Collateral for long-cycle B2B sales. No A/B testing — had to get it right.',
+    metric: '4',
+    image: '/work/forse-insights.jpg',
+    color: '#3b82f6',
+    icon: '📄',
+    subtitle: 'Sales Enablement',
+    modal: {
+      fullDescription: 'Created sales enablement materials for a sales-led GTM with long cycles and bespoke deal structures. In B2B with few deals and long timelines, you can\'t A/B test messaging — these had to work.',
+      role: 'Positioning, copywriting, layout direction',
+      highlights: 'Sales-led GTM means marketing\'s job is to arm sales, not generate inbound leads.',
+      images: [
+        '/work/forse-insights.jpg',
+        '/work/forse-grants.jpg',
+        '/work/forse-grants-visual.jpg',
+        '/work/forse-incentive.jpg',
+      ],
+    },
+  },
+  {
+    id: 'landing-pages',
+    title: 'Landing Pages',
+    description: 'Positioning and copy for product and services pages.',
+    metric: '2',
+    image: '/work/forse-landing.jpg',
+    color: '#3b82f6',
+    icon: '🌐',
+    subtitle: 'GTM Collateral',
+    modal: {
+      fullDescription: 'Wrote positioning and copy for both Forse (product) and StableLab (services) landing pages. Worked with designer on messaging hierarchy.',
+      role: 'Positioning, copywriting, messaging hierarchy',
+      images: ['/work/forse-landing.jpg', '/work/stablelab-landing.jpg'],
+      links: [
+        { label: 'Forse.io', url: 'https://forse.io', primary: true },
+        { label: 'StableLab.xyz', url: 'https://stablelab.xyz' },
+      ],
+    },
+  },
+  {
+    id: 'content-strategy',
+    title: 'Content Under Constraints',
+    description: 'Long cycles and confidentiality meant getting creative.',
+    metric: '5',
+    image: 'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg',
+    color: '#8b5cf6',
+    icon: '✍️',
+    subtitle: 'Creative GTM',
+    modal: {
+      fullDescription: 'Long sales cycles and few closing deals forced creative solutions. Developed content categories that could ship without client sign-off while still signaling capability.',
+      role: 'Content strategy, writing, working with data analysts',
+      highlights: '"Building Forse" (work behind the work), quasi case studies, product launches, work highlights, rebrand announcements.',
+      blogPosts: [
+        { title: 'Building Forse: Data Stack', category: 'Behind the Work', image: 'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg', url: 'https://stablelab.xyz/blog/building-forse-the-data-stack-behind-our-terminals' },
+        { title: 'Measuring PYUSD Adoption', category: 'Case Study', image: 'https://framerusercontent.com/images/LGX66YflfGEGJHe68VvY5zlnsk.jpg', url: 'https://stablelab.xyz/blog/measuring-pyusd-adoption-tvl-cohorts-and-real-usage' },
+        { title: 'Forse Grants Platform', category: 'Product Launch', image: 'https://framerusercontent.com/images/iFPpzgtjT4lr3IhEhviIN5Vza4.jpg', url: 'https://stablelab.xyz/blog/introducing-the-forse-grants-management-platform' },
+      ],
+    },
+  },
+];
+
+// Supporting Work
 const supportingWork = {
   governanceGathering: {
     id: 'governance-gathering',
-    title: 'A Governance Gathering',
-    subtitle: 'Side Event',
-    icon: '🎪',
-    description: 'Networking event during EthCC Brussels. Co-hosted with UMA, Wormhole, Tally.',
-    metric: '150+ attendees',
+    title: 'Governance Gathering',
+    description: 'Side event at EthCC Brussels. 150+ attendees.',
+    metric: '150+',
     image: '/work/governance-gathering.avif',
     color: '#7c3aed',
+    icon: '🎪',
+    subtitle: 'Event',
     modal: {
-      fullDescription: 'Initiated and project-managed a networking event during EthCC [7] in Brussels. Built credibility and relationships during the services era. Co-hosted with UMA, Wormhole, and Tally.',
-      role: 'Initiated idea, project management, co-host sourcing, budget management, event coordination',
+      fullDescription: 'Initiated and project-managed a networking event during EthCC [7] in Brussels. Co-hosted with UMA, Wormhole, and Tally.',
+      role: 'Project management, co-host sourcing, budget management',
       metrics: [
         { label: 'Attendees', value: '150+' },
         { label: 'Registrations', value: '258' },
         { label: 'Co-hosts', value: '4' },
-        { label: 'Event', value: 'EthCC [7]' },
       ],
       cohosts: 'UMA, Wormhole, Tally',
-      highlights: 'Built partnerships with Gauntlet, Karpatkey, and Spark. Network-driven attendance through direct outreach.',
       images: [
         '/work/agg/event-4.jpg',
         '/work/agg/event-5.jpg',
         '/work/agg/event-6.jpg',
-        '/work/agg/event-1.jpeg',
-        '/work/agg/event-2.jpeg',
-        '/work/agg/event-3.jpeg',
+        '/work/agg/event-1.jpg',
       ],
-      links: [
-        { label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true },
-      ],
+      links: [{ label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true }],
     },
   },
   swag: {
     id: 'team-swag',
     title: 'Team Swag',
-    subtitle: 'Creative Direction',
-    icon: '🎨',
-    description: 'Creative directed internal swag for team offsites and conferences.',
-    metric: '8 items',
+    description: 'Creative direction for offsites and conferences.',
+    metric: '8',
     image: '/work/swag/G38s2xAbUAckcN8.jpeg',
     color: '#8B5CF6',
+    icon: '🎨',
+    subtitle: 'Creative',
     previewImages: [
       '/work/swag/G38s2xAbUAckcN8.jpeg',
       '/work/swag/G4CFb5KaQAAudN8.jpeg',
       '/work/swag/Gb3M36_bwAQzwTy.jpeg',
     ],
-    extraCount: 5,
     modal: {
-      fullDescription: 'Creative directed internal swag for team offsites and conferences. Worked with in-house designer on concepts, managed production, and coordinated distribution with vendor.',
+      fullDescription: 'Creative directed internal swag for team offsites and conferences.',
       role: 'Creative direction, project management, vendor coordination',
       images: [
         '/work/swag/G38s2xAbUAckcN8.jpeg',
@@ -328,8 +292,6 @@ const supportingWork = {
         '/work/swag/GbxxrkraMAEk-N6.jpeg',
         '/work/swag/GE1n8HsacAAogMP.jpeg',
         '/work/swag/GgEpB6qW8AAkzuw.jpeg',
-        '/work/swag/SL KL Offsite Stickers and Camera.jpg',
-        '/work/swag/3DF2A30A-03E2-4B17-BCAC-618CF29C719C_1_105_c.jpg',
       ],
     },
   },
@@ -341,69 +303,37 @@ const behindTheScenes = {
   subtitle: 'Content Capture',
   icon: '📷',
   description: 'Moments from offsites, conferences, and team life.',
-  image: '/work/behind-the-scenes.png',
+  image: '/work/behind-the-scenes.jpg',
   color: '#ec4899',
   modal: {
     fullDescription: 'Pushed for content capture at every offsite. Started a disposable camera tradition with categories and prizes. These moments became fuel for posts, videos, and team culture.',
     role: 'Initiated content capture culture, ran photo competitions, curated moments',
     highlights: 'Created rituals that got the team documenting together. Built up a collection of real moments to pull from.',
+    videos: [
+      { title: 'Memories of Bodrum', year: '2025', youtubeId: 'R8k1o2b9HhU' },
+      { title: 'A Year in Review 2024', year: '2024', youtubeId: '0jjzvV1jUQM' },
+      { title: 'Memories of Phuket', year: '2024', youtubeId: 'lQtC02UaiuQ' },
+      { title: 'Phuket Team Offsite', year: '2024', youtubeId: '7MW6yNj45po' },
+      { title: 'In Conversation w/ Gustav', year: '2024', youtubeId: 'bdQxQ71DIJE' },
+      { title: 'Kuala Lumpur Offsite', year: '2024', youtubeId: 'jbgb3jXZA0o' },
+    ],
   },
 };
-
-// visualWork removed - landing pages moved to Phase 3
-
-const teamVideos = [
-  {
-    title: 'Memories of Bodrum',
-    description: 'Cinematic recap of our team offsite in Bodrum, Turkey.',
-    year: '2025',
-    youtubeId: 'R8k1o2b9HhU',
-  },
-  {
-    title: 'A Year in Review 2024',
-    description: 'End-of-year recap video covering StableLab\'s 2024 highlights.',
-    year: '2024',
-    youtubeId: '0jjzvV1jUQM',
-  },
-  {
-    title: 'Memories of Phuket',
-    description: 'Cinematic team culture video from Phuket offsite.',
-    year: '2024',
-    youtubeId: 'lQtC02UaiuQ',
-  },
-  {
-    title: 'Phuket Team Offsite',
-    description: 'Full documentary-style coverage of the Phuket 2024 offsite.',
-    year: '2024',
-    youtubeId: '7MW6yNj45po',
-  },
-  {
-    title: 'In Conversation w/ Gustav',
-    description: 'Interview with CEO & Co-founder Gustav Arentoft at Phuket offsite.',
-    year: '2024',
-    youtubeId: 'bdQxQ71DIJE',
-  },
-  {
-    title: 'Kuala Lumpur Offsite',
-    description: 'Team offsite highlights from Kuala Lumpur 2024.',
-    year: '2024',
-    youtubeId: 'jbgb3jXZA0o',
-  },
-];
 ---
 
-<Layout title="Work — Juan Esquivel" description="B2B marketing across three phases: building trust, launching products, enabling sales.">
+<Layout title="Work Portfolio — Juan Esquivel's Marketing Projects" description="B2B marketing portfolio from Juan Esquivel's time at StableLab: services marketing, product launch, and sales enablement across three business phases.">
   <header class="header">
     <a href="/" class="back-link">← Back</a>
   </header>
 
   <main>
-    <div class="page-intro">
+    <!-- Hero Section -->
+    <section class="hero">
       <h1>Work</h1>
-      <p class="intro">At StableLab, I led marketing across three distinct business phases. Each required a different approach because the business context changed. That's the throughline.</p>
-    </div>
+      <p class="hero-sub">Head of Marketing at StableLab (2023–2026). Led marketing through three business phases: services, product launch, and sales-led GTM.</p>
+    </section>
 
-    <!-- Phase Timeline -->
+    <!-- Timeline -->
     <div class="timeline">
       <div class="timeline-phase">
         <div class="timeline-dot dot-services"></div>
@@ -427,42 +357,41 @@ const teamVideos = [
       </div>
     </div>
 
-    <!-- Phase 1: Building Trust -->
-    <section class="section phase-section">
-      <div class="phase-header">
-        <div class="phase-number">01</div>
-        <div class="phase-title-block">
-          <h2>Building Trust</h2>
-          <p class="phase-context">Services business. Marketing wasn't about lead gen—it was making sure the governance work built reputation beyond the forums.</p>
-        </div>
-      </div>
-      <div class="phase-insight">
-        <span class="insight-label">The insight</span>
-        <p>The governance analysts did the work. My job was making sure the work got seen. Content showed we knew what we were talking about.</p>
-      </div>
+    <!-- Partners -->
+    <section class="partners">
+      <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" width="640" height="80" />
+    </section>
 
-      <!-- Phase 1 Heroes: StablePod & Newsletter -->
-      <div class="flagship-grid" style="margin-left: 2rem; margin-bottom: 2rem;">
-        {phase1Heroes.map((item) => (
-          <button class="flagship-card" data-modal={item.id} style={`--accent: ${item.color}`}>
-            <div class="flagship-image">
-              <img src={item.image} alt={item.title} loading="lazy" />
-            </div>
-            <div class="flagship-content">
-              <div class="flagship-header">
+    <!-- Phase 1: Services -->
+    <section class="phase">
+      <header class="phase-head">
+        <span class="phase-tag phase-tag--services">01</span>
+        <div>
+          <h2>Building Trust</h2>
+          <p>Services era. Marketing was about credibility, not lead gen. Making governance work visible beyond the forums.</p>
+        </div>
+      </header>
+
+      <!-- Flagship: Podcast & Newsletter -->
+      <div class="flagship-row">
+        {flagshipWork.map((item) => (
+          <button class="flagship" data-modal={item.id}>
+            <img src={item.image} alt={item.title} loading="lazy" />
+            <div class="flagship-body">
+              <div class="flagship-top">
                 <h3>{item.title}</h3>
-                <span class="flagship-badge">{item.badge}</span>
+                <span class="flagship-sub">{item.subtitle}</span>
               </div>
-              <p class="flagship-description">{item.description}</p>
-              <div class="flagship-metrics">
-                <div class="flagship-metric">
-                  <span class="flagship-metric-value">{item.metric.split(' ')[0]}</span>
-                  <span class="flagship-metric-label">{item.metric.split(' ').slice(1).join(' ')}</span>
+              <p>{item.description}</p>
+              <div class="flagship-stats">
+                <div class="stat">
+                  <span class="stat-val">{item.metric}</span>
+                  <span class="stat-label">{item.metricLabel}</span>
                 </div>
                 {item.metricSecondary && (
-                  <div class="flagship-metric">
-                    <span class="flagship-metric-value">{item.metricSecondary.split(' ')[0]}</span>
-                    <span class="flagship-metric-label">{item.metricSecondary.split(' ').slice(1).join(' ')}</span>
+                  <div class="stat">
+                    <span class="stat-val">{item.metricSecondary}</span>
+                    <span class="stat-label">{item.metricSecondaryLabel}</span>
                   </div>
                 )}
               </div>
@@ -471,240 +400,176 @@ const teamVideos = [
         ))}
       </div>
 
-      <div class="campaign-grid" style="margin-left: 2rem;">
-        {servicesMarketing.map((item) => (
-          <button
-            class="campaign-card"
-            data-modal={item.id}
-            style={`--accent: ${item.color}`}
-          >
-            <div class="campaign-image">
-              {item.image ? (
-                <img src={item.image} alt={item.title} loading="lazy" />
-              ) : (
-                <div class="campaign-placeholder" style={`--accent: ${item.color}`}>
-                  <span>{item.icon}</span>
-                </div>
-              )}
-            </div>
-            <div class="campaign-content">
-              <div class="campaign-header">
-                <h3>{item.title}</h3>
-                <span class="campaign-badge">{item.metric}</span>
-              </div>
-              <p class="campaign-subtitle">{item.subtitle}</p>
-              <p class="campaign-description">{item.description}</p>
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <div class="partners-cloud">
-        <img src="/work/partners.png" alt="Protocols we worked with: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ others" loading="lazy" />
-      </div>
-    </section>
-
-    <!-- Phase 2: Product Launch -->
-    <section class="section phase-section">
-      <div class="phase-header">
-        <div class="phase-number">02</div>
-        <div class="phase-title-block">
-          <h2>Product Launch</h2>
-          <p class="phase-context">Services company launches first product. The challenge: how do you market something new when your brand is known for something else?</p>
-        </div>
-      </div>
-      <div class="phase-insight">
-        <span class="insight-label">The insight</span>
-        <p>"Built by StableLab" became the positioning—borrowing trust from the services brand while building product credibility. Then we discovered DAOs weren't the real buyer. Foundations and labs were.</p>
-      </div>
-      <div class="hero-grid">
-        {productLaunch.map((item) => (
-          <button
-            class="hero-card"
-            data-modal={item.id}
-            style={`--accent: ${item.color}`}
-          >
-            <div class="hero-image">
+      <!-- Services Work -->
+      <div class="card-row">
+        {servicesWork.map((item) => (
+          <button class="card" data-modal={item.id}>
+            <div class="card-img">
               <img src={item.image} alt={item.title} loading="lazy" />
             </div>
-            <div class="hero-content">
-              <div class="hero-header">
-                <h3>{item.title}</h3>
-                <span class="hero-badge">{item.subtitle}</span>
+            <div class="card-body">
+              <div class="card-top">
+                <h4>{item.title}</h4>
+                <span class="card-metric">{item.metric}</span>
               </div>
-              <p class="hero-description">{item.description}</p>
-              <div class="hero-metrics">
-                <span class="metric-primary">{item.metric}</span>
-              </div>
+              <p>{item.description}</p>
             </div>
           </button>
         ))}
       </div>
     </section>
 
-    <!-- Phase 3: Sales-Led GTM -->
-    <section class="section phase-section">
-      <div class="phase-header">
-        <div class="phase-number">03</div>
-        <div class="phase-title-block">
-          <h2>Sales-Led GTM</h2>
-          <p class="phase-context">Enterprise B2B with long cycles. Marketing's job shifted from awareness to giving sales something to sell with.</p>
+    <!-- Phase 2: Product -->
+    <section class="phase">
+      <header class="phase-head">
+        <span class="phase-tag phase-tag--product">02</span>
+        <div>
+          <h2>Product Launch</h2>
+          <p>Productized services insights into Forse. Borrowed trust from the services brand, then discovered DAOs weren't the buyer.</p>
         </div>
-      </div>
-      <div class="phase-insight">
-        <span class="insight-label">The insight</span>
-        <p>You can't A/B test with 10 deals a year. Buyers are cyclical—catch them at setup or re-architecture, not mid-flight. Public credibility (events, partnerships) enabled private sales conversations.</p>
-      </div>
-      <div class="campaign-grid">
-        {salesLed.map((item) => (
-          <button
-            class="campaign-card"
-            data-modal={item.id}
-            style={`--accent: ${item.color}`}
-          >
-            <div class="campaign-image">
-              {item.image ? (
-                <img src={item.image} alt={item.title} loading="lazy" />
-              ) : (
-                <div class="campaign-placeholder" style={`--accent: ${item.color}`}>
-                  <span>{item.icon}</span>
-                </div>
-              )}
+      </header>
+
+      <div class="card-row card-row--wide">
+        {productWork.map((item) => (
+          <button class="card card--wide" data-modal={item.id}>
+            <div class="card-img">
+              <img src={item.image} alt={item.title} loading="lazy" />
             </div>
-            <div class="campaign-content">
-              <div class="campaign-header">
-                <h3>{item.title}</h3>
-                <span class="campaign-badge">{item.metric}</span>
+            <div class="card-body">
+              <div class="card-top">
+                <h4>{item.title}</h4>
+                <span class="card-badge">{item.subtitle}</span>
               </div>
-              <p class="campaign-subtitle">{item.subtitle}</p>
-              <p class="campaign-description">{item.description}</p>
+              <p>{item.description}</p>
             </div>
           </button>
         ))}
       </div>
     </section>
 
-    <!-- Supporting Work -->
-    <section class="section">
-      <h2>Supporting Work</h2>
-      <p class="section-subtitle">Events, internal creative, and team culture.</p>
-      <div class="visual-grid visual-grid-2">
-        <button class="visual-card" data-modal="governance-gathering">
-          <img src={supportingWork.governanceGathering.image} alt="A Governance Gathering" loading="lazy" />
-          <div class="visual-meta">
-            <h3>A Governance Gathering</h3>
-            <p>Side event · 150+ attendees</p>
+    <!-- Phase 3: Sales-Led -->
+    <section class="phase">
+      <header class="phase-head">
+        <span class="phase-tag phase-tag--sales">03</span>
+        <div>
+          <h2>Sales-Led GTM</h2>
+          <p>Long cycles, few deals, no A/B testing. Marketing's job was arming sales and building proof points.</p>
+        </div>
+      </header>
+
+      <div class="card-row">
+        {salesWork.map((item) => (
+          <button class="card" data-modal={item.id}>
+            <div class="card-img">
+              <img src={item.image} alt={item.title} loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <h4>{item.title}</h4>
+                <span class="card-metric">{item.metric}</span>
+              </div>
+              <p>{item.description}</p>
+            </div>
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Creative Work -->
+    <section class="more">
+      <h2>Creative</h2>
+      <div class="more-grid">
+        <button class="more-card" data-modal="governance-gathering">
+          <img src={supportingWork.governanceGathering.image} alt="Governance Gathering" loading="lazy" />
+          <div class="more-info">
+            <h4>Governance Gathering</h4>
+            <span>EthCC Brussels · 150+ attendees</span>
           </div>
         </button>
-        <button class="visual-card" data-modal="team-swag">
-          <div class="swag-visual-preview">
-            <img src={supportingWork.swag.previewImages[0]} alt="Team Swag" loading="lazy" class="swag-main" />
-            <div class="swag-stack">
-              <img src={supportingWork.swag.previewImages[1]} alt="Team Swag" loading="lazy" />
-              <img src={supportingWork.swag.previewImages[2]} alt="Team Swag" loading="lazy" />
-            </div>
+        <button class="more-card" data-modal="team-swag">
+          <div class="swag-grid">
+            {supportingWork.swag.previewImages.map((img, i) => (
+              <img src={img} alt="Team Swag" loading="lazy" class={i === 0 ? 'swag-main' : ''} />
+            ))}
           </div>
-          <div class="visual-meta">
-            <h3>Team Swag</h3>
-            <p>Creative direction for offsites</p>
+          <div class="more-info">
+            <h4>Team Swag</h4>
+            <span>Creative direction</span>
           </div>
         </button>
       </div>
     </section>
 
     <!-- Storytelling -->
-    <section class="section">
+    <section class="storytelling">
       <h2>Storytelling</h2>
-      <p class="section-subtitle">Behind-the-scenes videos and content captured during team offsites.</p>
-
       <button class="bts-card" data-modal="behind-the-scenes">
         <img src={behindTheScenes.image} alt="Behind the Scenes" loading="lazy" />
         <div class="bts-overlay">
           <h3>Behind the Scenes</h3>
           <p>Moments from offsites, conferences, and team life</p>
+          <span class="bts-cta">6 videos →</span>
         </div>
       </button>
-
-      <div class="team-video-grid">
-        {teamVideos.map((video) => (
-          <a href={`https://youtu.be/${video.youtubeId}`} target="_blank" class="team-video-card">
-            <img src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`} alt={video.title} loading="lazy" />
-            <div class="team-video-play">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="team-video-info">
-              <h3>{video.title}</h3>
-              <p>{video.description}</p>
-              <span class="team-video-year">{video.year}</span>
-            </div>
-          </a>
-        ))}
-      </div>
     </section>
 
   </main>
 
-  <!-- Modal Container -->
-  <div class="modal-backdrop" id="modalBackdrop">
+  <!-- Modal -->
+  <div class="modal-bg" id="modalBg">
     <div class="modal" id="modal" role="dialog" aria-modal="true">
-      <button class="modal-close" id="modalClose" aria-label="Close modal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 6L6 18M6 6l12 12"/>
-        </svg>
+      <button class="modal-x" id="modalX" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-      <div class="modal-content" id="modalContent">
-        <!-- Content injected by JS -->
-      </div>
+      <div class="modal-inner" id="modalInner"></div>
     </div>
   </div>
 
-  <!-- Modal Data -->
-  <script define:vars={{ servicesMarketing, productLaunch, salesLed, phase1Heroes, supportingWork, behindTheScenes }}>
-    window.workData = [...phase1Heroes, ...servicesMarketing, ...productLaunch, ...salesLed, supportingWork.governanceGathering, supportingWork.swag, behindTheScenes].reduce((acc, item) => {
-      acc[item.id] = item;
-      return acc;
-    }, {});
+  <script define:vars={{ flagshipWork, servicesWork, productWork, salesWork, supportingWork, behindTheScenes }}>
+    window.workData = [
+      ...flagshipWork,
+      ...servicesWork,
+      ...productWork,
+      ...salesWork,
+      supportingWork.governanceGathering,
+      supportingWork.swag,
+      behindTheScenes,
+    ].reduce((acc, item) => { acc[item.id] = item; return acc; }, {});
   </script>
 </Layout>
 
 <style>
+  /* ========================================
+     BASE & LAYOUT
+     ======================================== */
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .back-link {
     font-size: 0.8125rem;
     color: #666;
-    transition: color 0.2s ease;
-    letter-spacing: 0.02em;
+    transition: color 0.15s;
   }
-
   .back-link:hover {
-    color: #a3a3a3;
+    color: #999;
   }
 
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
+  /* Hero */
+  .hero {
+    margin-bottom: 2.5rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 600;
     letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
   }
-
-  .page-intro {
-    margin-bottom: 3rem;
-  }
-
-  .intro {
-    color: #777;
-    margin-bottom: 3rem;
-    font-size: 1.0625rem;
-    line-height: 1.7;
-    max-width: 600px;
-  }
-
-  .intro strong {
-    color: #b3b3b3;
-    font-weight: 500;
+  .hero-sub {
+    color: #666;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    max-width: 520px;
   }
 
   /* Timeline */
@@ -713,66 +578,60 @@ const teamVideos = [
     align-items: flex-start;
     justify-content: center;
     gap: 0;
-    margin-bottom: 5rem;
-    padding: 2rem 0;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
   }
 
   .timeline-phase {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    min-width: 100px;
+    gap: 0.375rem;
+    min-width: 90px;
   }
 
   .timeline-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    border: none;
-    position: relative;
   }
 
   .dot-services {
     background: #6366f1;
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.5), 0 0 24px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
   }
-
   .dot-product {
     background: #f97316;
-    box-shadow: 0 0 12px rgba(249, 115, 22, 0.5), 0 0 24px rgba(249, 115, 22, 0.25);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
   }
-
   .dot-sales {
     background: #22c55e;
-    box-shadow: 0 0 12px rgba(34, 197, 94, 0.5), 0 0 24px rgba(34, 197, 94, 0.25);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
   }
 
   .timeline-label {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 500;
     color: #e5e5e5;
-    margin-top: 0.25rem;
   }
 
   .timeline-desc {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     color: #555;
   }
 
   .timeline-years {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     color: #444;
-    margin-top: 0.25rem;
   }
 
   .timeline-line {
     flex: 1;
     height: 1px;
     background: #222;
-    margin-top: 5px;
-    max-width: 80px;
-    min-width: 40px;
+    margin-top: 4px;
+    max-width: 60px;
+    min-width: 30px;
   }
 
   @media (max-width: 480px) {
@@ -781,494 +640,251 @@ const teamVideos = [
       align-items: flex-start;
       gap: 0;
     }
-
     .timeline-phase {
       flex-direction: row;
-      align-items: flex-start;
-      gap: 1rem;
+      gap: 0.75rem;
       min-width: auto;
     }
-
     .timeline-line {
       width: 1px;
-      height: 24px;
+      height: 20px;
       min-width: 1px;
       max-width: 1px;
-      margin: 0;
-      margin-left: 4px;
-    }
-
-    .timeline-desc {
-      margin-top: 0;
-    }
-
-    .timeline-years {
-      margin-top: 0.125rem;
+      margin: 0 0 0 4px;
     }
   }
 
-  /* Phase section hero grid needs margin when following insight */
-  .phase-section .hero-grid {
-    margin-left: 2rem;
-  }
-
-  .phase-section .campaign-grid {
-    margin-left: 2rem;
-  }
-
-  @media (max-width: 540px) {
-    .phase-section .hero-grid,
-    .phase-section .campaign-grid {
-      margin-left: 0;
-    }
-  }
-
-  /* Flagship Section */
-  .flagship-section {
-    margin-bottom: 5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid #1a1a1a;
-  }
-
-  .flagship-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  @media (max-width: 700px) {
-    .flagship-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .flagship-card {
-    display: flex;
-    flex-direction: column;
-    background: #0d0d0d;
-    border: 1px solid #1f1f1f;
-    border-radius: 12px;
+  /* Partners */
+  .partners {
+    margin-bottom: 3rem;
+    border-radius: 8px;
     overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left;
-    font-family: inherit;
-    color: inherit;
+    opacity: 0.85;
   }
-
-  .flagship-card:hover {
-    background: #111;
-    border-color: #2a2a2a;
-    transform: translateY(-2px);
+  .partners:hover {
+    opacity: 1;
   }
-
-  .flagship-image {
+  .partners img {
     width: 100%;
-    height: 180px;
-    overflow: hidden;
+    display: block;
   }
 
-  .flagship-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+  /* ========================================
+     PHASE SECTIONS
+     ======================================== */
+  .phase {
+    margin-bottom: 4rem;
   }
 
-  .flagship-card:hover .flagship-image img {
-    transform: scale(1.03);
-  }
-
-  .flagship-content {
-    padding: 1.5rem;
+  .phase-head {
     display: flex;
-    flex-direction: column;
-    gap: 0.875rem;
-  }
-
-  .flagship-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     gap: 1rem;
-  }
-
-  .flagship-header h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: #f0f0f0;
-  }
-
-  .flagship-badge {
-    font-size: 0.6875rem;
-    font-weight: 500;
-    color: #666;
-    padding: 0.25rem 0.625rem;
-    background: #1a1a1a;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-
-  .flagship-description {
-    font-size: 0.9375rem;
-    color: #777;
-    line-height: 1.6;
-  }
-
-  .flagship-metrics {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #1a1a1a;
-  }
-
-  .flagship-metric {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
-
-  .flagship-metric-value {
-    font-size: 1.375rem;
-    font-weight: 700;
-    color: #e5e5e5;
-    letter-spacing: -0.02em;
-  }
-
-  .flagship-metric-label {
-    font-size: 0.6875rem;
-    color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  /* Sections */
-  .section {
-    margin-bottom: 6rem;
-  }
-
-  .section h2 {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #444;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 2rem;
-  }
-
-  .section-subtitle {
-    color: #555;
-    font-size: 0.9375rem;
-    margin-bottom: 2rem;
-    margin-top: -1rem;
-    line-height: 1.5;
-  }
-
-  /* Phase Sections */
-  .phase-section {
-    margin-bottom: 5rem;
-  }
-
-  .phase-header {
-    display: flex;
-    gap: 1.25rem;
+    align-items: flex-start;
     margin-bottom: 1.5rem;
   }
 
-  .phase-number {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #333;
-    padding-top: 0.25rem;
+  .phase-tag {
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+  .phase-tag--services {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+  }
+  .phase-tag--product {
+    background: rgba(249, 115, 22, 0.15);
+    color: #fb923c;
+  }
+  .phase-tag--sales {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
   }
 
-  .phase-title-block h2 {
-    font-size: 1.125rem;
+  .phase-head h2 {
+    font-size: 1rem;
     font-weight: 600;
     color: #e5e5e5;
+    margin-bottom: 0.25rem;
     text-transform: none;
     letter-spacing: -0.01em;
-    margin-bottom: 0.5rem;
   }
 
-  .phase-context {
-    font-size: 0.9375rem;
-    color: #666;
-    line-height: 1.55;
-    max-width: 540px;
-  }
-
-  .phase-insight {
-    background: #0d0d0d;
-    border: 1px solid #1a1a1a;
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem;
-  }
-
-  .insight-label {
-    font-size: 0.625rem;
-    font-weight: 600;
-    color: #444;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .phase-insight p {
-    font-size: 0.9375rem;
-    color: #888;
-    line-height: 1.6;
-  }
-
-  .phase-note {
+  .phase-head p {
     font-size: 0.875rem;
-    color: #555;
-    margin-left: 2rem;
-    padding: 1rem 1.25rem;
-    background: transparent;
-    border-left: 2px solid #1f1f1f;
-  }
-
-  .phase-note strong {
-    color: #777;
-    font-weight: 500;
-  }
-
-  @media (max-width: 540px) {
-    .phase-header {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .phase-insight,
-    .phase-note {
-      margin-left: 0;
-    }
-  }
-
-  .partners-cloud {
-    margin-top: 2rem;
-    margin-left: 2rem;
-    border-radius: 12px;
-    overflow: hidden;
-    opacity: 0.85;
-    transition: opacity 0.3s ease;
-  }
-
-  .partners-cloud:hover {
-    opacity: 1;
-  }
-
-  .partners-cloud img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  @media (max-width: 540px) {
-    .partners-cloud {
-      margin-left: 0;
-    }
-  }
-
-  .inline-link {
-    color: #a3a3a3;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .inline-link:hover {
-    color: #fff;
-  }
-
-  /* Hero Cards */
-  .hero-section {
-    margin-bottom: 6rem;
-  }
-
-  .hero-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .hero-card {
-    display: flex;
-    flex-direction: row;
-    background: transparent;
-    border: 1px solid #1a1a1a;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left;
-    width: 100%;
-    font-family: inherit;
-    color: inherit;
-  }
-
-  .hero-card:hover {
-    background: #0f0f0f;
-    border-color: #252525;
-  }
-
-  .hero-image {
-    width: 200px;
-    min-width: 200px;
-    height: 150px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .hero-card:hover .hero-image img {
-    transform: scale(1.03);
-  }
-
-  .hero-content {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1;
-  }
-
-  .hero-header {
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-    margin-bottom: 0.625rem;
-  }
-
-  .hero-header h3 {
-    font-size: 1.1875rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
-  .hero-badge {
-    font-size: 0.625rem;
-    font-weight: 500;
-    color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.25rem 0.5rem;
-    background: transparent;
-    border: 1px solid #2a2a2a;
-    border-radius: 3px;
-  }
-
-  .hero-description {
-    font-size: 0.9375rem;
     color: #666;
-    margin-bottom: 1rem;
-    line-height: 1.55;
+    line-height: 1.5;
   }
 
-  .hero-metrics {
-    display: flex;
-    gap: 1.25rem;
-    align-items: baseline;
-  }
-
-  .metric-primary {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #888;
-  }
-
-  .metric-secondary {
-    font-size: 0.8125rem;
-    color: #555;
-  }
-
-  @media (max-width: 540px) {
-    .hero-card {
-      flex-direction: column;
-    }
-
-    .hero-image {
-      width: 100%;
-      height: 160px;
-    }
-  }
-
-  /* Campaign Cards */
-  .campaign-grid {
+  /* ========================================
+     FLAGSHIP CARDS (Podcast, Newsletter)
+     ======================================== */
+  .flagship-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    margin-bottom: 1rem;
   }
 
-  @media (max-width: 540px) {
-    .campaign-grid {
+  @media (max-width: 600px) {
+    .flagship-row {
       grid-template-columns: 1fr;
     }
   }
 
-  .campaign-card {
+  .flagship {
+    display: flex;
+    flex-direction: column;
+    background: #0f0f0f;
+    border: 1px solid #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .flagship:hover {
+    background: #111;
+    border-color: #262626;
+  }
+
+  .flagship > img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .flagship-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .flagship-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .flagship-top h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #f0f0f0;
+  }
+
+  .flagship-sub {
+    font-size: 0.625rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.1875rem 0.5rem;
+    background: #1a1a1a;
+    border-radius: 3px;
+  }
+
+  .flagship-body > p {
+    font-size: 0.8125rem;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .flagship-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-val {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #e5e5e5;
+  }
+  .stat-label {
+    font-size: 0.625rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ========================================
+     STANDARD CARDS
+     ======================================== */
+  .card-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.875rem;
+  }
+
+  @media (max-width: 700px) {
+    .card-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .card-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card-row--wide {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 480px) {
+    .card-row--wide {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card {
     display: flex;
     flex-direction: column;
     background: transparent;
     border: 1px solid #1a1a1a;
     border-radius: 6px;
     overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
     text-align: left;
     font-family: inherit;
     color: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
   }
-
-  .campaign-card:hover {
+  .card:hover {
     background: #0f0f0f;
-    border-color: #252525;
+    border-color: #262626;
   }
 
-  .campaign-image {
-    aspect-ratio: 16/9;
+  .card-img {
+    aspect-ratio: 16/10;
     overflow: hidden;
   }
-
-  .campaign-image img {
+  .card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s;
   }
-
-  .campaign-card:hover .campaign-image img {
+  .card:hover .card-img img {
     transform: scale(1.03);
   }
 
-  .campaign-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #0d0d0d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    opacity: 0.6;
+  .card-body {
+    padding: 1rem;
   }
 
-  .campaign-content {
-    padding: 1.25rem;
-  }
-
-  .campaign-header {
+  .card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1276,167 +892,141 @@ const teamVideos = [
     margin-bottom: 0.375rem;
   }
 
-  .campaign-header h3 {
-    font-size: 1rem;
+  .card-top h4 {
+    font-size: 0.875rem;
     font-weight: 500;
-    letter-spacing: -0.01em;
+    color: #e5e5e5;
   }
 
-  .campaign-badge {
+  .card-metric {
     font-size: 0.6875rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #555;
     white-space: nowrap;
   }
 
-  .campaign-subtitle {
+  .card-badge {
+    font-size: 0.5625rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.125rem 0.375rem;
+    border: 1px solid #262626;
+    border-radius: 3px;
+  }
+
+  .card-body > p {
+    font-size: 0.8125rem;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  /* Wide card variant */
+  .card--wide .card-img {
+    aspect-ratio: 2/1;
+  }
+
+  /* ========================================
+     MORE SECTION
+     ======================================== */
+  .more {
+    margin-bottom: 4rem;
+  }
+  .more h2 {
     font-size: 0.6875rem;
+    font-weight: 600;
     color: #444;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.625rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
   }
 
-  .campaign-description {
-    font-size: 0.875rem;
-    color: #666;
-    line-height: 1.5;
-  }
-
-  /* Visual Work Cards */
-  .visual-grid {
+  .more-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    align-items: start;
   }
-
-  .visual-grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .visual-grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .visual-grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  .visual-grid-2 .visual-card img {
-    height: 200px;
-  }
-
-  .visual-grid-2 .swag-visual-preview {
-    height: 200px;
-  }
-
-  @media (max-width: 600px) {
-    .visual-grid {
-      grid-template-columns: 1fr;
-    }
-    .visual-grid-3 {
-      grid-template-columns: 1fr;
-    }
-    .visual-grid-4 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .visual-grid-2 {
+  @media (max-width: 500px) {
+    .more-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .swag-visual-preview {
+  .more-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
+    overflow: hidden;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .more-card:hover {
+    background: #0f0f0f;
+    border-color: #262626;
+  }
+
+  .more-card > img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .swag-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: 2px;
     height: 160px;
     overflow: hidden;
   }
-
-  .swag-visual-preview .swag-main {
-    grid-row: span 2;
+  .swag-grid img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-
-  .swag-visual-preview .swag-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .swag-grid .swag-main {
+    grid-row: span 2;
   }
 
-  .swag-visual-preview .swag-stack img {
-    width: 100%;
-    height: 50%;
-    object-fit: cover;
-    flex: 1;
+  .more-info {
+    padding: 0.875rem 1rem;
   }
-
-  .visual-card {
-    display: block;
-    border: 1px solid #1a1a1a;
-    border-radius: 6px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    background: transparent;
-  }
-
-  button.visual-card {
-    text-align: left;
-    font-family: inherit;
-    color: inherit;
-    cursor: pointer;
-    width: 100%;
-  }
-
-  .visual-card:hover {
-    background: #0f0f0f;
-    border-color: #252525;
-  }
-
-  .visual-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-  }
-
-  .visual-card-small img {
-    height: 120px;
-  }
-
-  .visual-card img {
-    transition: transform 0.4s ease;
-  }
-
-  .visual-card:hover img {
-    transform: scale(1.03);
-  }
-
-  .visual-meta {
-    padding: 1rem;
-    background: transparent;
-  }
-
-  .visual-meta h3 {
+  .more-info h4 {
     font-size: 0.875rem;
     font-weight: 500;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.125rem;
   }
-
-  .visual-meta p {
-    font-size: 0.8125rem;
+  .more-info span {
+    font-size: 0.75rem;
     color: #555;
   }
 
-  /* Behind the Scenes Card */
+  /* ========================================
+     STORYTELLING
+     ======================================== */
+  .storytelling {
+    margin-bottom: 3rem;
+  }
+  .storytelling h2 {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
   .bts-card {
     position: relative;
     width: 100%;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     border: 1px solid #1a1a1a;
@@ -1444,22 +1034,20 @@ const teamVideos = [
     font-family: inherit;
     color: inherit;
     text-align: left;
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
   }
-
   .bts-card:hover {
-    border-color: #2a2a2a;
+    border-color: #262626;
   }
 
   .bts-card img {
     width: 100%;
-    height: 300px;
+    height: 280px;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s;
   }
-
   .bts-card:hover img {
     transform: scale(1.02);
   }
@@ -1469,175 +1057,122 @@ const teamVideos = [
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 2rem 1.5rem 1.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    padding: 2rem 1.25rem 1.25rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
   }
-
   .bts-overlay h3 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
     color: #fff;
+    margin-bottom: 0.125rem;
   }
-
   .bts-overlay p {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     color: #999;
   }
 
-  /* Team Videos */
-  .team-video-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+  .bts-cta {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: #666;
+    transition: color 0.15s;
+  }
+  .bts-card:hover .bts-cta {
+    color: #999;
   }
 
+  /* ========================================
+     VIDEOS
+     ======================================== */
+
+  .video-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
   @media (max-width: 600px) {
-    .team-video-grid {
+    .video-row {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (max-width: 400px) {
-    .team-video-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .team-video-card {
+  .video-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: transparent;
     border: 1px solid #1a1a1a;
     border-radius: 6px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s;
+  }
+  .video-card:hover {
+    border-color: #262626;
   }
 
-  .team-video-card:hover {
-    background: #0f0f0f;
-    border-color: #252525;
-  }
-
-  .team-video-card img {
+  .video-card > img {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
   }
 
-  .team-video-card:hover img {
-    transform: scale(1.03);
-  }
-
-  .team-video-play {
+  .video-play {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(0,0,0,0.25);
     opacity: 0;
-    transition: opacity 0.2s ease;
-    background: rgba(0, 0, 0, 0.3);
+    transition: opacity 0.2s;
   }
-
-  .team-video-card:hover .team-video-play {
+  .video-card:hover .video-play {
     opacity: 1;
   }
-
-  .team-video-play svg {
-    width: 40px;
-    height: 40px;
+  .video-play svg {
+    width: 28px;
+    height: 28px;
     color: #fff;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
   }
 
-  .team-video-info {
-    padding: 1rem;
-  }
-
-  .team-video-info h3 {
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 0.375rem;
-    color: #e5e5e5;
-  }
-
-  .team-video-info p {
-    font-size: 0.8125rem;
-    color: #555;
-    line-height: 1.45;
-    margin-bottom: 0.5rem;
-  }
-
-  .team-video-year {
-    font-size: 0.6875rem;
-    color: #444;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-
-  /* Swag Hero Preview */
-  .swag-hero-preview {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 2px;
-    padding: 0;
-    position: relative;
-  }
-
-  .swag-hero-preview .swag-preview-main {
-    grid-row: span 2;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .swag-hero-preview .swag-preview-stack {
-    display: contents;
-  }
-
-  .swag-hero-preview .swag-preview-stack img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .swag-preview-count {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 50%;
-    height: 50%;
-    background: rgba(0, 0, 0, 0.7);
+  .video-info {
+    padding: 0.625rem 0.75rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #fff;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .video-info > span:first-child {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ccc;
+  }
+  .video-year {
+    font-size: 0.625rem;
+    color: #555;
   }
 
-  /* Modal - using :global for dynamically injected content */
-  .modal-backdrop {
+  /* ========================================
+     MODAL
+     ======================================== */
+  .modal-bg {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
-    z-index: 1001;
+    padding: 1rem;
+    z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.2s, visibility 0.2s;
   }
-
-  .modal-backdrop.active {
+  .modal-bg.open {
     opacity: 1;
     visibility: visible;
   }
@@ -1645,454 +1180,508 @@ const teamVideos = [
   .modal {
     background: #111;
     border: 1px solid #222;
-    border-radius: 16px;
-    max-width: 520px;
+    border-radius: 12px;
+    max-width: 560px;
     width: 100%;
-    max-height: calc(100vh - 3rem);
+    max-height: calc(100vh - 2rem);
     overflow-y: auto;
-    overflow-x: hidden;
     position: relative;
-    transform: translateY(16px);
+    transform: translateY(12px);
     opacity: 0;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    transition: transform 0.2s ease-out, opacity 0.2s;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
   }
 
   .modal::-webkit-scrollbar {
-    display: none;
+    width: 6px;
   }
 
-  .modal-backdrop.active .modal {
+  .modal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .modal::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+  }
+
+  .modal::-webkit-scrollbar-thumb:hover {
+    background: #444;
+  }
+  .modal-bg.open .modal {
     transform: translateY(0);
     opacity: 1;
   }
 
-  .modal-close {
+  .modal-x {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 32px;
-    height: 32px;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #1a1a1a;
     border: 1px solid #2a2a2a;
-    border-radius: 8px;
-    cursor: pointer;
+    border-radius: 6px;
     color: #666;
-    transition: all 0.15s ease;
+    cursor: pointer;
     z-index: 10;
+    transition: color 0.15s, background 0.15s;
   }
-
-  .modal-close:hover {
+  .modal-x:hover {
     color: #999;
     background: #222;
-    border-color: #333;
+  }
+  .modal-x svg {
+    width: 12px;
+    height: 12px;
   }
 
-  .modal-close svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .modal-content {
+  .modal-inner {
     padding: 0;
   }
 
-  :global(.modal-image) {
+  /* Modal content styles via :global */
+  :global(.m-img) {
     width: 100%;
     aspect-ratio: 16/10;
-    overflow: hidden;
-    border-radius: 16px 16px 0 0;
-  }
-
-  :global(.modal-image img) {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
+    border-radius: 12px 12px 0 0;
   }
 
-  :global(.modal-body) {
-    padding: 1.5rem;
+  :global(.m-body) {
+    padding: 1.25rem;
   }
 
-  :global(.modal-header) {
+  :global(.m-head) {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    padding-right: 2.5rem;
+    gap: 0.875rem;
+    margin-bottom: 1rem;
+    padding-right: 2rem;
   }
 
-  :global(.modal-icon) {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+  :global(.m-icon) {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
-    flex-shrink: 0;
-  }
-
-  :global(.modal-header-text) {
-    flex: 1;
-  }
-
-  :global(.modal-title) {
     font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: #fff;
+    flex-shrink: 0;
+    background: #1a1a1a;
   }
 
-  :global(.modal-subtitle) {
-    font-size: 0.75rem;
-    color: #666;
+  :global(.m-title) {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.125rem;
+  }
+
+  :global(.m-sub) {
+    font-size: 0.6875rem;
+    color: #555;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
-  :global(.modal-description) {
-    font-size: 0.875rem;
+  :global(.m-desc) {
+    font-size: 0.8125rem;
     color: #888;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid #1a1a1a;
   }
 
-  :global(.modal-metrics) {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+  :global(.m-metrics) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-bottom: 1.25rem;
   }
 
-  :global(.modal-metric) {
+  :global(.m-stat) {
     background: #1a1a1a;
-    border-radius: 10px;
-    padding: 1rem 0.75rem;
+    border-radius: 8px;
+    padding: 0.75rem;
     text-align: center;
+    min-width: 70px;
   }
 
-  :global(.modal-metric-value) {
-    font-size: 1.25rem;
+  :global(.m-stat-val) {
+    font-size: 1.125rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 0.25rem;
   }
 
-  :global(.modal-metric-label) {
-    font-size: 0.625rem;
+  :global(.m-stat-label) {
+    font-size: 0.5625rem;
     color: #555;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }
 
-  :global(.modal-sections) {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  :global(.modal-section) {
+  :global(.m-section) {
     background: #1a1a1a;
-    border-radius: 10px;
-    padding: 1rem;
+    border-radius: 8px;
+    padding: 0.875rem;
+    margin-bottom: 0.75rem;
   }
 
-  :global(.modal-section-title) {
-    font-size: 0.6875rem;
+  :global(.m-section-title) {
+    font-size: 0.5625rem;
     font-weight: 600;
     color: #555;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.375rem;
   }
 
-  :global(.modal-section-content) {
-    font-size: 0.8125rem;
+  :global(.m-section-content) {
+    font-size: 0.75rem;
     color: #999;
     line-height: 1.5;
   }
 
-  :global(.modal-links) {
+  :global(.m-links) {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.625rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
     border-top: 1px solid #1a1a1a;
   }
 
-  :global(.modal-link) {
+  :global(.m-link) {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    font-size: 0.8125rem;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.15s ease;
+    border-radius: 6px;
     text-decoration: none;
+    transition: all 0.15s;
   }
 
-  :global(.modal-link-primary) {
+  :global(.m-link--primary) {
     background: #fff;
     color: #000;
   }
-
-  :global(.modal-link-primary:hover) {
+  :global(.m-link--primary:hover) {
     background: #e5e5e5;
-    color: #000;
   }
 
-  :global(.modal-link-secondary) {
+  :global(.m-link--secondary) {
     background: #1a1a1a;
     color: #888;
     border: 1px solid #2a2a2a;
   }
-
-  :global(.modal-link-secondary:hover) {
+  :global(.m-link--secondary:hover) {
     color: #bbb;
-    border-color: #3a3a3a;
     background: #222;
   }
 
-  :global(.modal-link svg) {
-    width: 14px;
-    height: 14px;
+  :global(.m-link svg) {
+    width: 12px;
+    height: 12px;
   }
 
-  :global(.modal-gallery) {
+  :global(.m-gallery) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 
-  :global(.modal-gallery-item) {
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    border-radius: 8px;
-  }
-
-  :global(.modal-gallery-item img) {
+  :global(.m-gallery img) {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16/10;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    border-radius: 6px;
   }
 
-  :global(.modal-gallery-item:hover img) {
-    transform: scale(1.05);
-  }
-
-  :global(.modal-blog-posts) {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #1a1a1a;
-  }
-
-  :global(.modal-blog-grid) {
+  :global(.m-blog-grid) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.625rem;
     margin-top: 0.75rem;
   }
 
-  :global(.modal-blog-card) {
+  :global(.m-blog-card) {
     display: block;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: hidden;
     background: #1a1a1a;
-    transition: all 0.2s ease;
     text-decoration: none;
+    transition: background 0.15s;
   }
-
-  :global(.modal-blog-card:hover) {
+  :global(.m-blog-card:hover) {
     background: #222;
-    transform: translateY(-2px);
   }
 
-  :global(.modal-blog-card img) {
+  :global(.m-blog-card img) {
     width: 100%;
-    height: 80px;
+    height: 60px;
     object-fit: cover;
-    display: block;
   }
 
-  :global(.modal-blog-info) {
-    padding: 0.625rem 0.75rem;
+  :global(.m-blog-info) {
+    padding: 0.5rem 0.625rem;
   }
 
-  :global(.modal-blog-category) {
-    font-size: 0.5625rem;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  :global(.modal-blog-info h4) {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #ccc;
-    margin-top: 0.25rem;
-    line-height: 1.3;
-  }
-
-  :global(.modal-before-after) {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #1a1a1a;
-  }
-
-  :global(.before-after-grid) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 0.75rem;
-  }
-
-  :global(.before-after-item) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  :global(.before-after-label) {
-    font-size: 0.625rem;
+  :global(.m-blog-cat) {
+    font-size: 0.5rem;
     font-weight: 600;
     color: #555;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
 
-  :global(.before-after-item img) {
+  :global(.m-blog-info h5) {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: #ccc;
+    margin-top: 0.125rem;
+    line-height: 1.3;
+  }
+
+  :global(.m-ba) {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  :global(.m-ba-grid) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  :global(.m-ba-item) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  :global(.m-ba-label) {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  :global(.m-ba-item img) {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid #222;
   }
 
-  :global(.before-after-tagline) {
-    font-size: 0.6875rem;
+  :global(.m-ba-tagline) {
+    font-size: 0.625rem;
     color: #666;
-    line-height: 1.4;
     font-style: italic;
+  }
+
+  :global(.m-videos) {
+    margin-top: 1rem;
+  }
+
+  :global(.m-videos-title) {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.m-video-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
+  }
+
+  :global(.m-video-card) {
+    display: block;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.15s;
+  }
+  :global(.m-video-card:hover) {
+    transform: scale(1.02);
+  }
+
+  :global(.m-video-card img) {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+  }
+
+  :global(.m-video-play) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  :global(.m-video-card:hover .m-video-play) {
+    opacity: 1;
+  }
+  :global(.m-video-play svg) {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+  }
+
+  :global(.m-video-info) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  }
+
+  :global(.m-video-info span) {
+    font-size: 0.6875rem;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  :global(.m-video-year) {
+    font-size: 0.5625rem;
+    color: #888;
+    margin-left: 0.375rem;
   }
 </style>
 
 <script>
-  const backdrop = document.getElementById('modalBackdrop');
+  const bg = document.getElementById('modalBg');
   const modal = document.getElementById('modal');
-  const modalContent = document.getElementById('modalContent');
-  const modalClose = document.getElementById('modalClose');
+  const inner = document.getElementById('modalInner');
+  const closeBtn = document.getElementById('modalX');
 
-  // Open modal on card click
-  document.querySelectorAll('[data-modal]').forEach(card => {
-    card.addEventListener('click', () => {
-      const id = card.getAttribute('data-modal');
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-modal');
       const data = (window as any).workData[id];
       if (data) openModal(data);
     });
   });
 
-  // Close modal
-  modalClose?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', (e) => {
-    if (e.target === backdrop) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
+  closeBtn?.addEventListener('click', closeModal);
+  bg?.addEventListener('click', (e) => { if (e.target === bg) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  function openModal(data: any) {
-    const m = data.modal;
-    if (!m || !modalContent) return;
+  function openModal(d: any) {
+    const m = d.modal;
+    if (!m || !inner) return;
 
-    const icon = data.icon || '📁';
+    const icon = d.icon || '📁';
+    const imgHtml = d.image ? `<img class="m-img" src="${d.image}" alt="${d.title}" />` : '';
 
     const metricsHtml = m.metrics ? `
-      <div class="modal-metrics">
-        ${m.metrics.map((metric: any) => `
-          <div class="modal-metric">
-            <div class="modal-metric-value">${metric.value}</div>
-            <div class="modal-metric-label">${metric.label}</div>
+      <div class="m-metrics">
+        ${m.metrics.map((x: any) => `
+          <div class="m-stat">
+            <div class="m-stat-val">${x.value}</div>
+            <div class="m-stat-label">${x.label}</div>
           </div>
         `).join('')}
       </div>
     ` : '';
 
-    // Build sections array
     const sections = [];
-    if (m.role) {
-      sections.push({ title: 'Role', content: m.role });
-    }
-    if (m.cohosts) {
-      sections.push({ title: 'Co-hosts', content: m.cohosts });
-    }
-    if (m.guests) {
-      sections.push({ title: 'Notable Guests', content: m.guests });
-    }
-    if (m.highlights) {
-      sections.push({ title: 'Highlights', content: m.highlights });
-    }
+    if (m.role) sections.push({ t: 'Role', c: m.role });
+    if (m.cohosts) sections.push({ t: 'Co-hosts', c: m.cohosts });
+    if (m.guests) sections.push({ t: 'Notable Guests', c: m.guests });
+    if (m.highlights) sections.push({ t: 'Highlights', c: m.highlights });
 
-    const sectionsHtml = sections.length ? `
-      <div class="modal-sections">
-        ${sections.map(s => `
-          <div class="modal-section">
-            <div class="modal-section-title">${s.title}</div>
-            <div class="modal-section-content">${s.content}</div>
-          </div>
-        `).join('')}
+    const sectionsHtml = sections.map(s => `
+      <div class="m-section">
+        <div class="m-section-title">${s.t}</div>
+        <div class="m-section-content">${s.c}</div>
       </div>
-    ` : '';
+    `).join('');
 
     const linksHtml = m.links ? `
-      <div class="modal-links">
-        ${m.links.map((link: any) => `
-          <a href="${link.url}" target="_blank" class="modal-link ${link.primary ? 'modal-link-primary' : 'modal-link-secondary'}">
-            ${link.label}
+      <div class="m-links">
+        ${m.links.map((l: any) => `
+          <a href="${l.url}" target="_blank" class="m-link ${l.primary ? 'm-link--primary' : 'm-link--secondary'}">
+            ${l.label}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </a>
         `).join('')}
       </div>
     ` : '';
 
-    // Handle image gallery for swag, single hero image for others
-    const hasGallery = m.images && m.images.length > 0;
-
-    const heroImageHtml = (!hasGallery && data.image) ? `
-      <div class="modal-image">
-        <img src="${data.image}" alt="${data.title}" />
+    const galleryHtml = m.images ? `
+      <div class="m-gallery">
+        ${m.images.map((src: string) => `<img src="${src}" alt="${d.title}" />`).join('')}
       </div>
     ` : '';
 
-    const galleryHtml = hasGallery ? `
-      <div class="modal-gallery">
-        ${m.images.map((src: string) => `
-          <div class="modal-gallery-item">
-            <img src="${src}" alt="${data.title}" />
-          </div>
+    const blogHtml = m.blogPosts ? `
+      <div class="m-section-title" style="margin-top:1rem">Content Shipped</div>
+      <div class="m-blog-grid">
+        ${m.blogPosts.map((p: any) => `
+          <a href="${p.url}" target="_blank" class="m-blog-card">
+            <img src="${p.image}" alt="${p.title}" />
+            <div class="m-blog-info">
+              <span class="m-blog-cat">${p.category}</span>
+              <h5>${p.title}</h5>
+            </div>
+          </a>
         `).join('')}
       </div>
     ` : '';
 
-    const blogPostsHtml = m.blogPosts ? `
-      <div class="modal-blog-posts">
-        <div class="modal-section-title">Content Shipped</div>
-        <div class="modal-blog-grid">
-          ${m.blogPosts.map((post: any) => `
-            <a href="${post.url}" target="_blank" class="modal-blog-card">
-              <img src="${post.image}" alt="${post.title}" />
-              <div class="modal-blog-info">
-                <span class="modal-blog-category">${post.category}</span>
-                <h4>${post.title}</h4>
+    const baHtml = m.beforeAfter ? `
+      <div class="m-ba">
+        <div class="m-section-title">The Pivot</div>
+        <div class="m-ba-grid">
+          <div class="m-ba-item">
+            <span class="m-ba-label">${m.beforeAfter.before.label}</span>
+            <img src="${m.beforeAfter.before.image}" alt="Before" />
+            <span class="m-ba-tagline">${m.beforeAfter.before.tagline}</span>
+          </div>
+          <div class="m-ba-item">
+            <span class="m-ba-label">${m.beforeAfter.after.label}</span>
+            <img src="${m.beforeAfter.after.image}" alt="After" />
+            <span class="m-ba-tagline">${m.beforeAfter.after.tagline}</span>
+          </div>
+        </div>
+      </div>
+    ` : '';
+
+    const videosHtml = m.videos ? `
+      <div class="m-videos">
+        <div class="m-videos-title">Team Videos</div>
+        <div class="m-video-grid">
+          ${m.videos.map((v: any) => `
+            <a href="https://youtu.be/${v.youtubeId}" target="_blank" rel="noopener noreferrer" class="m-video-card">
+              <img src="https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg" alt="${v.title}" />
+              <div class="m-video-play">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <div class="m-video-info">
+                <span>${v.title}</span>
+                <span class="m-video-year">${v.year}</span>
               </div>
             </a>
           `).join('')}
@@ -2100,50 +1689,33 @@ const teamVideos = [
       </div>
     ` : '';
 
-    const beforeAfterHtml = m.beforeAfter ? `
-      <div class="modal-before-after">
-        <div class="modal-section-title">The Pivot</div>
-        <div class="before-after-grid">
-          <div class="before-after-item">
-            <span class="before-after-label">${m.beforeAfter.before.label}</span>
-            <img src="${m.beforeAfter.before.image}" alt="Before" />
-            <p class="before-after-tagline">${m.beforeAfter.before.tagline}</p>
-          </div>
-          <div class="before-after-item">
-            <span class="before-after-label">${m.beforeAfter.after.label}</span>
-            <img src="${m.beforeAfter.after.image}" alt="After" />
-            <p class="before-after-tagline">${m.beforeAfter.after.tagline}</p>
+    inner.innerHTML = `
+      ${imgHtml}
+      <div class="m-body">
+        <div class="m-head">
+          <div class="m-icon">${icon}</div>
+          <div>
+            <div class="m-title">${d.title}</div>
+            <div class="m-sub">${d.subtitle}</div>
           </div>
         </div>
-      </div>
-    ` : '';
-
-    modalContent.innerHTML = `
-      ${heroImageHtml}
-      <div class="modal-body">
-        <div class="modal-header">
-          <div class="modal-icon" style="background: ${data.color}20;">${icon}</div>
-          <div class="modal-header-text">
-            <h2 class="modal-title">${data.title}</h2>
-            <span class="modal-subtitle">${data.subtitle}</span>
-          </div>
-        </div>
-        <p class="modal-description">${m.fullDescription}</p>
+        <p class="m-desc">${m.fullDescription}</p>
         ${metricsHtml}
         ${sectionsHtml}
-        ${beforeAfterHtml}
+        ${baHtml}
         ${galleryHtml}
-        ${blogPostsHtml}
+        ${blogHtml}
+        ${videosHtml}
         ${linksHtml}
       </div>
     `;
 
-    backdrop?.classList.add('active');
+    bg?.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
-    backdrop?.classList.remove('active');
+    bg?.classList.remove('open');
     document.body.style.overflow = '';
   }
 </script>

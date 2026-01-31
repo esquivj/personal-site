@@ -12,8 +12,8 @@ const SITE_URL = 'https://juanesquivel.xyz';
 const DEFAULT_IMAGE = '/images/og-image.png';
 
 const {
-  title = "Juan Esquivel",
-  description = "Lore maximalist. Leading marketing at a crypto startup. Building brand, narrative, and lore.",
+  title = "Juan Esquivel — Crypto Marketer & Storyteller",
+  description = "Juan Esquivel is a crypto marketer based in Lisbon, building brand, narrative, and storytelling at StableLab. Thoughts on marketing, brand strategy, and building in web3.",
   image = DEFAULT_IMAGE,
   type = "website",
   publishedTime,
@@ -113,6 +113,27 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
+
+  /* Webkit scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #444;
   }
 
   body {

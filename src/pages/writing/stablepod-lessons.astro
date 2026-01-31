@@ -25,7 +25,11 @@ const articleSchema = {
   "publisher": {
     "@type": "Person",
     "name": "Juan Esquivel",
-    "url": "https://juanesquivel.xyz"
+    "url": "https://juanesquivel.xyz",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://juanesquivel.xyz/images/avatar.jpg"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -36,7 +40,7 @@ const articleSchema = {
 
 <Layout
   title={`${post.title} - Juan Esquivel`}
-  description={post.subtitle}
+  description="What I learned from interviewing nearly 30 crypto founders and leaders on StablePod. Tips for being a better podcast guest and showing your authentic personality."
   type="article"
   image={post.cover}
   publishedTime={post.publishedTime}
@@ -57,7 +61,7 @@ const articleSchema = {
   <article class="post">
     {post.cover && (
       <figure class="post-cover">
-        <img src={post.cover} alt="" />
+        <img src={post.cover} alt="StablePod lessons article cover" width="640" height="360" />
       </figure>
     )}
 
