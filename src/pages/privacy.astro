@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Privacy Policy",
+  "url": "https://juanesquivel.xyz/privacy"
+};
+---
+
+<Layout
+  title="Privacy Policy — Juan Esquivel"
+  description="Privacy policy for juanesquivel.xyz. Learn what data is (and is not) collected, how analytics are handled, and how information is used."
+  canonicalPath="/privacy"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  </Fragment>
+
+  <section>
+    <h1>Privacy Policy</h1>
+    <p class="text-secondary">This site is a personal portfolio and blog. I do not sell or share personal information.</p>
+  </section>
+
+  <section class="privacy-content">
+    <h2>Analytics</h2>
+    <p class="text-secondary">Basic, privacy-focused analytics may be collected to understand site traffic. No advertising or tracking cookies are used.</p>
+
+    <h2>Contact</h2>
+    <p class="text-secondary">If you email me, I will only use your information to respond.</p>
+  </section>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .privacy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+</style>

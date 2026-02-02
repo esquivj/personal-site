@@ -5,6 +5,7 @@ const post = {
   title: "A Story About Building Your Way In",
   subtitle: "I had no network, no connections, and no clear path in.",
   date: "2026.01.31",
+  publishedTime: "2026-01-31",
   cover: "/images/building-way-in-cover.jpg"
 };
 
@@ -14,25 +15,36 @@ const articleSchema = {
   "headline": post.title,
   "description": post.subtitle,
   "image": `https://juanesquivel.xyz${post.cover}`,
-  "datePublished": "2026-01-31",
+  "datePublished": post.publishedTime,
   "author": {
     "@type": "Person",
     "name": "Juan Esquivel",
     "url": "https://juanesquivel.xyz"
   },
   "publisher": {
-    "@type": "Person",
-    "name": "Juan Esquivel"
+    "@type": "Organization",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://juanesquivel.xyz/images/avatar.jpg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://juanesquivel.xyz/writing/building-way-in"
   }
 };
 ---
 
 <Layout
-  title={`${post.title} — Juan Esquivel`}
-  description={post.subtitle}
+  title="Building Your Way In — Juan Esquivel"
+  description="A personal essay on breaking into crypto without a network, building proof of work, and finding a path into startups. Lessons from RabbitHole and Boardroom."
   type="article"
-  publishedTime="2026-01-31"
+  image={post.cover}
+  publishedTime={post.publishedTime}
   canonicalPath="/writing/building-way-in"
+  preloadImages={[post.cover]}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -49,7 +61,7 @@ const articleSchema = {
   <article class="post">
     {post.cover && (
       <figure class="post-cover">
-        <img src={post.cover} alt="Building My Way In article cover" width="640" height="360" />
+        <img src={post.cover} alt="Building My Way In article cover" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
       </figure>
     )}
 
@@ -65,7 +77,7 @@ const articleSchema = {
       <p>Last week I was scrolling X when I stumbled on this:</p>
 
       <figure class="post-image">
-        <img src="/images/building-way-in-tweet.jpg" alt="Tweet from van Schneider: In order to write about life, first you must live it. — Ernest Hemingway" width="600" height="300" />
+        <img src="/images/building-way-in-tweet.jpg" alt="Tweet from van Schneider: In order to write about life, first you must live it. — Ernest Hemingway" width="600" height="300" loading="eager" decoding="async" />
         <figcaption>i need to read more hemingway</figcaption>
       </figure>
 
@@ -92,7 +104,7 @@ const articleSchema = {
       <p>Meeting and speaking with people in this space is the most valuable thing you can do for yourself. I was on the outside looking in, and I didn't know where to start. I thought to myself, "why would these individuals ever care to talk to me?" <strong>Don't let this hold you back. Create value, give recognition, and become someone worth betting on.</strong></p>
 
       <figure class="post-image">
-        <img src="/images/building-way-in-dm.jpg" alt="DM conversation with Zach from RabbitHole" width="600" height="400" />
+        <img src="/images/building-way-in-dm.jpg" alt="DM conversation with Zach from RabbitHole" width="600" height="400" loading="eager" decoding="async" />
         <figcaption>twitter dms can change your life</figcaption>
       </figure>
 
@@ -129,12 +141,22 @@ const articleSchema = {
       <p>None of that has to matter. Build proof of work, create value, and put yourself out there before you feel ready.</p>
 
       <figure class="post-image">
-        <img src="/images/building-way-in-nairolf.jpg" alt="Tweet from @0xNairolf: the most beautiful part of crypto is unlocking access people never had" width="600" height="200" />
+        <img src="/images/building-way-in-nairolf.jpg" alt="Tweet from @0xNairolf: the most beautiful part of crypto is unlocking access people never had" width="600" height="200" loading="eager" decoding="async" />
       </figure>
 
       <p><strong>The path won't be handed to you, but you can build it yourself. I did.</strong></p>
     </div>
   </article>
+
+  <section class="more-writing">
+    <h2>More writing</h2>
+    <ul>
+      <li><a href="/writing/crypto-native">Crypto-native isn't everything. But it's still something.</a></li>
+      <li><a href="/writing/stablepod-lessons">The best crypto founders and leaders do this on podcasts</a></li>
+      <li><a href="/writing">See all writing</a></li>
+    </ul>
+  </section>
+
 </Layout>
 
 <style>
@@ -346,5 +368,26 @@ const articleSchema = {
     .post-content blockquote {
       font-size: 1rem;
     }
+  }
+
+  .more-writing {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .more-writing ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .more-writing a {
+    color: #e5e5e5;
+  }
+
+  .more-writing a:hover {
+    color: #FF6B00;
   }
 </style>

@@ -23,7 +23,7 @@ const articleSchema = {
     "url": "https://juanesquivel.xyz"
   },
   "publisher": {
-    "@type": "Person",
+    "@type": "Organization",
     "name": "Juan Esquivel",
     "url": "https://juanesquivel.xyz",
     "logo": {
@@ -39,12 +39,13 @@ const articleSchema = {
 ---
 
 <Layout
-  title={`${post.title} - Juan Esquivel`}
-  description="Why being crypto-native still matters as the industry matures. Lessons on building intuition for what's real in web3 from someone in the space since 2021."
+  title="Why Crypto-Native Still Matters — Juan Esquivel"
+  description="Why being crypto-native still matters as the industry matures. Lessons on building intuition for what's real in web3, drawn from experience inside the space."
   type="article"
   image={post.cover}
   publishedTime={post.publishedTime}
   canonicalPath="/writing/crypto-native"
+  preloadImages={[post.cover]}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -61,7 +62,7 @@ const articleSchema = {
   <article class="post">
     {post.cover && (
       <figure class="post-cover">
-        <img src={post.cover} alt="Crypto-native article cover" width="640" height="360" />
+        <img src={post.cover} alt="Crypto-native article cover" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
       </figure>
     )}
 
@@ -109,6 +110,16 @@ const articleSchema = {
       <p>But intuition alone isn't enough. The industry is going to keep changing. The natives who stay relevant aren't the ones who rest on "I was here early." They're the ones who keep learning.</p>
     </div>
   </article>
+
+  <section class="more-writing">
+    <h2>More writing</h2>
+    <ul>
+      <li><a href="/writing/building-way-in">A Story About Building Your Way In</a></li>
+      <li><a href="/writing/stablepod-lessons">The best crypto founders and leaders do this on podcasts</a></li>
+      <li><a href="/writing">See all writing</a></li>
+    </ul>
+  </section>
+
 </Layout>
 
 <style>
@@ -303,5 +314,26 @@ const articleSchema = {
     .post-subtitle {
       font-size: 1rem;
     }
+  }
+
+  .more-writing {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .more-writing ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .more-writing a {
+    color: #e5e5e5;
+  }
+
+  .more-writing a:hover {
+    color: #FF6B00;
   }
 </style>

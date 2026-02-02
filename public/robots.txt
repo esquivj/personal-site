@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://juanesquivel.xyz/sitemap-index.xml
+Sitemap: https://juanesquivel.xyz/sitemap.xml
 
 # AI Crawlers - Explicitly allowed for discoverability
 # OpenAI

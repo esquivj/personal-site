@@ -19,6 +19,7 @@ const pageSchema = {
   title="Speaking — Podcasts & Talks by Juan Esquivel"
   description="Podcasts, interviews, and speaking appearances by Juan Esquivel covering crypto marketing, DAO governance, brand building, and storytelling in web3."
   canonicalPath="/speaking"
+  preloadImages={["/images/dao-talk-thumbnail.jpg"]}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
@@ -50,7 +51,7 @@ const pageSchema = {
   <section>
     <div class="speaking-list">
       <a href="https://youtu.be/CYTEW2VF4n8" target="_blank" rel="noopener" class="speaking-item">
-        <img src="/images/dao-talk-thumbnail.jpg" alt="DAO Talk thumbnail" class="speaking-thumbnail" width="120" height="68" />
+        <img src="/images/dao-talk-thumbnail.jpg" alt="DAO Talk thumbnail" class="speaking-thumbnail" width="120" height="68" loading="eager" decoding="async" fetchpriority="high" />
         <div class="speaking-info">
           <span class="speaking-title">Governance Solution Providers & DAO Marketing</span>
           <span class="speaking-host">DAO Talk by Tally</span>

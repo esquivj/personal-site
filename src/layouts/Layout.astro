@@ -6,6 +6,7 @@ interface Props {
   type?: 'website' | 'article';
   publishedTime?: string;
   canonicalPath?: string;
+  preloadImages?: string[];
 }
 
 const SITE_URL = 'https://juanesquivel.xyz';
@@ -17,7 +18,8 @@ const {
   image = DEFAULT_IMAGE,
   type = "website",
   publishedTime,
-  canonicalPath
+  canonicalPath,
+  preloadImages = []
 } = Astro.props;
 
 const canonicalURL = canonicalPath ? `${SITE_URL}${canonicalPath}` : new URL(Astro.url.pathname, SITE_URL).toString();
@@ -35,6 +37,12 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Preload Images -->
+    {preloadImages.map((src) => {
+      const href = src.startsWith('http') ? src : `${SITE_URL}${src}`;
+      return <link rel="preload" as="image" href={href} />;
+    })}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -85,10 +93,17 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="container">
-      <slot />
+      <main id="main-content">
+        <slot />
+      </main>
       <footer class="footer">
-        <p>© 2025 Juan Esquivel</p>
+        <p>© 2026 Juan Esquivel</p>
+        <div class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/contact">Contact</a>
+        </div>
       </footer>
     </div>
     <script>
@@ -169,6 +184,36 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     mix-blend-mode: overlay;
   }
 
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: #111;
+    color: #ffffff;
+    border-radius: 6px;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+    z-index: 2000;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* Page load animation base */
   @keyframes fadeInUp {
     from {
@@ -199,6 +244,10 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     max-width: 640px;
     margin: 0 auto;
     padding: 4rem 1.5rem;
+  }
+
+  main {
+    display: block;
   }
 
   a {
@@ -276,10 +325,29 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     margin-top: 4rem;
     padding-top: 2rem;
     border-top: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .footer p {
     font-size: 0.8125rem;
     color: #404040;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .footer-links a {
+    color: #525252;
+  }
+
+  .footer-links a:hover {
+    color: #e5e5e5;
   }
 </style>
