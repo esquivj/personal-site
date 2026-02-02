@@ -109,6 +109,36 @@ const servicesWork = [
     },
   },
   {
+    id: 'partnership-announcements',
+    title: 'Partnership Announcements',
+    description: 'Every new protocol engagement became a blog post.',
+    metric: '8+',
+    image: '/work/partnerships/makerdao.jpg',
+    color: '#6366f1',
+    icon: '🤝',
+    subtitle: 'Network Building',
+    modal: {
+      fullDescription: 'These weren\'t public delegation asks. These were structured deals with teams on the other side, which meant we could co-market.',
+      storySections: [
+        {
+          title: 'What I Did',
+          content: 'Wrote blog posts for each partnership. Positioned engagements to show a growing network.',
+        },
+        {
+          title: 'Impact',
+          content: 'First time we could co-market. MakerDAO announcement was the proof point, real engagement.',
+        },
+      ],
+      blogPosts: [
+        { title: 'MakerDAO Partnership', category: 'Business Development', image: '/work/partnerships/makerdao.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
+        { title: 'Reserve Protocol', category: 'Governance Facilitator', image: '/work/partnerships/reserve.jpg', url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement' },
+        { title: 'Gitcoin Partnership', category: 'DAO-to-DAO', image: '/work/partnerships/gitcoin.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships' },
+        { title: 'Instadapp Partnership', category: 'Governance', image: '/work/partnerships/instadapp.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships' },
+        { title: 'Rootstock Collective', category: 'Governance', image: '/work/partnerships/rootstock.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-rootstockcollective-to-support-governance-and-ecosystem-growth' },
+      ],
+    },
+  },
+  {
     id: 'conference-marketing',
     title: 'Conference Presence',
     description: 'Event marketing for EthCC, Devconnect, Token2049, KBW.',
@@ -144,33 +174,26 @@ const servicesWork = [
     },
   },
   {
-    id: 'partnership-announcements',
-    title: 'Partnership Announcements',
-    description: 'Every new protocol engagement became a blog post.',
-    metric: '8+',
-    image: '/work/partnerships/makerdao.jpg',
-    color: '#6366f1',
-    icon: '🤝',
-    subtitle: 'Network Building',
+    id: 'governance-gathering',
+    title: 'Governance Gathering',
+    description: 'Side event at EthCC Brussels. 150+ attendees.',
+    image: '/work/governance-gathering.avif',
+    color: '#7c3aed',
+    icon: '🎪',
+    subtitle: 'Event Hosting',
     modal: {
-      fullDescription: 'These weren\'t public delegation asks. These were structured deals with teams on the other side, which meant we could co-market.',
-      storySections: [
-        {
-          title: 'What I Did',
-          content: 'Wrote blog posts for each partnership. Positioned engagements to show a growing network.',
-        },
-        {
-          title: 'Impact',
-          content: 'First time we could co-market. MakerDAO announcement was the proof point, real engagement.',
-        },
+      fullDescription: 'Initiated and project-managed a networking event at EthCC Brussels. Co-hosted with UMA, Wormhole, Tally.',
+      metrics: [
+        { label: 'Attendees', value: '150+' },
+        { label: 'Registrations', value: '258' },
       ],
-      blogPosts: [
-        { title: 'MakerDAO Partnership', category: 'Business Development', image: '/work/partnerships/makerdao.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
-        { title: 'Reserve Protocol', category: 'Governance Facilitator', image: '/work/partnerships/reserve.jpg', url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement' },
-        { title: 'Gitcoin Partnership', category: 'DAO-to-DAO', image: '/work/partnerships/gitcoin.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships' },
-        { title: 'Instadapp Partnership', category: 'Governance', image: '/work/partnerships/instadapp.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships' },
-        { title: 'Rootstock Collective', category: 'Governance', image: '/work/partnerships/rootstock.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-rootstockcollective-to-support-governance-and-ecosystem-growth' },
+      images: [
+        '/work/agg/event-4.jpg',
+        '/work/agg/event-5.jpg',
+        '/work/agg/event-6.jpg',
+        '/work/agg/event-1.jpg',
       ],
+      links: [{ label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true }],
     },
   },
 ];
@@ -343,30 +366,6 @@ const salesWork = [
 
 // Supporting Work
 const supportingWork = {
-  governanceGathering: {
-    id: 'governance-gathering',
-    title: 'Governance Gathering',
-    description: 'Side event at EthCC Brussels. 150+ attendees.',
-    metric: '150+',
-    image: '/work/governance-gathering.avif',
-    color: '#7c3aed',
-    icon: '🎪',
-    subtitle: 'Event',
-    modal: {
-      fullDescription: 'Initiated and project-managed a networking event at EthCC Brussels. Co-hosted with UMA, Wormhole, Tally.',
-      metrics: [
-        { label: 'Attendees', value: '150+' },
-        { label: 'Registrations', value: '258' },
-      ],
-      images: [
-        '/work/agg/event-4.jpg',
-        '/work/agg/event-5.jpg',
-        '/work/agg/event-6.jpg',
-        '/work/agg/event-1.jpg',
-      ],
-      links: [{ label: 'Event Page', url: 'https://lu.ma/l5tvcrcb', primary: true }],
-    },
-  },
   swag: {
     id: 'team-swag',
     title: 'Team Swag',
@@ -390,6 +389,10 @@ const supportingWork = {
         '/work/swag/GbxxrkraMAEk-N6.jpeg',
         '/work/swag/GE1n8HsacAAogMP.jpeg',
         '/work/swag/GgEpB6qW8AAkzuw.jpeg',
+        '/work/swag/decentralized-governance.jpg',
+        '/work/swag/gothic-tees.jpg',
+        '/work/swag/work-shirt.jpg',
+        '/work/swag/protocol-agents.jpg',
       ],
     },
   },
@@ -401,14 +404,13 @@ const behindTheScenes = {
   subtitle: 'Content Capture',
   icon: '📷',
   description: 'Moments from offsites, conferences, and team life.',
-  image: '/work/behind-the-scenes.jpg',
+  image: '/work/behind-the-scenes.png',
   color: '#ec4899',
   modal: {
-    fullDescription: 'Pushed for content capture at every offsite. Started a disposable camera tradition with categories and prizes. These moments became fuel for posts, videos, and team culture.',
-    highlights: 'Created rituals that got the team documenting together. Built up a collection of real moments to pull from.',
+    fullDescription: 'As a remote-first team, in-person time was rare. I pushed for content capture at every offsite and conference. Started a disposable camera tradition with categories and prizes. Built up a library of real moments.',
     videos: [
       { title: 'Memories of Bodrum', year: '2025', youtubeId: 'R8k1o2b9HhU' },
-      { title: 'A Year in Review 2024', year: '2024', youtubeId: '0jjzvV1jUQM' },
+      { title: 'A Year in Review', year: '2024', youtubeId: '0jjzvV1jUQM' },
       { title: 'Memories of Phuket', year: '2024', youtubeId: 'lQtC02UaiuQ' },
       { title: 'Phuket Team Offsite', year: '2024', youtubeId: '7MW6yNj45po' },
       { title: 'In Conversation w/ Gustav', year: '2024', youtubeId: 'bdQxQ71DIJE' },
@@ -498,9 +500,9 @@ const behindTheScenes = {
       </div>
 
       <!-- Services Work -->
-      <div class="card-row">
+      <div class="card-row card-row--wide">
         {servicesWork.map((item) => (
-          <button class="card" data-modal={item.id}>
+          <button class="card card--wide" data-modal={item.id}>
             <div class="card-img">
               <img src={item.image} alt={item.title} loading="lazy" />
             </div>
@@ -566,42 +568,29 @@ const behindTheScenes = {
       </div>
     </section>
 
-    <!-- Creative Work -->
-    <section class="more">
+    <!-- Creative -->
+    <section class="creative-section">
       <h2>Creative</h2>
-      <div class="more-grid">
-        <button class="more-card" data-modal="governance-gathering">
-          <img src={supportingWork.governanceGathering.image} alt="Governance Gathering" loading="lazy" />
-          <div class="more-info">
-            <h4>Governance Gathering</h4>
-            <span>EthCC Brussels · 150+ attendees</span>
-          </div>
-        </button>
-        <button class="more-card" data-modal="team-swag">
-          <div class="swag-grid">
+      <div class="creative-grid">
+        <button class="creative-card creative-card--swag" data-modal="team-swag">
+          <div class="swag-grid-large">
             {supportingWork.swag.previewImages.map((img, i) => (
               <img src={img} alt="Team Swag" loading="lazy" class={i === 0 ? 'swag-main' : ''} />
             ))}
           </div>
-          <div class="more-info">
+          <div class="creative-info">
             <h4>Team Swag</h4>
-            <span>Creative direction</span>
+            <span>Creative direction for offsites and conferences</span>
+          </div>
+        </button>
+        <button class="creative-card creative-card--bts" data-modal="behind-the-scenes">
+          <img src={behindTheScenes.image} alt="Behind the Scenes" loading="lazy" />
+          <div class="creative-overlay">
+            <h4>Behind the Scenes</h4>
+            <span>Team videos and moments · 6 videos</span>
           </div>
         </button>
       </div>
-    </section>
-
-    <!-- Storytelling -->
-    <section class="storytelling">
-      <h2>Storytelling</h2>
-      <button class="bts-card" data-modal="behind-the-scenes">
-        <img src={behindTheScenes.image} alt="Behind the Scenes" loading="lazy" />
-        <div class="bts-overlay">
-          <h3>Behind the Scenes</h3>
-          <p>Moments from offsites, conferences, and team life</p>
-          <span class="bts-cta">6 videos →</span>
-        </div>
-      </button>
     </section>
 
   </main>
@@ -630,7 +619,6 @@ const behindTheScenes = {
       ...servicesWork,
       ...productWork,
       ...salesWork,
-      supportingWork.governanceGathering,
       supportingWork.swag,
       behindTheScenes,
     ].reduce((acc, item) => { acc[item.id] = item; return acc; }, {});
@@ -1031,13 +1019,14 @@ const behindTheScenes = {
     aspect-ratio: 2/1;
   }
 
+
   /* ========================================
-     MORE SECTION
+     CREATIVE SECTION
      ======================================== */
-  .more {
-    margin-bottom: 4rem;
+  .creative-section {
+    margin-bottom: 3rem;
   }
-  .more h2 {
+  .creative-section h2 {
     font-size: 0.6875rem;
     font-weight: 600;
     color: #444;
@@ -1046,91 +1035,19 @@ const behindTheScenes = {
     margin-bottom: 1rem;
   }
 
-  .more-grid {
+  .creative-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    align-items: start;
   }
-  @media (max-width: 500px) {
-    .more-grid {
+  @media (max-width: 600px) {
+    .creative-grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .more-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #1a1a1a;
-    border-radius: 6px;
-    overflow: hidden;
-    background: transparent;
-    text-align: left;
-    font-family: inherit;
-    color: inherit;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .more-card:hover {
-    background: #0f0f0f;
-    border-color: #262626;
-  }
-
-  .more-card > img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .swag-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 2px;
-    height: 160px;
-    overflow: hidden;
-  }
-  .swag-grid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .swag-grid .swag-main {
-    grid-row: span 2;
-  }
-
-  .more-info {
-    padding: 0.875rem 1rem;
-  }
-  .more-info h4 {
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 0.125rem;
-  }
-  .more-info span {
-    font-size: 0.75rem;
-    color: #555;
-  }
-
-  /* ========================================
-     STORYTELLING
-     ======================================== */
-  .storytelling {
-    margin-bottom: 3rem;
-  }
-  .storytelling h2 {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    color: #444;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
-
-  .bts-card {
+  .creative-card {
     position: relative;
-    width: 100%;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
@@ -1139,51 +1056,79 @@ const behindTheScenes = {
     font-family: inherit;
     color: inherit;
     text-align: left;
-    margin-bottom: 1.5rem;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
   }
-  .bts-card:hover {
+  .creative-card:hover {
     border-color: #262626;
+    background: #0f0f0f;
   }
 
-  .bts-card img {
+  .creative-card--swag {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .swag-grid-large {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    height: 200px;
+    overflow: hidden;
+  }
+  .swag-grid-large img {
     width: 100%;
-    height: 280px;
+    height: 100%;
+    object-fit: cover;
+  }
+  .swag-grid-large .swag-main {
+    grid-row: span 2;
+  }
+
+  .creative-info {
+    padding: 1rem;
+  }
+  .creative-info h4 {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .creative-info span {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .creative-card--bts {
+    position: relative;
+  }
+  .creative-card--bts > img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
     object-fit: cover;
     display: block;
     transition: transform 0.3s;
   }
-  .bts-card:hover img {
+  .creative-card--bts:hover > img {
     transform: scale(1.02);
   }
 
-  .bts-overlay {
+  .creative-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 2rem 1.25rem 1.25rem;
+    padding: 1.5rem 1rem 1rem;
     background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
   }
-  .bts-overlay h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
+  .creative-overlay h4 {
+    font-size: 0.9375rem;
+    font-weight: 500;
     color: #fff;
-    margin-bottom: 0.125rem;
+    margin-bottom: 0.25rem;
   }
-  .bts-overlay p {
-    font-size: 0.8125rem;
-    color: #999;
-  }
-
-  .bts-cta {
-    display: inline-block;
-    margin-top: 0.75rem;
+  .creative-overlay span {
     font-size: 0.75rem;
-    color: #666;
-    transition: color 0.15s;
-  }
-  .bts-card:hover .bts-cta {
     color: #999;
   }
 
@@ -1199,6 +1144,11 @@ const behindTheScenes = {
   @media (max-width: 600px) {
     .video-row {
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 360px) {
+    .video-row {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -1829,8 +1779,8 @@ const behindTheScenes = {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 0.75rem 0.5rem 0.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
   }
 
   :global(.m-video-info span) {
@@ -1909,6 +1859,190 @@ const behindTheScenes = {
   .lightbox-close svg {
     width: 18px;
     height: 18px;
+  }
+
+  /* ========================================
+     MOBILE OPTIMIZATIONS
+     ======================================== */
+  @media (max-width: 480px) {
+    /* Hero */
+    .hero h1 {
+      font-size: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 0.875rem;
+    }
+
+    /* Phase headers */
+    .phase-head {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .phase-tag {
+      margin-top: 0;
+    }
+
+    /* Flagship cards */
+    .flagship-body {
+      padding: 1rem;
+    }
+    .flagship-top h3 {
+      font-size: 0.9375rem;
+    }
+    .flagship-stats {
+      gap: 1rem;
+    }
+    .stat-val {
+      font-size: 1.125rem;
+    }
+
+    /* Standard cards */
+    .card-body {
+      padding: 0.875rem;
+    }
+    .card-top h4 {
+      font-size: 0.8125rem;
+    }
+    .card-body > p {
+      font-size: 0.75rem;
+    }
+
+    /* Creative cards */
+    .swag-grid-large {
+      height: 160px;
+    }
+    .creative-info {
+      padding: 0.875rem;
+    }
+    .creative-card--bts > img {
+      min-height: 200px;
+    }
+
+    /* Video cards */
+    .video-info {
+      padding: 0.5rem 0.625rem;
+    }
+    .video-info > span:first-child {
+      font-size: 0.6875rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  /* Mobile modal optimizations */
+  @media (max-width: 480px) {
+    .modal-bg {
+      padding: 0;
+      align-items: flex-end;
+    }
+    .modal {
+      max-width: 100%;
+      max-height: 92vh;
+      border-radius: 16px 16px 0 0;
+      border-bottom: none;
+    }
+    .modal-bg.open .modal {
+      transform: translateY(0);
+    }
+    .modal-x {
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    :global(.m-body) {
+      padding: 1rem;
+    }
+    :global(.m-head) {
+      gap: 0.625rem;
+      padding-right: 1.5rem;
+    }
+    :global(.m-icon) {
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+    }
+    :global(.m-title) {
+      font-size: 0.9375rem;
+    }
+    :global(.m-desc) {
+      font-size: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+    }
+    :global(.m-metrics) {
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    :global(.m-stat) {
+      padding: 0.75rem 1rem;
+      min-width: 80px;
+    }
+    :global(.m-stat-val) {
+      font-size: 1rem;
+    }
+    :global(.m-section) {
+      padding: 0.75rem;
+    }
+    :global(.m-section-content) {
+      font-size: 0.6875rem;
+    }
+    :global(.m-story-section-content) {
+      font-size: 0.75rem;
+    }
+    :global(.m-gallery) {
+      grid-template-columns: 1fr;
+      gap: 0.375rem;
+    }
+    :global(.m-blog-grid) {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    :global(.m-blog-card img) {
+      height: 120px;
+    }
+    :global(.m-ba-grid) {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    :global(.m-links) {
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+    :global(.m-link) {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.6875rem;
+    }
+    :global(.m-deliverables) {
+      padding: 0.875rem;
+    }
+    :global(.m-results) {
+      padding: 0.875rem;
+    }
+    :global(.m-results-content) {
+      font-size: 0.75rem;
+    }
+    :global(.m-role-badge) {
+      padding: 0.625rem 0.875rem;
+    }
+    :global(.m-role-text) {
+      font-size: 0.6875rem;
+    }
+  }
+
+  /* Lightbox mobile */
+  @media (max-width: 480px) {
+    .lightbox {
+      padding: 0.5rem;
+    }
+    .lightbox-close {
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 36px;
+      height: 36px;
+    }
   }
 </style>
 
