@@ -138,38 +138,75 @@ const productWork = [
   {
     id: 'forse-launch',
     title: 'Forse Launch',
-    description: '"Built by StableLab" — borrowing trust from services to launch product.',
+    description: 'First time doing product marketing. Built an entire brand from scratch.',
     metric: 'GTM',
-    image: '/work/forse-landing.jpg',
+    image: '/work/forse-launch-hero.png',
     color: '#FF6B00',
     icon: '🚀',
-    subtitle: 'Services → Product',
+    subtitle: 'Product Launch',
     modal: {
-      fullDescription: 'Led the full product launch for Forse, StableLab\'s first product. The play was simple: people trusted StableLab, so we made sure they knew who built this.',
-      role: 'Marketing lead — naming, brand identity, positioning, all launch collateral, GTM execution',
-      highlights: 'First product launch for a company transitioning from services to product. Owned entire arc from naming workshops through launch campaign.',
+      fullDescription: 'StableLab\'s first product launch. Services company transitioning to product — needed to build a brand from scratch and bring it to market.',
+      role: 'Marketing lead — naming, brand strategy, visual identity, positioning, launch execution',
+      storySections: [
+        {
+          title: 'The Challenge',
+          content: 'First time doing product marketing. No existing brand, no playbook. Had to create everything from naming to launch campaign while borrowing trust from the services brand.',
+        },
+        {
+          title: 'What I Did',
+          content: 'Ran naming workshops with CEO, Head of Product, and Designer. Landed on "Forse" — a play on the Danish word "forsker" (researcher/scientist). Developed visual identity with the designer: color palette, wordmark (chose simplicity over failed logomark attempts). Created "Built by StableLab" trust transfer strategy. Coordinated multi-channel launch: teaser week → launch day → post-launch content across website, blog, X, LinkedIn, email. Sent to key partners to seed engagement.',
+        },
+      ],
+      deliverables: {
+        title: 'What I Shipped',
+        images: [
+          { src: '/work/forse-brand-system.jpg', caption: 'Brand system: naming, colors, wordmark, positioning' },
+          { src: '/work/forse-workshop.png', caption: 'FigJam workshop: Vision, Audience, Competition, Brand Heart' },
+        ],
+        items: ['Brand name & rationale', 'Color palette & typography', 'Wordmark', 'Positioning & tagline', 'Brand strategy doc', 'Launch campaign'],
+      },
+      results: {
+        title: 'Results',
+        content: '13.7k impressions. More importantly: having something live put Forse on partners\' radar before EthCC, making networking conversations easier. The launch enabled sales.',
+      },
       links: [
         { label: 'Landing Page', url: 'https://forse.io', primary: true },
-        { label: 'Launch Post', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
+        { label: 'Launch Announcement', url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab' },
       ],
     },
   },
   {
     id: 'forse-rebrand',
     title: 'Forse Rebrand',
-    description: 'Discovered DAOs weren\'t the buyer. Foundations and labs were.',
+    description: 'ICP discovery, brand architecture decisions, and visual modernization.',
     metric: 'Pivot',
-    image: '/work/forse-landing.jpg',
+    image: '/work/forse-rebrand-hero.png',
     color: '#FF6B00',
     icon: '🔄',
     subtitle: 'ICP Discovery',
     modal: {
-      fullDescription: 'Initial DAO-focused positioning wasn\'t finding product-market fit. Discovered the real buyers were foundations and labs with budget authority. Led strategic repositioning and full visual rebrand.',
-      role: 'Strategy, ICP redefinition, new positioning, visual rebrand direction',
-      highlights: 'The lesson: the people using governance tools weren\'t the ones buying them.',
+      fullDescription: 'Initial DAO-focused positioning wasn\'t finding product-market fit. Led a strategic repositioning that touched ICP, brand architecture, visual identity, and messaging.',
+      role: 'Strategy, ICP redefinition, brand architecture, positioning, visual rebrand direction',
+      storySections: [
+        {
+          title: 'The Challenge',
+          content: 'DAO-focused positioning wasn\'t finding product-market fit. The brand felt "overdesigned" and "outdated." We were also considering building the agent platform under a completely different brand — which would have meant managing three separate brands.',
+        },
+        {
+          title: 'What I Did',
+          content: 'Led ICP discovery that revealed DAOs weren\'t the buyer — Foundations and Labs with budget authority were. Pushed hard to keep everything under Forse instead of creating a third brand. Directed visual modernization toward modern, minimal, AI-native aesthetics. Repositioned from "DAO analytics platform" to "The intelligence layer for web3 growth" with a modular brand system (Forse Insights + Forse Agents). The clearer positioning set us up for sales-led GTM — we weren\'t just selling governance data anymore, we were targeting anyone pushing incentives and growth initiatives for onchain businesses.',
+        },
+      ],
+      deliverables: {
+        title: 'What I Shipped',
+        images: [
+          { src: '/work/forse-brand-architecture.png', caption: 'Brand architecture: unified system under Forse umbrella' },
+        ],
+        items: ['ICP redefinition', 'Brand architecture framework', 'Positioning pivot', 'Visual modernization', 'Modular naming system'],
+      },
       beforeAfter: {
         before: { image: '/work/forse-old.png', label: 'Before', tagline: 'Empowering DAOs with Data-Driven Governance' },
-        after: { image: '/work/forse-new.png', label: 'After', tagline: 'The Intelligence Layer Fueling Web3 Growth' },
+        after: { image: '/work/forse-new.png', label: 'After', tagline: 'The Intelligence Layer for Web3 Growth' },
       },
     },
   },
@@ -359,7 +396,7 @@ const behindTheScenes = {
 
     <!-- Partners -->
     <section class="partners">
-      <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" width="640" height="80" />
+      <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" />
     </section>
 
     <!-- Phase 1: Services -->
@@ -523,6 +560,14 @@ const behindTheScenes = {
       </button>
       <div class="modal-inner" id="modalInner"></div>
     </div>
+  </div>
+
+  <!-- Lightbox for gallery images -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="" />
   </div>
 
   <script define:vars={{ flagshipWork, servicesWork, productWork, salesWork, supportingWork, behindTheScenes }}>
@@ -1349,6 +1394,176 @@ const behindTheScenes = {
     line-height: 1.5;
   }
 
+  /* Role badge for case studies */
+  :global(.m-role-badge) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  :global(.m-role-label) {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    color: #818cf8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  :global(.m-role-text) {
+    font-size: 0.75rem;
+    color: #ccc;
+    line-height: 1.4;
+  }
+
+  /* Deliverables section */
+  :global(.m-deliverables) {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 10px;
+  }
+
+  :global(.m-deliverables-title) {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #4ade80;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.m-deliverables-gallery) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.m-deliverables-img-wrap) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  :global(.m-deliverables-img) {
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  :global(.m-deliverables-img:hover) {
+    opacity: 0.9;
+  }
+
+  :global(.m-deliverables-caption) {
+    font-size: 0.6875rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  :global(.m-deliverables-list) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  :global(.m-deliverable-item) {
+    font-size: 0.6875rem;
+    color: #888;
+    padding: 0.25rem 0.5rem;
+    background: #1a1a1a;
+    border-radius: 4px;
+  }
+
+  /* Story sections (cleaner narrative flow) */
+  :global(.m-story-sections) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  :global(.m-story-section) {
+
+  }
+
+  :global(.m-story-section-title) {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #666;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  :global(.m-story-section-content) {
+    font-size: 0.8125rem;
+    color: #aaa;
+    line-height: 1.65;
+  }
+
+  /* Results section */
+  :global(.m-results) {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
+    border: 1px solid rgba(34, 197, 94, 0.15);
+    border-radius: 8px;
+  }
+
+  :global(.m-results-title) {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #4ade80;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.m-results-content) {
+    font-size: 0.8125rem;
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  /* Rich sections for detailed case studies (legacy) */
+  :global(.m-rich-sections) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.m-rich-section) {
+    padding: 1rem;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border-left: 3px solid #333;
+  }
+
+  :global(.m-rich-section-title) {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #e5e5e5;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  :global(.m-rich-section-content) {
+    font-size: 0.8125rem;
+    color: #999;
+    line-height: 1.6;
+  }
+
   :global(.m-links) {
     display: flex;
     flex-wrap: wrap;
@@ -1568,6 +1783,72 @@ const behindTheScenes = {
     color: #888;
     margin-left: 0.375rem;
   }
+
+  :global(.gallery-img) {
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  :global(.gallery-img:hover) {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+  .lightbox.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.2s ease-out, opacity 0.2s;
+  }
+  .lightbox.open img {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .lightbox-close svg {
+    width: 18px;
+    height: 18px;
+  }
 </style>
 
 <script>
@@ -1606,18 +1887,93 @@ const behindTheScenes = {
       </div>
     ` : '';
 
+    // Build sections from either legacy format or new sections array
     const sections = [];
     if (m.role) sections.push({ t: 'Role', c: m.role });
     if (m.cohosts) sections.push({ t: 'Co-hosts', c: m.cohosts });
     if (m.guests) sections.push({ t: 'Notable Guests', c: m.guests });
     if (m.highlights) sections.push({ t: 'Highlights', c: m.highlights });
 
-    const sectionsHtml = sections.map(s => `
+    const legacySectionsHtml = sections.map(s => `
       <div class="m-section">
         <div class="m-section-title">${s.t}</div>
         <div class="m-section-content">${s.c}</div>
       </div>
     `).join('');
+
+    // Role badge
+    const roleBadgeHtml = m.role ? `
+      <div class="m-role-badge">
+        <span class="m-role-label">Role</span>
+        <span class="m-role-text">${m.role}</span>
+      </div>
+    ` : '';
+
+    // Story sections (Challenge → What I Did → Results)
+    const storySectionsHtml = m.storySections ? `
+      <div class="m-story-sections">
+        ${m.storySections.map((s: any) => `
+          <div class="m-story-section">
+            <div class="m-story-section-title">${s.title}</div>
+            <div class="m-story-section-content">${s.content}</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    // Deliverables section with images and list
+    const deliverablesHtml = m.deliverables ? `
+      <div class="m-deliverables">
+        <div class="m-deliverables-title">${m.deliverables.title}</div>
+        ${m.deliverables.images ? `
+          <div class="m-deliverables-gallery">
+            ${m.deliverables.images.map((img: any) => `
+              <div class="m-deliverables-img-wrap">
+                <img src="${img.src}" alt="${img.caption}" class="m-deliverables-img gallery-img" data-src="${img.src}" />
+                <span class="m-deliverables-caption">${img.caption}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : m.deliverables.image ? `
+          <img src="${m.deliverables.image}" alt="Deliverables" class="m-deliverables-img gallery-img" data-src="${m.deliverables.image}" />
+        ` : ''}
+        <div class="m-deliverables-list">
+          ${m.deliverables.items.map((item: string) => `<span class="m-deliverable-item">${item}</span>`).join('')}
+        </div>
+      </div>
+    ` : '';
+
+    // Results section
+    const resultsHtml = m.results ? `
+      <div class="m-results">
+        <div class="m-results-title">${m.results.title}</div>
+        <div class="m-results-content">${m.results.content}</div>
+      </div>
+    ` : '';
+
+    // New rich sections format for detailed case studies (legacy format)
+    const richSectionsHtml = m.sections ? `
+      ${roleBadgeHtml}
+      ${deliverablesHtml}
+      <div class="m-rich-sections">
+        ${m.sections.map((s: any) => `
+          <div class="m-rich-section">
+            <div class="m-rich-section-title">${s.title}</div>
+            <div class="m-rich-section-content">${s.content}</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    // Story-based layout (new format)
+    const storyLayoutHtml = m.storySections ? `
+      ${roleBadgeHtml}
+      ${storySectionsHtml}
+      ${deliverablesHtml}
+      ${resultsHtml}
+    ` : '';
+
+    const sectionsHtml = storyLayoutHtml || richSectionsHtml || legacySectionsHtml;
 
     const linksHtml = m.links ? `
       <div class="m-links">
@@ -1632,7 +1988,7 @@ const behindTheScenes = {
 
     const galleryHtml = m.images ? `
       <div class="m-gallery">
-        ${m.images.map((src: string) => `<img src="${src}" alt="${d.title}" />`).join('')}
+        ${m.images.map((src: string) => `<img src="${src}" alt="${d.title}" class="gallery-img" data-src="${src}" />`).join('')}
       </div>
     ` : '';
 
@@ -1717,5 +2073,35 @@ const behindTheScenes = {
   function closeModal() {
     bg?.classList.remove('open');
     document.body.style.overflow = '';
+  }
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg') as HTMLImageElement;
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  // Use event delegation for dynamically created gallery images
+  inner?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('gallery-img')) {
+      const src = target.getAttribute('data-src');
+      if (src && lightboxImg && lightbox) {
+        lightboxImg.src = src;
+        lightboxImg.alt = target.alt || 'Gallery image';
+        lightbox.classList.add('open');
+      }
+    }
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox?.classList.contains('open')) {
+      closeLightbox();
+    }
+  });
+
+  function closeLightbox() {
+    lightbox?.classList.remove('open');
   }
 </script>
