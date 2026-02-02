@@ -1,14 +1,14 @@
 # Juan Esquivel
 
-> Lore maximalist. Head of Marketing at StableLab. Building brand, narrative, and lore in crypto. Based in Lisbon, Portugal.
+> Lore maximalist. Previously Head of Marketing at StableLab (2023–2026). Building brand, narrative, and lore in crypto. Based in Lisbon, Portugal. Currently exploring what's next.
 
-Juan Esquivel is a crypto marketer specializing in brand strategy, content marketing, and storytelling for Web3 companies. He leads marketing at StableLab, a DAO governance infrastructure company. Previously, he was Content Lead at Boardroom. He writes about crypto marketing, building brands, storytelling, and working at startups.
+Juan Esquivel is a crypto marketer specializing in brand strategy, content marketing, and positioning for Web3 companies. He led marketing at StableLab, a DAO governance infrastructure company, through three business phases: services, product launch, and sales-led GTM. Previously, he was Content Lead at Boardroom. He writes about crypto marketing, building brands, storytelling, and working at startups.
 
 ## Core Information
 
 - Name: Juan Esquivel
 - Location: Lisbon, Portugal
-- Role: Head of Marketing at StableLab
+- Role: Marketing leader, currently open to opportunities
 - Twitter/X: @0xCadena
 - Email: juanesquivel138@gmail.com
 - Personal brand: "lore maximalist"
@@ -16,10 +16,10 @@ Juan Esquivel is a crypto marketer specializing in brand strategy, content marke
 ## Expertise
 
 - Crypto/Web3 Marketing
-- Brand Strategy & Narrative Design
+- Brand Strategy & Positioning
 - Content Marketing
-- DAO Governance
-- Storytelling for Startups
+- B2B Marketing for Technical Products
+- Narrative Design & Storytelling
 
 ## Pages
 
@@ -27,7 +27,8 @@ Juan Esquivel is a crypto marketer specializing in brand strategy, content marke
 - [About Me](https://juanesquivel.xyz/about): Full bio, background, and personal story
 
 ### Professional
-- [Homepage](https://juanesquivel.xyz/): Overview with work history and sections
+- [Homepage](https://juanesquivel.xyz/): Overview with work history
+- [Work Portfolio](https://juanesquivel.xyz/work): Marketing projects from StableLab
 - [Speaking](https://juanesquivel.xyz/speaking): Podcasts, interviews, and talks
 
 ### Content
@@ -39,8 +40,9 @@ Juan Esquivel is a crypto marketer specializing in brand strategy, content marke
 
 ## Work History
 
-- **StableLab** (2023-Present): Head of Marketing
+- **StableLab** (2023–2026): Head of Marketing
 - **Boardroom** (2022): Content Lead
+- **RabbitHole** (2021–2022): Content & Community
 
 ## Contact
 
