@@ -208,7 +208,7 @@ const partnersShowcase = {
   color: '#1f2937',
   icon: '🤝',
   modal: {
-    fullDescription: 'A snapshot of the protocols and partners StableLab supported across governance, research, and product.',
+    minimalImage: true,
   },
 };
 
@@ -1317,6 +1317,22 @@ const behindTheScenes = {
     padding: 0;
   }
 
+  .modal--image {
+    background: transparent;
+    border: none;
+    max-width: min(960px, 92vw);
+  }
+
+  .modal--image .modal-x {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .modal--image :global(.m-img--full) {
+    border-radius: 12px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  }
+
   /* Modal content styles via :global */
   :global(.m-img) {
     width: 100%;
@@ -2260,26 +2276,32 @@ const behindTheScenes = {
       </div>
     ` : '';
 
-    inner.innerHTML = `
-      ${imgHtml}
-      <div class="m-body">
-        <div class="m-head">
-          <div class="m-icon">${icon}</div>
-          <div>
-            <div class="m-title">${d.title}</div>
-            <div class="m-sub">${d.subtitle}</div>
+    if (m.minimalImage && d.image) {
+      inner.innerHTML = `<img class="m-img m-img--full" src="${d.image}" alt="${d.title}" />`;
+      modal?.classList.add('modal--image');
+    } else {
+      inner.innerHTML = `
+        ${imgHtml}
+        <div class="m-body">
+          <div class="m-head">
+            <div class="m-icon">${icon}</div>
+            <div>
+              <div class="m-title">${d.title}</div>
+              <div class="m-sub">${d.subtitle}</div>
+            </div>
           </div>
+          <p class="m-desc">${m.fullDescription}</p>
+          ${metricsHtml}
+          ${sectionsHtml}
+          ${baHtml}
+          ${galleryHtml}
+          ${blogHtml}
+          ${videosHtml}
+          ${linksHtml}
         </div>
-        <p class="m-desc">${m.fullDescription}</p>
-        ${metricsHtml}
-        ${sectionsHtml}
-        ${baHtml}
-        ${galleryHtml}
-        ${blogHtml}
-        ${videosHtml}
-        ${linksHtml}
-      </div>
-    `;
+      `;
+      modal?.classList.remove('modal--image');
+    }
 
     bg?.classList.add('open');
     document.body.style.overflow = 'hidden';
