@@ -198,6 +198,21 @@ const servicesWork = [
   },
 ];
 
+// Partners highlight
+const partnersShowcase = {
+  id: 'partners-logos',
+  title: 'StableLab Partners',
+  subtitle: 'Protocol network',
+  description: 'Snapshot of the ecosystem StableLab worked with.',
+  image: '/work/partners.jpg',
+  color: '#1f2937',
+  icon: '🤝',
+  modal: {
+    fullDescription: 'A snapshot of the protocols and partners StableLab supported across governance, research, and product.',
+  },
+};
+
+
 // Phase 2: Product Launch
 const productWork = [
   {
@@ -458,15 +473,9 @@ const behindTheScenes = {
 
     <!-- Partners -->
     <section class="partners">
-      <button class="partners-trigger" type="button" aria-haspopup="dialog" aria-controls="partners-modal">
+      <button class="partners-trigger" type="button" data-modal="partners-logos">
         <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" />
       </button>
-      <dialog id="partners-modal" class="partners-modal" aria-label="StableLab partners">
-        <button class="partners-close" type="button" aria-label="Close">×</button>
-        <div class="partners-modal-content">
-          <img src="/work/partners.jpg" alt="StableLab partner logos" />
-        </div>
-      </dialog>
     </section>
 
     <!-- Phase 1: Services -->
@@ -627,6 +636,7 @@ const behindTheScenes = {
       ...servicesWork,
       ...productWork,
       ...salesWork,
+      partnersShowcase,
       supportingWork.swag,
       behindTheScenes,
     ].reduce((acc, item) => { acc[item.id] = item; return acc; }, {});
@@ -2311,23 +2321,3 @@ const behindTheScenes = {
   }
 </script>
 
-<script>
-  const partnersTrigger = document.querySelector('.partners-trigger');
-  const partnersModal = document.querySelector('#partners-modal');
-  const partnersClose = document.querySelector('.partners-close');
-
-  partnersTrigger?.addEventListener('click', () => {
-    partnersModal?.showModal();
-  });
-
-  partnersClose?.addEventListener('click', () => {
-    partnersModal?.close();
-  });
-
-  partnersModal?.addEventListener('click', (event) => {
-    const target = event.target;
-    if (target === partnersModal) {
-      partnersModal.close();
-    }
-  });
-</script>
