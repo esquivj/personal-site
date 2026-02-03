@@ -458,7 +458,14 @@ const behindTheScenes = {
 
     <!-- Partners -->
     <section class="partners">
-      <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" />
+      <button class="partners-trigger" type="button" aria-haspopup="dialog" aria-controls="partners-modal">
+        <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" />
+        <span class="partners-zoom">Click to enlarge</span>
+      </button>
+      <dialog id="partners-modal" class="partners-modal" aria-label="StableLab partners">
+        <button class="partners-close" type="button" aria-label="Close">×</button>
+        <img src="/work/partners.jpg" alt="StableLab partner logos" />
+      </dialog>
     </section>
 
     <!-- Phase 1: Services -->
@@ -2301,4 +2308,25 @@ const behindTheScenes = {
   function closeLightbox() {
     lightbox?.classList.remove('open');
   }
+</script>
+
+<script>
+  const partnersTrigger = document.querySelector('.partners-trigger');
+  const partnersModal = document.querySelector('#partners-modal');
+  const partnersClose = document.querySelector('.partners-close');
+
+  partnersTrigger?.addEventListener('click', () => {
+    partnersModal?.showModal();
+  });
+
+  partnersClose?.addEventListener('click', () => {
+    partnersModal?.close();
+  });
+
+  partnersModal?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target === partnersModal) {
+      partnersModal.close();
+    }
+  });
 </script>
