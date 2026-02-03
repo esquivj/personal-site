@@ -1327,6 +1327,7 @@ const behindTheScenes = {
     background: transparent;
     border: none;
     box-shadow: none;
+    border-radius: 0;
     max-width: min(960px, 92vw);
   }
 
@@ -1335,15 +1336,20 @@ const behindTheScenes = {
     border-color: transparent;
   }
 
+  .modal--image .modal-inner {
+    background: transparent;
+  }
+
   .modal--image :global(.m-img--full) {
     width: 100%;
     height: auto;
     max-height: 80vh;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 0;
     box-shadow: none;
     border: none;
     outline: none;
+    background: transparent;
   }
 
   /* Modal content styles via :global */
