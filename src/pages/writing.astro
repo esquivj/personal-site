@@ -99,7 +99,7 @@ const posts = [
     {posts.map((post) => (
       <a href={`/writing/${post.slug}`} class="post-card">
         <div class="post-card-cover">
-          <img src={post.cover} alt={post.title} width="640" height="360" />
+          <img src={post.cover} alt={post.title} width="640" height="360" loading="lazy" decoding="async" />
         </div>
         <div class="post-card-content">
           <h2 class="post-card-title">{post.title}</h2>
