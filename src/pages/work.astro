@@ -1329,6 +1329,10 @@ const behindTheScenes = {
   }
 
   .modal--image :global(.m-img--full) {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
     border-radius: 12px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
   }
@@ -2277,7 +2281,7 @@ const behindTheScenes = {
     ` : '';
 
     if (m.minimalImage && d.image) {
-      inner.innerHTML = `<img class="m-img m-img--full" src="${d.image}" alt="${d.title}" />`;
+      inner.innerHTML = `<img class="m-img--full" src="${d.image}" alt="${d.title}" />`;
       modal?.classList.add('modal--image');
     } else {
       inner.innerHTML = `
