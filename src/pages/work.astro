@@ -1266,6 +1266,12 @@ const behindTheScenes = {
     scrollbar-color: #333 transparent;
   }
 
+  .modal--image {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
   .modal::-webkit-scrollbar {
     width: 6px;
   }
@@ -1320,6 +1326,7 @@ const behindTheScenes = {
   .modal--image {
     background: transparent;
     border: none;
+    box-shadow: none;
     max-width: min(960px, 92vw);
   }
 
@@ -1334,7 +1341,9 @@ const behindTheScenes = {
     max-height: 80vh;
     object-fit: contain;
     border-radius: 12px;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    box-shadow: none;
+    border: none;
+    outline: none;
   }
 
   /* Modal content styles via :global */
