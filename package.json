@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -14,5 +16,9 @@
     "astro": "^5.16.9",
     "lucide-static": "^0.562.0",
     "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
