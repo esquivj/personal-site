@@ -198,20 +198,6 @@ const servicesWork = [
   },
 ];
 
-// Partners highlight
-const partnersShowcase = {
-  id: 'partners-logos',
-  title: 'StableLab Partners',
-  subtitle: 'Protocol network',
-  description: 'Snapshot of the ecosystem StableLab worked with.',
-  image: '/work/partners.jpg',
-  color: '#1f2937',
-  icon: '🤝',
-  modal: {
-    minimalImage: true,
-  },
-};
-
 
 // Phase 2: Product Launch
 const productWork = [
@@ -473,7 +459,7 @@ const behindTheScenes = {
 
     <!-- Partners -->
     <section class="partners">
-      <button class="partners-trigger" type="button" data-modal="partners-logos">
+      <button class="partners-trigger" type="button" data-lightbox-src="/work/partners.jpg" data-lightbox-alt="StableLab partner logos">
         <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" />
       </button>
     </section>
@@ -630,13 +616,12 @@ const behindTheScenes = {
     <img id="lightboxImg" src="" alt="" />
   </div>
 
-  <script define:vars={{ flagshipWork, servicesWork, productWork, salesWork, supportingWork, behindTheScenes, partnersShowcase }}>
+  <script define:vars={{ flagshipWork, servicesWork, productWork, salesWork, supportingWork, behindTheScenes }}>
     window.workData = [
       ...flagshipWork,
       ...servicesWork,
       ...productWork,
       ...salesWork,
-      partnersShowcase,
       supportingWork.swag,
       behindTheScenes,
     ].reduce((acc, item) => { acc[item.id] = item; return acc; }, {});
@@ -1323,34 +1308,6 @@ const behindTheScenes = {
     padding: 0;
   }
 
-  .modal--image {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    max-width: min(960px, 92vw);
-  }
-
-  .modal--image .modal-x {
-    background: rgba(0, 0, 0, 0.6);
-    border-color: transparent;
-  }
-
-  .modal--image .modal-inner {
-    background: transparent;
-  }
-
-  .modal--image :global(.m-img--full) {
-    width: 100%;
-    height: auto;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    outline: none;
-    background: transparent;
-  }
 
   /* Modal content styles via :global */
   :global(.m-img) {
@@ -2319,7 +2276,6 @@ const behindTheScenes = {
           ${linksHtml}
         </div>
       `;
-      modal?.classList.remove('modal--image');
     }
 
     bg?.classList.add('open');
@@ -2332,9 +2288,21 @@ const behindTheScenes = {
   }
 
   // Lightbox functionality
+
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg') as HTMLImageElement;
   const lightboxClose = document.getElementById('lightboxClose');
+
+  const partnersTrigger = document.querySelector('.partners-trigger');
+  partnersTrigger?.addEventListener('click', () => {
+    const src = partnersTrigger.getAttribute('data-lightbox-src');
+    const alt = partnersTrigger.getAttribute('data-lightbox-alt') || 'Partners image';
+    if (src && lightboxImg && lightbox) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightbox.classList.add('open');
+    }
+  });
 
   // Use event delegation for dynamically created gallery images
   inner?.addEventListener('click', (e) => {
