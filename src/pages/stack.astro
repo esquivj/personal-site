@@ -20,6 +20,11 @@ const pageSchema = {
   title="Stack — Tools & Apps Used by Juan Esquivel"
   description="Tools, apps, and gear that power Juan Esquivel's day-to-day. Development tools, productivity apps, and creative software."
   canonicalPath="/stack"
+  preloadImages={[
+    "/images/stack/anthropic.jpg",
+    "/images/stack/cursor.png",
+    "/images/stack/ghostty.png"
+  ]}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
@@ -289,4 +294,3 @@ const pageSchema = {
     margin-top: 2rem;
   }
 </style>
-
