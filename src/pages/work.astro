@@ -1,6 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const imageDimensions: Record<string, { width: number; height: number }> = {
+  '/work/partners.jpg': { width: 1600, height: 800 },
+  '/work/stablepod-cover.jpg': { width: 600, height: 600 },
+  '/work/governance-lab-cover.jpg': { width: 1280, height: 640 },
+  '/work/proposals/unichain.jpg': { width: 800, height: 400 },
+  '/work/partnerships/makerdao.webp': { width: 1920, height: 1080 },
+  '/work/conferences/ethcc-8.webp': { width: 2070, height: 1459 },
+  '/work/governance-gathering.avif': { width: 800, height: 800 },
+  '/work/forse-launch-hero.webp': { width: 1394, height: 732 },
+  '/work/forse-rebrand-hero.png': { width: 2992, height: 1680 },
+  '/work/forse-insights.jpg': { width: 800, height: 1351 },
+  '/work/forse-landing-hero.webp': { width: 2992, height: 1680 },
+  '/work/swag/G38s2xAbUAckcN8.jpeg': { width: 600, height: 800 },
+  '/work/swag/G4CFb5KaQAAudN8.jpeg': { width: 600, height: 616 },
+  '/work/swag/Gb3M36_bwAQzwTy.jpeg': { width: 600, height: 800 },
+  '/work/behind-the-scenes-hq.webp': { width: 2000, height: 1000 },
+  'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg': { width: 1600, height: 900 },
+};
+
+function getImageDimensions(src: string, fallback = { width: 1600, height: 900 }) {
+  return imageDimensions[src] ?? fallback;
+}
+
 // =============================================================================
 // DATA: All work items organized by phase
 // =============================================================================
@@ -113,7 +136,7 @@ const servicesWork = [
     title: 'Partnership Announcements',
     description: 'Every new protocol engagement became a blog post.',
     metric: '8+',
-    image: '/work/partnerships/makerdao.jpg',
+    image: '/work/partnerships/makerdao.webp',
     color: '#6366f1',
     icon: '🤝',
     subtitle: 'Network Building',
@@ -130,7 +153,7 @@ const servicesWork = [
         },
       ],
       blogPosts: [
-        { title: 'MakerDAO Partnership', category: 'Business Development', image: '/work/partnerships/makerdao.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
+        { title: 'MakerDAO Partnership', category: 'Business Development', image: '/work/partnerships/makerdao.webp', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
         { title: 'Reserve Protocol', category: 'Governance Facilitator', image: '/work/partnerships/reserve.jpg', url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement' },
         { title: 'Gitcoin Partnership', category: 'DAO-to-DAO', image: '/work/partnerships/gitcoin.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships' },
         { title: 'Instadapp Partnership', category: 'Governance', image: '/work/partnerships/instadapp.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships' },
@@ -143,7 +166,7 @@ const servicesWork = [
     title: 'Conference Presence',
     description: 'Event marketing for EthCC, Devconnect, Token2049, KBW.',
     metric: '5+/yr',
-    image: '/work/conferences/ethcc-8.jpg',
+    image: '/work/conferences/ethcc-8.webp',
     color: '#6366f1',
     icon: '🎤',
     subtitle: 'Event Marketing',
@@ -160,7 +183,7 @@ const servicesWork = [
         },
       ],
       images: [
-        '/work/conferences/ethcc-8.jpg',
+        '/work/conferences/ethcc-8.webp',
         '/work/conferences/eth-denver.jpg',
         '/work/conferences/solana-breakpoint.jpg',
         '/work/conferences/lagos-blockchain-week.jpg',
@@ -206,7 +229,7 @@ const productWork = [
     title: 'Forse Launch',
     description: 'Built a product brand from scratch and brought it to market.',
     metric: 'GTM',
-    image: '/work/forse-launch-hero.png',
+    image: '/work/forse-launch-hero.webp',
     color: '#FF6B00',
     icon: '🚀',
     subtitle: 'Product Launch',
@@ -311,7 +334,7 @@ const salesWork = [
     title: 'Landing Page',
     description: 'Defined page architecture and copy framework for sales-first redesign.',
     metric: '1',
-    image: '/work/forse-landing-hero.png',
+    image: '/work/forse-landing-hero.webp',
     color: '#3b82f6',
     icon: '🌐',
     subtitle: 'Page Architecture',
@@ -327,7 +350,7 @@ const salesWork = [
           content: 'Gave the team a blueprint. Sales-first page structure optimized for demo conversions.',
         },
       ],
-      images: ['/work/forse-landing-hero.png'],
+      images: ['/work/forse-landing-hero.webp'],
       links: [
         { label: 'Forse.io', url: 'https://forse.io', primary: true },
       ],
@@ -405,7 +428,7 @@ const behindTheScenes = {
   subtitle: 'Content Capture',
   icon: '📷',
   description: 'Moments from offsites, conferences, and team life.',
-  image: '/work/behind-the-scenes.png',
+  image: '/work/behind-the-scenes-hq.webp',
   color: '#ec4899',
   modal: {
     fullDescription: 'As a remote-first team, in-person time was rare. I pushed for content capture at every offsite and conference. Started a disposable camera tradition with categories and prizes. Built up a library of real moments.',
@@ -460,7 +483,14 @@ const behindTheScenes = {
     <!-- Partners -->
     <section class="partners">
       <button class="partners-trigger" type="button" data-lightbox-src="/work/partners.jpg" data-lightbox-alt="StableLab partner logos">
-        <img src="/work/partners.jpg" alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols" loading="lazy" />
+        <img
+          src="/work/partners.jpg"
+          alt="Partner logos: Aave, Arbitrum, Optimism, Uniswap, Lido, Compound, Gnosis, and 40+ more protocols"
+          loading="eager"
+          fetchpriority="high"
+          width={getImageDimensions('/work/partners.jpg').width}
+          height={getImageDimensions('/work/partners.jpg').height}
+        />
       </button>
     </section>
 
@@ -476,46 +506,52 @@ const behindTheScenes = {
 
       <!-- Flagship: Podcast & Newsletter -->
       <div class="flagship-row">
-        {flagshipWork.map((item) => (
-          <button class="flagship" data-modal={item.id}>
-            <img src={item.image} alt={item.title} loading="lazy" />
-            <div class="flagship-body">
-              <div class="flagship-top">
-                <h3>{item.title}</h3>
-                <span class="flagship-sub">{item.subtitle}</span>
-              </div>
-              <p>{item.description}</p>
-              <div class="flagship-stats">
-                <div class="stat">
-                  <span class="stat-val">{item.metric}</span>
-                  <span class="stat-label">{item.metricLabel}</span>
+        {flagshipWork.map((item) => {
+          const dims = getImageDimensions(item.image, { width: 1200, height: 1200 });
+          return (
+            <button class="flagship" data-modal={item.id}>
+              <img src={item.image} alt={item.title} loading="eager" width={dims.width} height={dims.height} />
+              <div class="flagship-body">
+                <div class="flagship-top">
+                  <h3>{item.title}</h3>
+                  <span class="flagship-sub">{item.subtitle}</span>
                 </div>
-                {item.metricSecondary && (
+                <p>{item.description}</p>
+                <div class="flagship-stats">
                   <div class="stat">
-                    <span class="stat-val">{item.metricSecondary}</span>
-                    <span class="stat-label">{item.metricSecondaryLabel}</span>
+                    <span class="stat-val">{item.metric}</span>
+                    <span class="stat-label">{item.metricLabel}</span>
                   </div>
-                )}
+                  {item.metricSecondary && (
+                    <div class="stat">
+                      <span class="stat-val">{item.metricSecondary}</span>
+                      <span class="stat-label">{item.metricSecondaryLabel}</span>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
 
       <!-- Services Work -->
       <div class="card-row card-row--wide">
-        {servicesWork.map((item) => (
-          <button class="card card--wide" data-modal={item.id}>
-            <div class="card-img">
-              <img src={item.image} alt={item.title} loading="lazy" />
-            </div>
-            <div class="card-body">
-              <h4>{item.title}</h4>
-              <span class="card-badge">{item.subtitle}</span>
-              <p>{item.description}</p>
-            </div>
-          </button>
-        ))}
+        {servicesWork.map((item) => {
+          const dims = getImageDimensions(item.image, { width: 1600, height: 800 });
+          return (
+            <button class="card card--wide" data-modal={item.id}>
+              <div class="card-img">
+                <img src={item.image} alt={item.title} loading="lazy" width={dims.width} height={dims.height} />
+              </div>
+              <div class="card-body">
+                <h4>{item.title}</h4>
+                <span class="card-badge">{item.subtitle}</span>
+                <p>{item.description}</p>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </section>
 
@@ -530,18 +566,21 @@ const behindTheScenes = {
       </header>
 
       <div class="card-row card-row--wide">
-        {productWork.map((item) => (
-          <button class="card card--wide" data-modal={item.id}>
-            <div class="card-img">
-              <img src={item.image} alt={item.title} loading="lazy" />
-            </div>
-            <div class="card-body">
-              <h4>{item.title}</h4>
-              <span class="card-badge">{item.subtitle}</span>
-              <p>{item.description}</p>
-            </div>
-          </button>
-        ))}
+        {productWork.map((item) => {
+          const dims = getImageDimensions(item.image, { width: 1600, height: 800 });
+          return (
+            <button class="card card--wide" data-modal={item.id}>
+              <div class="card-img">
+                <img src={item.image} alt={item.title} loading="lazy" width={dims.width} height={dims.height} />
+              </div>
+              <div class="card-body">
+                <h4>{item.title}</h4>
+                <span class="card-badge">{item.subtitle}</span>
+                <p>{item.description}</p>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </section>
 
@@ -556,18 +595,21 @@ const behindTheScenes = {
       </header>
 
       <div class="card-row">
-        {salesWork.map((item) => (
-          <button class="card" data-modal={item.id}>
-            <div class="card-img">
-              <img src={item.image} alt={item.title} loading="lazy" />
-            </div>
-            <div class="card-body">
-              <h4>{item.title}</h4>
-              <span class="card-badge">{item.subtitle}</span>
-              <p>{item.description}</p>
-            </div>
-          </button>
-        ))}
+        {salesWork.map((item) => {
+          const dims = getImageDimensions(item.image, { width: 1600, height: 900 });
+          return (
+            <button class="card" data-modal={item.id}>
+              <div class="card-img">
+                <img src={item.image} alt={item.title} loading="lazy" width={dims.width} height={dims.height} />
+              </div>
+              <div class="card-body">
+                <h4>{item.title}</h4>
+                <span class="card-badge">{item.subtitle}</span>
+                <p>{item.description}</p>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </section>
 
@@ -577,9 +619,10 @@ const behindTheScenes = {
       <div class="creative-grid">
         <button class="creative-card creative-card--swag" data-modal="team-swag">
           <div class="swag-grid-large">
-            {supportingWork.swag.previewImages.map((img, i) => (
-              <img src={img} alt="Team Swag" loading="lazy" class={i === 0 ? 'swag-main' : ''} />
-            ))}
+            {supportingWork.swag.previewImages.map((img, i) => {
+              const dims = getImageDimensions(img, { width: 600, height: 800 });
+              return <img src={img} alt="Team Swag" loading="lazy" class={i === 0 ? 'swag-main' : ''} width={dims.width} height={dims.height} />;
+            })}
           </div>
           <div class="creative-info">
             <h4>Team Swag</h4>
@@ -587,7 +630,13 @@ const behindTheScenes = {
           </div>
         </button>
         <button class="creative-card creative-card--bts" data-modal="behind-the-scenes">
-          <img src={behindTheScenes.image} alt="Behind the Scenes" loading="lazy" />
+          <img
+            src={behindTheScenes.image}
+            alt="Behind the Scenes"
+            loading="lazy"
+            width={getImageDimensions(behindTheScenes.image).width}
+            height={getImageDimensions(behindTheScenes.image).height}
+          />
           <div class="creative-overlay">
             <h4>Behind the Scenes</h4>
             <span>Team videos and moments · 6 videos</span>
@@ -2345,4 +2394,3 @@ const behindTheScenes = {
     lightbox?.classList.remove('open');
   }
 </script>
-
