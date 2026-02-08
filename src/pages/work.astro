@@ -6,17 +6,17 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
   '/work/stablepod-cover.jpg': { width: 600, height: 600 },
   '/work/governance-lab-cover.jpg': { width: 1280, height: 640 },
   '/work/proposals/unichain.jpg': { width: 800, height: 400 },
-  '/work/partnerships/makerdao.webp': { width: 1920, height: 1080 },
-  '/work/conferences/ethcc-8.webp': { width: 2070, height: 1459 },
+  '/work/partnerships/makerdao.avif': { width: 1920, height: 1080 },
+  '/work/conferences/ethcc-8.avif': { width: 2070, height: 1459 },
   '/work/governance-gathering.avif': { width: 800, height: 800 },
   '/work/forse-launch-hero.webp': { width: 1394, height: 732 },
   '/work/forse-rebrand-hero.png': { width: 2992, height: 1680 },
   '/work/forse-insights.jpg': { width: 800, height: 1351 },
-  '/work/forse-landing-hero.webp': { width: 2992, height: 1680 },
+  '/work/forse-landing-hero.avif': { width: 2992, height: 1680 },
   '/work/swag/G38s2xAbUAckcN8.jpeg': { width: 600, height: 800 },
   '/work/swag/G4CFb5KaQAAudN8.jpeg': { width: 600, height: 616 },
   '/work/swag/Gb3M36_bwAQzwTy.jpeg': { width: 600, height: 800 },
-  '/work/behind-the-scenes-hq.webp': { width: 2000, height: 1000 },
+  '/work/behind-the-scenes-hq.avif': { width: 2000, height: 1000 },
   'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg': { width: 1600, height: 900 },
 };
 
@@ -136,7 +136,7 @@ const servicesWork = [
     title: 'Partnership Announcements',
     description: 'Every new protocol engagement became a blog post.',
     metric: '8+',
-    image: '/work/partnerships/makerdao.webp',
+    image: '/work/partnerships/makerdao.avif',
     color: '#6366f1',
     icon: '🤝',
     subtitle: 'Network Building',
@@ -153,7 +153,7 @@ const servicesWork = [
         },
       ],
       blogPosts: [
-        { title: 'MakerDAO Partnership', category: 'Business Development', image: '/work/partnerships/makerdao.webp', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
+        { title: 'MakerDAO Partnership', category: 'Business Development', image: '/work/partnerships/makerdao.avif', url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts' },
         { title: 'Reserve Protocol', category: 'Governance Facilitator', image: '/work/partnerships/reserve.jpg', url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement' },
         { title: 'Gitcoin Partnership', category: 'DAO-to-DAO', image: '/work/partnerships/gitcoin.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships' },
         { title: 'Instadapp Partnership', category: 'Governance', image: '/work/partnerships/instadapp.jpg', url: 'https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships' },
@@ -166,7 +166,7 @@ const servicesWork = [
     title: 'Conference Presence',
     description: 'Event marketing for EthCC, Devconnect, Token2049, KBW.',
     metric: '5+/yr',
-    image: '/work/conferences/ethcc-8.webp',
+    image: '/work/conferences/ethcc-8.avif',
     color: '#6366f1',
     icon: '🎤',
     subtitle: 'Event Marketing',
@@ -183,7 +183,7 @@ const servicesWork = [
         },
       ],
       images: [
-        '/work/conferences/ethcc-8.webp',
+        '/work/conferences/ethcc-8.avif',
         '/work/conferences/eth-denver.jpg',
         '/work/conferences/solana-breakpoint.jpg',
         '/work/conferences/lagos-blockchain-week.jpg',
@@ -334,7 +334,7 @@ const salesWork = [
     title: 'Landing Page',
     description: 'Defined page architecture and copy framework for sales-first redesign.',
     metric: '1',
-    image: '/work/forse-landing-hero.webp',
+    image: '/work/forse-landing-hero.avif',
     color: '#3b82f6',
     icon: '🌐',
     subtitle: 'Page Architecture',
@@ -350,7 +350,7 @@ const salesWork = [
           content: 'Gave the team a blueprint. Sales-first page structure optimized for demo conversions.',
         },
       ],
-      images: ['/work/forse-landing-hero.webp'],
+      images: ['/work/forse-landing-hero.avif'],
       links: [
         { label: 'Forse.io', url: 'https://forse.io', primary: true },
       ],
@@ -428,7 +428,7 @@ const behindTheScenes = {
   subtitle: 'Content Capture',
   icon: '📷',
   description: 'Moments from offsites, conferences, and team life.',
-  image: '/work/behind-the-scenes-hq.webp',
+  image: '/work/behind-the-scenes-hq.avif',
   color: '#ec4899',
   modal: {
     fullDescription: 'As a remote-first team, in-person time was rare. I pushed for content capture at every offsite and conference. Started a disposable camera tradition with categories and prizes. Built up a library of real moments.',
@@ -444,7 +444,11 @@ const behindTheScenes = {
 };
 ---
 
-<Layout title="Work Portfolio — Juan Esquivel's Marketing Projects" description="B2B marketing portfolio from Juan Esquivel's time at StableLab: services marketing, product launch, and sales enablement across three business phases.">
+<Layout
+  title="Work Portfolio — Juan Esquivel's Marketing Projects"
+  description="B2B marketing portfolio from Juan Esquivel's time at StableLab: services marketing, product launch, and sales enablement across three business phases."
+  preloadImages={['/work/partners.jpg', '/work/stablepod-cover.jpg', '/work/governance-lab-cover.jpg']}
+>
   <header class="header">
     <a href="/" class="back-link">← Back</a>
   </header>
