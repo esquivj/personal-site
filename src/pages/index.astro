@@ -143,7 +143,8 @@ const websiteSchema = {
         <span class="work-date">2022</span>
       </a>
     </div>
-    <a href="/resume" target="_blank" rel="noopener" class="section-link">View resume <span class="arrow">→</span></a>
+    <a href="/work" class="section-link">See the full portfolio <span class="arrow">→</span></a>
+    <a href="/resume" target="_blank" rel="noopener" class="section-link section-link--secondary">View resume <span class="arrow">→</span></a>
   </section>
 
   <!-- Writing -->
@@ -464,6 +465,17 @@ const websiteSchema = {
 
   .section-link:hover .arrow {
     transform: translateX(4px);
+  }
+
+  .section-link--secondary {
+    color: #525252;
+    font-weight: 500;
+  }
+
+  .section-link--secondary:hover,
+  .section-link--secondary:active {
+    color: #999;
+    background-color: rgba(255, 255, 255, 0.04);
   }
 </style>
 
