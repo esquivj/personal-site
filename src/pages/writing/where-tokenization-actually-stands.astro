@@ -1,0 +1,361 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const post = {
+  title: "Where tokenization actually stands",
+  subtitle: "A primer on what's actually happening across tokenized treasuries, funds, private credit, and equities",
+  date: "2026.03.02",
+  publishedTime: "2026-03-02",
+  readingTime: "RT: 7 MIN",
+  cover: "/images/tokenization-cover.jpg"
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.title,
+  "description": post.subtitle,
+  "image": `https://juanesquivel.xyz${post.cover}`,
+  "datePublished": post.publishedTime,
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://juanesquivel.xyz/images/avatar.jpg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://juanesquivel.xyz/writing/where-tokenization-actually-stands"
+  }
+};
+---
+
+<Layout
+  title="Where tokenization actually stands — Juan Esquivel"
+  description="A primer on what's actually happening across tokenized treasuries, funds, private credit, and equities. What's working, what's stuck, and what the patterns say about where this is headed."
+  type="article"
+  image={post.cover}
+  publishedTime={post.publishedTime}
+  canonicalPath="/writing/where-tokenization-actually-stands"
+  preloadImages={[post.cover]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <nav class="nav">
+    <a href="/writing" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Writing
+    </a>
+  </nav>
+
+  <article class="post">
+    {post.cover && (
+      <figure class="post-cover">
+        <img src={post.cover} alt="Where tokenization actually stands" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
+      </figure>
+    )}
+
+    <header class="post-header">
+      <h1 class="post-title">{post.title}</h1>
+      <p class="post-subtitle">{post.subtitle}</p>
+      <div class="post-meta">
+        <time>{post.date}</time>
+      </div>
+    </header>
+
+    <div class="post-content">
+
+      <p>"Tokenization" gets thrown around as if it's one thing. Treasuries, funds, private credit, and equities are all being tokenized, and they solve different problems, face different blockers, and are at completely different stages. If you're not paying close attention to this pocket of our space, those distinctions blur.</p>
+
+      <p>A tokenized T-bill and a tokenized stock have almost nothing in common besides living onchain. Different assets, different buyers, different friction, different maturity curves.</p>
+
+      <p>And tokenization itself is not the end state. It's the starting point. Moving capital to a new rail. What happens after — making it productive, composable, plugged into real markets — that's the actual game. How these assets plug in, and what they have to give up to get there, might tell us more about the future of DeFi than any protocol upgrade.</p>
+
+      <p>So I wanted to lay out the actual lines between these categories so more people pay attention. Because the distinctions matter more than the umbrella term.</p>
+
+      <h2>Tokenized Treasuries</h2>
+
+      <p><em>What is it?</em> Mostly US government debt. T-bills and money market funds, represented as tokens onchain.</p>
+
+      <p><em>Names to know:</em> <a href="https://securitize.io/blackrock/buidl">BUIDL</a> (BlackRock/Securitize), <a href="https://www.circle.com/usyc">USYC</a> (Circle), <a href="https://ondo.finance/usdy">USDY</a> (Ondo), <a href="https://digitalassets.franklintempleton.com/benji/">BENJI</a> (Franklin Templeton).</p>
+
+      <p><em>What does it aim to do?</em> Give institutions and protocols a native way to hold government bond and money market yields onchain. No intermediaries, no T+1 settlement, no minimum check sizes. You hold a token, you earn yield. That simple.</p>
+
+      <p><em>How has it grown?</em> This was the first category to scale (outside of stablecoins). It <a href="https://theccpress.com/tokenized-u-s-treasuries-reach-10b-tvl-on-rwa-inflows/">crossed <strong>$10B in TVL</strong> in February 2026</a>. BUIDL, USYC, USDY, BENJI. All operating and growing. More importantly, this is the category that arguably made traditional institutions take tokenization seriously. When BlackRock puts its name on a tokenized product, it stops being a crypto experiment. Right?</p>
+
+      <p>Crossing $10B is the easy part. Most holders are still treating these as <strong>yield instruments, not building blocks</strong>.</p>
+
+      <p><em>What's blocking it?</em> Treasuries is the furthest along of any category. The issuance problem is largely solved. But making them useful is still being figured out. BUIDL is increasingly used as collateral across DeFi, from derivatives platforms like Deribit and Crypto.com to lending protocols, and others are building on top of it, but most holders still treat tokenized treasuries as a yield instrument, not a building block. Regulatory access still varies by jurisdiction, and redemption mechanics aren't instant everywhere. The infrastructure works. The composability layer needs to catch up.</p>
+
+      <h2>Tokenized Funds</h2>
+
+      <p><em>What is it?</em> Traditional investment funds (credit funds, CLO strategies, carry trade vehicles) restructured so they're not just onchain but actually composable inside DeFi.</p>
+
+      <p><em>Names to know:</em> <a href="https://centrifuge.io/blog/centrifuge-janus-henderson-grove-tokenized-aaa-clo-fund">JAAA</a> (Janus Henderson/Centrifuge, ~$1B), <a href="https://superstate.com/assets/uscc">USCC</a> (Superstate, ~$200M+), <a href="https://securitize.io/primary-market/apollo-diversified-credit-securitize-fund">ACRED</a> (Apollo/Securitize, ~$130M).</p>
+
+      <p><em>What does it aim to do?</em> Open up institutional fund strategies to people who were never on the guest list. A CLO or credit fund that previously required large minimums, weeks of onboarding, and the right relationships becomes accessible as a token. The fund doesn't change. Who can buy it does.</p>
+
+      <p><em>How has it grown?</em> The funds that leaned into composability are the ones scaling. Janus Henderson's JAAA tokenized its AAA CLO strategy onchain through <a href="https://centrifuge.io/">Centrifuge</a>, reaching roughly $1B in AUM and making it the largest tokenized institutional fund. Superstate's USCC runs a crypto carry strategy and is integrated with Aave Horizon as accepted collateral, where it accounts for the bulk of the platform's RWA side. Apollo's ACRED created the sACRED loop on <a href="https://morpho.org/vaults">Morpho</a>: deposit ACRED, borrow USDC, redeploy, repeat. In late February 2026, <a href="https://thedefiant.io/news/defi/resolv-and-centrifuge-launch-usd100m-tokenized-credit-strategy-on-aave">Resolv deployed up to $100M of JAAA into Aave as active collateral</a>, the largest RWA loop trade attempted in DeFi to date. This is the category where <strong>composability isn't a future goal, it's the actual product.</strong> The composability is why people buy in. Without it, these are just funds with extra steps.</p>
+
+      <p>The interesting thing here is that the DeFi integration isn't a feature. It's the entire value proposition. Without it, there's no reason to tokenize a fund.</p>
+
+      <p><em>What's blocking it?</em> Complexity. Making a fund composable inside DeFi isn't a distribution problem, it's a product design problem. Fund managers need to think about DeFi integration from day one, not bolt it on after launch. Most traditional managers aren't there yet. The ones who get it are pulling ahead.</p>
+
+      <h2>Tokenized Private Credit</h2>
+
+      <p><em>What is it?</em> Business loans and credit facilities represented as tokens, giving investors onchain access to private lending returns.</p>
+
+      <p><em>Names to know:</em> <a href="https://maple.finance/">Maple Finance</a>, <a href="https://www.figure.com/">Figure</a>, <a href="https://centrifuge.io/">Centrifuge</a>.</p>
+
+      <p><em>What does it aim to do?</em> Make private lending returns accessible to a broader investor base. Business loans and credit facilities that previously required large minimums, months of onboarding, and accredited investor status become accessible as tokens. Same underlying assets, different distribution rails.</p>
+
+      <p><em>How has it grown?</em> By total value, private credit is the largest tokenized RWA category at roughly $12B+. That number includes Figure, which accounts for a significant portion through tokenized HELOCs on Provenance, a permissioned blockchain. On public chains, the picture looks different: tokenized treasuries are actually larger. Maple Finance is the most cited example of public-chain private credit, growing total AUM roughly 8x in 2025 to over $4B, with onchain underwriting, transparent pools, and programmable terms.</p>
+
+      <p>Private credit is quietly the category where the numbers are biggest and the questions are hardest.</p>
+
+      <p><em>What's blocking it?</em> The fundamental nature of the asset. Private credit is illiquid by design. These are loans. Putting them onchain doesn't solve the underlying liquidity mismatch. You can use them as collateral, and some protocols do, but you can't build a secondary trading market around an asset that was never meant to trade. Getting onchain is solved. <strong>The composability question has a ceiling built into the asset itself.</strong></p>
+
+      <h2>Tokenized Equities</h2>
+
+      <p><em>What is it?</em> US stocks and ETFs available as tokens, tradeable onchain 24/7.</p>
+
+      <p><em>Names to know:</em> <a href="https://ondo.finance/global-markets">Ondo Global Markets</a>, <a href="https://backed.fi/">Backed Finance</a> (xStocks), <a href="https://securitize.io/">Securitize</a>, <a href="https://robinhood.com/eu/en/support/articles/about-stock-tokens/">Robinhood</a>.</p>
+
+      <p><em>What does it aim to do?</em> Give global users access to US equity markets without going through tradfi. The longer-term play some projects are working toward is making equities usable as DeFi collateral, but that hasn't been tested at scale yet.</p>
+
+      <p><em>How has it grown?</em> Two models are competing: synthetic (price exposure only, no shareholder rights) and backed (actual 1:1 ownership with full rights). Both are live, the market hasn't decided which wins. The category <a href="https://www.coindesk.com/business/2026/01/30/the-market-for-tokenized-equities-has-exploded-by-almost-3-000-in-a-single-year">grew <strong>nearly 3,000%</strong> in 2025</a>, from ~$32M to ~$963M. Still small in absolute terms, but the trajectory is steep. Ondo alone accounts for over half the total market cap, with <a href="https://www.coindesk.com/business/2026/02/23/binance-brings-back-tokenized-stocks-trading-with-ondo-finance-deal">$11B in cumulative trading volume since September 2025</a> and <a href="https://www.coindesk.com/business/2026/01/21/ondo-finance-brings-200-tokenized-u-s-stocks-and-etfs-to-solana">200+ tokenized stocks now live on Solana</a>. The <a href="https://www.theblock.co/post/391030/binance-brings-back-tokenized-stocks-via-ondo-finance-partnership">Binance/Ondo deal in February 2026</a>, putting ten tokenized US stocks in front of non-US Binance users, was the biggest distribution moment so far.</p>
+
+      <p>Equities feel like the category with the most raw potential and the least clarity. Everyone can see where this could go. Nobody has proven the path yet.</p>
+
+      <p><em>What's blocking it?</em> The issuance layer is still early. Regulatory uncertainty across jurisdictions, the buyer question (retail access strongest in emerging markets), and the synthetic vs backed debate all remain open. The longer play, actually using tokenized equities as DeFi collateral, is theoretically sound but hasn't been tested at any real scale. The use case exists on paper. The infrastructure to support it is being built.</p>
+
+      <h2>Everything Else</h2>
+
+      <p>Commodities, real estate, corporate bonds. They're all getting the tokenization treatment too. Commodities is almost entirely tokenized gold, <a href="https://gold.tether.to/">XAUT</a> (Tether) and <a href="https://www.paxos.com/pax-gold">PAXG</a> (Paxos) together hold over 1.2 million ounces of vaulted bullion and <a href="https://cointelegraph.com/news/tokenized-commodities-like-gold-reach-6-billion">crossed $6B in February 2026</a>, adding $2B in six weeks on the gold rally. Corporate bonds are in the mix too. Blockstream has been issuing tokenized bitcoin mining notes on STOKR for a few years, and the category is growing, but there's no clear DeFi composability story yet. Real estate has been "the next big thing" for years but remains small onchain, stuck behind jurisdiction-specific property law and the reality that buildings don't compose well with lending protocols.</p>
+
+      <p>All of these got tokenized. Most have no clear answer for what comes next. Putting a deed or a carbon offset onchain doesn't automatically make it productive capital. These categories need their own breakthrough moment, and none of them have had it yet.</p>
+
+      <h2>Why This All Matters</h2>
+
+      <p>Getting any of these categories from tokenized to actually useful isn't just a composability problem. It requires entirely new infrastructure that legacy finance never needed before: settlement layers like Kinexys and DTCC handling T+0, institutional custody that isn't a crypto wallet, compliance wrappers like Securitize sitting between DeFi and regulated capital, onchain pricing for assets that have never had real-time markets. Most of this is just now being built.</p>
+
+      <p>And that infrastructure question leads somewhere uncomfortable. Because what's being built to get them there is increasingly written to institutional spec: permissioned pools, KYC gates, walled gardens. <strong>The builders are still mostly crypto-native. But the blueprint is starting to look like the thing tokenization was supposed to replace.</strong></p>
+
+      <p>The promise of tokenization is the original promise of DeFi: composable, permissionless, trustless. The more legacy finance shows up, the more that original promise gets tested. Whether it survives contact with institutional capital, or gets quietly replaced by something more permissioned, is the question none of these categories can avoid.</p>
+
+    </div>
+  </article>
+
+  <section class="more-writing">
+    <h2>More writing</h2>
+    <ul>
+      <li><a href="/writing/building-way-in">A Story About Building Your Way In</a></li>
+      <li><a href="/writing/crypto-native">Crypto-native isn't everything. But it's still something.</a></li>
+      <li><a href="/writing">See all writing</a></li>
+    </ul>
+  </section>
+
+</Layout>
+
+<style>
+  .nav {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #e5e5e5;
+  }
+
+  .back-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .post {
+    max-width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-cover {
+    margin: 0 0 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .post-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1.125rem;
+    color: #999999;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+  }
+
+  .post-content {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content blockquote {
+    border-left: 2px solid #404040;
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #a3a3a3;
+    background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .post-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content li {
+    margin-bottom: 0.5rem;
+    color: #c4c4c4;
+  }
+
+  .post-content li::marker {
+    color: #525252;
+  }
+
+  .post-content hr {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 3rem 0;
+  }
+
+  .post-content strong {
+    color: #e5e5e5;
+    font-weight: 700;
+  }
+
+  .post-content a {
+    color: #e5e5e5;
+    text-decoration: underline;
+    text-decoration-color: #525252;
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .post-content a:hover {
+    text-decoration-color: #e5e5e5;
+  }
+
+  .post-content em {
+    color: #999999;
+    font-style: italic;
+  }
+
+  .back-link:focus-visible {
+    outline: 2px solid #525252;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.625rem;
+    }
+
+    .post-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .more-writing {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .more-writing ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .more-writing a {
+    color: #e5e5e5;
+  }
+
+  .more-writing a:hover {
+    color: #FF6B00;
+  }
+</style>
