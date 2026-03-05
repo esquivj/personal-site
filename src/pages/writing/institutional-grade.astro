@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 
 const post = {
-  title: "Institutional grade is a category vibe",
+  title: "'Institutional Grade' Is a Category Vibe",
   subtitle: "On positioning, borrowed language, and the translation problem",
   date: "2026.03.05",
   publishedTime: "2026-03-05",
@@ -13,7 +13,7 @@ const post = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": post.title,
+  "headline": "'Institutional Grade' Is a Category Vibe",
   "description": post.subtitle,
   "image": `https://juanesquivel.xyz${post.cover}`,
   "datePublished": post.publishedTime,
@@ -39,7 +39,7 @@ const articleSchema = {
 ---
 
 <Layout
-  title="Institutional grade is a category vibe — Juan Esquivel"
+  title="'Institutional Grade' Is a Category Vibe — Juan Esquivel"
   description="On positioning, borrowed language, and the translation problem. Why crypto doesn't need borrowed credibility when the proof is already onchain."
   type="article"
   image={post.cover}
@@ -62,7 +62,7 @@ const articleSchema = {
   <article class="post">
     {post.cover && (
       <figure class="post-cover">
-        <img src={post.cover} alt="Institutional grade is a category vibe" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
+        <img src={post.cover} alt="'Institutional Grade' Is a Category Vibe" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
       </figure>
     )}
 
