@@ -7,7 +7,7 @@ const post = {
   date: "2026.03.05",
   publishedTime: "2026-03-05",
   readingTime: "RT: 4 MIN",
-  cover: ""
+  cover: "/images/institutional-grade-cover.jpg"
 };
 
 const articleSchema = {
@@ -15,6 +15,7 @@ const articleSchema = {
   "@type": "Article",
   "headline": post.title,
   "description": post.subtitle,
+  "image": `https://juanesquivel.xyz${post.cover}`,
   "datePublished": post.publishedTime,
   "author": {
     "@type": "Person",
@@ -41,8 +42,10 @@ const articleSchema = {
   title="Institutional grade is a category vibe — Juan Esquivel"
   description="On positioning, borrowed language, and the translation problem. Why crypto doesn't need borrowed credibility when the proof is already onchain."
   type="article"
+  image={post.cover}
   publishedTime={post.publishedTime}
   canonicalPath="/writing/institutional-grade"
+  preloadImages={[post.cover]}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -57,6 +60,12 @@ const articleSchema = {
   </nav>
 
   <article class="post">
+    {post.cover && (
+      <figure class="post-cover">
+        <img src={post.cover} alt="Institutional grade is a category vibe" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
+      </figure>
+    )}
+
     <header class="post-header">
       <h1 class="post-title">{post.title}</h1>
       <p class="post-subtitle">{post.subtitle}</p>
