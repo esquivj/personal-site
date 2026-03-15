@@ -88,9 +88,9 @@ const articleSchema = {
 
       <p>Three approaches exist right now, and they all get called "tokenized stocks."</p>
 
-      <figure class="post-cover">
+      <figure class="post-diagram">
         <a href="/images/tokenized-stocks-spectrum.jpg" target="_blank" style="cursor: zoom-in;">
-          <img src="/images/tokenized-stocks-spectrum.jpg" alt="Spectrum of tokenized stock models: synthetic, indirect, and native" width="940" height="450" loading="lazy" style="max-width: 100%; height: auto;" />
+          <img src="/images/tokenized-stocks-spectrum.jpg" alt="Spectrum of tokenized stock models: synthetic, indirect, and native" loading="lazy" />
         </a>
       </figure>
 
@@ -185,6 +185,19 @@ const articleSchema = {
     display: block;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+  }
+
+  .post-diagram {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: visible;
+    background: #111;
+  }
+
+  .post-diagram img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .post-title {
