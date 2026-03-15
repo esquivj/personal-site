@@ -1,0 +1,325 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const post = {
+  title: "What does 'owning stock' mean onchain?",
+  subtitle: "They're all called tokenized stocks and they're not the same thing",
+  date: "2026.03.15",
+  publishedTime: "2026-03-15",
+  readingTime: "RT: 5 MIN",
+  cover: "/images/tokenized-stocks-cover.jpg"
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What does 'owning stock' mean onchain?",
+  "description": post.subtitle,
+  "image": `https://juanesquivel.xyz${post.cover}`,
+  "datePublished": post.publishedTime,
+  "author": {
+    "@type": "Person",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Juan Esquivel",
+    "url": "https://juanesquivel.xyz",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://juanesquivel.xyz/images/avatar.jpg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://juanesquivel.xyz/writing/owning-stock-onchain"
+  }
+};
+---
+
+<Layout
+  title="What does 'owning stock' mean onchain? — Juan Esquivel"
+  description="They're all called tokenized stocks and they're not the same thing. A breakdown of what synthetic, indirect, and native tokenization actually mean for the person buying."
+  type="article"
+  image={post.cover}
+  publishedTime={post.publishedTime}
+  canonicalPath="/writing/owning-stock-onchain"
+  preloadImages={[post.cover]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <nav class="nav">
+    <a href="/writing" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Writing
+    </a>
+  </nav>
+
+  <article class="post">
+    {post.cover && (
+      <figure class="post-cover">
+        <img src={post.cover} alt="What does 'owning stock' mean onchain?" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
+      </figure>
+    )}
+
+    <header class="post-header">
+      <h1 class="post-title">{post.title}</h1>
+      <p class="post-subtitle">{post.subtitle}</p>
+      <div class="post-meta">
+        <time>{post.date}</time>
+      </div>
+    </header>
+
+    <div class="post-content">
+
+      <p><em>They're all called tokenized stocks and they're not the same thing.</em></p>
+
+      <p>In a previous piece I looked at where each tokenized asset class stands. Equities stood out as the category with the most raw potential and the least clarity. In 2026, the activity around tokenized stocks has been hard to ignore.</p>
+
+      <p>"Buy Apple stock at 2am on a Sunday" can make sense to anyone without needing a glossary or a DeFi tutorial, and that's what makes this category different. It's the first one where regular people can see what changes for them.</p>
+
+      <p>Kraken, Nasdaq, ICE, and Robinhood all made moves between February and March. The tokenized equities market <a href="https://www.coindesk.com/business/2026/03/10/kraken-s-tokenized-stock-venue-starts-points-program-hinting-at-possible-ecosystem-token">crossed $1 billion in total value</a>. Even the <a href="https://www.wsj.com/finance/stocks/tokenized-stocks-are-coming-to-a-market-near-you-five-things-to-know-d9131494">WSJ called them</a> "digital tokens that mimic shares." That word, mimic, tells you everything about where the definition stands right now. The part most people are missing is that every one of these products is a fundamentally different thing.</p>
+
+      <h2>Three models, same name</h2>
+
+      <p>Three approaches exist right now, and they all get called "tokenized stocks."</p>
+
+      <figure class="post-cover"><img src="/images/tokenized-stocks-spectrum.jpg" alt="Spectrum of tokenized stock models: synthetic, indirect, and native" width="940" height="450" loading="lazy" /></figure>
+
+      <p>The first is <strong>synthetic</strong>, which is just price exposure with nothing behind it, and perp exchanges have done this for years so it's not really new.</p>
+
+      <p>The second is <strong>wrapped</strong> or <strong>indirect</strong>, where a third party creates a product that tracks real shares. You get the price movement, maybe dividends passed through, but you don't legally own the stock. The specifics vary: <a href="https://www.coindesk.com/business/2026/03/03/ondo-finance-tokenized-stocks-platform-on-binance-wins-regulatory-approval-in-abu-dhabi">Ondo Global Markets</a> structures theirs as equity-linked notes, while <a href="https://blog.kraken.com/product/xstocks/introducing-xchange">Kraken's xStocks</a> uses a Jersey-based SPV with shares held 1:1 in custody. Both get called "tokenized stocks," but even within this category they're not the same thing.</p>
+
+      <p>And then there's the idea of <strong>native</strong> or <strong>direct</strong> tokenization, where the token would be the stock itself: same legal status, same settlement, same shareholder rights. Nobody has fully built this for public equities yet. <a href="https://www.reuters.com/business/nasdaq-teams-up-with-kraken-expand-tokenization-infrastructure-2026-03-09/">Nasdaq announced a framework</a> for it this month, with Kraken's parent company Payward <a href="https://blog.kraken.com/news/payward-partners-with-nasdaq">building the bridge</a> between traditional settlement and onchain rails, but it's not expected to be operational until 2027.</p>
+
+      <p><a href="https://www.coindesk.com/business/2026/03/05/nyse-owner-ice-forges-strategic-partnership-with-crypto-exchange-okx">ICE partnered with and invested in OKX</a> to bring NYSE-listed tokenized stocks to OKX's users. <a href="https://simplywall.st/stocks/us/diversified-financials/nasdaq-hood/robinhood-markets/news/robinhood-chain-puts-tokenized-assets-and-prediction-markets">Robinhood launched its own L2</a> and has already tokenized around 2,000 U.S. stocks and ETFs for European customers, with a full U.S. launch planned for later this year. <a href="https://coinpaper.com/15397/dtc-s-2026-tokenization-plan-could-bring-on-chain-settlements-to-u-s-capital-markets">DTCC started building onchain settlement</a> for the securities it already holds, expected later this year. In about eight weeks, major players made moves in tokenized stocks, and it all looks different.</p>
+
+      <h2>People chose access over rights</h2>
+
+      <p>Most indirect models today, including <a href="https://blog.kraken.com/product/xstocks/introducing-xchange">xStocks</a>, are transparent about the tradeoffs. The <a href="https://support.kraken.com/articles/xstocks-faq">FAQ</a> is clear: these are exposure products, not direct ownership. No voting, no legal claims to the underlying shares. The product does what it says it does, and <a href="https://blog.kraken.com/product/xstocks/introducing-xchange">over $25 billion in cumulative volume</a> with over 85,000 holders tells you people are fine with that tradeoff.</p>
+
+      <p>For a lot of the market, access matters more than rights, and whether they technically "own" the stock is secondary to trading it whenever they want from wherever they are.</p>
+
+      <p>That model isn't really new. ETFs are a multi-trillion-dollar global market where investors don't directly own shares in the underlying companies, you get exposure without direct ownership, and millions of people invest this way without thinking twice. The difference is that ETFs have decades of regulatory structure behind them and indirect tokenized products don't. The SEC is <a href="https://www.coindesk.com/policy/2026/03/12/sec-s-advisory-group-backs-push-for-tokenized-securities-outlines-how-to-keep-it-safe">starting to move on this</a>, but the early signals are <a href="https://www.theblock.co/post/393487/sec-narrower-exemption-tokenized-securities">narrower than most people hoped</a>.</p>
+
+      <h2>Why I think this is the one</h2>
+
+      <p>Most of the tokenization story so far has been about institutional money. Treasuries, money markets, private credit.</p>
+
+      <p>Equities are different. This is where tokenization can talk to everyone. Not just institutions and not just DeFi natives but everyone.</p>
+
+      <p>Nobody <em>really</em> has fun with tokenized treasuries. Equities have Tesla, Apple, Nvidia. People already talk about these companies. They don't need to be convinced stocks matter.</p>
+
+      <p>Gen Z has arguably skipped traditional brokerages entirely and started with crypto. For them, tokenized stocks aren't a bridge from traditional finance to crypto, they're a bridge the other direction, stocks inside the system they already use. That flips the framing from "how do we bring Wall Street onchain" to "how do we give people who are already onchain a reason to care about equities at all."</p>
+
+      <p>The indirect model has proven appetite for this asset, but it's a stepping stone. Native tokenization is where I think this goes, and it needs regulatory infrastructure that doesn't exist yet. The people buying these products right now have no idea what they actually own.</p>
+
+    </div>
+  </article>
+
+  <section class="more-writing">
+    <h2>More writing</h2>
+    <ul>
+      <li><a href="/writing/institutional-grade">'Institutional Grade' Is a Category Vibe</a></li>
+      <li><a href="/writing/where-tokenization-actually-stands">Where tokenization actually stands</a></li>
+      <li><a href="/writing">See all writing</a></li>
+    </ul>
+  </section>
+
+</Layout>
+
+<style>
+  .nav {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #e5e5e5;
+  }
+
+  .back-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .post {
+    max-width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-cover {
+    margin: 0 0 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .post-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1.125rem;
+    color: #999999;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #525252;
+  }
+
+  .post-content {
+    color: #c4c4c4;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .post-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content blockquote {
+    border-left: 2px solid #404040;
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #a3a3a3;
+    background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .post-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content li {
+    margin-bottom: 0.5rem;
+    color: #c4c4c4;
+  }
+
+  .post-content li::marker {
+    color: #525252;
+  }
+
+  .post-content hr {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 3rem 0;
+  }
+
+  .post-content strong {
+    color: #e5e5e5;
+    font-weight: 700;
+  }
+
+  .post-content a {
+    color: #e5e5e5;
+    text-decoration: underline;
+    text-decoration-color: #525252;
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .post-content a:hover {
+    text-decoration-color: #e5e5e5;
+  }
+
+  .post-content em {
+    color: #999999;
+    font-style: italic;
+  }
+
+  .back-link:focus-visible {
+    outline: 2px solid #525252;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.625rem;
+    }
+
+    .post-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .more-writing {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .more-writing ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .more-writing a {
+    color: #e5e5e5;
+  }
+
+  .more-writing a:hover {
+    color: #FF6B00;
+  }
+</style>
