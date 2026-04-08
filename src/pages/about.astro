@@ -98,16 +98,47 @@ const pageSchema = {
     overflow: hidden;
   }
 
+  .about-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(42% 34% at 18% 24%, rgba(255, 255, 255, 0.26), transparent 72%),
+      radial-gradient(34% 28% at 76% 74%, rgba(255, 255, 255, 0.18), transparent 70%),
+      radial-gradient(36% 26% at 52% 14%, rgba(161, 176, 191, 0.14), transparent 74%);
+    mix-blend-mode: screen;
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  .about-stage::after {
+    content: '';
+    position: absolute;
+    inset: 1.6rem;
+    border: 1px solid rgba(243, 241, 235, 0.34);
+    pointer-events: none;
+  }
+
   .about-pane {
     position: relative;
     width: min(43rem, calc(100% - 7rem));
     padding: 2.05rem 2.25rem 1.9rem;
     border: 1px solid rgba(20, 19, 17, 0.16);
-    background: rgba(246, 244, 239, 0.95);
-    backdrop-filter: blur(10px);
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.95), rgba(243, 240, 235, 0.94)),
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.28), transparent 42%);
     box-shadow:
-      0 20px 46px rgba(17, 15, 13, 0.08),
+      0 20px 46px rgba(17, 15, 13, 0.07),
       0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  }
+
+  .about-pane {
+    background-image:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.95), rgba(243, 240, 235, 0.94)),
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.28), transparent 42%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.18'/%3E%3C/svg%3E");
+    background-size: auto, auto, 180px 180px;
+    background-repeat: no-repeat, no-repeat, repeat;
   }
 
   .about-pane::before {
