@@ -30,81 +30,121 @@ const pageSchema = {
 
   <PageHeader title="Now" subtitle="What I'm focused on at the moment." />
 
-  <section>
-    <h2>Work</h2>
-    <p>
-      Recently wrapped up three years leading marketing at StableLab. Now exploring what's next.
-      Still thinking about how to tell stories that actually land in crypto.
-    </p>
-  </section>
+  <div class="now-ledger">
+    <section class="now-row">
+      <h2>Work</h2>
+      <div class="now-row-body">
+        <p>
+          Recently wrapped up three years leading marketing at StableLab. Now exploring what's next.
+          Still thinking about how to tell stories that actually land in crypto.
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <h2>Building</h2>
-    <p>
-      Building a personal brand. Trying to connect with people who think about this stuff the same
-      way I do and inspiring people in crypto to care about storytelling.
-    </p>
-  </section>
+    <section class="now-row">
+      <h2>Building</h2>
+      <div class="now-row-body">
+        <p>
+          Building a personal brand. Trying to connect with people who think about this stuff the same
+          way I do and inspiring people in crypto to care about storytelling.
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <h2>Life</h2>
-    <p>
-      Back in Los Angeles. Re-settling into the city, spending more time with family, lifting
-      consistently, and trying to read and cook more.
-    </p>
-  </section>
+    <section class="now-row">
+      <h2>Life</h2>
+      <div class="now-row-body">
+        <p>
+          Back in Los Angeles. Re-settling into the city, spending more time with family, lifting
+          consistently, and trying to read and cook more.
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <h2>Listening</h2>
-    <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="inline-link"
-      >Deftones, Junior H, Peso Pluma ↗</a
-    >
-  </section>
+    <section class="now-row">
+      <h2>Listening</h2>
+      <div class="now-row-body">
+        <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="inline-link"
+          >Deftones, Junior H, Peso Pluma ↗</a
+        >
+      </div>
+    </section>
 
-  <section class="watching-section">
-    <h2>Watching</h2>
+    <section class="now-row now-row--watching">
+      <h2>Watching</h2>
+      <div class="now-row-body">
+        <div class="watching-block">
+          <h3>Movies</h3>
+          <a href="https://letterboxd.com/cadena/" target="_blank" rel="noopener" class="inline-link"
+            >One Battle After Another, Bugonia, Weapons ↗</a
+          >
+        </div>
 
-    <h3>Movies</h3>
-    <a href="https://letterboxd.com/cadena/" target="_blank" rel="noopener" class="inline-link"
-      >One Battle After Another, Bugonia, Weapons ↗</a
-    >
+        <div class="watching-block">
+          <h3>Shows</h3>
+          <p class="watching-text">Entourage, Pluribus, IT: Welcome to Derry</p>
+        </div>
 
-    <h3>Shows</h3>
-    <p class="watching-text">Entourage, Pluribus, IT: Welcome to Derry</p>
-
-    <h3>Creators</h3>
-    <p class="watching-text">George Heaton, Kai Cenat, Agent00, Daniel Simmons, Sam Sulek</p>
-  </section>
+        <div class="watching-block">
+          <h3>Creators</h3>
+          <p class="watching-text">George Heaton, Kai Cenat, Agent00, Daniel Simmons, Sam Sulek</p>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <p class="page-note">Last updated: April 2026</p>
 </Layout>
 
 <style>
-  section p {
-    color: var(--text-soft);
-    font-size: 0.98rem;
-    line-height: 1.8;
+  .now-ledger {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
   }
 
-  .watching-section h3 {
-    font-size: 0.68rem;
+  .now-row {
+    display: grid;
+    grid-template-columns: 128px minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 1.35rem 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .now-row h2 {
+    margin-bottom: 0;
+  }
+
+  .now-row-body {
+    min-width: 0;
+  }
+
+  .now-row p {
+    color: var(--text-soft);
+    max-width: 62ch;
+    font-size: 1rem;
+    line-height: 1.82;
+  }
+
+  .watching-block + .watching-block {
+    margin-top: 1.5rem;
+  }
+
+  .watching-block h3 {
+    font-size: 0.7rem;
     font-weight: 400;
     color: var(--text-soft);
-    margin-bottom: 0.75rem;
-    margin-top: 1.5rem;
+    margin-bottom: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-  }
-
-  .watching-section h3:first-of-type {
-    margin-top: 0;
   }
 
   .watching-text,
   .inline-link {
     color: var(--text-soft);
-    font-size: 0.98rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.82;
   }
 
   .inline-link:hover {
@@ -113,5 +153,12 @@ const pageSchema = {
 
   .page-note {
     margin-top: 3rem;
+  }
+
+  @media (max-width: 700px) {
+    .now-row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
   }
 </style>

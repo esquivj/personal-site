@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { travelStats } from '../data/travels';
+import { geoNaturalEarth1, geoPath } from 'd3-geo';
+import { feature } from 'topojson-client';
+import landData from 'world-atlas/land-110m.json';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -19,6 +22,51 @@ const pageSchema = {
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const flightHours = Math.round(travelStats.totalDistance / 800);
+
+const travelPins = [
+  { name: 'United States', lon: -118.2437, lat: 34.0522 },
+  { name: 'Mexico', lon: -99.1332, lat: 19.4326 },
+  { name: 'Colombia', lon: -74.0721, lat: 4.711 },
+  { name: 'Belgium', lon: 4.3517, lat: 50.8503 },
+  { name: 'France', lon: 2.3522, lat: 48.8566 },
+  { name: 'Hong Kong', lon: 114.1694, lat: 22.3193 },
+  { name: 'Ireland', lon: -6.2603, lat: 53.3498 },
+  { name: 'Japan', lon: 139.6917, lat: 35.6895 },
+  { name: 'Malaysia', lon: 101.6869, lat: 3.139 },
+  { name: 'Portugal', lon: -9.1393, lat: 38.7223 },
+  { name: 'Singapore', lon: 103.8198, lat: 1.3521 },
+  { name: 'South Korea', lon: 126.978, lat: 37.5665 },
+  { name: 'Spain', lon: -3.7038, lat: 40.4168 },
+  { name: 'Thailand', lon: 100.5018, lat: 13.7563 },
+  { name: 'Turkey', lon: 28.9784, lat: 41.0082 },
+  { name: 'United Kingdom', lon: -0.1276, lat: 51.5072 },
+];
+
+const MAP_WIDTH = 1000;
+const MAP_HEIGHT = 500;
+const projection = geoNaturalEarth1().fitExtent(
+  [
+    [28, 36],
+    [MAP_WIDTH - 28, MAP_HEIGHT - 36],
+  ],
+  { type: 'Sphere' },
+);
+const path = geoPath(projection);
+const land = feature(landData as any, (landData as any).objects.land);
+const landPath = path(land) ?? '';
+const visitedCountries = travelPins.map((pin) => pin.name);
+
+const projectedPins = travelPins
+  .map((pin) => {
+    const point = projection([pin.lon, pin.lat]);
+    if (!point) return null;
+    return {
+      ...pin,
+      xPct: (point[0] / MAP_WIDTH) * 100,
+      yPct: (point[1] / MAP_HEIGHT) * 100,
+    };
+  })
+  .filter(Boolean);
 ---
 
 <Layout
@@ -74,10 +122,45 @@ const flightHours = Math.round(travelStats.totalDistance / 800);
     </div>
   </section>
 
-  <section>
+  <section class="travel-map-section travel-breakout">
     <h2>Countries</h2>
-    <div class="tag-grid">
-      {travelStats.countries.map((country) => <span class="tag-chip">{country}</span>)}
+    <div class="travel-map-shell">
+      <div class="travel-map" aria-hidden="true">
+        <svg viewBox="0 0 1000 500" class="travel-map-svg" role="img" aria-label="World map with visited countries marked">
+          <g class="map-graticule">
+            <path d="M28 120H972" />
+            <path d="M28 200H972" />
+            <path d="M28 280H972" />
+            <path d="M28 360H972" />
+            <path d="M180 36V464" />
+            <path d="M340 36V464" />
+            <path d="M500 36V464" />
+            <path d="M660 36V464" />
+            <path d="M820 36V464" />
+          </g>
+          <g class="map-continents">
+            <path d={landPath} />
+          </g>
+        </svg>
+
+        {projectedPins.map((pin) => (
+          <button
+            class="travel-pin"
+            type="button"
+            style={`left:${pin.xPct}%; top:${pin.yPct}%;`}
+            aria-label={pin.name}
+            title={pin.name}
+>
+            <span class="travel-pin-dot"></span>
+            <span class="travel-pin-label">{pin.name}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="travel-map-legend">
+        <span class="travel-map-legend-label">Visited</span>
+        {visitedCountries.map((name) => <span class="travel-map-country">{name}</span>)}
+      </div>
     </div>
   </section>
 
@@ -90,3 +173,163 @@ const flightHours = Math.round(travelStats.totalDistance / 800);
     }
   </p>
 </Layout>
+
+<style>
+  .travel-breakout {
+    position: relative;
+    left: 50%;
+    width: min(1080px, calc(100vw - 4rem));
+    transform: translateX(-50%);
+  }
+
+  .travel-map-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  .travel-map-section h2 {
+    margin-bottom: 0.8rem;
+  }
+
+  .travel-map {
+    position: relative;
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(20, 19, 17, 0.01), rgba(20, 19, 17, 0.03)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
+    overflow: hidden;
+    aspect-ratio: 2.05 / 1;
+  }
+
+  .travel-map::after {
+    content: '';
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid rgba(20, 19, 17, 0.04);
+    pointer-events: none;
+  }
+
+  .travel-map-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .map-graticule path {
+    fill: none;
+    stroke: rgba(20, 19, 17, 0.08);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .map-continents path {
+    fill: rgba(20, 19, 17, 0.085);
+    stroke: rgba(20, 19, 17, 0.12);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .travel-pin {
+    all: unset;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    cursor: default;
+    display: grid;
+    place-items: center;
+  }
+
+  .travel-pin-label {
+    position: absolute;
+    bottom: calc(100% + 0.45rem);
+    left: 50%;
+    transform: translate(-50%, 4px);
+    padding: 0.28rem 0.42rem;
+    border: 1px solid rgba(20, 19, 17, 0.1);
+    background: rgba(247, 245, 241, 0.96);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+
+  .travel-pin-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow:
+      0 0 0 3px rgba(194, 74, 45, 0.14),
+      0 0 0 1px rgba(20, 19, 17, 0.1);
+  }
+
+  .travel-map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.55rem;
+    align-items: center;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .travel-map-legend-label {
+    color: var(--text);
+  }
+
+  .travel-map-country::after {
+    content: ' /';
+    color: rgba(20, 19, 17, 0.25);
+    margin-left: 0.2rem;
+  }
+
+  .travel-map-country:last-child::after {
+    content: '';
+    margin: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .travel-pin:hover .travel-pin-dot {
+      transform: scale(1.15);
+      box-shadow:
+        0 0 0 4px rgba(194, 74, 45, 0.18),
+        0 0 0 1px rgba(20, 19, 17, 0.12);
+    }
+
+    .travel-pin:hover .travel-pin-label {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @media (max-width: 960px) {
+    .travel-breakout {
+      left: auto;
+      width: auto;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .travel-map {
+      aspect-ratio: 1.5 / 1;
+    }
+
+    .travel-map-legend {
+      gap: 0.4rem 0.45rem;
+    }
+
+    .travel-map-country {
+      font-size: 0.58rem;
+    }
+  }
+</style>

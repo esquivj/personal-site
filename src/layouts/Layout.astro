@@ -151,6 +151,13 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     --accent-glow: rgba(194, 74, 45, 0.16);
     --accent-secondary: #c24a2d;
     --shadow: 0 18px 48px rgba(18, 14, 10, 0.06);
+    --space-2xs: 0.35rem;
+    --space-xs: 0.6rem;
+    --space-sm: 0.9rem;
+    --space-md: 1.25rem;
+    --space-lg: clamp(1.8rem, 2vw, 2.35rem);
+    --space-xl: clamp(3rem, 5vw, 4rem);
+    --space-2xl: clamp(4.5rem, 8vw, 6.5rem);
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --font-display: 'Instrument Serif', 'Times New Roman', serif;
@@ -170,11 +177,14 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     background-color: var(--bg);
     color: var(--text);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scrollbar-width: thin;
     scrollbar-color: var(--line-strong) transparent;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    font-variant-numeric: lining-nums proportional-nums;
   }
 
   /* Webkit scrollbar */
@@ -304,7 +314,7 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
   .container {
     max-width: 840px;
     margin: 0 auto;
-    padding: 3.1rem 2rem 2.3rem;
+    padding: 3.25rem 2rem 2.3rem;
   }
 
   main {
@@ -366,41 +376,41 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
   /* Section spacing */
   section {
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-xl);
   }
 
   section h2 {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-family: var(--font-mono);
     font-weight: 500;
     color: var(--text-soft);
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
   }
 
   .page-header {
-    margin-bottom: 2.75rem;
+    margin-bottom: clamp(3rem, 5vw, 3.75rem);
   }
 
   .page-header--compact {
-    margin-bottom: 2rem;
+    margin-bottom: clamp(2.2rem, 4vw, 2.8rem);
   }
 
   .page-title {
-    font-size: clamp(2.4rem, 4vw, 3rem);
+    font-size: clamp(2.55rem, 4.4vw, 3.2rem);
     font-weight: 500;
-    line-height: 0.92;
-    letter-spacing: -0.055em;
-    margin-bottom: 0.55rem;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.85rem;
     color: var(--text);
   }
 
   .page-subtitle {
-    max-width: 38rem;
+    max-width: 50ch;
     color: var(--text-soft);
-    font-size: 0.95rem;
-    line-height: 1.75;
+    font-size: 1rem;
+    line-height: 1.78;
   }
 
   .page-note {
@@ -414,21 +424,22 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
   .prose {
     display: flex;
     flex-direction: column;
-    gap: 1.35rem;
+    gap: var(--space-lg);
   }
 
   .prose p {
-    max-width: 42rem;
+    max-width: 63ch;
     color: var(--text-soft);
-    font-size: 0.98rem;
-    line-height: 1.78;
+    font-size: 1rem;
+    line-height: 1.82;
   }
 
   .prose .lead,
   .prose > p:first-child {
     color: var(--text);
+    max-width: 40ch;
     font-size: 1.14rem;
-    line-height: 1.65;
+    line-height: 1.68;
   }
 
   .surface-list {
@@ -494,16 +505,16 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
   .surface-title {
     color: var(--text);
-    font-size: 1.02rem;
+    font-size: 1.08rem;
     font-family: var(--font-display);
-    line-height: 1.16;
+    line-height: 1.12;
     letter-spacing: -0.03em;
   }
 
   .surface-meta {
     color: var(--text-soft);
-    font-size: 0.8rem;
-    line-height: 1.55;
+    font-size: 0.84rem;
+    line-height: 1.62;
   }
 
   .surface-arrow {
@@ -525,16 +536,16 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
   .surface-card-title {
     color: var(--text);
-    font-size: 1.8rem;
-    line-height: 0.98;
+    font-size: 1.9rem;
+    line-height: 1.02;
     letter-spacing: -0.05em;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.95rem;
   }
 
   .surface-card-copy {
     color: var(--text-soft);
-    font-size: 0.96rem;
-    line-height: 1.8;
+    font-size: 0.98rem;
+    line-height: 1.82;
   }
 
   .meta-grid {
@@ -686,7 +697,7 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
   }
 
   .footer {
-    margin-top: 6rem;
+    margin-top: 8.5rem;
     padding-top: 1.65rem;
     border-top: 1px solid var(--line);
     width: min(1440px, calc(100vw - 2.5rem));
@@ -694,14 +705,14 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 0.3rem;
   }
 
   .footer-mark {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 0.25rem;
     overflow: hidden;
   }
 
@@ -712,7 +723,7 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     font-size: clamp(6rem, 14vw, 12rem);
     font-weight: 600;
     font-variation-settings: 'wdth' 125;
-    line-height: 0.68;
+    line-height: 0.6;
     letter-spacing: -0.075em;
     color: rgba(20, 19, 17, 0.085);
     user-select: none;
@@ -733,13 +744,15 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
+    margin-top: -0.1rem;
   }
 
   .footer-meta p {
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.62rem;
+    line-height: 1;
     color: var(--text-faint);
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -748,8 +761,9 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
   .footer-links {
     font-family: var(--font-mono);
     display: flex;
-    gap: 0.85rem;
-    font-size: 0.66rem;
+    gap: 0.7rem;
+    font-size: 0.62rem;
+    line-height: 1;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
@@ -814,7 +828,7 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     }
 
     .footer {
-      margin-top: 4.25rem;
+      margin-top: 5.75rem;
       width: calc(100vw - 2.3rem);
     }
 

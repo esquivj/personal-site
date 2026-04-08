@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import PageHeader from '../components/PageHeader.astro';
+import UiIcon from '../components/UiIcon.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -47,6 +48,20 @@ const projects = [
     {
       projects.map((project) => (
         <article class="project-feature">
+          <div class="project-caption">
+            <div class="project-main">
+              <h2 class="project-title">{project.title}</h2>
+              <p class="project-summary">{project.summary}</p>
+            </div>
+
+            <div class="project-meta">
+              <a href={project.url} target="_blank" rel="noopener" class="project-link">
+                Open site
+                <UiIcon name="arrow-up-right" size={13} class="project-link-icon" />
+              </a>
+            </div>
+          </div>
+
           <a
             href={project.url}
             target="_blank"
@@ -63,18 +78,6 @@ const projects = [
               decoding="async"
             />
           </a>
-
-          <div class="project-caption">
-            <div class="project-main">
-              <h2 class="project-title">{project.title}</h2>
-              <p class="project-domain">{project.domain}</p>
-              <p class="project-summary">{project.summary}</p>
-            </div>
-
-            <div class="project-meta">
-              <a href={project.url} target="_blank" rel="noopener" class="project-link">Open site ↗</a>
-            </div>
-          </div>
         </article>
       ))
     }
@@ -88,7 +91,7 @@ const projects = [
   }
 
   .project-feature {
-    padding: 1.4rem 0 1.45rem;
+    padding: 1.7rem 0 2rem;
     border-top: 1px solid var(--line);
   }
 
@@ -101,7 +104,9 @@ const projects = [
     border: 1px solid var(--line);
     background: rgba(15, 15, 15, 0.96);
     overflow: hidden;
-    margin-bottom: 1rem;
+    width: min(100%, 43rem);
+    margin-top: 1.55rem;
+    margin-inline: auto;
     transition:
       border-color 180ms var(--ease-out),
       transform 180ms var(--ease-out);
@@ -116,36 +121,28 @@ const projects = [
   .project-caption {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.5rem;
+    gap: 1.8rem;
     align-items: end;
   }
 
   .project-main {
-    max-width: 40rem;
+    max-width: 34rem;
   }
 
   .project-title {
-    margin: 0 0 0.2rem;
+    margin: 0 0 0.35rem;
     font-family: var(--font-display);
-    font-size: clamp(1.45rem, 2.8vw, 1.95rem);
-    line-height: 1.04;
+    font-size: clamp(1.55rem, 3vw, 2.05rem);
+    line-height: 0.98;
     font-weight: 400;
     letter-spacing: -0.03em;
     text-transform: none;
   }
 
-  .project-domain {
-    margin: 0 0 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-faint);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
   .project-summary {
-    font-size: 0.98rem;
-    line-height: 1.68;
+    max-width: 50ch;
+    font-size: 1rem;
+    line-height: 1.74;
     color: var(--text-soft);
   }
 
@@ -157,6 +154,9 @@ const projects = [
   }
 
   .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
     color: var(--text);
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -167,6 +167,12 @@ const projects = [
     transition:
       color 160ms var(--ease-out),
       border-color 160ms var(--ease-out);
+  }
+
+  .project-link-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -185,6 +191,11 @@ const projects = [
     .project-caption {
       grid-template-columns: 1fr;
       gap: 0.85rem;
+    }
+
+    .project-preview {
+      width: 100%;
+      margin-inline: 0;
     }
 
     .project-meta {

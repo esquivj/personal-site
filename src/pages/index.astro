@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import UiIcon from '../components/UiIcon.astro';
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -19,7 +20,6 @@ const personSchema = {
     'https://x.com/0xCadena',
     'https://www.linkedin.com/in/esquivj/',
     'https://github.com/esquivj',
-    'https://www.cosmos.so/cadena',
   ],
   knowsAbout: [
     'Crypto Marketing',
@@ -69,20 +69,29 @@ const websiteSchema = {
 
           <div class="contact-strip">
             <span class="contact-kicker">Get in touch</span>
-            <a href="https://x.com/0xCadena" target="_blank" rel="noopener">X</a>
-            <a href="https://www.linkedin.com/in/esquivj/" target="_blank" rel="noopener"
-              >LinkedIn</a
-            >
-            <a href="https://github.com/esquivj" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.cosmos.so/cadena" target="_blank" rel="noopener">Cosmos</a>
-            <button
-              class="social-link-btn"
-              data-copy="juanesquivel138@gmail.com"
-              aria-label="Copy email to clipboard"
-            >
-              Email
-              <span class="copy-toast">Copied</span>
-            </button>
+            <div class="contact-actions">
+              <a href="mailto:juanesquivel138@gmail.com" class="social-link-btn">
+                <UiIcon name="mail" size={13} class="contact-icon" />
+                Email
+              </a>
+              <a href="https://x.com/0xCadena" target="_blank" rel="noopener" class="social-link-btn">
+                <UiIcon name="brand-x" size={13} class="contact-icon" />
+                X
+              </a>
+              <a
+                href="https://www.linkedin.com/in/esquivj/"
+                target="_blank"
+                rel="noopener"
+                class="social-link-btn"
+              >
+                <UiIcon name="brand-linkedin" size={13} class="contact-icon" />
+                LinkedIn
+              </a>
+              <a href="https://github.com/esquivj" target="_blank" rel="noopener" class="social-link-btn">
+                <UiIcon name="brand-github" size={13} class="contact-icon" />
+                GitHub
+              </a>
+            </div>
           </div>
         </div>
 
@@ -191,18 +200,18 @@ const websiteSchema = {
 
 <style>
   .header {
-    margin-bottom: 4rem;
+    margin-bottom: 4.8rem;
   }
 
   .header-panel {
-    padding-bottom: 1.3rem;
+    padding-bottom: 1.6rem;
     border-bottom: 1px solid var(--line);
   }
 
   .header-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 176px;
-    gap: 1.4rem;
+    grid-template-columns: minmax(0, 1fr) 188px;
+    gap: clamp(1.4rem, 4vw, 2.35rem);
     align-items: start;
   }
 
@@ -214,7 +223,7 @@ const websiteSchema = {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.2rem;
   }
 
   .header-copy {
@@ -223,6 +232,7 @@ const websiteSchema = {
 
   .portrait-panel {
     margin: 0;
+    padding-top: 0.2rem;
   }
 
   .avatar {
@@ -257,24 +267,24 @@ const websiteSchema = {
     font-size: clamp(3.2rem, 8vw, 5.1rem);
     font-weight: 500;
     color: var(--text);
-    line-height: 0.9;
-    letter-spacing: -0.06em;
+    line-height: 0.93;
+    letter-spacing: -0.055em;
   }
 
   .bio {
-    font-size: 1rem;
+    max-width: 36ch;
+    font-size: 1.02rem;
     color: var(--text-soft);
-    margin-bottom: 1.15rem;
-    line-height: 1.68;
-    max-width: 25rem;
+    margin-bottom: 1.35rem;
+    line-height: 1.74;
   }
 
   .contact-strip {
     display: flex;
-    align-items: center;
-    gap: 1rem 1.1rem;
+    align-items: baseline;
+    gap: 0.85rem 1rem;
     flex-wrap: wrap;
-    padding-top: 0.9rem;
+    padding-top: 1.05rem;
     border-top: 1px solid var(--line);
   }
 
@@ -285,73 +295,50 @@ const websiteSchema = {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     white-space: nowrap;
-    margin-right: 0.1rem;
   }
 
-  .contact-strip a {
-    font-family: var(--font-mono);
-    color: var(--text-faint);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition:
-      color 150ms var(--ease-out),
-      transform 160ms var(--ease-out);
+  .contact-actions {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem 1rem;
+    flex-wrap: wrap;
   }
 
   .social-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
     font-family: var(--font-mono);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: var(--text-faint);
+    color: var(--text-soft);
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
     transition:
       color 150ms var(--ease-out),
-      transform 140ms var(--ease-out);
-    position: relative;
+      transform 140ms var(--ease-out),
+      border-color 160ms var(--ease-out);
   }
 
-  .social-link-btn:active {
-    transform: scale(0.97);
-  }
-
-  .copy-toast {
-    font-family: var(--font-mono);
-    position: absolute;
-    bottom: -1.6rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.56rem;
-    color: #f6f2eb;
-    background: rgba(24, 21, 19, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0.16rem 0.38rem;
-    border-radius: 999px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 160ms var(--ease-out);
-    white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .social-link-btn.copied .copy-toast {
-    opacity: 1;
+  .contact-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    color: currentColor;
+    display: block;
   }
 
   .editorial-index {
     border-top: 1px solid var(--line);
+    margin-top: 0.35rem;
   }
 
   .folio-row {
     display: grid;
     grid-template-columns: 150px minmax(0, 1fr) auto;
-    gap: 1.4rem;
-    padding: 1.15rem 0;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
     border-bottom: 1px solid var(--line);
     align-items: start;
   }
@@ -366,21 +353,25 @@ const websiteSchema = {
   }
 
   .folio-row--feature {
-    padding-top: 1.45rem;
-    padding-bottom: 1.3rem;
+    padding-top: 1.6rem;
+    padding-bottom: 1.7rem;
+  }
+
+  .folio-row--feature + .folio-row {
+    padding-top: 1.55rem;
   }
 
   .folio-row--feature .folio-copy p {
-    max-width: 31rem;
-    font-size: 0.98rem;
+    max-width: 34rem;
+    font-size: 1rem;
     color: var(--text-soft);
-    line-height: 1.58;
+    line-height: 1.66;
   }
 
   .folio-row--minor .folio-copy p {
-    max-width: 30rem;
-    font-size: 0.89rem;
-    line-height: 1.52;
+    max-width: 34rem;
+    font-size: 0.92rem;
+    line-height: 1.62;
     color: var(--text-soft);
   }
 
@@ -415,6 +406,7 @@ const websiteSchema = {
     flex-direction: column;
     align-items: flex-end;
     gap: 0.5rem;
+    min-width: 6.5rem;
   }
 
   .section-link {
@@ -423,14 +415,16 @@ const websiteSchema = {
     align-items: center;
     gap: 0.25rem;
     margin-top: 0;
-    font-size: 0.68rem;
-    color: var(--text-soft);
+    font-size: 0.66rem;
+    color: var(--text);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
     transition:
       color 150ms var(--ease-out),
-      gap 160ms var(--ease-out);
+      gap 160ms var(--ease-out),
+      border-color 160ms var(--ease-out);
   }
 
   .folio-row--feature .section-link {
@@ -476,15 +470,16 @@ const websiteSchema = {
       transform: translateY(-1px) scale(1.01);
     }
 
-    .contact-strip a:hover,
     .social-link-btn:hover {
       color: var(--accent);
       transform: translateY(-1px);
+      border-color: currentColor;
     }
 
     .section-link:hover {
       color: var(--text);
       gap: 0.45rem;
+      border-color: rgba(20, 19, 17, 0.35);
     }
 
     .section-link:hover .arrow {
@@ -496,15 +491,3 @@ const websiteSchema = {
     }
   }
 </style>
-
-<script>
-  const copyBtn = document.querySelector('[data-copy]');
-  copyBtn?.addEventListener('click', async () => {
-    const text = copyBtn.getAttribute('data-copy');
-    if (text) {
-      await navigator.clipboard.writeText(text);
-      copyBtn.classList.add('copied');
-      setTimeout(() => copyBtn.classList.remove('copied'), 1500);
-    }
-  });
-</script>

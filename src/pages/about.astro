@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -22,64 +21,152 @@ const pageSchema = {
   title="About Juan Esquivel — Crypto Marketer in Los Angeles"
   description="Background, taste, and working context for Juan Esquivel."
   canonicalPath="/about"
+  preloadImages={['/images/about/about-stage.avif']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
   <Nav active="about" />
 
-  <PageHeader title="About" subtitle="Background, taste, and the path into the work." />
+  <section class="about-stage-shell">
+    <div class="about-stage">
+    <article class="about-pane">
+      <header class="about-pane-header">
+        <h1 class="about-pane-title">About</h1>
+      </header>
 
-  <article class="prose">
-    <p class="lead">
-      I'm Juan. From Los Angeles, child of Mexican immigrants, raised by the internet, and now back
-      in LA.
-    </p>
+      <p class="about-pane-lead">
+        I'm Juan. From Los Angeles, son of Mexican immigrants, raised by the internet.
+      </p>
 
-    <p>
-      I've been doing marketing in crypto for about four years now. Got in through content. Writing
-      was the way in and it's still the thing I keep circling back to. These days I'm more drawn to
-      brand and product marketing, but storytelling runs through all of it.
-    </p>
+      <p>
+        I got into crypto through content. Writing was the way in, and it is still the discipline I
+        trust most. Over time the work widened into brand, product, and narrative, but the core has
+        stayed the same: make the story clear enough that people want to keep paying attention.
+      </p>
 
-    <p>
-      Studied finance in school. Graduated around DeFi summer which was good timing I guess. The
-      traditional finance path never really appealed to me. My parents got burned by 2008 and the
-      opportunities I was seeing just felt off. Meanwhile crypto Twitter was going crazy. I knew I
-      wanted in somehow.
-    </p>
+      <p>
+        I studied finance and graduated around DeFi summer. Traditional finance never really pulled
+        me in. After seeing what 2008 did to my family, the path in front of me felt thin. Crypto
+        looked chaotic, unserious, and alive. That was more interesting.
+      </p>
 
-    <p>
-      I spent time away and got a lot out of the reset, but I'm back in Los Angeles now. Being home
-      again feels clarifying. The city still shapes my taste, my references, and probably the way I
-      think about brand more than anywhere else.
-    </p>
+      <p>
+        The last few years made the lane clearer. I care about trust-building work: editorial systems,
+        launches that need taste, and positioning that gives technical products a point of view. I
+        like the part of marketing that feels closer to design, world-building, and judgment than
+        growth theater.
+      </p>
 
-    <p>
-      When I'm not working I'm usually watching movies, digging through music, or hunting for good
-      coffee shops around the city. In another life I helped run an indie electronic label with some
-      friends in London. Tried my hand at DJing. I watch too much baseball, too many streamers, and
-      I've seen every episode of Seinfeld more times than I'd admit. Have traveled to over 13
-      countries and counting.
-    </p>
+      <p>
+        Outside work I spend a lot of time with film, music, design, baseball, and whatever city I am
+        in. In another life I helped run an indie electronic label with friends in London and tried my
+        hand at DJing. The references all bleed into the work sooner or later.
+      </p>
 
-    <p>
-      The throughline is still the same: storytelling, creativity, world-building, brand. The part
-      of work that doesn't feel like work.
-    </p>
+      <p>
+        The throughline is still storytelling. Brand, product, content, narrative — different surfaces,
+        same instinct.
+      </p>
 
-    <p class="resume-link"><a href="/resume" target="_blank" rel="noopener">View my resume →</a></p>
-  </article>
+      <p class="resume-link"><a href="/resume" target="_blank" rel="noopener">View my resume →</a></p>
+    </article>
+    </div>
+  </section>
 </Layout>
 
 <style>
+  .about-stage-shell {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: clamp(4rem, 9vw, 6rem);
+  }
+
+  .about-stage {
+    position: relative;
+    min-height: clamp(38rem, 62vw, 48rem);
+    padding: clamp(2.8rem, 5vw, 4.2rem);
+    background:
+      linear-gradient(180deg, rgba(243, 241, 235, 0.06), rgba(243, 241, 235, 0.18)),
+      linear-gradient(90deg, rgba(243, 241, 235, 0.16), rgba(243, 241, 235, 0.04) 38%, rgba(243, 241, 235, 0.02)),
+      url('/images/about/about-stage.avif') center center / cover no-repeat;
+    box-shadow: 0 22px 58px rgba(17, 15, 13, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .about-pane {
+    position: relative;
+    width: min(43rem, calc(100% - 7rem));
+    padding: 2.05rem 2.25rem 1.9rem;
+    border: 1px solid rgba(20, 19, 17, 0.16);
+    background: rgba(246, 244, 239, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 20px 46px rgba(17, 15, 13, 0.08),
+      0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  }
+
+  .about-pane::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    width: 3.75rem;
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, rgba(194, 74, 45, 0.9), rgba(20, 19, 17, 0.1));
+  }
+
+  .about-pane::after {
+    content: '';
+    position: absolute;
+    inset: 0.8rem;
+    border: 1px solid rgba(20, 19, 17, 0.035);
+    pointer-events: none;
+  }
+
+  .about-pane-header {
+    margin-bottom: 1.2rem;
+    padding-top: 0.7rem;
+  }
+
+  .about-pane-title {
+    font-size: clamp(2.7rem, 5vw, 4rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+    margin-bottom: 0.7rem;
+  }
+
+  .about-pane-lead {
+    color: var(--text);
+    max-width: 46ch;
+    font-size: 1.06rem;
+    line-height: 1.62;
+    margin-bottom: 0.9rem;
+  }
+
+  .about-pane p:not(.about-pane-lead):not(.resume-link) {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    line-height: 1.74;
+  }
+
+  .about-pane p + p {
+    margin-top: 0.8rem;
+  }
+
   .resume-link {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
   }
 
   .resume-link a {
     color: var(--accent);
-    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: opacity 0.15s ease;
@@ -87,5 +174,39 @@ const pageSchema = {
 
   .resume-link a:hover {
     opacity: 0.8;
+  }
+
+  @media (max-width: 760px) {
+    .about-stage-shell {
+      width: 100%;
+      margin-left: 0;
+      transform: none;
+      margin-bottom: 3.25rem;
+    }
+
+    .about-stage {
+      min-height: auto;
+      align-items: stretch;
+      padding: 0;
+      background-position: center top;
+    }
+
+    .about-pane {
+      width: 100%;
+      margin-top: 12rem;
+      padding: 1.65rem 1.2rem 1.5rem;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      box-shadow: none;
+    }
+
+    .about-pane::before {
+      top: 0.85rem;
+    }
+
+    .about-pane::after {
+      inset: 0.55rem 0.75rem;
+    }
   }
 </style>
