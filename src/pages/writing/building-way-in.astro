@@ -1,39 +1,34 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { writingPostBySlug } from '../../data/writing';
 
-const post = {
-  title: "A Story About Building Your Way In",
-  subtitle: "I had no network, no connections, and no clear path in.",
-  date: "2026.01.31",
-  publishedTime: "2026-01-31",
-  cover: "/images/building-way-in-cover.jpg"
-};
+const post = writingPostBySlug['building-way-in'];
 
 const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": post.title,
-  "description": post.subtitle,
-  "image": `https://juanesquivel.xyz${post.cover}`,
-  "datePublished": post.publishedTime,
-  "author": {
-    "@type": "Person",
-    "name": "Juan Esquivel",
-    "url": "https://juanesquivel.xyz"
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.subtitle,
+  image: `https://juanesquivel.xyz${post.cover}`,
+  datePublished: post.publishedTime,
+  author: {
+    '@type': 'Person',
+    name: 'Juan Esquivel',
+    url: 'https://juanesquivel.xyz',
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Juan Esquivel",
-    "url": "https://juanesquivel.xyz",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://juanesquivel.xyz/images/avatar.jpg"
-    }
+  publisher: {
+    '@type': 'Organization',
+    name: 'Juan Esquivel',
+    url: 'https://juanesquivel.xyz',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://juanesquivel.xyz/images/avatar.jpg',
+    },
   },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://juanesquivel.xyz/writing/building-way-in"
-  }
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://juanesquivel.xyz/writing/building-way-in',
+  },
 };
 ---
 
@@ -51,19 +46,38 @@ const articleSchema = {
   </Fragment>
   <nav class="nav">
     <a href="/writing" class="back-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m15 18-6-6 6-6"/>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m15 18-6-6 6-6"></path>
       </svg>
       Writing
     </a>
   </nav>
 
   <article class="post">
-    {post.cover && (
-      <figure class="post-cover">
-        <img src={post.cover} alt="Building My Way In article cover" width="640" height="360" loading="eager" decoding="async" fetchpriority="high" />
-      </figure>
-    )}
+    {
+      post.cover && (
+        <figure class="post-cover">
+          <img
+            src={post.cover}
+            alt="Building My Way In article cover"
+            width="640"
+            height="360"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </figure>
+      )
+    }
 
     <header class="post-header">
       <h1 class="post-title">{post.title}</h1>
@@ -77,317 +91,408 @@ const articleSchema = {
       <p>Last week I was scrolling X when I stumbled on this:</p>
 
       <figure class="post-image">
-        <img src="/images/building-way-in-tweet.jpg" alt="Tweet from van Schneider: In order to write about life, first you must live it. — Ernest Hemingway" width="600" height="300" loading="lazy" decoding="async" />
+        <img
+          src="/images/building-way-in-tweet.jpg"
+          alt="Tweet from van Schneider: In order to write about life, first you must live it. — Ernest Hemingway"
+          width="600"
+          height="300"
+          loading="lazy"
+          decoding="async"
+        />
         <figcaption>i need to read more hemingway</figcaption>
       </figure>
 
-      <p>I took this as a sign that it's time I wrote about my journey into crypto and experience operating in startups, so here it is. A story about being on the outside, and building a way in.</p>
+      <p>
+        I took this as a sign that it's time I wrote about my journey into crypto and experience
+        operating in startups, so here it is. A story about being on the outside, and building a way
+        in.
+      </p>
 
       <h2>The Pre-Crypto Era</h2>
 
-      <p>Back in 2020-21, off the high of DeFi Summer and lows of Covid shutdowns, I landed face first in the crypto industry. If you were around CT back then you know the wave of euphoria and optimism that was happening, the promises of decentralization, permissionlessness, and transparent technology. New rails for a new world.</p>
+      <p>
+        Back in 2020-21, off the high of DeFi Summer and lows of Covid shutdowns, I landed face
+        first in the crypto industry. If you were around CT back then you know the wave of euphoria
+        and optimism that was happening, the promises of decentralization, permissionlessness, and
+        transparent technology. New rails for a new world.
+      </p>
 
-      <p>This was happening online, but offline in my personal life I was really struggling. I had recently graduated university and was not excited about my options in tradfi. I studied finance and was looking at financial services paths like wealth management and retail brokerages, but I didn't have connections in tech and no one in my circle was in crypto. I was starting from zero, trying to break into an industry that didn't know I existed. Crypto, the alternative to tradfi, called to me.</p>
+      <p>
+        This was happening online, but offline in my personal life I was really struggling. I had
+        recently graduated university and was not excited about my options in tradfi. I studied
+        finance and was looking at financial services paths like wealth management and retail
+        brokerages, but I didn't have connections in tech and no one in my circle was in crypto. I
+        was starting from zero, trying to break into an industry that didn't know I existed. Crypto,
+        the alternative to tradfi, called to me.
+      </p>
 
-      <p>Over the summer of 2021, I looked for opportunities, interacted with people I admired, posted on CT to build an audience, and built proof of work. The method was simple: create and post useful content to open doors. When you don't have a network, you build one, and when no one knows who you are, you make them notice.</p>
+      <p>
+        Over the summer of 2021, I looked for opportunities, interacted with people I admired,
+        posted on CT to build an audience, and built proof of work. The method was simple: create
+        and post useful content to open doors. When you don't have a network, you build one, and
+        when no one knows who you are, you make them notice.
+      </p>
 
       <h2>The Community Contributor Era</h2>
 
-      <p>Posting content led me to Zach Davidson. At the time, Zach was running Growth and Community for RabbitHole, a quest and bounty platform that rewarded users for using crypto protocols or apps. Zach took notice and invited me to join the company's upcoming Metagovernance experiment.</p>
+      <p>
+        Posting content led me to Zach Davidson. At the time, Zach was running Growth and Community
+        for RabbitHole, a quest and bounty platform that rewarded users for using crypto protocols
+        or apps. Zach took notice and invited me to join the company's upcoming Metagovernance
+        experiment.
+      </p>
 
-      <p>Quick aside on self-doubt and fear: if you're reading this and struggle with these thoughts, do what I did. Before you overthink it, hit send. I promise you'll be surprised with how many conversations or doors open to those who simply knock. I really struggled with this early on, but my deep hunger to learn paired with humility helped me overcome it.</p>
+      <p>
+        Quick aside on self-doubt and fear: if you're reading this and struggle with these thoughts,
+        do what I did. Before you overthink it, hit send. I promise you'll be surprised with how
+        many conversations or doors open to those who simply knock. I really struggled with this
+        early on, but my deep hunger to learn paired with humility helped me overcome it.
+      </p>
 
-      <p>During RabbitHole's Metagovernance initiative I focused on creating educational content and resources. We had a few goals: long-term it was figuring out how to effectively decentralize the RabbitHole protocol, and short-term, act as responsible governing tokenholders for protocols like Compound, Aave, Uniswap, and others.</p>
+      <p>
+        During RabbitHole's Metagovernance initiative I focused on creating educational content and
+        resources. We had a few goals: long-term it was figuring out how to effectively decentralize
+        the RabbitHole protocol, and short-term, act as responsible governing tokenholders for
+        protocols like Compound, Aave, Uniswap, and others.
+      </p>
 
-      <p>Shoutout <a href="https://x.com/raholloway" target="_blank" rel="noopener">@raholloway</a>, another homie I met along my journey. We came up through RabbitHole grinding the community calls, and he's thriving now over at Uniswap.</p>
+      <p>
+        Shoutout <a href="https://x.com/raholloway" target="_blank" rel="noopener">@raholloway</a>,
+        another homie I met along my journey. We came up through RabbitHole grinding the community
+        calls, and he's thriving now over at Uniswap.
+      </p>
 
-      <p>Meeting and speaking with people in this space is the most valuable thing you can do for yourself. I was on the outside looking in, and I didn't know where to start. I thought to myself, "why would these individuals ever care to talk to me?" <strong>Don't let this hold you back. Create value, give recognition, and become someone worth betting on.</strong></p>
+      <p>
+        Meeting and speaking with people in this space is the most valuable thing you can do for
+        yourself. I was on the outside looking in, and I didn't know where to start. I thought to
+        myself, "why would these individuals ever care to talk to me?" <strong
+          >Don't let this hold you back. Create value, give recognition, and become someone worth
+          betting on.</strong>
+      </p>
 
       <figure class="post-image">
-        <img src="/images/building-way-in-dm.jpg" alt="DM conversation with Zach from RabbitHole" width="600" height="400" loading="lazy" decoding="async" />
+        <img
+          src="/images/building-way-in-dm.jpg"
+          alt="DM conversation with Zach from RabbitHole"
+          width="600"
+          height="400"
+          loading="lazy"
+          decoding="async"
+        />
         <figcaption>twitter dms can change your life</figcaption>
       </figure>
 
-      <p>Quick aside: Zach and I met for lunch in LA a few months later. Hope you're doing well Zach, thanks for nudging me all those years ago.</p>
+      <p>
+        Quick aside: Zach and I met for lunch in LA a few months later. Hope you're doing well Zach,
+        thanks for nudging me all those years ago.
+      </p>
 
-      <p>After RabbitHole ended, I briefly contributed at Orca (few pivots later now known as Metal), which was building governance infrastructure for DAOs on top of multi-sig tech. I contributed in working groups exploring how this technology itself could be decentralized as it became the foundation for many of the DAOs sprouting up at the time.</p>
+      <p>
+        After RabbitHole ended, I briefly contributed at Orca (few pivots later now known as Metal),
+        which was building governance infrastructure for DAOs on top of multi-sig tech. I
+        contributed in working groups exploring how this technology itself could be decentralized as
+        it became the foundation for many of the DAOs sprouting up at the time.
+      </p>
 
-      <p>Both of these experiences gave me something valuable: a community and network. A lot of this work was really just community contribution, sometimes paid, sometimes not. But I realized I was ready to join a team full-time.</p>
+      <p>
+        Both of these experiences gave me something valuable: a community and network. A lot of this
+        work was really just community contribution, sometimes paid, sometimes not. But I realized I
+        was ready to join a team full-time.
+      </p>
 
       <h2>The Startup Era</h2>
 
-      <p>I joined Boardroom as Content Lead in the summer of 2022. I posted a tweet that I was looking for my next project, put myself out there, and made it happen. A handful of teams reached out, and I jumped on a call with Kevin Nielsen, founder of Boardroom, the DAO governance tooling platform. Kevin offered me the chance to take over content and join the startup full-time, and I agreed.</p>
+      <p>
+        I joined Boardroom as Content Lead in the summer of 2022. I posted a tweet that I was
+        looking for my next project, put myself out there, and made it happen. A handful of teams
+        reached out, and I jumped on a call with Kevin Nielsen, founder of Boardroom, the DAO
+        governance tooling platform. Kevin offered me the chance to take over content and join the
+        startup full-time, and I agreed.
+      </p>
 
-      <p>At Boardroom I got my first real exposure to an early-stage technology startup and quickly fell in love with the chaos and growth opportunities. I built the foundations of a content system and strategy, learned how technical teams operate, what building product takes, and most importantly learned all I could about building a startup. This time I was on the inside.</p>
+      <p>
+        At Boardroom I got my first real exposure to an early-stage technology startup and quickly
+        fell in love with the chaos and growth opportunities. I built the foundations of a content
+        system and strategy, learned how technical teams operate, what building product takes, and
+        most importantly learned all I could about building a startup. This time I was on the
+        inside.
+      </p>
 
-      <p>While at Boardroom I had the chance to form more connections, meeting people like <a href="https://x.com/bobbay_b" target="_blank" rel="noopener">Bobby Bola</a>, who was a Governance Analyst at StableLab at the time. Bobby and I became good friends and stayed in touch over the following months. Over the holiday break of 2022, Bobby pushed me to apply at StableLab as they were in need of crypto-native marketing help. I made a choice, followed my gut, and applied.</p>
+      <p>
+        While at Boardroom I had the chance to form more connections, meeting people like <a
+          href="https://x.com/bobbay_b"
+          target="_blank"
+          rel="noopener">Bobby Bola</a
+        >, who was a Governance Analyst at StableLab at the time. Bobby and I became good friends
+        and stayed in touch over the following months. Over the holiday break of 2022, Bobby pushed
+        me to apply at StableLab as they were in need of crypto-native marketing help. I made a
+        choice, followed my gut, and applied.
+      </p>
 
-      <p>I got the role at StableLab, an early stage company operating as a governance services firm for many of the big DAOs and protocols in the space. Most of my learning happened at StableLab. Over three years I did things I had never done before: brand development, product marketing, explored new forms of content, learned management skills. I took the function from effectively zero, adapting as the company evolved toward a product-first startup.</p>
+      <p>
+        I got the role at StableLab, an early stage company operating as a governance services firm
+        for many of the big DAOs and protocols in the space. Most of my learning happened at
+        StableLab. Over three years I did things I had never done before: brand development, product
+        marketing, explored new forms of content, learned management skills. I took the function
+        from effectively zero, adapting as the company evolved toward a product-first startup.
+      </p>
 
-      <p>Working under Gustav Arentoft and Doo Wan Nam, I learned more than just marketing. I became someone who could be relied on, who took ownership, who adapted when things shifted. You can't really teach that. You either figure it out in the chaos or you don't. I figured it out. I was a university graduate with no network and no clear path to where I wanted to be, and now I was leading marketing at a company working with the biggest protocols in crypto. I built that.</p>
+      <p>
+        Working under Gustav Arentoft and Doo Wan Nam, I learned more than just marketing. I became
+        someone who could be relied on, who took ownership, who adapted when things shifted. You
+        can't really teach that. You either figure it out in the chaos or you don't. I figured it
+        out. I was a university graduate with no network and no clear path to where I wanted to be,
+        and now I was leading marketing at a company working with the biggest protocols in crypto. I
+        built that.
+      </p>
 
-      <p>In January 2026, after 5 years of operations, StableLab unfortunately ceased operations. A bittersweet moment. This chapter is over but my story continues, and with it I take every single conversation, mistake, lesson, and connection I've made up until now.</p>
+      <p>
+        In January 2026, after 5 years of operations, StableLab unfortunately ceased operations. A
+        bittersweet moment. This chapter is over but my story continues, and with it I take every
+        single conversation, mistake, lesson, and connection I've made up until now.
+      </p>
 
       <h2>What's Next</h2>
 
-      <p>The thing about startups is that you can read about them, but experiencing them is a whole other level. If you're willing to do the work, the work will open doors.</p>
+      <p>
+        The thing about startups is that you can read about them, but experiencing them is a whole
+        other level. If you're willing to do the work, the work will open doors.
+      </p>
 
-      <p>Over the last 4-5 years, much has evolved. The industry and its companies are growing up, institutions have arrived and will continue coming, and products and application layers are becoming useful with real users.</p>
+      <p>
+        Over the last 4-5 years, much has evolved. The industry and its companies are growing up,
+        institutions have arrived and will continue coming, and products and application layers are
+        becoming useful with real users.
+      </p>
 
-      <p>I came into this space to help build those new rails. That hasn't changed. I want to keep telling stories, keep learning, and find a team that cares about craft as much as I do.</p>
+      <p>
+        I came into this space to help build those new rails. That hasn't changed. I want to keep
+        telling stories, keep learning, and find a team that cares about craft as much as I do.
+      </p>
 
-      <p>If you read this far, maybe you see yourself in my story. Maybe you're the one without the network. Maybe you're sitting there wondering why anyone would take a chance on you.</p>
+      <p>
+        If you read this far, maybe you see yourself in my story. Maybe you're the one without the
+        network. Maybe you're sitting there wondering why anyone would take a chance on you.
+      </p>
 
-      <p>None of that has to matter. Build proof of work, create value, and put yourself out there before you feel ready.</p>
+      <p>
+        None of that has to matter. Build proof of work, create value, and put yourself out there
+        before you feel ready.
+      </p>
 
       <figure class="post-image">
-        <img src="/images/building-way-in-nairolf.jpg" alt="Tweet from @0xNairolf: the most beautiful part of crypto is unlocking access people never had" width="600" height="200" loading="lazy" decoding="async" />
+        <img
+          src="/images/building-way-in-nairolf.jpg"
+          alt="Tweet from @0xNairolf: the most beautiful part of crypto is unlocking access people never had"
+          width="600"
+          height="200"
+          loading="lazy"
+          decoding="async"
+        />
       </figure>
 
       <p><strong>The path won't be handed to you, but you can build it yourself. I did.</strong></p>
     </div>
-  </article>
 
-  <section class="more-writing">
+    <section class="more-writing">
     <h2>More writing</h2>
     <ul>
-      <li><a href="/writing/crypto-native">Crypto-native isn't everything. But it's still something.</a></li>
-      <li><a href="/writing/stablepod-lessons">The best crypto founders and leaders do this on podcasts</a></li>
+      <li>
+        <a href="/writing/crypto-native"
+          >Crypto-native isn't everything. But it's still something.</a>
+      </li>
+      <li>
+        <a href="/writing/stablepod-lessons"
+          >The best crypto founders and leaders do this on podcasts</a>
+      </li>
       <li><a href="/writing">See all writing</a></li>
     </ul>
-  </section>
-
+    </section>
+  </article>
 </Layout>
 
 <style>
   .nav {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #1a1a1a;
+    margin-bottom: 2rem;
   }
 
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: #525252;
-    transition: color 0.2s ease;
+    gap: 0.375rem;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  .back-link:hover {
-    color: #e5e5e5;
-  }
-
-  .back-link svg {
-    transition: transform 0.2s ease;
-  }
-
-  .back-link:hover svg {
-    transform: translateX(-2px);
+  .back-link:focus-visible {
+    outline: 2px solid var(--line-strong);
+    outline-offset: 2px;
   }
 
   .post {
-    max-width: 100%;
+    max-width: 44rem;
+    margin: 0 auto;
   }
 
-  .post-cover {
-    margin: 0 0 2.5rem 0;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    max-width: 38rem;
-  }
-
-  .post-cover img {
-    width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-  }
-
-  .post-header {
-    margin-bottom: 2.5rem;
-    max-width: 38rem;
-  }
-
-  .post-title {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #f5f5f5;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.75rem;
-  }
-
-  .post-subtitle {
-    font-size: 1.125rem;
-    color: #999999;
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: #525252;
-  }
-
-  .separator {
-    color: #333;
-  }
-
-  .post-content {
-    color: #c4c4c4;
-    font-size: 1rem;
-    line-height: 1.75;
-    max-width: 38rem;
-  }
-
-  .post-content > p:first-child {
-    font-size: 1.125rem;
-    color: #e5e5e5;
-    line-height: 1.7;
-  }
-
-  .post-content p {
-    margin-bottom: 1.5rem;
-    text-wrap: pretty;
-  }
-
+  .post-cover,
   .post-image {
-    margin: 2.5rem 0;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
+    margin: 0 0 1.5rem;
   }
 
+  .post-cover img,
   .post-image img {
     width: 100%;
     height: auto;
     display: block;
+    border: 1px solid var(--line);
   }
 
   .post-image figcaption {
-    font-size: 0.8125rem;
-    color: #525252;
-    padding: 0.75rem 1rem;
-    font-style: italic;
-    border-top: 1px solid #1a1a1a;
+    margin-top: 0.55rem;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-title {
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    line-height: 0.95;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-subtitle {
+    font-size: 1rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-meta {
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .post-content {
+    color: var(--text-soft);
   }
 
   .post-content h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #e5e5e5;
-    margin-top: 4rem;
-    margin-bottom: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.9rem;
+    font-size: 1.45rem;
+    text-transform: none;
+    letter-spacing: -0.03em;
+  }
+
+  .post-content h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    text-transform: none;
     letter-spacing: -0.02em;
-    text-wrap: balance;
+  }
+
+  .post-content p,
+  .post-content li {
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+
+  .post-content p + p,
+  .post-content p + ul,
+  .post-content p + blockquote,
+  .post-content p + .post-image,
+  .post-content ul + p,
+  .post-content blockquote + p,
+  .post-content .post-image + p,
+  .post-content h2 + p,
+  .post-content h3 + p {
+    margin-top: 1rem;
+  }
+
+  .post-content ul {
+    padding-left: 1.1rem;
+  }
+
+  .post-content li + li {
+    margin-top: 0.45rem;
+  }
+
+  .post-content blockquote {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--line-strong);
+    color: var(--text);
+    font-style: italic;
   }
 
   .post-content hr {
     border: none;
-    border-top: 1px solid #262626;
-    margin: 3.5rem 0;
-  }
-
-  .post-content blockquote {
-    border-left: 2px solid #FF6B00;
-    padding: 1.25rem 0 1.25rem 1.5rem;
-    margin: 2.5rem 0;
-    font-size: 1.125rem;
-    font-style: italic;
-    color: #e5e5e5;
-    background: linear-gradient(to right, rgba(255,107,0,0.04), transparent);
-    border-radius: 0 4px 4px 0;
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-
-  .post-content ul {
+    border-top: 1px solid var(--line);
     margin: 2rem 0;
-    padding-left: 1.25rem;
-  }
-
-  .post-content li {
-    margin-bottom: 0.75rem;
-    color: #c4c4c4;
-    padding-left: 0.5rem;
-    text-wrap: pretty;
-  }
-
-  .post-content li::marker {
-    color: #FF6B00;
   }
 
   .post-content strong {
-    color: #e5e5e5;
-    font-weight: 600;
+    color: var(--text);
   }
 
   .post-content em {
-    color: #a3a3a3;
+    color: var(--text-soft);
   }
 
-  .post-content a {
-    color: #FF6B00;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255, 107, 0, 0.3);
-    transition: border-color 0.15s ease;
+  .post-content code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--surface-strong);
+    padding: 0.18em 0.38em;
   }
 
-  .post-content a:hover {
-    border-color: #FF6B00;
+  .post-content pre {
+    margin-top: 1rem;
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
   }
 
-  @media (max-width: 640px) {
-    .post-title {
-      font-size: 1.75rem;
-      letter-spacing: -0.02em;
-    }
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
 
-    .post-subtitle {
-      font-size: 1rem;
-    }
-
-    .post-content h2 {
-      font-size: 1.25rem;
-      margin-top: 3rem;
-    }
-
-    .post-content > p:first-child {
-      font-size: 1.0625rem;
-    }
-
-    .post-content blockquote {
-      font-size: 1rem;
-    }
+  .post-content a,
+  .more-writing a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--text-faint);
+    text-underline-offset: 2px;
   }
 
   .more-writing {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #1a1a1a;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .more-writing h2 {
+    margin-bottom: 0.8rem;
   }
 
   .more-writing ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .more-writing a {
-    color: #e5e5e5;
-  }
-
-  .more-writing a:hover {
-    color: #FF6B00;
+    padding-left: 1rem;
   }
 </style>

@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  compact?: boolean;
+}
+
+const { title, subtitle, compact = false } = Astro.props;
+---
+
+<header class:list={['page-header', compact && 'page-header--compact']}>
+  <h1 class="page-title">{title}</h1>
+  {subtitle && <p class="page-subtitle">{subtitle}</p>}
+</header>

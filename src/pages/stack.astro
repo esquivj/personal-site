@@ -1,296 +1,200 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "name": "Juan Esquivel's Stack",
-  "url": "https://juanesquivel.xyz/stack",
-  "description": "Tools, apps, and gear that Juan Esquivel uses daily for development, productivity, and creativity.",
-  "author": {
-    "@type": "Person",
-    "name": "Juan Esquivel",
-    "url": "https://juanesquivel.xyz"
-  }
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: "Juan Esquivel's Stack",
+  url: 'https://juanesquivel.xyz/stack',
+  description:
+    'Tools, apps, and gear that Juan Esquivel uses daily for development, productivity, and creativity.',
+  author: {
+    '@type': 'Person',
+    name: 'Juan Esquivel',
+    url: 'https://juanesquivel.xyz',
+  },
 };
+
+const stackSections = [
+  {
+    title: 'Development',
+    items: [
+      {
+        name: 'Claude Code',
+        desc: 'AI coding assistant',
+        href: 'https://claude.ai/code',
+        icon: '/images/stack/anthropic.jpg',
+        eager: true,
+      },
+      {
+        name: 'Cursor',
+        desc: 'AI-powered code editor',
+        href: 'https://cursor.com',
+        icon: '/images/stack/cursor.png',
+        eager: true,
+      },
+      {
+        name: 'Ghostty',
+        desc: 'Terminal emulator',
+        href: 'https://ghostty.org',
+        icon: '/images/stack/ghostty.png',
+        eager: true,
+      },
+      {
+        name: 'OpenClaw',
+        desc: 'AI computer use agent',
+        href: 'https://openclaw.ai',
+        icon: '/images/stack/openclaw.jpg',
+      },
+    ],
+  },
+  {
+    title: 'Productivity',
+    items: [
+      {
+        name: 'Obsidian',
+        desc: 'Knowledge management',
+        href: 'https://obsidian.md',
+        icon: '/images/stack/obsidian.jpg',
+      },
+      {
+        name: 'Notion',
+        desc: 'Docs and wikis',
+        href: 'https://notion.so',
+        icon: '/images/stack/notion.png',
+      },
+      {
+        name: 'Linear',
+        desc: 'Project and task management',
+        href: 'https://linear.app',
+        icon: '/images/stack/linear.jpg',
+      },
+      {
+        name: 'Amie',
+        desc: 'Calendar',
+        href: 'https://amie.so',
+        icon: '/images/stack/amie.jpg',
+      },
+      {
+        name: 'Granola',
+        desc: 'AI meeting notes',
+        href: 'https://granola.ai',
+        icon: '/images/stack/granola.png',
+      },
+      {
+        name: 'Things 3',
+        desc: 'Task management',
+        href: 'https://culturedcode.com/things/',
+        icon: '/images/stack/things.jpg',
+      },
+    ],
+  },
+  {
+    title: 'Browsing & Research',
+    items: [
+      {
+        name: 'Dia',
+        desc: 'Web browser',
+        href: 'https://www.diabrowser.com',
+        icon: '/images/stack/dia.png',
+      },
+      {
+        name: 'Eagle',
+        desc: 'Image and video library',
+        href: 'https://eagle.cool',
+        icon: '/images/stack/eagle.jpg',
+      },
+    ],
+  },
+  {
+    title: 'Communication',
+    items: [
+      {
+        name: 'Beeper',
+        desc: 'All-in-one messaging',
+        href: 'https://www.beeper.com',
+        icon: '/images/stack/beeper.png',
+      },
+      {
+        name: 'Notion Mail',
+        desc: 'Email client',
+        href: 'https://notion.so/product/mail',
+        icon: '/images/stack/notion.png',
+      },
+    ],
+  },
+  {
+    title: 'Music',
+    items: [
+      {
+        name: 'Spotify',
+        desc: 'Music streaming',
+        href: 'https://spotify.com',
+        icon: '/images/stack/spotify.png',
+      },
+    ],
+  },
+];
 ---
 
 <Layout
   title="Stack — Tools & Apps Used by Juan Esquivel"
   description="Tools, apps, and gear that power Juan Esquivel's day-to-day. Development tools, productivity apps, and creative software."
   canonicalPath="/stack"
-  preloadImages={[
-    "/images/stack/anthropic.jpg",
-    "/images/stack/cursor.png",
-    "/images/stack/ghostty.png"
-  ]}
+  preloadImages={['/images/stack/anthropic.jpg', '/images/stack/cursor.png', '/images/stack/ghostty.png']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
   <Nav active="stack" />
 
-  <header class="page-header">
-    <h1>Stack</h1>
-    <p class="subtitle">Tools, apps, and gear that power my day-to-day.</p>
-  </header>
+  <PageHeader title="Stack" subtitle="Tools, apps, and gear that power my day-to-day." />
 
-  <!-- Development -->
-  <section>
-    <h2>Development</h2>
-    <div class="stack-list">
-      <a href="https://claude.ai/code" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/anthropic.jpg" alt="Claude" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Claude Code</span>
-          <span class="stack-desc">AI coding assistant</span>
+  {
+    stackSections.map((section) => (
+      <section>
+        <h2>{section.title}</h2>
+        <div class="surface-list">
+          {section.items.map((item) => (
+            <a href={item.href} target="_blank" rel="noopener" class="surface-link surface-link--stack">
+              <div class="surface-media stack-media">
+                <img
+                  src={item.icon}
+                  alt={item.name}
+                  class="contain"
+                  width="40"
+                  height="40"
+                  loading={item.eager ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+              <div class="surface-body">
+                <span class="surface-title">{item.name}</span>
+                <span class="surface-meta">{item.desc}</span>
+              </div>
+              <span class="surface-arrow">↗</span>
+            </a>
+          ))}
         </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://cursor.com" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/cursor.png" alt="Cursor" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Cursor</span>
-          <span class="stack-desc">AI-powered code editor</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://ghostty.org" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/ghostty.png" alt="Ghostty" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Ghostty</span>
-          <span class="stack-desc">Terminal emulator</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://openclaw.ai" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/openclaw.jpg" alt="OpenClaw" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">OpenClaw</span>
-          <span class="stack-desc">AI computer use agent</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-    </div>
-  </section>
+      </section>
+    ))
+  }
 
-  <!-- Productivity -->
-  <section>
-    <h2>Productivity</h2>
-    <div class="stack-list">
-      <a href="https://obsidian.md" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/obsidian.jpg" alt="Obsidian" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Obsidian</span>
-          <span class="stack-desc">Knowledge management</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://notion.so" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/notion.png" alt="Notion" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Notion</span>
-          <span class="stack-desc">Docs and wikis</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://linear.app" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/linear.jpg" alt="Linear" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Linear</span>
-          <span class="stack-desc">Project and task management</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://amie.so" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/amie.jpg" alt="Amie" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Amie</span>
-          <span class="stack-desc">Calendar</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://granola.ai" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/granola.png" alt="Granola" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Granola</span>
-          <span class="stack-desc">AI meeting notes</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://culturedcode.com/things/" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/things.jpg" alt="Things 3" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Things 3</span>
-          <span class="stack-desc">Task management</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Browsing & Research -->
-  <section>
-    <h2>Browsing & Research</h2>
-    <div class="stack-list">
-      <a href="https://www.diabrowser.com" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/dia.png" alt="Dia" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Dia</span>
-          <span class="stack-desc">Web browser</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://eagle.cool" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/eagle.jpg" alt="Eagle" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Eagle</span>
-          <span class="stack-desc">Image and video library</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Communication -->
-  <section>
-    <h2>Communication</h2>
-    <div class="stack-list">
-      <a href="https://www.beeper.com" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/beeper.png" alt="Beeper" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Beeper</span>
-          <span class="stack-desc">All-in-one messaging</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-      <a href="https://notion.so/product/mail" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/notion.png" alt="Notion Mail" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Notion Mail</span>
-          <span class="stack-desc">Email client</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Music -->
-  <section>
-    <h2>Music</h2>
-    <div class="stack-list">
-      <a href="https://spotify.com" target="_blank" rel="noopener" class="stack-item">
-        <img src="/images/stack/spotify.png" alt="Spotify" class="stack-icon" width="40" height="40" loading="lazy" decoding="async" />
-        <div class="stack-info">
-          <span class="stack-name">Spotify</span>
-          <span class="stack-desc">Music streaming</span>
-        </div>
-        <span class="stack-arrow">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <p class="coming-soon">Hardware, supplements, and gear coming soon.</p>
+  <p class="page-note">Hardware, supplements, and gear coming soon.</p>
 </Layout>
 
 <style>
-
-  .page-header {
-    margin-bottom: 3rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #e5e5e5;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: #999999;
-    font-size: 1rem;
-  }
-
-  section {
-    margin-bottom: 2.5rem;
-  }
-
-  section h2 {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #525252;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-  }
-
-  .stack-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .stack-item {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 0.5rem 0.75rem;
-    margin: 0 -0.75rem;
-    border-radius: 8px;
-    transition: background-color 0.15s ease;
-  }
-
-  .stack-item:hover {
-    background-color: #141414;
-  }
-
-  .stack-icon {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
+  .stack-media {
     border-radius: 22%;
-    object-fit: contain;
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 0 0.5px rgba(255, 255, 255, 0.05),
-      0 1px 3px rgba(0, 0, 0, 0.3),
-      0 0 0 0.5px rgba(255, 255, 255, 0.03);
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.03),
+      0 1px 3px rgba(0, 0, 0, 0.26);
   }
 
-  .stack-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-    flex-grow: 1;
-  }
-
-  .stack-name {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: #e5e5e5;
-  }
-
-  .stack-desc {
-    font-size: 0.8125rem;
-    color: #999999;
-  }
-
-  .stack-arrow {
-    color: #525252;
-    font-size: 0.875rem;
-    margin-left: auto;
-    flex-shrink: 0;
-  }
-
-  .stack-item:hover .stack-arrow {
-    color: #c4c4c4;
-  }
-
-  .coming-soon {
-    color: #525252;
-    font-size: 0.875rem;
-    font-style: italic;
+  .page-note {
     margin-top: 2rem;
   }
 </style>

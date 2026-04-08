@@ -1,17 +1,17 @@
 # Juan Esquivel
 
-> Lore maximalist. Previously Head of Marketing at StableLab (2023–2026). Building brand, narrative, and lore in crypto. Based in Lisbon, Portugal. Currently exploring what's next.
+> Marketer based in Los Angeles. Previously Head of Marketing at StableLab (2023–2026). Working across content, brand, product, and narrative.
 
-Juan Esquivel is a crypto marketer specializing in brand strategy, content marketing, and positioning for Web3 companies. He led marketing at StableLab, a DAO governance infrastructure company, through three business phases: services, product launch, and sales-led GTM. Previously, he was Content Lead at Boardroom. He writes about crypto marketing, building brands, storytelling, and working at startups.
+Juan Esquivel is a marketer specializing in brand strategy, content, product marketing, and positioning for crypto companies. He led marketing at StableLab, a DAO governance infrastructure company, through three business phases: services, product launch, and sales-led GTM. Previously, he was Content Lead at Boardroom. He writes about marketing, storytelling, and building your way in.
 
 ## Core Information
 
 - Name: Juan Esquivel
-- Location: Lisbon, Portugal
+- Location: Los Angeles, California
 - Role: Marketing leader, currently open to opportunities
 - Twitter/X: @0xCadena
 - Email: juanesquivel138@gmail.com
-- Personal brand: "lore maximalist"
+- Focus: content, brand, product, and narrative
 
 ## Expertise
 
@@ -28,11 +28,12 @@ Juan Esquivel is a crypto marketer specializing in brand strategy, content marke
 
 ### Professional
 - [Homepage](https://juanesquivel.xyz/): Overview with work history
+- [Projects](https://juanesquivel.xyz/projects): Independent builds and experiments
 - [Work Portfolio](https://juanesquivel.xyz/work): Marketing projects from StableLab
 - [Speaking](https://juanesquivel.xyz/speaking): Podcasts, interviews, and talks
 
 ### Content
-- [Writing](https://juanesquivel.xyz/writing): Essays on storytelling, crypto marketing, building brands
+- [Writing](https://juanesquivel.xyz/writing): Essays on marketing, storytelling, and building your way in.
 
 ### Personal
 - [Stack](https://juanesquivel.xyz/stack): Tools, apps, and gear used daily

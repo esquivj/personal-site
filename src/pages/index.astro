@@ -3,484 +3,501 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 
 const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Juan Esquivel",
-  "url": "https://juanesquivel.xyz",
-  "image": "https://juanesquivel.xyz/images/avatar.jpg",
-  "description": "Lore maximalist. Crypto marketer. Building brand, narrative, and lore in web3.",
-  "jobTitle": "Crypto Marketer",
-  "address": {
-    "@type": "Place",
-    "name": "Lisbon, Portugal"
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Juan Esquivel',
+  url: 'https://juanesquivel.xyz',
+  image: 'https://juanesquivel.xyz/images/avatar.jpg',
+  description:
+    'Marketer working across brand, product, and narrative with a focus on taste, clarity, and detail.',
+  jobTitle: 'Crypto Marketer',
+  address: {
+    '@type': 'Place',
+    name: 'Los Angeles, California',
   },
-  "sameAs": [
-    "https://x.com/0xCadena",
-    "https://www.linkedin.com/in/esquivj/",
-    "https://github.com/esquivj",
-    "https://www.cosmos.so/cadena"
+  sameAs: [
+    'https://x.com/0xCadena',
+    'https://www.linkedin.com/in/esquivj/',
+    'https://github.com/esquivj',
+    'https://www.cosmos.so/cadena',
   ],
-  "knowsAbout": [
-    "Crypto Marketing",
-    "Brand Strategy",
-    "Content Marketing",
-    "DAO Governance",
-    "Web3",
-    "Storytelling"
-  ]
+  knowsAbout: [
+    'Crypto Marketing',
+    'Brand Strategy',
+    'Content Marketing',
+    'DAO Governance',
+    'Web3',
+    'Storytelling',
+  ],
 };
 
 const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Juan Esquivel",
-  "url": "https://juanesquivel.xyz",
-  "description": "Personal website of Juan Esquivel - crypto marketer and storyteller based in Lisbon",
-  "author": {
-    "@type": "Person",
-    "name": "Juan Esquivel"
-  }
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Juan Esquivel',
+  url: 'https://juanesquivel.xyz',
+  description:
+    'Personal website of Juan Esquivel, a marketer working across brand, product, and narrative.',
+  author: {
+    '@type': 'Person',
+    name: 'Juan Esquivel',
+  },
 };
 ---
 
-<Layout canonicalPath="/" preloadImages={["/images/avatar.jpg"]}>
+<Layout canonicalPath="/" preloadImages={['/images/avatar.jpg']}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </Fragment>
-  <!-- Navigation -->
   <Nav active="home" />
 
-  <!-- Header -->
   <header class="header">
-    <div class="header-top">
-      <div class="avatar">
-        <img src="/images/avatar.jpg" alt="Juan Esquivel" width="64" height="64" loading="eager" decoding="async" fetchpriority="high" />
+    <div class="header-panel">
+      <div class="header-grid">
+        <div class="header-main">
+          <div class="header-top">
+            <div class="header-copy">
+              <h1 class="name">Juan Esquivel</h1>
+            </div>
+          </div>
+
+          <p class="bio">
+            Marketer based in Los Angeles. Most recently led marketing at StableLab. Working across
+            content, brand, product, and narrative.
+          </p>
+
+          <div class="contact-strip">
+            <span class="contact-kicker">Get in touch</span>
+            <a href="https://x.com/0xCadena" target="_blank" rel="noopener">X</a>
+            <a href="https://www.linkedin.com/in/esquivj/" target="_blank" rel="noopener"
+              >LinkedIn</a
+            >
+            <a href="https://github.com/esquivj" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.cosmos.so/cadena" target="_blank" rel="noopener">Cosmos</a>
+            <button
+              class="social-link-btn"
+              data-copy="juanesquivel138@gmail.com"
+              aria-label="Copy email to clipboard"
+            >
+              Email
+              <span class="copy-toast">Copied</span>
+            </button>
+          </div>
+        </div>
+
+        <figure class="portrait-panel">
+          <div class="avatar avatar--editorial">
+            <img
+              src="/images/avatar.jpg"
+              alt="Juan Esquivel"
+              width="160"
+              height="160"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </div>
+        </figure>
       </div>
-      <h1 class="name">Juan Esquivel</h1>
-    </div>
-
-    <p class="signature">lore maximalist</p>
-    <p class="bio">I'm a marketer living in Lisbon. Most recently led marketing at StableLab. In crypto since 2021. Currently exploring what's next.</p>
-
-    <p class="location">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-        <circle cx="12" cy="10" r="3"/>
-      </svg>
-      Lisbon, Portugal
-    </p>
-
-    <div class="social-links">
-      <a href="https://x.com/0xCadena" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-        <span class="sr-only">X</span>
-      </a>
-      <a href="https://www.linkedin.com/in/esquivj/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        <span class="sr-only">LinkedIn</span>
-      </a>
-      <a href="https://www.cosmos.so/cadena" target="_blank" rel="noopener" aria-label="Cosmos">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="12" cy="3.5" r="2.5"/>
-          <circle cx="19.4" cy="7.75" r="2.5"/>
-          <circle cx="19.4" cy="16.25" r="2.5"/>
-          <circle cx="12" cy="20.5" r="2.5"/>
-          <circle cx="4.6" cy="16.25" r="2.5"/>
-          <circle cx="4.6" cy="7.75" r="2.5"/>
-        </svg>
-        <span class="sr-only">Cosmos</span>
-      </a>
-      <a href="https://github.com/esquivj" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-        </svg>
-        <span class="sr-only">GitHub</span>
-      </a>
-      <button class="social-link-btn" data-copy="juanesquivel138@gmail.com" aria-label="Copy email to clipboard">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect width="20" height="16" x="2" y="4" rx="2"/>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-        </svg>
-        <span class="sr-only">Email</span>
-        <span class="copy-toast">Copied!</span>
-      </button>
-      <a href="https://etherscan.io/address/0xfE9D3B6F60F5cA2c76b4B682E497cF04E26E7257" target="_blank" rel="noopener" aria-label="Ethereum (juanesquivel.eth)">
-        <svg class="social-icon" viewBox="0 0 320 512" fill="currentColor">
-          <path d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"/>
-        </svg>
-        <span class="sr-only">Ethereum</span>
-      </a>
     </div>
   </header>
 
-  <!-- Work -->
-  <section>
-    <h2>Work</h2>
-    <div class="work-list">
-      <a href="https://stablelab.xyz" target="_blank" rel="noopener" class="work-item">
-        <div class="work-logo">
-          <img src="/images/stablelab-logo.svg" alt="StableLab" width="36" height="36" loading="eager" decoding="async" />
+  <section class="editorial-index">
+    <article class="folio-row folio-row--feature">
+      <div class="folio-label">
+        <h2>Work</h2>
+      </div>
+      <div class="folio-copy">
+        <p>Three years leading marketing at StableLab across services, product, and GTM.</p>
+        <div class="folio-credits">
+          <span>StableLab — Head of Marketing</span>
+          <span>Boardroom — Content Lead</span>
         </div>
-        <div class="work-info">
-          <span class="work-company">StableLab</span>
-          <span class="work-role">Head of Marketing</span>
-        </div>
-        <span class="work-date">2023 - 2026</span>
-      </a>
-      <a href="https://boardroom.io" target="_blank" rel="noopener" class="work-item">
-        <div class="work-logo">
-          <img src="/images/boardroom-logo.png" alt="Boardroom" width="36" height="36" loading="eager" decoding="async" />
-        </div>
-        <div class="work-info">
-          <span class="work-company">Boardroom</span>
-          <span class="work-role">Content Lead</span>
-        </div>
-        <span class="work-date">2022</span>
-      </a>
-    </div>
-    <a href="/work" class="section-link">See the full portfolio <span class="arrow">→</span></a>
-    <a href="/resume" target="_blank" rel="noopener" class="section-link section-link--secondary">View resume <span class="arrow">→</span></a>
-  </section>
+      </div>
+      <div class="folio-actions">
+        <a href="/work" class="section-link">Portfolio <span class="arrow">→</span></a>
+        <a
+          href="/resume"
+          target="_blank"
+          rel="noopener"
+          class="section-link section-link--secondary"
+          >Resume <span class="arrow">→</span></a
+        >
+      </div>
+    </article>
 
-  <!-- Writing -->
-  <section>
-    <h2>Writing</h2>
-    <p class="text-muted empty-state">My thoughts on storytelling, crypto marketing, building brands, and working at a startup.</p>
-    <a href="/writing" class="section-link">Explore <span class="arrow">→</span></a>
-  </section>
+    <article class="folio-row folio-row--minor">
+      <div class="folio-label">
+        <h2>Projects</h2>
+      </div>
+      <div class="folio-copy">
+        <p>Independent projects, starting with <span class="accent-callout">tokenizationmap.com</span>.</p>
+      </div>
+      <div class="folio-actions">
+        <a href="/projects" class="section-link">Open <span class="arrow">→</span></a>
+      </div>
+    </article>
 
-  <!-- Stack -->
-  <section>
-    <h2>Stack</h2>
-    <p class="text-muted empty-state">The tools, apps, gear, and setup I use everyday.</p>
-    <a href="/stack" class="section-link">Explore <span class="arrow">→</span></a>
-  </section>
+    <article class="folio-row folio-row--minor">
+      <div class="folio-label">
+        <h2>Writing</h2>
+      </div>
+      <div class="folio-copy">
+        <p>Essays on marketing, storytelling, and building your way in.</p>
+      </div>
+      <div class="folio-actions">
+        <a href="/writing" class="section-link">Read <span class="arrow">→</span></a>
+      </div>
+    </article>
 
-  <!-- Speaking -->
-  <section>
-    <h2>Speaking</h2>
-    <p class="text-muted empty-state">Podcasts, interviews, and talks.</p>
-    <a href="/speaking" class="section-link">Explore <span class="arrow">→</span></a>
-  </section>
+    <article class="folio-row folio-row--minor">
+      <div class="folio-label">
+        <h2>Stack</h2>
+      </div>
+      <div class="folio-copy">
+        <p>The tools and setup I use for work, research, and everyday life.</p>
+      </div>
+      <div class="folio-actions">
+        <a href="/stack" class="section-link">Browse <span class="arrow">→</span></a>
+      </div>
+    </article>
 
-  <!-- Now -->
-  <section>
-    <h2>Now</h2>
-    <p class="text-muted empty-state">What I'm working on, watching, and listening to.</p>
-    <a href="/now" class="section-link">Explore <span class="arrow">→</span></a>
+    <article class="folio-row folio-row--minor">
+      <div class="folio-label">
+        <h2>Speaking</h2>
+      </div>
+      <div class="folio-copy">
+        <p>Selected conversations on governance, marketing, and narrative.</p>
+      </div>
+      <div class="folio-actions">
+        <a href="/speaking" class="section-link">Watch <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <article class="folio-row folio-row--minor">
+      <div class="folio-label">
+        <h2>Now</h2>
+      </div>
+      <div class="folio-copy">
+        <p>What I’m working on and paying attention to right now.</p>
+      </div>
+      <div class="folio-actions">
+        <a href="/now" class="section-link">Current <span class="arrow">→</span></a>
+      </div>
+    </article>
   </section>
 </Layout>
 
 <style>
-  /* Navigation */
-
-  /* Header */
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .header-panel {
+    padding-bottom: 1.3rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 176px;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  .header-main {
+    min-width: 0;
   }
 
   .header-top {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .header-copy {
+    min-width: 0;
+  }
+
+  .portrait-panel {
+    margin: 0;
   }
 
   .avatar {
-    width: 64px;
-    height: 64px;
+    width: 136px;
+    height: 136px;
     flex-shrink: 0;
-    border-radius: 50%;
+    border-radius: 2px;
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--line);
+    transition: transform 180ms var(--ease-out);
   }
 
-  .avatar:hover {
-    transform: scale(1.05) rotate(2deg);
+  .avatar--editorial {
+    width: 176px;
+    height: 216px;
+    border-radius: 0;
+    background: #d9d3c8;
   }
 
   .avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    object-position: center center;
   }
 
-  .avatar:hover img {
-    filter: brightness(1.1);
+  .avatar--editorial img {
+    filter: saturate(0.9) contrast(1.02);
   }
 
   .name {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #e5e5e5;
-    letter-spacing: -0.03em;
-    cursor: default;
-    position: relative;
-  }
-
-  .name:hover {
-    animation: glitch 0.3s ease;
-  }
-
-  @keyframes glitch {
-    0%, 100% {
-      text-shadow: none;
-      transform: translateX(0);
-    }
-    25% {
-      text-shadow: -1px 0 rgba(255, 107, 0, 0.7), 1px 0 rgba(0, 255, 255, 0.7);
-    }
-    50% {
-      text-shadow: 1px 0 rgba(255, 107, 0, 0.7), -1px 0 rgba(0, 255, 255, 0.7);
-      transform: translateX(0.5px);
-    }
-    75% {
-      text-shadow: -0.5px 0 rgba(255, 107, 0, 0.5), 0.5px 0 rgba(0, 255, 255, 0.5);
-    }
-  }
-
-  .signature {
-    font-size: 1rem;
-    color: #999999;
-    font-style: italic;
-    margin-bottom: 0.75rem;
+    font-size: clamp(3.2rem, 8vw, 5.1rem);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
   }
 
   .bio {
     font-size: 1rem;
-    color: #c4c4c4;
-    margin-bottom: 0.75rem;
-    line-height: 1.65;
+    color: var(--text-soft);
+    margin-bottom: 1.15rem;
+    line-height: 1.68;
+    max-width: 25rem;
   }
 
-  .location {
+  .contact-strip {
     display: flex;
     align-items: center;
-    gap: 0.375rem;
-    font-size: 0.875rem;
-    color: #525252;
-    margin-bottom: 1rem;
+    gap: 1rem 1.1rem;
+    flex-wrap: wrap;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
   }
 
-  .icon {
-    width: 14px;
-    height: 14px;
+  .contact-kicker {
+    font-family: var(--font-mono);
+    color: var(--text-faint);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-right: 0.1rem;
   }
 
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .social-links a {
-    color: #525252;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
-  }
-
-  .social-links a:hover {
-    color: #e5e5e5;
-    transform: translateY(-2px);
-  }
-
-  /* Brand color hovers */
-  .social-links a[aria-label="X (Twitter)"]:hover {
-    color: #ffffff;
-  }
-
-  .social-links a[aria-label="LinkedIn"]:hover {
-    color: #0A66C2;
-  }
-
-  .social-links a[aria-label="Cosmos"]:hover {
-    color: #ffffff;
-  }
-
-  .social-links a[aria-label="GitHub"]:hover {
-    color: #ffffff;
-  }
-
-  .social-links a[aria-label*="Ethereum"]:hover {
-    color: #627EEA;
+  .contact-strip a {
+    font-family: var(--font-mono);
+    color: var(--text-faint);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition:
+      color 150ms var(--ease-out),
+      transform 160ms var(--ease-out);
   }
 
   .social-link-btn {
+    font-family: var(--font-mono);
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    color: #525252;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
+    color: var(--text-faint);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition:
+      color 150ms var(--ease-out),
+      transform 140ms var(--ease-out);
     position: relative;
   }
 
-  .social-link-btn:hover {
-    color: #EA4335;
-    transform: translateY(-2px);
+  .social-link-btn:active {
+    transform: scale(0.97);
   }
 
   .copy-toast {
+    font-family: var(--font-mono);
     position: absolute;
-    bottom: -24px;
+    bottom: -1.6rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.6875rem;
-    color: #e5e5e5;
-    background: #1a1a1a;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    font-size: 0.56rem;
+    color: #f6f2eb;
+    background: rgba(24, 21, 19, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.16rem 0.38rem;
+    border-radius: 999px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 160ms var(--ease-out);
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   .social-link-btn.copied .copy-toast {
     opacity: 1;
   }
 
-  .social-icon {
-    width: 18px;
-    height: 18px;
+  .editorial-index {
+    border-top: 1px solid var(--line);
   }
 
-  /* Work */
-  .work-list {
+  .folio-row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) auto;
+    gap: 1.4rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+
+  .folio-label h2 {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .folio-row--feature {
+    padding-top: 1.45rem;
+    padding-bottom: 1.3rem;
+  }
+
+  .folio-row--feature .folio-copy p {
+    max-width: 31rem;
+    font-size: 0.98rem;
+    color: var(--text-soft);
+    line-height: 1.58;
+  }
+
+  .folio-row--minor .folio-copy p {
+    max-width: 30rem;
+    font-size: 0.89rem;
+    line-height: 1.52;
+    color: var(--text-soft);
+  }
+
+  .folio-row--minor .folio-actions {
+    padding-top: 0.05rem;
+  }
+
+  .folio-copy span {
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .folio-copy .accent-callout {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .folio-credits {
+    font-family: var(--font-mono);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.2rem;
+    margin-top: 0.6rem;
+    color: var(--text-faint);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .folio-actions {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .work-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .work-item:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-    transform: translateX(4px);
-  }
-
-  .work-item:hover .work-logo img {
-    box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
-      inset 0 0 0 0.5px rgba(255, 255, 255, 0.08),
-      0 4px 12px rgba(0, 0, 0, 0.4),
-      0 0 0 0.5px rgba(255, 255, 255, 0.05);
-  }
-
-  .work-logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 22%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-
-  .work-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 22%;
-    transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 0 0.5px rgba(255, 255, 255, 0.05),
-      0 1px 3px rgba(0, 0, 0, 0.3),
-      0 0 0 0.5px rgba(255, 255, 255, 0.03);
-  }
-
-  .work-info {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    min-width: 0;
-  }
-
-  .work-company {
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: #e5e5e5;
-  }
-
-  .work-role {
-    font-size: 0.8125rem;
-    color: #999999;
-  }
-
-  .work-date {
-    font-size: 0.8125rem;
-    color: #525252;
-    flex-shrink: 0;
-  }
-
-  /* Empty states and section links */
-  .empty-state {
-    font-size: 0.9375rem;
+    align-items: flex-end;
+    gap: 0.5rem;
   }
 
   .section-link {
+    font-family: var(--font-mono);
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    margin-top: 0.5rem;
-    padding: 0.375rem 1rem 0.375rem 0.625rem;
-    margin-left: -0.625rem;
-    font-size: 0.875rem;
-    color: #FF6B00;
-    font-weight: 700;
-    border-radius: 6px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 0;
+    font-size: 0.68rem;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    transition:
+      color 150ms var(--ease-out),
+      gap 160ms var(--ease-out);
   }
 
-  .section-link:hover,
-  .section-link:active {
-    color: #FF6B00;
-    background-color: rgba(255, 107, 0, 0.08);
-    padding-left: 0.875rem;
-    padding-right: 1.25rem;
+  .folio-row--feature .section-link {
+    color: var(--text);
   }
 
   .section-link .arrow {
     display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .section-link:hover .arrow {
-    transform: translateX(4px);
+    opacity: 0.8;
+    transition: transform 160ms var(--ease-out);
   }
 
   .section-link--secondary {
-    color: #525252;
-    font-weight: 500;
+    color: var(--text-faint);
   }
 
-  .section-link--secondary:hover,
-  .section-link--secondary:active {
-    color: #999;
-    background-color: rgba(255, 255, 255, 0.04);
+  @media (max-width: 760px) {
+    .header-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .portrait-panel {
+      max-width: 176px;
+    }
+
+    .header {
+      margin-bottom: 3.35rem;
+    }
+
+    .folio-row {
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+    }
+
+    .folio-actions {
+      align-items: flex-start;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .avatar:hover {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .contact-strip a:hover,
+    .social-link-btn:hover {
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .section-link:hover {
+      color: var(--text);
+      gap: 0.45rem;
+    }
+
+    .section-link:hover .arrow {
+      transform: translateX(2px);
+    }
+
+    .section-link--secondary:hover {
+      color: var(--text);
+    }
   }
 </style>
 
 <script>
-  // Copy to clipboard
   const copyBtn = document.querySelector('[data-copy]');
   copyBtn?.addEventListener('click', async () => {
     const text = copyBtn.getAttribute('data-copy');

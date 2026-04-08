@@ -1,18 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Speaking - Juan Esquivel",
-  "url": "https://juanesquivel.xyz/speaking",
-  "description": "Podcasts, interviews, and talks by Juan Esquivel on crypto marketing, DAO governance, and brand building.",
-  "author": {
-    "@type": "Person",
-    "name": "Juan Esquivel",
-    "url": "https://juanesquivel.xyz"
-  }
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Speaking - Juan Esquivel',
+  url: 'https://juanesquivel.xyz/speaking',
+  description:
+    'Podcasts, interviews, and talks by Juan Esquivel on crypto marketing, DAO governance, and brand building.',
+  author: {
+    '@type': 'Person',
+    name: 'Juan Esquivel',
+    url: 'https://juanesquivel.xyz',
+  },
 };
 ---
 
@@ -20,105 +22,40 @@ const pageSchema = {
   title="Speaking — Podcasts & Talks by Juan Esquivel"
   description="Podcasts, interviews, and speaking appearances by Juan Esquivel covering crypto marketing, DAO governance, brand building, and storytelling in web3."
   canonicalPath="/speaking"
-  preloadImages={["/images/dao-talk-thumbnail.jpg"]}
+  preloadImages={['/images/dao-talk-thumbnail.jpg']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
   <Nav active="speaking" />
 
-  <header class="page-header">
-    <h1>Speaking</h1>
-    <p class="subtitle">Podcasts, interviews, and talks.</p>
-  </header>
+  <PageHeader title="Speaking" subtitle="Podcasts, interviews, and talks." />
 
   <section>
-    <div class="speaking-list">
-      <a href="https://youtu.be/CYTEW2VF4n8" target="_blank" rel="noopener" class="speaking-item">
-        <img src="/images/dao-talk-thumbnail.jpg" alt="DAO Talk thumbnail" class="speaking-thumbnail" width="120" height="68" loading="eager" decoding="async" fetchpriority="high" />
-        <div class="speaking-info">
-          <span class="speaking-title">Governance Solution Providers & DAO Marketing</span>
-          <span class="speaking-host">DAO Talk by Tally</span>
+    <div class="surface-list">
+      <a
+        href="https://youtu.be/CYTEW2VF4n8"
+        target="_blank"
+        rel="noopener"
+        class="surface-link surface-link--speaking"
+      >
+        <div class="surface-media surface-media--wide">
+          <img
+            src="/images/dao-talk-thumbnail.jpg"
+            alt="DAO Talk thumbnail"
+            width="120"
+            height="68"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
         </div>
-        <span class="speaking-arrow">↗</span>
+        <div class="surface-body">
+          <span class="surface-title">Governance Solution Providers & DAO Marketing</span>
+          <span class="surface-meta">DAO Talk by Tally</span>
+        </div>
+        <span class="surface-arrow">Watch ↗</span>
       </a>
     </div>
   </section>
 </Layout>
-
-<style>
-
-  .page-header {
-    margin-bottom: 3rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #e5e5e5;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: #999999;
-    font-size: 1rem;
-  }
-
-  .speaking-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .speaking-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    margin: 0 -0.75rem;
-    border-radius: 8px;
-    transition: background-color 0.15s ease;
-  }
-
-  .speaking-item:hover {
-    background-color: #141414;
-  }
-
-  .speaking-thumbnail {
-    width: 120px;
-    height: 68px;
-    object-fit: cover;
-    border-radius: 6px;
-    flex-shrink: 0;
-  }
-
-  .speaking-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-    flex-grow: 1;
-  }
-
-  .speaking-title {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: #e5e5e5;
-  }
-
-  .speaking-host {
-    font-size: 0.8125rem;
-    color: #999999;
-  }
-
-  .speaking-arrow {
-    color: #525252;
-    font-size: 0.875rem;
-    margin-left: auto;
-    flex-shrink: 0;
-  }
-
-  .speaking-item:hover .speaking-arrow {
-    color: #c4c4c4;
-  }
-</style>
-

@@ -1,25 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { travelStats } from '../data/travels';
 
 const pageSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Juan Esquivel's Travel Stats",
-  "url": "https://juanesquivel.xyz/travels",
-  "description": "Flight statistics and travel data from Juan Esquivel's journeys around the world.",
-  "author": {
-    "@type": "Person",
-    "name": "Juan Esquivel",
-    "url": "https://juanesquivel.xyz"
-  }
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: "Juan Esquivel's Travel Stats",
+  url: 'https://juanesquivel.xyz/travels',
+  description: "Flight statistics and travel data from Juan Esquivel's journeys around the world.",
+  author: {
+    '@type': 'Person',
+    name: 'Juan Esquivel',
+    url: 'https://juanesquivel.xyz',
+  },
 };
 
-// Format distance with commas
 const formatNumber = (n: number) => n.toLocaleString('en-US');
-
-// Calculate flight hours (rough estimate: 800 km/h average)
 const flightHours = Math.round(travelStats.totalDistance / 800);
 ---
 
@@ -33,216 +31,62 @@ const flightHours = Math.round(travelStats.totalDistance / 800);
   </Fragment>
   <Nav active="travels" />
 
-  <header class="page-header">
-    <h1>Travels</h1>
-    <p class="subtitle">Flight stats from my journeys around the world.</p>
-  </header>
+  <PageHeader title="Travels" subtitle="Flight stats from my journeys around the world." />
 
-  <section class="hero-stat">
-    <div class="hero-number">{formatNumber(travelStats.totalDistance)}</div>
-    <div class="hero-label">kilometers flown</div>
+  <section class="stat-hero">
+    <div class="stat-hero-value">{formatNumber(travelStats.totalDistance)}</div>
+    <div class="stat-hero-label">Kilometers flown</div>
   </section>
 
-  <section class="supporting-stats">
-    <div class="supporting-stat">
-      <span class="supporting-value">{travelStats.totalFlights}</span>
-      <span class="supporting-label">flights</span>
+  <section class="inline-stats">
+    <div class="inline-stat">
+      <span class="inline-stat-value">{travelStats.totalFlights}</span>
+      <span class="inline-stat-label">Flights</span>
     </div>
-    <span class="stat-divider">·</span>
-    <div class="supporting-stat">
-      <span class="supporting-value">{flightHours}</span>
-      <span class="supporting-label">hours</span>
+    <span class="inline-divider">·</span>
+    <div class="inline-stat">
+      <span class="inline-stat-value">{flightHours}</span>
+      <span class="inline-stat-label">Hours</span>
     </div>
-    <span class="stat-divider">·</span>
-    <div class="supporting-stat">
-      <span class="supporting-value">{travelStats.totalCountries}</span>
-      <span class="supporting-label">countries</span>
+    <span class="inline-divider">·</span>
+    <div class="inline-stat">
+      <span class="inline-stat-value">{travelStats.totalCountries}</span>
+      <span class="inline-stat-label">Countries</span>
     </div>
   </section>
 
-  <section class="secondary-stats">
-    <div class="secondary-stat">
-      <span class="secondary-value">{travelStats.totalAirports}</span>
-      <span class="secondary-label">Airports</span>
+  <section class="mini-card-grid">
+    <div class="mini-card">
+      <span class="mini-card-value">{travelStats.totalAirports}</span>
+      <span class="mini-card-label">Airports</span>
     </div>
-    <div class="secondary-stat">
-      <span class="secondary-value">{travelStats.totalAirlines}</span>
-      <span class="secondary-label">Airlines</span>
+    <div class="mini-card">
+      <span class="mini-card-value">{travelStats.totalAirlines}</span>
+      <span class="mini-card-label">Airlines</span>
     </div>
-    <div class="secondary-stat">
-      <span class="secondary-value">{travelStats.totalAircraftTypes}</span>
-      <span class="secondary-label">Aircraft types</span>
+    <div class="mini-card">
+      <span class="mini-card-value">{travelStats.totalAircraftTypes}</span>
+      <span class="mini-card-label">Aircraft types</span>
     </div>
-    <div class="secondary-stat">
-      <span class="secondary-value">{travelStats.firstFlight.slice(0, 4)}</span>
-      <span class="secondary-label">First tracked</span>
+    <div class="mini-card">
+      <span class="mini-card-value">{travelStats.firstFlight.slice(0, 4)}</span>
+      <span class="mini-card-label">First tracked</span>
     </div>
   </section>
 
   <section>
     <h2>Countries</h2>
-    <div class="countries-grid">
-      {travelStats.countries.map(country => (
-        <span class="country-tag">{country}</span>
-      ))}
+    <div class="tag-grid">
+      {travelStats.countries.map((country) => <span class="tag-chip">{country}</span>)}
     </div>
   </section>
 
-  <p class="last-updated">Stats from Flighty. Last updated: {new Date(travelStats.lastUpdated).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
+  <p class="page-note">
+    Stats from Flighty. Last updated: {
+      new Date(travelStats.lastUpdated).toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric',
+      })
+    }
+  </p>
 </Layout>
-
-<style>
-
-  .page-header {
-    margin-bottom: 3rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #e5e5e5;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: #999999;
-    font-size: 1rem;
-  }
-
-  /* Hero Stat */
-  .hero-stat {
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-number {
-    font-size: 4rem;
-    font-weight: 700;
-    color: #e5e5e5;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-
-  .hero-label {
-    font-size: 1rem;
-    color: #525252;
-    margin-top: 0.5rem;
-  }
-
-  /* Supporting Stats */
-  .supporting-stats {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .supporting-stat {
-    display: flex;
-    align-items: baseline;
-    gap: 0.375rem;
-  }
-
-  .supporting-value {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #c4c4c4;
-  }
-
-  .supporting-label {
-    font-size: 0.875rem;
-    color: #525252;
-  }
-
-  .stat-divider {
-    color: #333;
-    font-size: 1.25rem;
-  }
-
-  @media (max-width: 480px) {
-    .hero-number {
-      font-size: 3rem;
-    }
-  }
-
-  /* Sections */
-  section {
-    margin-bottom: 2.5rem;
-  }
-
-  section h2 {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #525252;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.75rem;
-  }
-
-  /* Countries Grid */
-  .countries-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-
-  .country-tag {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid #1a1a1a;
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    color: #c4c4c4;
-  }
-
-  @media (min-width: 480px) {
-    .countries-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-
-  /* Secondary Stats */
-  .secondary-stats {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #1a1a1a;
-  }
-
-  .secondary-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
-
-  .secondary-value {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #c4c4c4;
-  }
-
-  .secondary-label {
-    font-size: 0.75rem;
-    color: #525252;
-  }
-
-  .last-updated {
-    color: #404040;
-    font-size: 0.8125rem;
-    font-style: italic;
-    margin-top: 3rem;
-  }
-
-  @media (max-width: 480px) {
-    .stats-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .secondary-stats {
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-  }
-</style>
-

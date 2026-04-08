@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
-  "name": "Contact Juan Esquivel",
-  "url": "https://juanesquivel.xyz/contact"
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Juan Esquivel',
+  url: 'https://juanesquivel.xyz/contact',
 };
 ---
 
@@ -18,36 +19,33 @@ const pageSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
 
-  <section>
-    <h1>Contact</h1>
-    <p class="text-secondary">If you want to collaborate, speak, or just say hi, email me or reach out on X or LinkedIn.</p>
-  </section>
+  <PageHeader
+    title="Contact"
+    subtitle="If you want to collaborate, speak, or just say hi, email me or reach out on X or LinkedIn."
+    compact={true}
+  />
 
-  <section class="contact-links">
-    <a href="mailto:juanesquivel138@gmail.com">juanesquivel138@gmail.com</a>
-    <a href="https://x.com/0xCadena" target="_blank" rel="noopener">X (Twitter)</a>
-    <a href="https://www.linkedin.com/in/esquivj/" target="_blank" rel="noopener">LinkedIn</a>
+  <section class="surface-list">
+    <a class="surface-link" href="mailto:juanesquivel138@gmail.com">
+      <div class="surface-body">
+        <span class="surface-title">juanesquivel138@gmail.com</span>
+        <span class="surface-meta">Email</span>
+      </div>
+      <span class="surface-arrow">Send ↗</span>
+    </a>
+    <a class="surface-link" href="https://x.com/0xCadena" target="_blank" rel="noopener">
+      <div class="surface-body">
+        <span class="surface-title">X (Twitter)</span>
+        <span class="surface-meta">@0xCadena</span>
+      </div>
+      <span class="surface-arrow">Open ↗</span>
+    </a>
+    <a class="surface-link" href="https://www.linkedin.com/in/esquivj/" target="_blank" rel="noopener">
+      <div class="surface-body">
+        <span class="surface-title">LinkedIn</span>
+        <span class="surface-meta">Professional profile</span>
+      </div>
+      <span class="surface-arrow">Open ↗</span>
+    </a>
   </section>
 </Layout>
-
-<style>
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 2rem;
-  }
-
-  .contact-links a {
-    color: #e5e5e5;
-  }
-
-  .contact-links a:hover {
-    color: #FF6B00;
-  }
-</style>
