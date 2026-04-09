@@ -68,7 +68,7 @@ const websiteSchema = {
           </p>
 
           <div class="contact-strip">
-            <span class="contact-kicker">Get in touch</span>
+            <span class="contact-kicker">Connect with me</span>
             <div class="contact-actions">
               <a href="mailto:juanesquivel138@gmail.com" class="social-link-btn">
                 <UiIcon name="mail" size={13} class="contact-icon" />
@@ -141,7 +141,7 @@ const websiteSchema = {
         <h2>Projects</h2>
       </div>
       <div class="folio-copy">
-        <p>Independent projects, starting with <span class="accent-callout">tokenizationmap.com</span>.</p>
+        <p>Projects built outside operating roles and client work.</p>
       </div>
       <div class="folio-actions">
         <a href="/projects" class="section-link">Open <span class="arrow">→</span></a>
@@ -150,25 +150,13 @@ const websiteSchema = {
 
     <article class="folio-row folio-row--minor">
       <div class="folio-label">
-        <h2>Writing</h2>
+        <h2>Essays</h2>
       </div>
       <div class="folio-copy">
-        <p>Essays on marketing, storytelling, and building your way in.</p>
+        <p>Essays on marketing, tokenization, and building your way in.</p>
       </div>
       <div class="folio-actions">
         <a href="/writing" class="section-link">Read <span class="arrow">→</span></a>
-      </div>
-    </article>
-
-    <article class="folio-row folio-row--minor">
-      <div class="folio-label">
-        <h2>Stack</h2>
-      </div>
-      <div class="folio-copy">
-        <p>The tools and setup I use for work, research, and everyday life.</p>
-      </div>
-      <div class="folio-actions">
-        <a href="/stack" class="section-link">Browse <span class="arrow">→</span></a>
       </div>
     </article>
 
@@ -181,6 +169,18 @@ const websiteSchema = {
       </div>
       <div class="folio-actions">
         <a href="/speaking" class="section-link">Watch <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <article class="folio-row folio-row--minor">
+      <div class="folio-label">
+        <h2>Stack</h2>
+      </div>
+      <div class="folio-copy">
+        <p>The tools and setup I use for work, research, and everyday life.</p>
+      </div>
+      <div class="folio-actions">
+        <a href="/stack" class="section-link">Browse <span class="arrow">→</span></a>
       </div>
     </article>
 
@@ -281,7 +281,7 @@ const websiteSchema = {
 
   .contact-strip {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.85rem 1rem;
     flex-wrap: wrap;
     padding-top: 1.05rem;
@@ -289,6 +289,9 @@ const websiteSchema = {
   }
 
   .contact-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-mono);
     color: var(--text-faint);
     font-size: 0.66rem;
@@ -297,9 +300,16 @@ const websiteSchema = {
     white-space: nowrap;
   }
 
+  .contact-kicker::after {
+    content: '';
+    width: 1.4rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
   .contact-actions {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.85rem 1rem;
     flex-wrap: wrap;
   }
@@ -308,6 +318,8 @@ const websiteSchema = {
     display: inline-flex;
     align-items: center;
     gap: 0.42rem;
+    position: relative;
+    padding-bottom: 0.1rem;
     font-family: var(--font-mono);
     color: var(--text-soft);
     font-size: 0.72rem;
@@ -321,12 +333,27 @@ const websiteSchema = {
       border-color 160ms var(--ease-out);
   }
 
+  .social-link-btn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    opacity: 0.55;
+    transition: transform 180ms var(--ease-out);
+  }
+
   .contact-icon {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
     color: currentColor;
     display: block;
+    transition: transform 160ms var(--ease-out);
   }
 
   .editorial-index {
@@ -473,7 +500,16 @@ const websiteSchema = {
     .social-link-btn:hover {
       color: var(--accent);
       transform: translateY(-1px);
-      border-color: currentColor;
+      border-color: transparent;
+    }
+
+    .social-link-btn:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .social-link-btn:hover .contact-icon {
+      transform: translateX(1px);
     }
 
     .section-link:hover {
