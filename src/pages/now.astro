@@ -36,7 +36,8 @@ const pageSchema = {
       <div class="now-row-body">
         <p>
           Recently wrapped up three years leading marketing at StableLab. Now exploring what's next.
-          Still thinking about how to tell stories that actually land in crypto.
+          Still thinking about how to tell stories that actually land in crypto. Going deeper on
+          tokenization of RWAs and agentic workflows.
         </p>
       </div>
     </section>
@@ -45,7 +46,8 @@ const pageSchema = {
       <h2>Building</h2>
       <div class="now-row-body">
         <p>
-          Building a personal brand. Trying to connect with people who think about this stuff the same
+          Building a personal brand and <a href="https://tokenizationmap.com" target="_blank" rel="noopener" class="inline-link">tokenizationmap.com</a>.
+          Always looking to connect with people who think about this stuff the same
           way I do and inspiring people in crypto to care about storytelling.
         </p>
       </div>
@@ -55,8 +57,8 @@ const pageSchema = {
       <h2>Life</h2>
       <div class="now-row-body">
         <p>
-          Back in Los Angeles. Re-settling into the city, spending more time with family, lifting
-          consistently, and trying to read and cook more.
+          Back in Los Angeles after living in Lisbon for a year and a half. Re-settling into the city,
+          spending more time with family, lifting consistently, and trying to read and cook more.
         </p>
       </div>
     </section>
@@ -64,8 +66,55 @@ const pageSchema = {
     <section class="now-row">
       <h2>Listening</h2>
       <div class="now-row-body">
-        <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="inline-link"
-          >Deftones, Junior H, Peso Pluma ↗</a
+        <div class="album-grid">
+          <a href="https://open.spotify.com/album/5poA9SAx0Xiz1cf17fWBLS" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/kanye-bully.jpg" alt="Kanye West — Bully" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Kanye West</span>
+            <span class="album-title">Bully</span>
+          </a>
+          <a href="https://open.spotify.com/album/4jI9SU1GmpIVhHMuYZuvX7" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/jcole-fall-off.jpg" alt="J Cole — The Fall Off" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">J Cole</span>
+            <span class="album-title">The Fall Off</span>
+          </a>
+          <a href="https://open.spotify.com/album/7MbDS0Fnw0buDkSjS1l4vd" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/chevelle-wonder-whats-next.jpg" alt="Chevelle — Wonder What's Next" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Chevelle</span>
+            <span class="album-title">Wonder What's Next</span>
+          </a>
+          <a href="https://open.spotify.com/album/2ANVost0y2y52ema1E9xAZ" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/deftones-private-music.jpg" alt="Deftones — private music" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Deftones</span>
+            <span class="album-title">private music</span>
+          </a>
+          <a href="https://open.spotify.com/album/5LEXck3kfixFaA3CqVE7bC" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/deftones-white-pony.jpg" alt="Deftones — White Pony" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Deftones</span>
+            <span class="album-title">White Pony</span>
+          </a>
+          <a href="https://open.spotify.com/album/4z7MXxGMbJOoYczjce8hQL" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/deftones-diamond-eyes.jpg" alt="Deftones — Diamond Eyes" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Deftones</span>
+            <span class="album-title">Diamond Eyes</span>
+          </a>
+          <a href="https://open.spotify.com/album/2jkFEBmGBnpJEEMsCJBbMd" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/juniorh-sad-boyz.jpg" alt="Junior H — $AD BOYZ 4 LIFE II" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Junior H</span>
+            <span class="album-title">$AD BOYZ 4 LIFE II</span>
+          </a>
+          <a href="https://open.spotify.com/album/2d9BCmHnVcnWfOWBdnFkq0" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/pesopluma-dinastia.jpg" alt="Peso Pluma — DINASTÍA" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Peso Pluma</span>
+            <span class="album-title">DINASTÍA</span>
+          </a>
+          <a href="https://open.spotify.com/album/1lGnl3jV1fiujKBNhcH3yr" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/pesopluma-exodo.jpg" alt="Peso Pluma — ÉXODO" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Peso Pluma</span>
+            <span class="album-title">ÉXODO</span>
+          </a>
+        </div>
+        <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="inline-link listening-profile"
+          >Spotify profile ↗</a
         >
       </div>
     </section>
@@ -146,6 +195,59 @@ const pageSchema = {
     color: var(--text-soft);
     font-size: 1rem;
     line-height: 1.82;
+  }
+
+  .album-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .album-card {
+    display: flex;
+    flex-direction: column;
+    width: 96px;
+    text-decoration: none;
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .album-card img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+
+  .album-artist {
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .album-title {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    line-height: 1.3;
+    margin-top: 0.1rem;
+  }
+
+  .listening-profile {
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .album-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .album-card:hover .album-title {
+      color: var(--text);
+    }
   }
 
   .inline-link:hover {

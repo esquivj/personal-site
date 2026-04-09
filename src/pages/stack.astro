@@ -103,30 +103,35 @@ const stackSections = [
         desc: 'Docs and wikis',
         href: 'https://notion.so',
         icon: '/images/stack/notion.png',
+        note: 'Shared workspace',
       },
       {
         name: 'Linear',
         desc: 'Project and task management',
         href: 'https://linear.app',
         icon: '/images/stack/linear.jpg',
+        note: 'Issue tracking',
       },
       {
-        name: 'Amie',
+        name: 'Notion Calendar',
         desc: 'Calendar',
-        href: 'https://amie.so',
-        icon: '/images/stack/amie.jpg',
+        href: 'https://www.notion.so/product/calendar',
+        icon: '/images/stack/notion.png',
+        note: 'Scheduling and time',
       },
       {
         name: 'Granola',
         desc: 'AI meeting notes',
         href: 'https://granola.ai',
         icon: '/images/stack/granola.png',
+        note: 'Auto-transcripts',
       },
       {
         name: 'Things 3',
         desc: 'Task management',
         href: 'https://culturedcode.com/things/',
         icon: '/images/stack/things.jpg',
+        note: 'Daily todos',
       },
     ],
   },
@@ -140,6 +145,27 @@ const stackSections = [
         href: 'https://www.diabrowser.com',
         icon: '/images/stack/dia.png',
         note: 'Default browser',
+      },
+      {
+        name: 'DefiLlama',
+        desc: 'DeFi analytics',
+        href: 'https://defillama.com',
+        icon: '/images/stack/defillama.png',
+        note: 'TVL and flows',
+      },
+      {
+        name: 'rwa.xyz',
+        desc: 'RWA market data',
+        href: 'https://rwa.xyz',
+        icon: '/images/stack/rwaxyz.png',
+        note: 'Tokenization figures',
+      },
+      {
+        name: 'Token Terminal',
+        desc: 'Onchain financial analytics',
+        href: 'https://tokenterminal.com',
+        icon: '/images/stack/tokenterminal.png',
+        note: 'Revenue and fundamentals',
       },
       {
         name: 'Eagle',
@@ -201,38 +227,6 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
 
   <PageHeader title="Stack" subtitle="The software I actually like using day to day." />
 
-  <section class="stack-stage stack-breakout">
-    <div class="stack-stage-copy">
-      <p class="stack-stage-kicker"><UiIcon name="apps" size={14} class="stack-kicker-icon" />Current daily drivers</p>
-      <p class="stack-stage-text">
-        The software I keep open more than anything else. Less a catalog, more the tools I trust
-        to write, build, research, and run the day.
-      </p>
-      <div class="stack-stage-meta">
-        <span>{favorites.length} daily</span>
-        <span>{totalTools} in rotation</span>
-        <span>{stackSections.length} shelves</span>
-      </div>
-    </div>
-
-    <div class="stack-drivers">
-      {favorites.map((item) => (
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener"
-          class="stack-driver-row"
-        >
-          <div class="stack-driver-icon">
-            <img src={item.icon} alt={item.name} width="36" height="36" loading="lazy" decoding="async" class="contain" />
-          </div>
-          <span class="stack-driver-name">{item.name}</span>
-          <span class="stack-driver-role">{item.role}</span>
-          <UiIcon name="arrow-up-right" size={13} class="stack-driver-arrow" />
-        </a>
-      ))}
-    </div>
-  </section>
 
   {
     stackSections.map((section, sectionIndex) => (
@@ -275,7 +269,7 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
   .stack-breakout {
     position: relative;
     left: 50%;
-    width: min(1080px, calc(100vw - 4rem));
+    width: min(720px, calc(100vw - 4rem));
     transform: translateX(-50%);
   }
 
@@ -411,6 +405,10 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
     border-top: 1px solid var(--line);
   }
 
+  .stack-shelf:first-child {
+    border-top: none;
+  }
+
   .stack-shelf + .stack-shelf {
     margin-top: 2.5rem;
   }
@@ -528,7 +526,7 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
   /* ── Footer Note ── */
 
   .stack-note {
-    width: min(1080px, calc(100vw - 4rem));
+    width: min(720px, calc(100vw - 4rem));
     margin-top: 2.85rem;
     padding-bottom: 1.25rem;
     border-bottom: 1px solid var(--line);
