@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juan Esquivel — Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'EB Garamond', 'Times New Roman', serif;
+    font-size: 11.5pt;
+    line-height: 1.35;
+    color: #1a1a1a;
+    background: #f5f5f5;
+    padding: 40px 0;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    background: white;
+    padding: 0.7in 0.75in;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 10px; }
+  .header h1 {
+    font-size: 28pt;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .header .contact {
+    font-size: 10pt;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  .header .contact a {
+    color: #333;
+    text-decoration: none;
+  }
+  .header .contact a:hover { text-decoration: underline; }
+  .header .contact .sep { margin: 0 4px; }
+  .header .tagline {
+    font-style: italic;
+    font-size: 11pt;
+    color: #444;
+    margin-top: 4px;
+  }
+
+  /* Section headers */
+  .section-title {
+    font-size: 10.5pt;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 2px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    font-variant: small-caps;
+  }
+
+  /* Experience entries */
+  .entry { margin-bottom: 12px; }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .entry-company { font-weight: 700; font-size: 11.5pt; }
+  .entry-date { font-size: 10.5pt; }
+  .entry-role-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .entry-role { font-style: italic; font-size: 11pt; }
+  .entry-location { font-style: italic; font-size: 10.5pt; }
+
+  ul {
+    margin-top: 3px;
+    margin-left: 18px;
+    list-style-type: disc;
+  }
+  ul li {
+    margin-bottom: 2px;
+    padding-left: 2px;
+    font-size: 10.8pt;
+    line-height: 1.38;
+  }
+  ul li::marker { font-size: 7pt; }
+
+  /* Skills */
+  .skills-block { font-size: 10.8pt; line-height: 1.5; }
+  .skills-block strong { font-weight: 700; }
+
+  /* Education */
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .edu-school { font-weight: 700; font-size: 11.5pt; }
+  .edu-location { font-size: 10.5pt; }
+  .edu-degree-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .edu-degree { font-style: italic; font-size: 11pt; }
+  .edu-year { font-style: italic; font-size: 10.5pt; }
+
+  /* Project */
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .project-name { font-weight: 700; font-size: 11.5pt; }
+  .project-url {
+    font-size: 10.5pt;
+    color: #333;
+    text-decoration: none;
+  }
+  .project-url:hover { text-decoration: underline; }
+  .project-subtitle { font-style: italic; font-size: 11pt; }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; padding: 0.5in 0.6in; width: auto; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Juan Esquivel</h1>
+    <div class="contact">
+      <a href="mailto:juanesquivel138@gmail.com">juanesquivel138@gmail.com</a>
+      <span class="sep">|</span>
+      <a href="https://linkedin.com/in/esquivj">linkedin.com/in/esquivj</a>
+      <span class="sep">|</span>
+      <a href="https://x.com/0xCadena">x.com/0xCadena</a>
+      <span class="sep">|</span>
+      <a href="https://juanesquivel.xyz">juanesquivel.xyz</a>
+      <span class="sep">|</span>
+      Los Angeles
+    </div>
+    <div class="tagline">Crypto-native marketer. Built my way in. Finding the "so what" and making people care.</div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section-title">Experience</div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-company">StableLab</span>
+      <span class="entry-date">Jan. 2023 – Jan. 2026</span>
+    </div>
+    <div class="entry-role-line">
+      <span class="entry-role">Head of Marketing</span>
+      <span class="entry-location">Remote</span>
+    </div>
+    <ul>
+      <li>Built the marketing function from zero at a governance and crypto data infrastructure company serving <strong>40+ protocol partners</strong> including Uniswap, Aave, Arbitrum, and Sky; owned strategy, positioning, and operations end to end</li>
+      <li>Evolved marketing strategy across three company phases (services, product development, sales-led GTM), realigning positioning and messaging at each stage</li>
+      <li>Led product marketing for <strong>Forse</strong>, a multi-product data platform: naming, brand identity, positioning, category framing, sales collateral, and GTM launch</li>
+      <li>Built awareness engine generating <strong>800k+ impressions</strong> and <strong>18k+ unique visitors</strong> across two B2B brands during transition from services to product</li>
+      <li>Grew newsletter to <strong>920+ subscribers</strong> and produced <strong>27+ podcast episodes</strong> with crypto founders; key touchpoints for partner relationships and BD</li>
+      <li>Drove BD and partnership efforts through content, co-marketing, and IRL events including a <strong>150+ attendee</strong> side event at EthCC Brussels</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-company">Boardroom</span>
+      <span class="entry-date">Aug. 2022 – Dec. 2022</span>
+    </div>
+    <div class="entry-role-line">
+      <span class="entry-role">Content Lead</span>
+      <span class="entry-location">Remote</span>
+    </div>
+    <ul>
+      <li>Stood up content function for governance tooling platform; defined strategy, built production workflows, aligned with product and engineering</li>
+      <li>Shipped <strong>50+ governance-focused content pieces</strong> (newsletters, podcasts, Twitter Spaces, threads), translating complex protocol governance into accessible narratives</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-company">Orca Protocol</span>
+      <span class="entry-date">Apr. 2022 – Aug. 2022</span>
+    </div>
+    <div class="entry-role-line">
+      <span class="entry-role">Contributor</span>
+      <span class="entry-location">Remote</span>
+    </div>
+    <ul>
+      <li>Contributed to pod-based DAO governance model; drafted compensation proposal paying <strong>10+ contributors</strong>, defined member roles, and ran weekly coordination calls</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-company">RabbitHole</span>
+      <span class="entry-date">Jan. 2022 – Apr. 2022</span>
+    </div>
+    <div class="entry-role-line">
+      <span class="entry-role">Contributor / Pathfinder</span>
+      <span class="entry-location">Remote</span>
+    </div>
+    <ul>
+      <li>Led Education workstream with <strong>40+ contributors</strong>; ran strategy calls while shipping <strong>10+ educational threads</strong> and a <strong>100+ article</strong> public database on DeFi and DAO fundamentals</li>
+    </ul>
+  </div>
+
+  <!-- Projects -->
+  <div class="section-title">Projects</div>
+
+  <div class="entry">
+    <div class="project-header">
+      <span class="project-name">The Tokenization Map</span>
+      <a class="project-url" href="https://tokenizationmap.com">tokenizationmap.com</a>
+    </div>
+    <div class="project-subtitle">Interactive map of the RWA/tokenization ecosystem</div>
+    <ul>
+      <li>Hand-curated <strong>200+ players</strong> and <strong>1,000+ relationships</strong> across 9 categories, mapping the full tokenization stack from issuance to custody to distribution</li>
+      <li>Built interactive force-directed graph with deep-linked URL state, search, filtering, and community submission system; Next.js on Vercel</li>
+    </ul>
+  </div>
+
+  <!-- Skills -->
+  <div class="section-title">Skills</div>
+
+  <div class="skills-block">
+    <strong>Core:</strong> B2B Marketing Strategy, Brand Development, Content-Led Growth, Product Marketing, GTM, Sales Enablement, Marketing Operations, Cross-functional Leadership<br>
+    <strong>Channels:</strong> Newsletter, Podcast, Crypto Twitter, LinkedIn, IRL Events<br>
+    <strong>Domain:</strong> Tokenization / RWA, DAO Governance, DeFi, Crypto Data Infrastructure<br>
+    <strong>Tools:</strong> Claude Code, Cursor, Openclaw, Next.js, Astro, Vercel, Dune, Linear, Figma, Riverside, Mixpanel, Framer
+  </div>
+
+  <!-- Education -->
+  <div class="section-title">Education</div>
+
+  <div class="entry">
+    <div class="edu-header">
+      <span class="edu-school">California State University, Northridge</span>
+      <span class="edu-location">Northridge, CA</span>
+    </div>
+    <div class="edu-degree-line">
+      <span class="edu-degree">B.S. in Financial Analysis</span>
+      <span class="edu-year">2020</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
