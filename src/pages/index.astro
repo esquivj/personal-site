@@ -264,6 +264,7 @@ const websiteSchema = {
   .avatar--editorial img {
     filter: saturate(0.78) contrast(1.02) sepia(0.08) brightness(1.02);
     mix-blend-mode: multiply;
+    transition: filter 400ms var(--ease-out), mix-blend-mode 400ms var(--ease-out);
   }
 
   .name {
@@ -410,9 +411,12 @@ const websiteSchema = {
     display: grid;
     grid-template-columns: 150px minmax(0, 1fr) auto;
     gap: 1.5rem;
-    padding: 1.25rem 0;
+    padding: 1.25rem 0.5rem;
+    margin: 0 -0.5rem;
     border-bottom: 1px solid var(--line);
     align-items: start;
+    border-radius: 2px;
+    transition: background 180ms var(--ease-out);
   }
 
   .folio-label h2 {
@@ -553,8 +557,29 @@ const websiteSchema = {
   }
 
   @media (hover: hover) and (pointer: fine) {
+    .folio-row:hover {
+      background: rgba(19, 18, 16, 0.02);
+    }
+
+    .folio-row:hover .folio-label h2 {
+      color: var(--text-soft);
+    }
+
+    .folio-row:hover .section-link {
+      gap: 0.45rem;
+    }
+
+    .folio-row:hover .section-link .arrow {
+      transform: translateX(2px);
+    }
+
     .avatar:hover {
       transform: translateY(-1px) scale(1.01);
+    }
+
+    .avatar--editorial:hover img {
+      filter: saturate(1) contrast(1.02) sepia(0) brightness(1.02);
+      mix-blend-mode: normal;
     }
 
     .social-link-btn:hover {

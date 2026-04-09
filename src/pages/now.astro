@@ -216,6 +216,7 @@ const pageSchema = {
     height: 96px;
     object-fit: cover;
     border: 1px solid var(--line);
+    transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
   }
 
   .album-artist {
@@ -242,7 +243,12 @@ const pageSchema = {
 
   @media (hover: hover) and (pointer: fine) {
     .album-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px) rotate(-1deg);
+    }
+
+    .album-card:hover img {
+      border-color: var(--line-strong);
+      box-shadow: 0 6px 16px rgba(17, 15, 13, 0.1);
     }
 
     .album-card:hover .album-title {

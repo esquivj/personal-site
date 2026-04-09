@@ -18,8 +18,8 @@ const linkClass = (key: Props['active']) => (key === active ? 'nav-link active' 
     <a href="/" class={linkClass('home')}>Home</a>
     <a href="/projects" class={linkClass('projects')}>Projects</a>
     <a href="/writing" class={linkClass('writing')}>Writing</a>
-    <a href="/stack" class={linkClass('stack')}>Stack</a>
     <a href="/speaking" class={linkClass('speaking')}>Speaking</a>
+    <a href="/stack" class={linkClass('stack')}>Stack</a>
     <a href="/now" class={linkClass('now')}>Now</a>
     <a href="/travels" class={linkClass('travels')}>Travels</a>
     <a href="/about" class={linkClass('about')}>About</a>
@@ -125,17 +125,37 @@ const linkClass = (key: Props['active']) => (key === active ? 'nav-link active' 
     }
 
     .nav-links {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 1rem;
       width: 100%;
       grid-column: 1 / -1;
       padding-top: 1rem;
       justify-content: flex-start;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 280ms var(--ease-out), opacity 200ms var(--ease-out);
     }
 
     .nav-links.open {
-      display: flex;
+      max-height: 24rem;
+      opacity: 1;
     }
+
+    .nav-links .nav-link {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), color 150ms var(--ease-out);
+    }
+
+    .nav-links.open .nav-link:nth-child(1) { opacity: 1; transform: none; transition-delay: 40ms; }
+    .nav-links.open .nav-link:nth-child(2) { opacity: 1; transform: none; transition-delay: 80ms; }
+    .nav-links.open .nav-link:nth-child(3) { opacity: 1; transform: none; transition-delay: 120ms; }
+    .nav-links.open .nav-link:nth-child(4) { opacity: 1; transform: none; transition-delay: 160ms; }
+    .nav-links.open .nav-link:nth-child(5) { opacity: 1; transform: none; transition-delay: 200ms; }
+    .nav-links.open .nav-link:nth-child(6) { opacity: 1; transform: none; transition-delay: 240ms; }
+    .nav-links.open .nav-link:nth-child(7) { opacity: 1; transform: none; transition-delay: 280ms; }
+    .nav-links.open .nav-link:nth-child(8) { opacity: 1; transform: none; transition-delay: 320ms; }
   }
 </style>
