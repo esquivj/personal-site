@@ -20,6 +20,7 @@ const airportCountry: Record<string, string> = {
   // United States
   LAX: "🇺🇸 United States", JFK: "🇺🇸 United States", PHL: "🇺🇸 United States",
   AUS: "🇺🇸 United States", PDX: "🇺🇸 United States", BUR: "🇺🇸 United States",
+  EWR: "🇺🇸 United States",
   // Mexico
   TIJ: "🇲🇽 Mexico", ZCL: "🇲🇽 Mexico", MEX: "🇲🇽 Mexico",
   // United Kingdom
