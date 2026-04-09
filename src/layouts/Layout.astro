@@ -28,6 +28,8 @@ const canonicalURL = canonicalPath
   ? `${SITE_URL}${canonicalPath}`
   : new URL(Astro.url.pathname, SITE_URL).toString();
 const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
+const isHome = canonicalPath === '/';
+const isAbout = canonicalPath === '/about';
 ---
 
 <!doctype html>
@@ -90,18 +92,22 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
       <main id="main-content">
         <slot />
       </main>
-      <footer class="footer">
-        <div class="footer-mark">
-          <div class="footer-wordmark" aria-hidden="true" data-footer-wordmark>ESQUIVEL</div>
-        </div>
-        <div class="footer-meta">
-          <p>© 2026 Juan Esquivel</p>
-          <div class="footer-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/contact">Contact</a>
+      {isHome ? (
+        <footer class="footer">
+          <div class="footer-mark">
+            <div class="footer-wordmark" aria-hidden="true" data-footer-wordmark>ESQUIVEL</div>
           </div>
-        </div>
-      </footer>
+          <div class="footer-meta">
+            <p>© 2026 Juan Esquivel</p>
+            <div class="footer-links">
+              <a href="/privacy">Privacy</a>
+              <a href="/contact">Contact</a>
+            </div>
+          </div>
+        </footer>
+      ) : (
+        <footer class:list={['footer-minimal', isAbout && 'footer-minimal--no-mark']} aria-hidden="true"></footer>
+      )}
     </div>
     {import.meta.env.DEV && (
       <AgentationOverlay client:only="react" />
@@ -402,6 +408,20 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
 
   .page-header {
     margin-bottom: clamp(3rem, 5vw, 3.75rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2rem);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    pointer-events: none;
   }
 
   .page-header--compact {
@@ -707,7 +727,32 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     }
   }
 
+  .footer-minimal {
+    position: relative;
+    margin-top: 6rem;
+    border-top: 1px solid var(--line);
+    height: 0;
+    padding-bottom: 2rem;
+  }
+
+  .footer-minimal--no-mark::after {
+    display: none;
+  }
+
+  .footer-minimal::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    pointer-events: none;
+  }
+
+
   .footer {
+    position: relative;
     margin-top: 8.5rem;
     padding-top: 1.65rem;
     border-top: 1px solid var(--line);
@@ -718,6 +763,7 @@ const ogImageURL = image.startsWith('http') ? image : `${SITE_URL}${image}`;
     flex-direction: column;
     gap: 0.05rem;
   }
+
 
   .footer-mark {
     width: 100%;

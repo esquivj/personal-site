@@ -886,6 +886,17 @@ const proofBadgeById: Record<string, string> = {
     border-bottom: 1px solid var(--line);
   }
 
+  .work-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    pointer-events: none;
+  }
+
   .work-hero-copy {
     max-width: 43rem;
     margin-bottom: 1.4rem;
@@ -1247,7 +1258,10 @@ const proofBadgeById: Record<string, string> = {
 
   .phase-block--creative {
     margin-bottom: 2.2rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
   }
+
 
   .creative-grid {
     display: grid;

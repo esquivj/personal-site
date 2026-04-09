@@ -17,16 +17,6 @@ const pageSchema = {
   },
 };
 
-const projects = [
-  {
-    title: 'The Tokenization Map',
-    domain: 'tokenizationmap.com',
-    summary:
-      "Who's building tokenization, how the stack connects, and where institutional capital is actually concentrating.",
-    url: 'https://tokenizationmap.com',
-    image: '/images/tokenizationmap-preview.jpg',
-  },
-];
 ---
 
 <Layout
@@ -41,119 +31,105 @@ const projects = [
 
   <PageHeader
     title="Projects"
-    subtitle="Projects built outside operating roles and client work."
+    subtitle="Independent work built outside operating roles."
   />
 
-  <section class="projects-feature-list">
-    {
-      projects.map((project) => (
-        <article class="project-feature">
-          <div class="project-caption">
-            <div class="project-main">
-              <h2 class="project-title">{project.title}</h2>
-              <p class="project-summary">{project.summary}</p>
-            </div>
+  <article class="case-study">
+    <header class="case-header">
+      <span class="case-kicker">Independent project, 2024–present</span>
+      <h2 class="case-title">The Tokenization Map</h2>
+      <p class="case-description">
+        An interactive infinite-canvas visualization mapping the entire tokenization landscape — who's building it, how the stack connects, and where institutional capital is actually concentrating. Not a directory. An opinionated cartography where every relationship is a claim.
+      </p>
+      <a
+        href="https://tokenizationmap.com"
+        target="_blank"
+        rel="noopener"
+        class="case-link"
+      >
+        Open site
+        <UiIcon name="arrow-up-right" size={13} class="case-link-icon" />
+      </a>
+    </header>
 
-            <div class="project-meta">
-              <a href={project.url} target="_blank" rel="noopener" class="project-link">
-                Open site
-                <UiIcon name="arrow-up-right" size={13} class="project-link-icon" />
-              </a>
-            </div>
-          </div>
+    <figure class="case-figure">
+      <a
+        href="https://tokenizationmap.com"
+        target="_blank"
+        rel="noopener"
+        class="case-image-link"
+        data-domain="tokenizationmap.com"
+      >
+        <img
+          src="/images/tokenizationmap-preview.jpg"
+          alt="The Tokenization Map — interactive graph visualization of the tokenization landscape"
+          width="1200"
+          height="630"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+    </figure>
 
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener"
-            class="project-preview"
-            aria-label={`Open ${project.title}`}
-          >
-            <img
-              src={project.image}
-              alt={`${project.title} website preview`}
-              width="1200"
-              height="630"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
-        </article>
-      ))
-    }
-  </section>
+    <div class="stats-row">
+      <div class="stat">
+        <span class="stat-number">200+</span>
+        <span class="stat-label">Players</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">9</span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">1,000+</span>
+        <span class="stat-label">Relationships</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">5</span>
+        <span class="stat-label">Asset classes</span>
+      </div>
+    </div>
+
+  </article>
 </Layout>
 
 <style>
-  .projects-feature-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .project-feature {
-    padding: 1.7rem 0 2rem;
+  .case-study {
     border-top: 1px solid var(--line);
   }
 
-  .project-feature:last-child {
-    border-bottom: 1px solid var(--line);
+  .case-header {
+    padding: 2rem 0 0;
   }
 
-  .project-preview {
+  .case-kicker {
     display: block;
-    border: 1px solid var(--line);
-    background: rgba(15, 15, 15, 0.96);
-    overflow: hidden;
-    width: min(100%, 43rem);
-    margin-top: 1.55rem;
-    margin-inline: auto;
-    transition:
-      border-color 180ms var(--ease-out),
-      transform 180ms var(--ease-out);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.65rem;
   }
 
-  .project-preview img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .project-caption {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.8rem;
-    align-items: end;
-  }
-
-  .project-main {
-    max-width: 34rem;
-  }
-
-  .project-title {
-    margin: 0 0 0.35rem;
+  .case-title {
     font-family: var(--font-display);
-    font-size: clamp(1.55rem, 3vw, 2.05rem);
-    line-height: 0.98;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
     font-weight: 400;
+    line-height: 0.95;
     letter-spacing: -0.03em;
-    text-transform: none;
+    margin: 0 0 1rem;
   }
 
-  .project-summary {
-    max-width: 50ch;
-    font-size: 1rem;
+  .case-description {
+    font-size: 1.02rem;
     line-height: 1.74;
     color: var(--text-soft);
+    margin: 0 0 1.4rem;
+    max-width: 68ch;
   }
 
-  .project-meta {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding-bottom: 0.1rem;
-  }
-
-  .project-link {
+  .case-link {
     display: inline-flex;
     align-items: center;
     gap: 0.38rem;
@@ -169,38 +145,151 @@ const projects = [
       border-color 160ms var(--ease-out);
   }
 
-  .project-link-icon {
+  .case-link-icon {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
   }
 
+  /* Figure */
+  .case-figure {
+    margin: 2rem 0 0;
+    padding: 0;
+  }
+
+  .case-image-link {
+    position: relative;
+    display: block;
+    border: 1px solid var(--line);
+    background: rgba(15, 15, 15, 0.96);
+    overflow: hidden;
+    transition:
+      border-color 180ms var(--ease-out),
+      transform 180ms var(--ease-out);
+  }
+
+  .case-image-link::after {
+    content: attr(data-domain);
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid rgba(243, 241, 235, 0.18);
+    background: rgba(20, 19, 17, 0.68);
+    color: rgba(243, 241, 235, 0.82);
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 180ms var(--ease-out),
+      transform 180ms var(--ease-out);
+    pointer-events: none;
+  }
+
+  .case-image-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 220ms var(--ease-out);
+  }
+
+  /* Stats */
+  .stats-row {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 2rem;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 1.1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat + .stat {
+    border-left: 1px solid var(--line);
+    padding-left: 1.2rem;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  /* Hover states */
   @media (hover: hover) and (pointer: fine) {
-    .project-preview:hover {
+    .case-image-link:hover {
       transform: translateY(-1px);
       border-color: var(--line-strong);
     }
 
-    .project-link:hover {
+    .case-image-link:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .case-image-link:hover img {
+      transform: scale(1.012);
+    }
+
+    .case-link:hover {
       color: var(--accent);
       border-color: currentColor;
     }
   }
 
+  /* Responsive */
   @media (max-width: 760px) {
-    .project-caption {
-      grid-template-columns: 1fr;
-      gap: 0.85rem;
+    .case-header {
+      max-width: none;
     }
 
-    .project-preview {
-      width: 100%;
-      margin-inline: 0;
+    .stats-row {
+      flex-wrap: wrap;
     }
 
-    .project-meta {
-      align-items: flex-start;
-      justify-content: flex-start;
+    .stat {
+      flex: 1 1 calc(50% - 0.5px);
+      min-width: 0;
     }
+
+    .stat:nth-child(1),
+    .stat:nth-child(2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat:nth-child(2) {
+      border-left: 1px solid var(--line);
+      padding-left: 1.2rem;
+    }
+
+    .stat:nth-child(3) {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .stat:nth-child(4) {
+      border-left: 1px solid var(--line);
+      padding-left: 1.2rem;
+    }
+
   }
 </style>
