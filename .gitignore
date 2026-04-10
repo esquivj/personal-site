@@ -24,3 +24,10 @@ pnpm-debug.log*
 .idea/
 .vercel
 .env*.local
+
+# design context
+.impeccable.md
+
+# unused assets
+public/images/about/corot-lake-and-boatman.jpg
+public/work/behind-the-scenes-hq.jpg
