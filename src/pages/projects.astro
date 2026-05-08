@@ -79,12 +79,11 @@ const pageSchema = {
       projects.map((project, index) => (
         <article class={`project-entry project-entry--${project.slug}`}>
           <div class="project-copy">
-            <div class="project-marker" aria-hidden="true">
-              <span class="project-number">{project.number}</span>
-              <span class="project-kicker">{project.kicker}</span>
-            </div>
-
             <div class="project-body">
+              <div class="project-meta" aria-label={`${project.number} ${project.kicker}`}>
+                <span>{project.number}</span>
+                <span>{project.kicker}</span>
+              </div>
               <h2 class="project-title">{project.title}</h2>
               <p class="project-line">{project.line}</p>
               <p class="project-description">{project.description}</p>
@@ -155,44 +154,40 @@ const pageSchema = {
   }
 
   .project-copy {
-    display: grid;
-    grid-template-columns: minmax(8rem, 0.28fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 5vw, 4rem);
-    align-items: start;
+    display: block;
     margin-bottom: clamp(1.45rem, 4vw, 2.35rem);
   }
 
-  .project-marker {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-top: 0.22rem;
-  }
-
-  .project-number,
-  .project-kicker,
+  .project-meta,
   .project-facts,
   .project-link {
     font-family: var(--font-mono);
   }
 
-  .project-number {
-    color: var(--accent);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-  }
-
-  .project-kicker {
-    max-width: 12ch;
+  .project-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
     color: var(--text-faint);
-    font-size: 0.62rem;
+    font-size: 0.64rem;
     letter-spacing: 0.12em;
-    line-height: 1.45;
+    line-height: 1;
+    margin-bottom: 1rem;
     text-transform: uppercase;
   }
 
+  .project-meta span:first-child {
+    color: var(--accent);
+  }
+
+  .project-meta span + span::before {
+    content: '/';
+    margin-right: 0.55rem;
+    color: var(--line-strong);
+  }
+
   .project-body {
-    max-width: 82ch;
+    max-width: 74ch;
   }
 
   .project-title {
@@ -295,21 +290,6 @@ const pageSchema = {
   }
 
   @media (max-width: 760px) {
-    .project-copy {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .project-marker {
-      flex-direction: row;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .project-kicker {
-      max-width: none;
-    }
-
     .project-title {
       font-size: clamp(2.3rem, 14vw, 3.35rem);
       letter-spacing: -0.025em;
