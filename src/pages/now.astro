@@ -9,7 +9,7 @@ const pageSchema = {
   name: 'What Juan Esquivel is doing now',
   url: 'https://juanesquivel.xyz/now',
   description:
-    'What Juan Esquivel is currently focused on - work, projects, life in Los Angeles, and current interests.',
+    'Work and interests from Juan Esquivel, a crypto native exploring AI in Los Angeles. Previously at Compound Foundation and StableLab.',
   author: {
     '@type': 'Person',
     name: 'Juan Esquivel',
@@ -20,7 +20,7 @@ const pageSchema = {
 
 <Layout
   title="Now — What Juan Esquivel is Working On"
-  description="What Juan Esquivel is currently focused on - exploring new opportunities, building a personal brand, life in Los Angeles, and current interests."
+  description="Work and interests from Juan Esquivel, a crypto native exploring AI in Los Angeles. Previously at Compound Foundation and StableLab."
   canonicalPath="/now"
 >
   <Fragment slot="head">
@@ -35,9 +35,8 @@ const pageSchema = {
       <h2>Work</h2>
       <div class="now-row-body">
         <p>
-          Recently wrapped up three years leading marketing at StableLab. Now exploring what's next.
-          Still thinking about how to tell stories that actually land in crypto. Going deeper on
-          tokenization of RWAs and agentic workflows.
+          Most recently, I was the founding social lead at <a href="https://compound.xyz" target="_blank" rel="noopener" class="text-link">Compound Foundation</a>.
+          Before that, three years leading marketing at StableLab across content, brand, product, and GTM.
         </p>
       </div>
     </section>
@@ -46,9 +45,7 @@ const pageSchema = {
       <h2>Building</h2>
       <div class="now-row-body">
         <p>
-          Building a personal brand and <a href="https://tokenizationmap.com" target="_blank" rel="noopener" class="inline-link">tokenizationmap.com</a>.
-          Always looking to connect with people who think about this stuff the same
-          way I do and inspiring people in crypto to care about storytelling.
+          Constantly playing with consumer AI and agent harnesses like Muse, Instinct, and Hermes Agent.
         </p>
       </div>
     </section>
@@ -67,6 +64,11 @@ const pageSchema = {
       <h2>Listening</h2>
       <div class="now-row-body">
         <div class="album-grid">
+          <a href="https://open.spotify.com/album/0OAv7DCME2AV4q1KPO95HY" target="_blank" rel="noopener" class="album-card">
+            <img src="/images/listening/drake-iceman.jpg" alt="Drake — Iceman" width="300" height="300" loading="lazy" decoding="async" />
+            <span class="album-artist">Drake</span>
+            <span class="album-title">Iceman</span>
+          </a>
           <a href="https://open.spotify.com/album/5poA9SAx0Xiz1cf17fWBLS" target="_blank" rel="noopener" class="album-card">
             <img src="/images/listening/kanye-bully.jpg" alt="Kanye West — Bully" width="300" height="300" loading="lazy" decoding="async" />
             <span class="album-artist">Kanye West</span>
@@ -119,19 +121,32 @@ const pageSchema = {
       </div>
     </section>
 
+    <section class="now-row">
+      <h2>Reading</h2>
+      <div class="now-row-body">
+        <div class="book-grid">
+          <a href="https://www.penguinrandomhouse.com/books/717356/the-creative-act-by-rick-rubin/9780593652886/" target="_blank" rel="noopener" class="book-card">
+            <img src="/images/reading/the-creative-act.jpg" alt="Cover of The Creative Act by Rick Rubin" width="306" height="450" loading="lazy" decoding="async" />
+            <span class="book-author">Rick Rubin</span>
+            <span class="book-title">The Creative Act</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="now-row now-row--watching">
       <h2>Watching</h2>
       <div class="now-row-body">
         <div class="watching-block">
           <h3>Movies</h3>
           <a href="https://letterboxd.com/cadena/" target="_blank" rel="noopener" class="inline-link"
-            >One Battle After Another, Bugonia, Weapons ↗</a
+            >The Deer Hunter, The Odyssey, One Battle After Another, Bugonia, Weapons ↗</a
           >
         </div>
 
         <div class="watching-block">
           <h3>Shows</h3>
-          <p class="watching-text">Entourage, Pluribus, IT: Welcome to Derry</p>
+          <p class="watching-text">Silo, Entourage, Pluribus, IT: Welcome to Derry</p>
         </div>
 
         <div class="watching-block">
@@ -142,7 +157,7 @@ const pageSchema = {
     </section>
   </div>
 
-  <p class="page-note">Last updated: April 2026</p>
+  <p class="page-note">Updated: October 8, 2026. Life and Creators last updated: April 2026.</p>
 </Layout>
 
 <style>
@@ -197,13 +212,15 @@ const pageSchema = {
     line-height: 1.82;
   }
 
-  .album-grid {
+  .album-grid,
+  .book-grid {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
   }
 
-  .album-card {
+  .album-card,
+  .book-card {
     display: flex;
     flex-direction: column;
     width: 96px;
@@ -211,7 +228,8 @@ const pageSchema = {
     transition: transform 160ms var(--ease-out);
   }
 
-  .album-card img {
+  .album-card img,
+  .book-card img {
     width: 96px;
     height: 96px;
     object-fit: cover;
@@ -219,7 +237,17 @@ const pageSchema = {
     transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
   }
 
-  .album-artist {
+  .book-card {
+    width: 112px;
+  }
+
+  .book-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .album-artist,
+  .book-author {
     margin-top: 0.4rem;
     font-family: var(--font-mono);
     font-size: 0.56rem;
@@ -229,7 +257,8 @@ const pageSchema = {
     line-height: 1.3;
   }
 
-  .album-title {
+  .album-title,
+  .book-title {
     font-size: 0.78rem;
     color: var(--text-soft);
     line-height: 1.3;
@@ -242,16 +271,19 @@ const pageSchema = {
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .album-card:hover {
+    .album-card:hover,
+    .book-card:hover {
       transform: translateY(-3px) rotate(-1deg);
     }
 
-    .album-card:hover img {
+    .album-card:hover img,
+    .book-card:hover img {
       border-color: var(--line-strong);
       box-shadow: 0 6px 16px rgba(17, 15, 13, 0.1);
     }
 
-    .album-card:hover .album-title {
+    .album-card:hover .album-title,
+    .book-card:hover .book-title {
       color: var(--text);
     }
   }

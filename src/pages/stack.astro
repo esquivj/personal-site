@@ -26,9 +26,9 @@ const favorites = [
     icon: '/images/stack/anthropic.jpg',
   },
   {
-    name: 'Codex',
-    role: 'Agentic coding',
-    href: 'https://github.com/openai/codex',
+    name: 'ChatGPT',
+    role: 'AI assistant',
+    href: 'https://chatgpt.com',
     icon: '/images/stack/openai.png',
   },
   {
@@ -47,8 +47,8 @@ const favorites = [
 
 const stackSections = [
   {
-    title: 'Development',
-    intro: 'The tools I keep open while building, shipping, and debugging.',
+    title: 'AI & Agents',
+    intro: "Consumer AI and agent harnesses I'm constantly playing with.",
     items: [
       {
         name: 'Claude Code',
@@ -58,11 +58,10 @@ const stackSections = [
         note: 'Primary thinking partner',
       },
       {
-        name: 'Codex',
-        desc: 'Agentic coding CLI',
-        href: 'https://github.com/openai/codex',
+        name: 'ChatGPT',
+        desc: 'AI assistant',
+        href: 'https://chatgpt.com',
         icon: '/images/stack/openai.png',
-        note: 'Second coding agent',
       },
       {
         name: 'Hermes Agent',
@@ -72,18 +71,16 @@ const stackSections = [
         note: 'Agent orchestration layer',
       },
       {
-        name: 'Ghostty',
-        desc: 'Terminal emulator',
-        href: 'https://ghostty.org',
-        icon: '/images/stack/ghostty.png',
-        note: 'Fast and clean',
+        name: 'Instinct',
+        desc: 'Personal AI assistant',
+        href: 'https://instinct.com',
+        icon: '/images/stack/instinct.png',
       },
       {
-        name: 'OpenClaw',
-        desc: 'AI computer use agent',
-        href: 'https://openclaw.ai',
-        icon: '/images/stack/openclaw.jpg',
-        note: 'Experimental workflow',
+        name: 'Muse',
+        desc: 'Personal AI agent',
+        href: 'https://muse.ai',
+        icon: '/images/stack/muse.svg',
       },
     ],
   },
@@ -104,20 +101,6 @@ const stackSections = [
         href: 'https://notion.so',
         icon: '/images/stack/notion.png',
         note: 'Shared workspace',
-      },
-      {
-        name: 'Linear',
-        desc: 'Project and task management',
-        href: 'https://linear.app',
-        icon: '/images/stack/linear.jpg',
-        note: 'Issue tracking',
-      },
-      {
-        name: 'Notion Calendar',
-        desc: 'Calendar',
-        href: 'https://www.notion.so/product/calendar',
-        icon: '/images/stack/notion.png',
-        note: 'Scheduling and time',
       },
       {
         name: 'Granola',
@@ -216,9 +199,9 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
 
 <Layout
   title="Stack — Tools & Apps Used by Juan Esquivel"
-  description="Tools, apps, and gear that power Juan Esquivel's day-to-day. Development tools, productivity apps, and creative software."
+  description="Tools, apps, and gear that power Juan Esquivel's day-to-day. AI tools and agents, productivity apps, and creative software."
   canonicalPath="/stack"
-  preloadImages={['/images/stack/anthropic.jpg', '/images/stack/cursor.png', '/images/stack/ghostty.png']}
+  preloadImages={['/images/stack/anthropic.jpg', '/images/stack/openai.png', '/images/stack/hermes.png']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
@@ -262,7 +245,6 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
     ))
   }
 
-  <p class="page-note stack-note">Hardware, gear, and everyday carry are next.</p>
 </Layout>
 
 <style>
@@ -523,15 +505,6 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
       color 180ms var(--ease-out);
   }
 
-  /* ── Footer Note ── */
-
-  .stack-note {
-    width: min(720px, calc(100vw - 4rem));
-    margin-top: 2.85rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
-  }
-
   /* ── Hover States ── */
 
   @media (hover: hover) and (pointer: fine) {
@@ -557,8 +530,7 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
   /* ── Responsive ── */
 
   @media (max-width: 960px) {
-    .stack-breakout,
-    .stack-note {
+    .stack-breakout {
       left: auto;
       width: auto;
       transform: none;

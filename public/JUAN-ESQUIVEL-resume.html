@@ -132,9 +132,13 @@
   .project-subtitle { font-style: italic; font-size: 11pt; }
 
   /* Print */
+  @page { size: letter; margin: 0.5in 0.6in; }
   @media print {
     body { background: white; padding: 0; }
-    .page { box-shadow: none; padding: 0.5in 0.6in; width: auto; min-height: auto; }
+    .page { box-shadow: none; padding: 0; width: auto; min-height: auto; }
+    .entry { break-inside: avoid; }
+    .earlier-experience { break-before: page; }
+    .section-title { break-after: avoid; }
   }
 </style>
 </head>
@@ -155,11 +159,29 @@
       <span class="sep">|</span>
       Los Angeles
     </div>
-    <div class="tagline">Crypto-native marketer. Built my way in. Finding the "so what" and making people care.</div>
+    <div class="tagline">Generalist Marketer building with AI. Built my way in. Finding the "so what" and making people care.</div>
   </div>
 
   <!-- Experience -->
   <div class="section-title">Experience</div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-company">Compound Foundation</span>
+      <span class="entry-date">May 2026 - Oct. 2026</span>
+    </div>
+    <div class="entry-role-line">
+      <span class="entry-role">Founding Social &amp; Community Lead</span>
+      <span class="entry-location">Remote</span>
+    </div>
+    <ul>
+      <li>Owned X and LinkedIn as the Foundation's first social and community hire; grew LinkedIn from <strong>203 to 734 followers (+262%)</strong> and X from <strong>3,436 to 3,964 (+15%)</strong></li>
+      <li>Created <strong>Claude-powered workflows</strong> to turn onchain data into content about protocol growth and generate Figma assets; independently built and ran the <strong>Institutional Market dashboard and daily brief</strong></li>
+      <li>Ran GTM for the <strong>$52M DAO-approved funding program</strong> and new leadership announcement through earned media, co-marketing, and owned content; generated <strong>125K+ views across the Foundation's own X posts</strong> with fewer than 4K followers</li>
+      <li>Led social and co-marketing for the <strong>Institutional Market</strong> launch, amplifying <strong>The Defiant</strong> coverage through WBTC and DeFi Saver posts to support BD outreach. The market reached <strong>$60M in capital supplied</strong></li>
+      <li>Ran <strong>weekly partner content</strong> to support BD, including campaigns with Sky and Chainlink; launched the monthly <strong>State of Compound</strong> recap</li>
+    </ul>
+  </div>
 
   <div class="entry">
     <div class="entry-header">
@@ -172,10 +194,10 @@
     </div>
     <ul>
       <li>Built the marketing function from zero at a governance and crypto data infrastructure company serving <strong>40+ protocol partners</strong> including Uniswap, Aave, Arbitrum, and Sky; owned strategy, positioning, and operations end to end</li>
-      <li>Evolved marketing strategy across three company phases (services, product development, sales-led GTM), realigning positioning and messaging at each stage</li>
+      <li>Repositioned StableLab across services, product development, and sales-led GTM</li>
       <li>Led product marketing for <strong>Forse</strong>, a multi-product data platform: naming, brand identity, positioning, category framing, sales collateral, and GTM launch</li>
-      <li>Built awareness engine generating <strong>800k+ impressions</strong> and <strong>18k+ unique visitors</strong> across two B2B brands during transition from services to product</li>
-      <li>Grew newsletter to <strong>920+ subscribers</strong> and produced <strong>27+ podcast episodes</strong> with crypto founders; key touchpoints for partner relationships and BD</li>
+      <li>Generated <strong>800K+ impressions</strong> and <strong>18K+ unique visitors</strong> across two B2B brands during the transition from services to product</li>
+      <li>Grew newsletter to <strong>920+ subscribers</strong> and produced <strong>27+ podcast episodes</strong> with crypto founders</li>
       <li>Drove BD and partnership efforts through content, co-marketing, and IRL events including a <strong>150+ attendee</strong> side event at EthCC Brussels</li>
     </ul>
   </div>
@@ -190,12 +212,12 @@
       <span class="entry-location">Remote</span>
     </div>
     <ul>
-      <li>Stood up content function for governance tooling platform; defined strategy, built production workflows, aligned with product and engineering</li>
+      <li>Built the content function for a governance tooling platform; defined strategy, built production workflows, aligned with product and engineering</li>
       <li>Shipped <strong>50+ governance-focused content pieces</strong> (newsletters, podcasts, Twitter Spaces, threads), translating complex protocol governance into accessible narratives</li>
     </ul>
   </div>
 
-  <div class="entry">
+  <div class="entry earlier-experience">
     <div class="entry-header">
       <span class="entry-company">Orca Protocol</span>
       <span class="entry-date">Apr. 2022 – Aug. 2022</span>
@@ -235,6 +257,7 @@
     <ul>
       <li>Hand-curated <strong>200+ players</strong> and <strong>1,000+ relationships</strong> across 9 categories, mapping the full tokenization stack from issuance to custody to distribution</li>
       <li>Built interactive force-directed graph with deep-linked URL state, search, filtering, and community submission system; Next.js on Vercel</li>
+      <li>Automated research pipeline with daily media scanning, schema validation, and claim staleness tracking</li>
     </ul>
   </div>
 

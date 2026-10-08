@@ -16,7 +16,7 @@ const DEFAULT_IMAGE = '/images/og-image.png';
 
 const {
   title = 'Juan Esquivel — Marketing, Brand, Narrative',
-  description = 'Juan Esquivel is a marketer based in Los Angeles. Previously led marketing at StableLab. Writing and work across content, brand, product, and narrative.',
+  description = 'Juan Esquivel is a marketing generalist and narrative storyteller in Los Angeles. Previously at Compound Foundation and StableLab.',
   image = DEFAULT_IMAGE,
   type = 'website',
   publishedTime,
@@ -363,6 +363,12 @@ const isAbout = canonicalPath === '/about';
     color: var(--text);
     text-decoration: none;
     transition: color 150ms var(--ease-out);
+  }
+
+  .text-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
   }
 
   a:focus-visible,
