@@ -67,7 +67,7 @@ const projectedPins = travelPins
       yPct: (point[1] / MAP_HEIGHT) * 100,
     };
   })
-  .filter(Boolean);
+  .filter((pin): pin is NonNullable<typeof pin> => pin !== null);
 ---
 
 <Layout

@@ -2479,7 +2479,7 @@ const proofBadgeById: Record<string, string> = {
   document.querySelectorAll('[data-modal]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-modal');
-      const data = (window as any).workData[id];
+      const data = id ? (window as any).workData[id] : undefined;
       if (data) openModal(data);
     });
   });
@@ -2795,7 +2795,7 @@ const proofBadgeById: Record<string, string> = {
       const src = target.getAttribute('data-src');
       if (src && lightboxImg && lightbox) {
         lightboxImg.src = src;
-        lightboxImg.alt = target.alt || 'Gallery image';
+        lightboxImg.alt = target.getAttribute('alt') || 'Gallery image';
         lightbox.classList.add('open');
       }
     }
