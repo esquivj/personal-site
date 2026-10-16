@@ -1,14 +1,9 @@
-export interface WritingPost {
-  slug: string;
-  title: string;
-  subtitle: string;
-  date: string;
-  publishedTime: string;
-  cover: string;
-  readingTime?: string;
-}
+import { z } from 'astro/zod';
+import { writingPostSchema, writingPostsSchema } from './schemas.mjs';
 
-export const writingPosts: WritingPost[] = [
+export type WritingPost = z.infer<typeof writingPostSchema>;
+
+export const writingPosts: WritingPost[] = writingPostsSchema.parse([
   {
     slug: 'owning-stock-onchain',
     title: "What does 'owning stock' mean onchain?",
@@ -60,7 +55,7 @@ export const writingPosts: WritingPost[] = [
     readingTime: 'RT: 5 MIN',
     cover: '/images/podcast-tips-cover.jpg',
   },
-];
+]);
 
 export const postsNewestFirst = [...writingPosts].sort((a, b) =>
   b.publishedTime.localeCompare(a.publishedTime)

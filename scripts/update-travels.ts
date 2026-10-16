@@ -240,20 +240,12 @@ function main() {
 // Last updated: ${today}
 // To update: Export new CSV from Flighty and run: npx tsx scripts/update-travels.ts
 
-export interface TravelStats {
-  totalFlights: number;
-  totalDistance: number; // in km
-  totalCountries: number;
-  totalAirports: number;
-  totalAirlines: number;
-  totalAircraftTypes: number;
-  firstFlight: string;
-  lastUpdated: string;
-  airports: string[];
-  countries: string[];
-}
+import { z } from 'astro/zod';
+import { travelStatsSchema } from './schemas.mjs';
 
-export const travelStats: TravelStats = ${JSON.stringify(stats, null, 2).replace(/"([^"]+)":/g, '$1:')};
+export type TravelStats = z.infer<typeof travelStatsSchema>;
+
+export const travelStats: TravelStats = travelStatsSchema.parse(${JSON.stringify(stats, null, 2).replace(/"([^"]+)":/g, '$1:')});
 `;
 
   const outputPath = resolve(__dirname, '../src/data/travels.ts');

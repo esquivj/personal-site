@@ -1,10 +1,11 @@
 ---
+import { projectsSchema } from '../data/schemas.mjs';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import PageHeader from '../components/PageHeader.astro';
 import UiIcon from '../components/UiIcon.astro';
 
-const projects = [
+const projects = projectsSchema.parse([
   {
     number: '01',
     slug: 'dial',
@@ -45,7 +46,7 @@ const projects = [
       height: 630,
     },
   },
-];
+]);
 
 const pageSchema = {
   '@context': 'https://schema.org',

@@ -2,20 +2,12 @@
 // Last updated: 2026-04-08
 // To update: Export new CSV from Flighty and run: npx tsx scripts/update-travels.ts
 
-export interface TravelStats {
-  totalFlights: number;
-  totalDistance: number; // in km
-  totalCountries: number;
-  totalAirports: number;
-  totalAirlines: number;
-  totalAircraftTypes: number;
-  firstFlight: string;
-  lastUpdated: string;
-  airports: string[];
-  countries: string[];
-}
+import { z } from 'astro/zod';
+import { travelStatsSchema } from './schemas.mjs';
 
-export const travelStats: TravelStats = {
+export type TravelStats = z.infer<typeof travelStatsSchema>;
+
+export const travelStats: TravelStats = travelStatsSchema.parse({
   totalFlights: 63,
   totalDistance: 264800,
   totalCountries: 17,
@@ -78,4 +70,4 @@ export const travelStats: TravelStats = {
     "🇹🇷 Turkey",
     "🇺🇸 United States"
   ]
-};
+});
