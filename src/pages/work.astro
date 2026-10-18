@@ -3,6 +3,12 @@ import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
 
 const imageDimensions: Record<string, { width: number; height: number }> = {
+  '/work/compound/dune-dashboard.webp': { width: 1200, height: 675 },
+  '/work/compound/funding-program-thread.webp': { width: 1200, height: 675 },
+  '/work/compound/institutional-market-60m.webp': { width: 1200, height: 675 },
+  '/work/compound/institutional-market-launch-thread.webp': { width: 1200, height: 675 },
+  '/work/compound/partner-spotlight-chainlink.webp': { width: 1200, height: 675 },
+  '/work/compound/partner-spotlight-sky.webp': { width: 1200, height: 675 },
   '/work/partners.jpg': { width: 1600, height: 800 },
   '/work/stablepod-cover.jpg': { width: 600, height: 600 },
   '/work/governance-lab-cover.jpg': { width: 1280, height: 640 },
@@ -731,16 +737,83 @@ const proofBadgeById: Record<string, string> = {
     <section class="phase-block">
       <div class="phase-rail"><span class="phase-number">04</span><div class="phase-copy"><h2>Compound Foundation</h2><span class="phase-years">2026</span><p>I served as founding Social &amp; Community Lead from May 27 to October 16, 2026.</p></div></div>
       <div class="phase-work"><div class="case-grid">
-        <!-- TODO: Juan will supply the Social growth case study link. -->
-        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Social growth</h3><p>I grew LinkedIn from 203 to 734 followers (+262%) and X from 3,436 to 3,964 followers (+15%).</p><span class="proof-chip">+262% LinkedIn</span></div></article>
-        <!-- TODO: Juan will supply the Funding program GTM case study link. -->
-        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Funding program GTM</h3><p>I led GTM for the $52M DAO-approved funding program and drove 125K+ views.</p><span class="proof-chip">125K+ views</span></div></article>
-        <!-- TODO: Juan will supply the Institutional Market launch case study link. -->
-        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Institutional Market launch</h3><p>I led social for the Institutional Market launch with coverage in The Defiant and co-posts with WBTC and DeFi Saver. The market reached $60M supplied.</p><span class="proof-chip">$60M supplied</span></div></article>
-        <!-- TODO: Juan will supply the Claude-powered content workflows case study link. -->
-        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Claude-powered content workflows</h3><p>I built Claude-powered content workflows, the Institutional Market dashboard, and a daily brief.</p><span class="proof-chip">AI content workflows</span></div></article>
-        <!-- TODO: Juan will supply the Partner content case study link. -->
-        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Partner content</h3><p>I shipped weekly partner content with Sky and Chainlink and the monthly State of Compound recap.</p><span class="proof-chip">Weekly partner content</span></div></article>
+        <article class="proof-card">
+          <a class="proof-card-media" href="https://x.com/Compound_xyz/status/2097373200300789866" target="_blank" rel="noopener">
+            <img src="/work/compound/institutional-market-launch-thread.webp" alt="Compound Institutional Market launch video on X" loading="lazy" {...getImageDimensions('/work/compound/institutional-market-launch-thread.webp')} />
+          </a>
+          <div class="proof-card-body">
+            <div class="card-topline">
+              <span class="case-row-kicker">Compound Foundation</span>
+              <span class="card-open" aria-hidden="true">↗</span>
+            </div>
+            <h3>Social growth</h3>
+            <p>I grew LinkedIn from 203 to 734 followers (+262%) and X from 3,436 to 3,964 followers (+15%). The Institutional Market launch thread drew 26K+ views on X.</p>
+            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2097373200300789866" target="_blank" rel="noopener">View the launch thread</a>
+            <span class="proof-chip">+262% LinkedIn</span>
+          </div>
+        </article>
+        <article class="proof-card">
+          <a class="proof-card-media" href="https://x.com/Compound_xyz/status/2089386082441871388" target="_blank" rel="noopener">
+            <img src="/work/compound/funding-program-thread.webp" alt="Compound Foundation post announcing the $52M development program" loading="lazy" {...getImageDimensions('/work/compound/funding-program-thread.webp')} />
+          </a>
+          <div class="proof-card-body">
+            <div class="card-topline">
+              <span class="case-row-kicker">Compound Foundation</span>
+              <span class="card-open" aria-hidden="true">↗</span>
+            </div>
+            <h3>Funding program GTM</h3>
+            <p>I ran GTM for the $52M DAO-approved funding program and the new leadership announcement. The announcement thread drew 156K+ views on X from an account with fewer than 4K followers.</p>
+            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2089386082441871388" target="_blank" rel="noopener">View the announcement</a>
+            <span class="proof-chip">156K+ views</span>
+          </div>
+        </article>
+        <article class="proof-card">
+          <a class="proof-card-media" href="https://x.com/DefiantNews/status/2097381232908644822" target="_blank" rel="noopener">
+            <img src="/work/compound/institutional-market-60m.webp" alt="Compound Institutional Market milestone graphic" loading="lazy" {...getImageDimensions('/work/compound/institutional-market-60m.webp')} />
+          </a>
+          <div class="proof-card-body">
+            <div class="card-topline">
+              <span class="case-row-kicker">Compound Foundation</span>
+              <span class="card-open" aria-hidden="true">↗</span>
+            </div>
+            <h3>Institutional Market launch</h3>
+            <p>I led social for the Institutional Market launch. The Defiant's coverage drew 15.9K+ views, and co-posts with WBTC and DeFi Saver followed. The market passed $60M in deposits and collateral supplied by September 25.</p>
+            <a class="text-link compound-proof-link" href="https://x.com/DefiantNews/status/2097381232908644822" target="_blank" rel="noopener">Read The Defiant's coverage</a>
+            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2103517844831125686" target="_blank" rel="noopener">See the $60M milestone</a>
+            <span class="proof-chip">$60M supplied</span>
+          </div>
+        </article>
+        <article class="proof-card">
+          <a class="proof-card-media" href="https://dune.com/cadena/compound-institutional-market" target="_blank" rel="noopener">
+            <img src="/work/compound/dune-dashboard.webp" alt="Compound Institutional Market dashboard on Dune" loading="lazy" {...getImageDimensions('/work/compound/dune-dashboard.webp')} />
+          </a>
+          <div class="proof-card-body">
+            <div class="card-topline">
+              <span class="case-row-kicker">Compound Foundation</span>
+              <span class="card-open" aria-hidden="true">↗</span>
+            </div>
+            <h3>Claude-powered content workflows</h3>
+            <p>I built Claude-powered content workflows, the Institutional Market dashboard on Dune, and a daily brief. On October 18, 2026 the dashboard showed $55M+ in capital in the market and $18M+ in active loans.</p>
+            <a class="text-link compound-proof-link" href="https://dune.com/cadena/compound-institutional-market" target="_blank" rel="noopener">Open the Dune dashboard</a>
+            <span class="proof-chip">Live Dune dashboard</span>
+          </div>
+        </article>
+        <article class="proof-card">
+          <a class="proof-card-media" href="https://x.com/Compound_xyz/status/2082499430373372231" target="_blank" rel="noopener">
+            <img src="/work/compound/partner-spotlight-chainlink.webp" alt="Compound Partner Spotlight graphic for Chainlink" loading="lazy" {...getImageDimensions('/work/compound/partner-spotlight-chainlink.webp')} />
+          </a>
+          <div class="proof-card-body">
+            <div class="card-topline">
+              <span class="case-row-kicker">Compound Foundation</span>
+              <span class="card-open" aria-hidden="true">↗</span>
+            </div>
+            <h3>Partner content</h3>
+            <p>I ran weekly Partner Spotlight content with Sky and Chainlink and launched the monthly State of Compound recap. The Chainlink spotlight drew 5.1K+ views and 40+ reposts.</p>
+            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2082499430373372231" target="_blank" rel="noopener">View the Chainlink spotlight</a>
+            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2075260694069690813" target="_blank" rel="noopener">View the Sky spotlight</a>
+            <span class="proof-chip">5.1K+ views</span>
+          </div>
+        </article>
       </div></div>
     </section>
 
@@ -1182,6 +1255,15 @@ const proofBadgeById: Record<string, string> = {
 
   .proof-card-media {
     aspect-ratio: 16 / 8.1;
+  }
+
+  article.proof-card > .proof-card-media {
+    display: block;
+  }
+
+  .compound-proof-link {
+    width: fit-content;
+    font-size: 0.8rem;
   }
 
   .proof-card--compact-media .proof-card-media {
