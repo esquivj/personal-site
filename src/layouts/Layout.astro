@@ -15,8 +15,8 @@ const SITE_URL = 'https://juanesquivel.xyz';
 const DEFAULT_IMAGE = '/images/og-image.png';
 
 const {
-  title = 'Juan Esquivel — Marketing, Brand, Narrative',
-  description = 'Juan Esquivel is a marketing generalist and narrative storyteller in Los Angeles. Previously at Compound Foundation and StableLab.',
+  title = 'Juan Esquivel — Content, Social, and Brand for Crypto and AI',
+  description = 'Juan Esquivel leads content, social, and brand for crypto and AI teams. Previously founding Social & Community Lead at Compound Foundation and Head of Marketing at StableLab.',
   image = DEFAULT_IMAGE,
   type = 'website',
   publishedTime,
@@ -100,6 +100,7 @@ const isAbout = canonicalPath === '/about';
           <div class="footer-meta">
             <p>© 2026 Juan Esquivel</p>
             <div class="footer-links">
+              <a href="/speaking">Speaking</a><a href="/stack">Stack</a><a href="/now">Now</a><a href="/travels">Travels</a>
               <a href="/privacy">Privacy</a>
               <a href="/contact">Contact</a>
             </div>
@@ -107,6 +108,7 @@ const isAbout = canonicalPath === '/about';
         </footer>
       ) : (
         <footer class:list={['footer-minimal', isAbout && 'footer-minimal--no-mark']}>
+          <div class="footer-links"><a href="/speaking">Speaking</a><a href="/stack">Stack</a><a href="/now">Now</a><a href="/travels">Travels</a></div>
           <p class="footer-colophon">Build your way in · Los Angeles · 2026</p>
         </footer>
       )}

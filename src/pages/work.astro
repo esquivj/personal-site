@@ -1,4 +1,5 @@
 ---
+import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
 
 const imageDimensions: Record<string, { width: number; height: number }> = {
@@ -17,9 +18,9 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
   '/work/swag/G4CFb5KaQAAudN8.jpeg': { width: 600, height: 616 },
   '/work/swag/Gb3M36_bwAQzwTy.jpeg': { width: 600, height: 800 },
   '/work/behind-the-scenes-hq.avif': { width: 2000, height: 1000 },
-  'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg': {
-    width: 1600,
-    height: 900,
+  '/work/stablelab/forse-data-stack.webp': {
+    width: 1200,
+    height: 675,
   },
 };
 
@@ -37,7 +38,7 @@ const flagshipWork = [
     id: 'stablepod',
     title: 'StablePod',
     description: 'Interviews with protocol leaders. A relationship-building vehicle.',
-    metric: '28',
+    metric: '27+',
     metricLabel: 'episodes',
     image: '/work/stablepod-cover.jpg',
     color: '#1DB954',
@@ -50,7 +51,7 @@ const flagshipWork = [
         {
           title: 'What I Did',
           content:
-            'Co-hosted and produced 28 episodes. Handled guest booking, episode planning, promotion.',
+            'I co-hosted and produced 27+ episodes. I handled guest booking, episode planning, and promotion.',
         },
         {
           title: 'Impact',
@@ -59,8 +60,8 @@ const flagshipWork = [
         },
       ],
       metrics: [
-        { label: 'Episodes', value: '28' },
-        { label: 'Unique Guests', value: '29' },
+        { label: 'Episodes', value: '27+' },
+        { label: 'Unique Guests', value: 'Nearly 30' },
         { label: 'Duration', value: '2023–2025' },
       ],
       links: [
@@ -146,14 +147,14 @@ const servicesWork = [
     id: 'partnership-announcements',
     title: 'Partnership Announcements',
     description: 'Every new protocol engagement became a blog post.',
-    metric: '8+',
+    metric: '5',
     image: '/work/partnerships/makerdao.avif',
     color: '#6366f1',
     icon: '🤝',
     subtitle: 'Network Building',
     modal: {
       fullDescription:
-        "These weren't public delegation asks. These were structured deals with teams on the other side, which meant we could co-market.",
+        "Each engagement was a structured deal with a team on the other side, which let us co-market.",
       storySections: [
         {
           title: 'What I Did',
@@ -171,31 +172,31 @@ const servicesWork = [
           title: 'MakerDAO Partnership',
           category: 'Business Development',
           image: '/work/partnerships/makerdao.avif',
-          url: 'https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts',
+          url: 'https://web.archive.org/web/20260414185659/https://stablelab.xyz/blog/stablelab-partners-with-makerdao-to-lead-business-development-efforts',
         },
         {
           title: 'Reserve Protocol',
           category: 'Governance Facilitator',
           image: '/work/partnerships/reserve.jpg',
-          url: 'https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement',
+          url: 'https://web.archive.org/web/20260414175057/https://stablelab.xyz/blog/stablelab-reserve-protocol-governance-facilitator-announcement',
         },
         {
           title: 'Gitcoin Partnership',
           category: 'DAO-to-DAO',
           image: '/work/partnerships/gitcoin.jpg',
-          url: 'https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships',
+          url: 'https://web.archive.org/web/20260316061654/https://stablelab.xyz/blog/stablelab-partners-with-gitcoin-to-enhance-dao-to-dao-collaborations-and-strategic-partnerships',
         },
         {
           title: 'Instadapp Partnership',
           category: 'Governance',
           image: '/work/partnerships/instadapp.jpg',
-          url: 'https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships',
+          url: 'https://web.archive.org/web/20260316051628/https://stablelab.xyz/blog/stablelab-partners-with-instadapp-to-foster-strategic-partnerships',
         },
         {
           title: 'Rootstock Collective',
           category: 'Governance',
           image: '/work/partnerships/rootstock.jpg',
-          url: 'https://stablelab.xyz/blog/stablelab-partners-with-rootstockcollective-to-support-governance-and-ecosystem-growth',
+          url: 'https://web.archive.org/web/20260414183217/https://stablelab.xyz/blog/stablelab-partners-with-rootstockcollective-to-support-governance-and-ecosystem-growth',
         },
       ],
     },
@@ -204,7 +205,7 @@ const servicesWork = [
     id: 'conference-marketing',
     title: 'Conference Presence',
     description: 'Event marketing for EthCC, Devconnect, Token2049, KBW.',
-    metric: '5+/yr',
+    metric: '5+ per year',
     image: '/work/conferences/ethcc-8.avif',
     color: '#6366f1',
     icon: '🎤',
@@ -314,7 +315,7 @@ const productWork = [
         { label: 'Landing Page', url: 'https://forse.io', primary: true },
         {
           label: 'Launch Announcement',
-          url: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab',
+          url: 'https://web.archive.org/web/20260114123639/https://stablelab.xyz/blog/introducing-forse-by-stablelab',
         },
       ],
     },
@@ -432,7 +433,7 @@ const salesWork = [
     title: 'Content Strategy',
     description: 'Long cycles and confidentiality meant getting creative.',
     metric: '5',
-    image: 'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg',
+    image: '/work/stablelab/forse-data-stack.webp',
     color: '#8b5cf6',
     icon: '✍️',
     subtitle: 'Creative GTM',
@@ -455,32 +456,32 @@ const salesWork = [
         {
           title: 'Building Forse: Data Stack',
           category: 'Behind the Work',
-          image: 'https://framerusercontent.com/images/p3IgX1ZyIvoI0dWrUsa6xqPrpNo.jpg',
-          url: 'https://stablelab.xyz/blog/building-forse-the-data-stack-behind-our-terminals',
+          image: '/work/stablelab/forse-data-stack.webp',
+          url: 'https://web.archive.org/web/20260414190117/https://stablelab.xyz/blog/building-forse-the-data-stack-behind-our-terminals',
         },
         {
           title: 'Measuring PYUSD Adoption',
           category: 'Quasi Case Study',
-          image: 'https://framerusercontent.com/images/LGX66YflfGEGJHe68VvY5zlnsk.jpg',
-          url: 'https://stablelab.xyz/blog/measuring-pyusd-adoption-tvl-cohorts-and-real-usage',
+          image: '/work/stablelab/pyusd-adoption.webp',
+          url: 'https://web.archive.org/web/20260114144239/https://stablelab.xyz/blog/measuring-pyusd-adoption-tvl-cohorts-and-real-usage',
         },
         {
           title: 'Forse Grants Platform',
           category: 'Product Launch',
-          image: 'https://framerusercontent.com/images/iFPpzgtjT4lr3IhEhviIN5Vza4.jpg',
-          url: 'https://stablelab.xyz/blog/introducing-the-forse-grants-management-platform',
+          image: '/work/stablelab/forse-grants-platform.webp',
+          url: 'https://web.archive.org/web/20260414190918/https://stablelab.xyz/blog/introducing-the-forse-grants-management-platform',
         },
         {
           title: 'GitHub Activity Index',
           category: 'Work Highlight',
           image: '/work/github-activity-index.jpg',
-          url: 'https://stablelab.xyz/blog/the-github-activity-index-a-builder-momentum-signal',
+          url: 'https://web.archive.org/web/20260316061306/https://stablelab.xyz/blog/the-github-activity-index-a-builder-momentum-signal',
         },
         {
           title: 'Reintroducing Forse',
           category: 'Rebrand',
           image: '/work/forse-relaunch-blogpost.jpg',
-          url: 'https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth',
+          url: 'https://web.archive.org/web/20260210054817/https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth',
         },
       ],
     },
@@ -537,7 +538,7 @@ const phaseGroups = [
     title: 'Product Launch',
     years: '2024',
     summary:
-      'StableLab tried to turn services insight into product. That meant launching Forse, then repositioning it once the first market thesis broke.',
+      'StableLab tried to turn services insight into product. The team launched Forse, then repositioned it once the first market thesis broke.',
     lead: [productWork[0]],
     items: [productWork[1]],
   },
@@ -574,11 +575,11 @@ const behindTheScenes = {
 };
 
 const proofBadgeById: Record<string, string> = {
-  stablepod: '28 episodes',
+  stablepod: '27+ episodes',
   newsletter: '121 issues',
   'proposal-comms': '50+ proposals',
-  'partnership-announcements': '8+ announcements',
-  'conference-marketing': '5 conferences / year',
+  'partnership-announcements': '5 announcements',
+  'conference-marketing': '5+ per year',
   'governance-gathering': '150+ attendees',
   'forse-launch': 'From scratch to launch',
   'forse-rebrand': 'ICP and brand pivot',
@@ -591,34 +592,31 @@ const proofBadgeById: Record<string, string> = {
 ---
 
 <Layout
-  title="Work Portfolio — Juan Esquivel's Marketing Projects"
-  description="B2B marketing portfolio from Juan Esquivel's time at StableLab: services marketing, product launch, and sales enablement across three business phases."
+  canonicalPath="/work"
+  title="Work — Juan Esquivel"
+  description="Juan Esquivel led social and community at Compound Foundation and marketing at StableLab. Explore his work across social, content, product launches, and sales-led GTM."
   preloadImages={[
     '/work/partners.jpg',
     '/work/stablepod-cover.jpg',
     '/work/governance-lab-cover.jpg',
   ]}
 >
-  <header class="header">
-    <a href="/" class="back-link">← Back</a>
-  </header>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "CollectionPage", name: "Juan Esquivel’s work", url: "https://juanesquivel.xyz/work", about: ["Compound Foundation", "StableLab"] })} /></Fragment>
+  <Nav active="work" />
+  <div class="work-content">
 
-  <main>
+
     <section class="work-hero">
       <div class="work-hero-copy">
-        <p class="work-kicker">StableLab / 2023–2026</p>
+        <p class="work-kicker">Compound Foundation + StableLab / 2023–2026</p>
         <h1>Work</h1>
-        <p class="hero-sub">
-          Most recently, I was the founding social lead at Compound Foundation.
-          Before that, I was Head of Marketing at StableLab. The work below covers three years of trust-first
-          B2B marketing in crypto across services, product launch, and sales-led GTM.
-        </p>
+        <p class="hero-sub">I ran social and community as Compound Foundation's first hire in 2026. Before Compound I spent three years as Head of Marketing at StableLab. The work below covers both roles across social, content, product launches, and sales-led GTM.</p>
       </div>
 
       <div class="work-ledger">
         <div class="work-ledger-item">
           <span class="work-ledger-label">Role</span>
-          <span class="work-ledger-value">Head of Marketing</span>
+          <span class="work-ledger-value">Founding Social &amp; Community Lead · Head of Marketing</span>
         </div>
         <div class="work-ledger-item">
           <span class="work-ledger-label">Focus</span>
@@ -636,8 +634,7 @@ const proofBadgeById: Record<string, string> = {
         <span class="section-index">Selected protocols</span>
         <h2>StableLab worked across 40+ protocols, foundations, and ecosystem teams.</h2>
         <p>
-          The brand had to feel credible to both operators and governance teams. That trust carried
-          the rest of the work.
+          The brand had to feel credible to both operators and governance teams. Earned trust carried the rest of the work.
         </p>
       </div>
 
@@ -731,9 +728,25 @@ const proofBadgeById: Record<string, string> = {
       ))
     }
 
+    <section class="phase-block">
+      <div class="phase-rail"><span class="phase-number">04</span><div class="phase-copy"><h2>Compound Foundation</h2><span class="phase-years">2026</span><p>I served as founding Social &amp; Community Lead from May 27 to October 16, 2026.</p></div></div>
+      <div class="phase-work"><div class="case-grid">
+        <!-- TODO: Juan will supply the Social growth case study link. -->
+        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Social growth</h3><p>I grew LinkedIn from 203 to 734 followers (+262%) and X from 3,436 to 3,964 followers (+15%).</p><span class="proof-chip">+262% LinkedIn</span></div></article>
+        <!-- TODO: Juan will supply the Funding program GTM case study link. -->
+        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Funding program GTM</h3><p>I led GTM for the $52M DAO-approved funding program and drove 125K+ views.</p><span class="proof-chip">125K+ views</span></div></article>
+        <!-- TODO: Juan will supply the Institutional Market launch case study link. -->
+        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Institutional Market launch</h3><p>I led social for the Institutional Market launch with coverage in The Defiant and co-posts with WBTC and DeFi Saver. The market reached $60M supplied.</p><span class="proof-chip">$60M supplied</span></div></article>
+        <!-- TODO: Juan will supply the Claude-powered content workflows case study link. -->
+        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Claude-powered content workflows</h3><p>I built Claude-powered content workflows, the Institutional Market dashboard, and a daily brief.</p><span class="proof-chip">AI content workflows</span></div></article>
+        <!-- TODO: Juan will supply the Partner content case study link. -->
+        <article class="proof-card"><div class="proof-card-body"><span class="case-row-kicker">Compound Foundation</span><h3>Partner content</h3><p>I shipped weekly partner content with Sky and Chainlink and the monthly State of Compound recap.</p><span class="proof-chip">Weekly partner content</span></div></article>
+      </div></div>
+    </section>
+
     <section class="phase-block phase-block--creative">
       <div class="phase-rail">
-        <span class="phase-number">04</span>
+        <span class="phase-number">05</span>
         <div class="phase-copy">
           <h2>Creative</h2>
           <span class="phase-years">Supporting work</span>
@@ -793,7 +806,9 @@ const proofBadgeById: Record<string, string> = {
         </div>
       </div>
     </section>
-  </main>
+
+
+  </div>
 
   <!-- Modal -->
   <div class="modal-bg" id="modalBg">
@@ -855,11 +870,11 @@ const proofBadgeById: Record<string, string> = {
     transition: color 150ms var(--ease-out);
   }
 
-  main {
+  .work-content {
     position: relative;
   }
 
-  main::before {
+  .work-content::before {
     content: '';
     position: absolute;
     inset: -1.5rem -2.5rem;

@@ -1,43 +1,13 @@
-# Astro Starter Kit: Minimal
+# Juan Esquivel’s personal site
 
-```sh
-npm create astro@latest -- --template minimal
-```
+The site presents Juan’s work, projects, and writing. Astro builds the site with TypeScript and React. Zod validates structured content in `src/data/`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Run `npm ci` to install dependencies. Run `npm run dev` to start development and `npm run preview` to inspect a production build.
 
-## 🚀 Project Structure
+Run `npm run typecheck`, `npm test`, and `npm run build` to validate changes. Run `node scripts/check-internal-links.mjs` after the build to check local links.
 
-Inside of your Astro project, you'll see the following folders and files:
+Vercel hosts the site. Juan approves production deployments. Agents work on branches and leave deployment approval to Juan.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Run `node scripts/optimize-images.mjs` to optimize portfolio images and generate avatar formats. Run `node scripts/generate-og.mjs` to regenerate the share image.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Run `node scripts/download-work-thumbnails.mjs` to refresh the StableLab blog thumbnails in `public/work/stablelab/`.

@@ -8,10 +8,10 @@ const personSchema = {
   '@type': 'Person',
   name: 'Juan Esquivel',
   url: 'https://juanesquivel.xyz',
-  image: 'https://juanesquivel.xyz/images/avatar.jpg',
+  image: 'https://juanesquivel.xyz/images/avatar.avif',
   description:
-    'Marketing generalist and narrative storyteller in Los Angeles. Previously the founding social lead at Compound Foundation. Before that, led marketing at StableLab. A crypto native building with AI.',
-  jobTitle: 'Marketing generalist',
+    "I lead content, social, and brand for crypto and AI teams. At Compound Foundation I grew LinkedIn followers 262% and drove 125K+ views on the Foundation's own X posts with fewer than 4K followers. At StableLab I built marketing from zero over three years and launched the Forse product brand. Based in Los Angeles.",
+  jobTitle: 'Content, Social, and Brand Lead',
   address: {
     '@type': 'Place',
     name: 'Los Angeles, California',
@@ -28,6 +28,9 @@ const personSchema = {
     'DAO Governance',
     'Web3',
     'Storytelling',
+    'Social Media Marketing',
+    'Community Building',
+    'AI Content Workflows',
   ],
 };
 
@@ -45,7 +48,7 @@ const websiteSchema = {
 };
 ---
 
-<Layout canonicalPath="/" preloadImages={['/images/avatar.jpg']}>
+<Layout canonicalPath="/" preloadImages={['/images/avatar.avif']}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
@@ -62,16 +65,13 @@ const websiteSchema = {
             </div>
           </div>
 
-          <p class="bio">
-            Marketing generalist and narrative storyteller in Los Angeles. I build marketing functions
-            from zero. Most recently, I was the founding social lead at Compound Foundation.
-            Before that, three years leading marketing at StableLab across content, brand, product,
-            and GTM. A crypto native building with AI.
-          </p>
+          <p class="bio">I lead content, social, and brand for crypto and AI teams. At Compound Foundation I grew LinkedIn followers 262% and drove 125K+ views on the Foundation's own X posts with fewer than 4K followers. At StableLab I built marketing from zero over three years and launched the Forse product brand. Based in Los Angeles.</p>
+          <p class="availability">Open to Content Lead, Social, Creative, and Marketing roles in crypto and AI, starting November 2026.</p>
 
           <div class="contact-strip">
-            <span class="contact-kicker">Connect with me</span>
+            <span class="contact-kicker">Get in touch</span>
             <div class="contact-actions">
+              <a href="/JUAN-ESQUIVEL-resume.pdf" class="social-link-btn">Resume</a>
               <a href="mailto:juanesquivel138@gmail.com" class="social-link-btn">
                 <UiIcon name="mail" size={13} class="contact-icon" />
                 Email
@@ -99,8 +99,11 @@ const websiteSchema = {
 
         <figure class="portrait-panel">
           <div class="avatar avatar--editorial">
+            <picture>
+            <source srcset="/images/avatar.avif" type="image/avif" />
+            <source srcset="/images/avatar.webp" type="image/webp" />
             <img
-              src="/images/avatar.jpg"
+              src="/images/avatar.webp"
               alt="Juan Esquivel"
               width="160"
               height="160"
@@ -108,6 +111,7 @@ const websiteSchema = {
               decoding="async"
               fetchpriority="high"
             />
+            </picture>
           </div>
         </figure>
       </div>
@@ -121,7 +125,7 @@ const websiteSchema = {
         <h2>Work</h2>
       </div>
       <div class="folio-copy">
-        <p>Previously the founding social lead at Compound Foundation. Before that, I led marketing at StableLab across content, brand, product, and GTM.</p>
+        <p>Case studies from Compound Foundation and StableLab, with the numbers behind each one.</p>
       </div>
       <div class="folio-actions">
         <a href="/work" class="section-link">Portfolio <span class="arrow">→</span></a>
@@ -136,7 +140,7 @@ const websiteSchema = {
         <p>Background, roles, and what I've shipped.</p>
       </div>
       <div class="folio-actions">
-        <a href="/resume" target="_blank" rel="noopener" class="section-link">View <span class="arrow">→</span></a>
+        <a href="/JUAN-ESQUIVEL-resume.pdf" target="_blank" rel="noopener" class="section-link">View <span class="arrow">→</span></a>
       </div>
     </article>
 
@@ -203,6 +207,8 @@ const websiteSchema = {
 </Layout>
 
 <style>
+  .availability { margin-top: 1rem; color: var(--accent); }
+  @media (max-width: 640px) { .social-link-btn { min-height: 44px; min-width: 44px; justify-content: center; } }
   .header {
     margin-bottom: 4.8rem;
   }

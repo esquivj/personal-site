@@ -1,4 +1,5 @@
 ---
+import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
@@ -19,6 +20,7 @@ const pageSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
 
+  <Nav />
   <PageHeader
     title="Privacy Policy"
     subtitle="This site is a personal portfolio and blog. I do not sell or share personal information."
