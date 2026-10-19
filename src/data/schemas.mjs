@@ -73,3 +73,39 @@ export const projectsSchema = z.array(z.object({
     height: z.number().int().positive(),
   }),
 })).superRefine(uniqueSlugs);
+
+export const compoundFeedSchema = z.array(z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('post'),
+    id: nonEmptyString,
+    name: nonEmptyString,
+    handle: nonEmptyString,
+    date: z.string().datetime(),
+    text: nonEmptyString,
+    url: z.string().url(),
+    metrics: z.object({
+      views: nonnegativeInteger,
+      likes: nonnegativeInteger,
+      reposts: nonnegativeInteger,
+      replies: nonnegativeInteger,
+    }),
+    metricsCheckedOn: isoDate,
+    milestone: nonEmptyString.optional(),
+    image: z.object({
+      src: z.string().startsWith('/work/compound/feed/'),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
+      isVideo: z.boolean(),
+    }).optional(),
+  }),
+  z.object({
+    kind: z.literal('marker'),
+    date: isoDate,
+    dateLabel: nonEmptyString,
+    title: nonEmptyString,
+    text: nonEmptyString,
+    url: z.string().url().optional(),
+    linkLabel: nonEmptyString.optional(),
+    source: nonEmptyString,
+  }),
+]));

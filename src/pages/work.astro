@@ -1,14 +1,15 @@
 ---
 import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
+import feedData from '../data/compound-feed.json';
+import { compoundFeedSchema } from '../data/schemas.mjs';
+
+const compoundFeed = compoundFeedSchema.parse(feedData);
+const feedDate = (date: string) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(date));
+const feedNumber = (value: number) => value.toLocaleString('en-US');
+const feedTags: Record<string, string> = { DefiantNews: 'Press', DeFiSaver: 'Partner', DooWanNam: 'Team' };
 
 const imageDimensions: Record<string, { width: number; height: number }> = {
-  '/work/compound/dune-dashboard.webp': { width: 1200, height: 675 },
-  '/work/compound/funding-program-thread.webp': { width: 1200, height: 675 },
-  '/work/compound/institutional-market-60m.webp': { width: 1200, height: 675 },
-  '/work/compound/institutional-market-launch-thread.webp': { width: 1200, height: 675 },
-  '/work/compound/partner-spotlight-chainlink.webp': { width: 1200, height: 675 },
-  '/work/compound/partner-spotlight-sky.webp': { width: 1200, height: 675 },
   '/work/partners.jpg': { width: 1600, height: 800 },
   '/work/stablepod-cover.jpg': { width: 600, height: 600 },
   '/work/governance-lab-cover.jpg': { width: 1280, height: 640 },
@@ -616,24 +617,58 @@ const proofBadgeById: Record<string, string> = {
       <div class="work-hero-copy">
         <p class="work-kicker">Compound Foundation + StableLab / 2023–2026</p>
         <h1>Work</h1>
-        <p class="hero-sub">I ran social and community as Compound Foundation's first hire in 2026. Before Compound I spent three years as Head of Marketing at StableLab. The work below covers both roles across social, content, product launches, and sales-led GTM.</p>
+        <p class="hero-sub">I ran social and community as Compound Foundation's first hire in 2026. Before Compound I spent three years as Head of Marketing at StableLab. The feed below starts with Compound, and the StableLab case studies follow.</p>
       </div>
 
-      <div class="work-ledger">
-        <div class="work-ledger-item">
-          <span class="work-ledger-label">Role</span>
-          <span class="work-ledger-value">Founding Social &amp; Community Lead · Head of Marketing</span>
-        </div>
-        <div class="work-ledger-item">
-          <span class="work-ledger-label">Focus</span>
-          <span class="work-ledger-value">Content, brand, launches, sales support</span>
-        </div>
-        <div class="work-ledger-item">
-          <span class="work-ledger-label">Context</span>
-          <span class="work-ledger-value">Long sales cycles, relationship-led deals, credibility over clicks</span>
-        </div>
-      </div>
     </section>
+
+    <section class="feed-chapter" id="compound" aria-labelledby="compound-heading">
+      <header class="chapter-header">
+        <h2 id="compound-heading">Compound Foundation</h2>
+        <p>Founding Social &amp; Community Lead · May 27 to Oct 16, 2026</p>
+      </header>
+      <dl class="feed-stats">
+        <div><dt>LinkedIn follower growth</dt><dd>+262%</dd></div>
+        <div><dt>views on the Foundation's own X posts</dt><dd>125K+</dd></div>
+        <div><dt>supplied in the Institutional Market</dt><dd>$60M</dd></div>
+      </dl>
+      <ol class="feed-timeline">
+        {compoundFeed.map((entry) => (
+          <li class:list={['feed-entry', { 'feed-entry--accent': entry.kind === 'marker' || !!entry.milestone }]}>
+            <time class="feed-date" datetime={entry.date}>{entry.kind === 'marker' ? entry.dateLabel : feedDate(entry.date)}</time>
+            {entry.kind === 'post' ? (
+              <article class="feed-card">
+                <header class="feed-card-header">
+                  <div><h3>{entry.name}</h3><span class="feed-handle">@{entry.handle}</span></div>
+                  {feedTags[entry.handle] && <span class="feed-tag">{feedTags[entry.handle]}</span>}
+                </header>
+                {entry.milestone && <span class="feed-milestone">Milestone · {entry.milestone}</span>}
+                <blockquote class="feed-text">{entry.text}</blockquote>
+                {entry.image && <div class="feed-image">
+                  <img src={entry.image.src} width={entry.image.width} height={entry.image.height} loading="lazy" alt={`${entry.image.isVideo ? 'Video' : 'Image'} from @${entry.handle}'s post`} />
+                  {entry.image.isVideo && <span class="feed-video">Video</span>}
+                </div>}
+                <footer class="feed-card-footer">
+                  <p class="feed-metrics">{feedNumber(entry.metrics.views)} views · {feedNumber(entry.metrics.likes)} likes · {feedNumber(entry.metrics.reposts)} reposts</p>
+                  <div class="feed-source"><small>Metrics checked {feedDate(entry.metricsCheckedOn)}</small><a href={entry.url} target="_blank" rel="noopener">View on X <span aria-hidden="true">↗</span></a></div>
+                </footer>
+              </article>
+            ) : (
+              <article class="feed-marker">
+                <h3>{entry.title}</h3><p>{entry.text}</p>
+                {entry.url && <a href={entry.url} target="_blank" rel="noopener">{entry.linkLabel} <span aria-hidden="true">↗</span></a>}
+              </article>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="stablelab" aria-labelledby="stablelab-heading">
+      <header class="chapter-header stablelab-header">
+        <h2 id="stablelab-heading">StableLab</h2>
+        <p>Head of Marketing · 2023 to 2026</p>
+      </header>
 
     <section class="partner-stage">
       <div class="partner-stage-copy">
@@ -734,89 +769,6 @@ const proofBadgeById: Record<string, string> = {
       ))
     }
 
-    <section class="phase-block">
-      <div class="phase-rail"><span class="phase-number">04</span><div class="phase-copy"><h2>Compound Foundation</h2><span class="phase-years">2026</span><p>I served as founding Social &amp; Community Lead from May 27 to October 16, 2026.</p></div></div>
-      <div class="phase-work"><div class="case-grid">
-        <article class="proof-card">
-          <a class="proof-card-media" href="https://x.com/Compound_xyz/status/2097373200300789866" target="_blank" rel="noopener">
-            <img src="/work/compound/institutional-market-launch-thread.webp" alt="Compound Institutional Market launch video on X" loading="lazy" {...getImageDimensions('/work/compound/institutional-market-launch-thread.webp')} />
-          </a>
-          <div class="proof-card-body">
-            <div class="card-topline">
-              <span class="case-row-kicker">Compound Foundation</span>
-              <span class="card-open" aria-hidden="true">↗</span>
-            </div>
-            <h3>Social growth</h3>
-            <p>I grew LinkedIn from 203 to 734 followers (+262%) and X from 3,436 to 3,964 followers (+15%). The Institutional Market launch thread drew 26K+ views on X.</p>
-            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2097373200300789866" target="_blank" rel="noopener">View the launch thread</a>
-            <span class="proof-chip">+262% LinkedIn</span>
-          </div>
-        </article>
-        <article class="proof-card">
-          <a class="proof-card-media" href="https://x.com/Compound_xyz/status/2089386082441871388" target="_blank" rel="noopener">
-            <img src="/work/compound/funding-program-thread.webp" alt="Compound Foundation post announcing the $52M development program" loading="lazy" {...getImageDimensions('/work/compound/funding-program-thread.webp')} />
-          </a>
-          <div class="proof-card-body">
-            <div class="card-topline">
-              <span class="case-row-kicker">Compound Foundation</span>
-              <span class="card-open" aria-hidden="true">↗</span>
-            </div>
-            <h3>Funding program GTM</h3>
-            <p>I ran GTM for the $52M DAO-approved funding program and the new leadership announcement. The announcement thread drew 156K+ views on X from an account with fewer than 4K followers.</p>
-            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2089386082441871388" target="_blank" rel="noopener">View the announcement</a>
-            <span class="proof-chip">156K+ views</span>
-          </div>
-        </article>
-        <article class="proof-card">
-          <a class="proof-card-media" href="https://x.com/DefiantNews/status/2097381232908644822" target="_blank" rel="noopener">
-            <img src="/work/compound/institutional-market-60m.webp" alt="Compound Institutional Market milestone graphic" loading="lazy" {...getImageDimensions('/work/compound/institutional-market-60m.webp')} />
-          </a>
-          <div class="proof-card-body">
-            <div class="card-topline">
-              <span class="case-row-kicker">Compound Foundation</span>
-              <span class="card-open" aria-hidden="true">↗</span>
-            </div>
-            <h3>Institutional Market launch</h3>
-            <p>I led social for the Institutional Market launch. The Defiant's coverage drew 15.9K+ views, and co-posts with WBTC and DeFi Saver followed. The market passed $60M in deposits and collateral supplied by September 25.</p>
-            <a class="text-link compound-proof-link" href="https://x.com/DefiantNews/status/2097381232908644822" target="_blank" rel="noopener">Read The Defiant's coverage</a>
-            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2103517844831125686" target="_blank" rel="noopener">See the $60M milestone</a>
-            <span class="proof-chip">$60M supplied</span>
-          </div>
-        </article>
-        <article class="proof-card">
-          <a class="proof-card-media" href="https://dune.com/cadena/compound-institutional-market" target="_blank" rel="noopener">
-            <img src="/work/compound/dune-dashboard.webp" alt="Compound Institutional Market dashboard on Dune" loading="lazy" {...getImageDimensions('/work/compound/dune-dashboard.webp')} />
-          </a>
-          <div class="proof-card-body">
-            <div class="card-topline">
-              <span class="case-row-kicker">Compound Foundation</span>
-              <span class="card-open" aria-hidden="true">↗</span>
-            </div>
-            <h3>Claude-powered content workflows</h3>
-            <p>I built Claude-powered content workflows, the Institutional Market dashboard on Dune, and a daily brief. On October 18, 2026 the dashboard showed $55M+ in capital in the market and $18M+ in active loans.</p>
-            <a class="text-link compound-proof-link" href="https://dune.com/cadena/compound-institutional-market" target="_blank" rel="noopener">Open the Dune dashboard</a>
-            <span class="proof-chip">Live Dune dashboard</span>
-          </div>
-        </article>
-        <article class="proof-card">
-          <a class="proof-card-media" href="https://x.com/Compound_xyz/status/2082499430373372231" target="_blank" rel="noopener">
-            <img src="/work/compound/partner-spotlight-chainlink.webp" alt="Compound Partner Spotlight graphic for Chainlink" loading="lazy" {...getImageDimensions('/work/compound/partner-spotlight-chainlink.webp')} />
-          </a>
-          <div class="proof-card-body">
-            <div class="card-topline">
-              <span class="case-row-kicker">Compound Foundation</span>
-              <span class="card-open" aria-hidden="true">↗</span>
-            </div>
-            <h3>Partner content</h3>
-            <p>I ran weekly Partner Spotlight content with Sky and Chainlink and launched the monthly State of Compound recap. The Chainlink spotlight drew 5.1K+ views and 40+ reposts.</p>
-            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2082499430373372231" target="_blank" rel="noopener">View the Chainlink spotlight</a>
-            <a class="text-link compound-proof-link" href="https://x.com/Compound_xyz/status/2075260694069690813" target="_blank" rel="noopener">View the Sky spotlight</a>
-            <span class="proof-chip">5.1K+ views</span>
-          </div>
-        </article>
-      </div></div>
-    </section>
-
     <section class="phase-block phase-block--creative">
       <div class="phase-rail">
         <span class="phase-number">05</span>
@@ -880,6 +832,7 @@ const proofBadgeById: Record<string, string> = {
       </div>
     </section>
 
+    </section>
 
   </div>
 
@@ -930,6 +883,65 @@ const proofBadgeById: Record<string, string> = {
 </Layout>
 
 <style>
+
+  .feed-chapter, .stablelab-header {
+    position: relative;
+    left: 50%;
+    width: min(1090px, calc(100vw - 5rem));
+    transform: translateX(-50%);
+  }
+  .chapter-header { margin-bottom: 2rem; }
+  .chapter-header h2 { font-family: var(--font-display); text-transform: none; font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  .chapter-header p { color: var(--text-soft); font-size: 0.85rem; line-height: 1.6; }
+  .feed-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 0 0 3rem; padding: 1.5rem 0; border-block: 1px solid var(--line); }
+  .feed-stats div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.5rem; }
+  .feed-stats dd { margin: 0; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; letter-spacing: -0.04em; }
+  .feed-stats dt { color: var(--text-soft); font-size: 0.78rem; line-height: 1.5; max-width: 26ch; }
+  .feed-timeline { list-style: none; padding: 0; max-width: calc(640px + 11rem); margin: 0 auto 5rem; }
+  .feed-entry { position: relative; padding: 0 0 2rem 11rem; }
+  .feed-entry::before { content: ''; position: absolute; left: 9rem; top: 0.5rem; bottom: -0.5rem; width: 1px; background: var(--line-strong); }
+  .feed-entry:last-child::before { display: none; }
+  .feed-entry::after { content: ''; position: absolute; left: calc(9rem - 3px); top: 0.5rem; width: 7px; height: 7px; border-radius: 50%; background: var(--text-faint); }
+  .feed-entry--accent::after { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .feed-date { position: absolute; left: 0; top: 0.25rem; width: 8rem; font-family: var(--font-mono); font-size: 0.65rem; line-height: 1.6; color: var(--text-faint); }
+  .feed-card, .feed-marker { max-width: 640px; }
+  .feed-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .feed-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1.25rem 1.5rem 0; }
+  .feed-card h3, .feed-marker h3 { font-size: 1rem; font-weight: 500; line-height: 1.5; }
+  .feed-handle { color: var(--text-faint); font-size: 0.8rem; }
+  .feed-tag, .feed-milestone, .feed-video { font-family: var(--font-mono); font-size: 0.6rem; line-height: 1.5; padding: 0.25rem 0.5rem; border: 1px solid var(--line); border-radius: 4px; }
+  .feed-tag { color: var(--text-soft); }
+  .feed-milestone { display: inline-block; margin: 1rem 1.5rem 0; background: var(--accent-soft); color: var(--accent); }
+  .feed-text { white-space: pre-wrap; overflow-wrap: anywhere; margin: 1.25rem 1.5rem; font-size: 0.9rem; line-height: 1.7; }
+  .feed-image { position: relative; margin: 0 1.5rem; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; }
+  .feed-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .feed-video { position: absolute; bottom: 0.75rem; left: 0.75rem; color: var(--text); background: var(--bg); }
+  .feed-card-footer { padding: 1rem 1.5rem; }
+  .feed-metrics { font-size: 0.75rem; line-height: 1.6; color: var(--text-soft); }
+  .feed-source { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; column-gap: 1rem; margin-top: 0.5rem; }
+  .feed-source small { font-size: 0.65rem; color: var(--text-faint); }
+  .feed-source a, .feed-marker a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; font-size: 0.75rem; color: var(--accent); }
+  .feed-marker { padding: 0 0 0.5rem; }
+  .feed-marker p { margin-top: 0.5rem; color: var(--text-soft); font-size: 0.85rem; line-height: 1.7; }
+  .stablelab-header { padding-top: 2rem; border-top: 1px solid var(--line-strong); }
+  @media (max-width: 700px) {
+    .feed-chapter, .stablelab-header { width: calc(100vw - 2rem); }
+    .feed-entry { padding-left: 1.25rem; }
+    .feed-entry::before { left: 0; }
+    .feed-entry::after { left: -3px; }
+    .feed-date { position: static; display: block; width: auto; margin-bottom: 0.75rem; }
+    .feed-stats { gap: 1rem; }
+    .feed-stats dt { font-size: 0.7rem; }
+    .feed-card-header { padding: 1rem 1rem 0; }
+    .feed-text { margin: 1rem; font-size: 0.85rem; }
+    .feed-image { margin: 0 1rem; }
+    .feed-milestone { margin-left: 1rem; }
+    .feed-card-footer { padding: 1rem; }
+    .work-content a, .work-content button { min-width: 44px; min-height: 44px; }
+    .work-content a { display: inline-flex; align-items: center; }
+    .modal-x, .lightbox-close { width: 44px; height: 44px; }
+  }
+
   .header {
     margin-bottom: 1.8rem;
   }
@@ -957,6 +969,10 @@ const proofBadgeById: Record<string, string> = {
       radial-gradient(44% 26% at 50% 100%, rgba(198, 189, 176, 0.12), transparent 72%);
     pointer-events: none;
     z-index: -1;
+  }
+
+  @media (max-width: 700px) {
+    .work-content::before { inset: -1.5rem 0; }
   }
 
   .work-hero,
@@ -1257,14 +1273,6 @@ const proofBadgeById: Record<string, string> = {
     aspect-ratio: 16 / 8.1;
   }
 
-  article.proof-card > .proof-card-media {
-    display: block;
-  }
-
-  .compound-proof-link {
-    width: fit-content;
-    font-size: 0.8rem;
-  }
 
   .proof-card--compact-media .proof-card-media {
     aspect-ratio: 16 / 3.2;
@@ -1709,6 +1717,8 @@ const proofBadgeById: Record<string, string> = {
   }
 
   .modal-x {
+    min-width: 44px;
+    min-height: 44px;
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
@@ -2386,6 +2396,8 @@ const proofBadgeById: Record<string, string> = {
       transform: translateY(0);
     }
     .modal-x {
+    min-width: 44px;
+    min-height: 44px;
       top: 0.5rem;
       right: 0.5rem;
     }
@@ -2480,8 +2492,8 @@ const proofBadgeById: Record<string, string> = {
     .lightbox-close {
       top: 0.5rem;
       right: 0.5rem;
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
     }
   }
 
