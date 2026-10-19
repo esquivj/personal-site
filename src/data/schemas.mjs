@@ -74,38 +74,38 @@ export const projectsSchema = z.array(z.object({
   }),
 })).superRefine(uniqueSlugs);
 
-export const compoundFeedSchema = z.array(z.discriminatedUnion('kind', [
-  z.object({
-    kind: z.literal('post'),
-    id: nonEmptyString,
-    name: nonEmptyString,
-    handle: nonEmptyString,
-    date: z.string().datetime(),
-    text: nonEmptyString,
-    url: z.string().url(),
-    metrics: z.object({
-      views: nonnegativeInteger,
-      likes: nonnegativeInteger,
-      reposts: nonnegativeInteger,
-      replies: nonnegativeInteger,
+const workImageSchema = z.object({
+  src: nonEmptyString,
+  alt: nonEmptyString,
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+  position: nonEmptyString.optional(),
+  video: z.boolean().optional(),
+});
+
+export const workChapterSchema = z.object({
+  label: nonEmptyString,
+  title: nonEmptyString,
+  copy: nonEmptyString,
+  stat: nonEmptyString,
+  statLabel: nonEmptyString,
+  proof: z.discriminatedUnion('kind', [
+    z.object({
+      kind: z.literal('post'),
+      name: nonEmptyString,
+      handle: nonEmptyString,
+      date: nonEmptyString,
+      datetime: isoDate,
+      text: nonEmptyString,
+      url: z.string().url(),
+      image: workImageSchema.optional(),
     }),
-    metricsCheckedOn: isoDate,
-    milestone: nonEmptyString.optional(),
-    image: z.object({
-      src: z.string().startsWith('/work/compound/feed/'),
-      width: z.number().int().positive(),
-      height: z.number().int().positive(),
-      isVideo: z.boolean(),
-    }).optional(),
-  }),
-  z.object({
-    kind: z.literal('marker'),
-    date: isoDate,
-    dateLabel: nonEmptyString,
-    title: nonEmptyString,
-    text: nonEmptyString,
-    url: z.string().url().optional(),
-    linkLabel: nonEmptyString.optional(),
-    source: nonEmptyString,
-  }),
-]));
+    z.object({
+      kind: z.literal('image'),
+      image: workImageSchema,
+      url: z.string().url().optional(),
+      linkLabel: nonEmptyString.optional(),
+      caption: nonEmptyString.optional(),
+    }),
+  ]),
+});

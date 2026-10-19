@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import ts from 'typescript';
-import { travelStatsSchema, writingPostsSchema, projectsSchema, compoundFeedSchema } from '../src/data/schemas.mjs';
+import { travelStatsSchema, writingPostsSchema, projectsSchema } from '../src/data/schemas.mjs';
 
 // Node cannot load TypeScript directly. Transpile the real data modules in memory;
 // their shared runtime schemas are ordinary ESM and need no loader or tsx.
@@ -94,14 +94,4 @@ test('current projects pass and invalid image dimensions fail', async () => {
   const projects = Function(`return (${literal});`)();
   assert.deepEqual(projectsSchema.parse(projects), projects);
   rejectsMutation(projectsSchema, projects, (data) => { data[0].image.width = -1; }, '0.image.width');
-});
-
-
-test('Compound feed passes and rejects invalid post data', async () => {
-  const feed = JSON.parse(await readFile(new URL('../src/data/compound-feed.json', import.meta.url), 'utf8'));
-  assert.deepEqual(compoundFeedSchema.parse(feed), feed);
-  const index = feed.findIndex((entry) => entry.kind === 'post' && entry.image);
-  rejectsMutation(compoundFeedSchema, feed, (data) => { data[index].image.width = -1; }, `${index}.image.width`);
-  rejectsMutation(compoundFeedSchema, feed, (data) => { data[index].metrics.views = -1; }, `${index}.metrics.views`);
-  rejectsMutation(compoundFeedSchema, feed, (data) => { data[index].date = 'invalid'; }, `${index}.date`);
 });
