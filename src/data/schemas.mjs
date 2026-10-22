@@ -71,5 +71,5 @@ export const projectsSchema = z.array(z.object({
     alt: nonEmptyString,
     width: z.number().int().positive(),
     height: z.number().int().positive(),
-  }),
+  }).optional(),
 })).superRefine(uniqueSlugs);
