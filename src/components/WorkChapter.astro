@@ -1,0 +1,77 @@
+---
+import type { z } from 'astro/zod';
+import type { workChapterSchema } from '../data/schemas.mjs';
+
+export type WorkChapterData = z.infer<typeof workChapterSchema>;
+interface Props { chapter: WorkChapterData }
+const { chapter } = Astro.props;
+const { proof } = chapter;
+---
+<article class="chapter">
+  <div class="chapter-story">
+    <p class="chapter-label">{chapter.label}</p>
+    <h3>{chapter.title}</h3>
+    <p class="chapter-copy">{chapter.copy}</p>
+    <div class="chapter-stat">
+      <p class="stat-value">{chapter.stat}</p>
+      <p class="stat-label">{chapter.statLabel}</p>
+    </div>
+  </div>
+  <figure class:list={['proof', proof.kind === 'post' && 'post']}>
+    {proof.kind === 'post' ? (
+      <>
+        <figcaption class="post-header">
+          <strong>{proof.name}</strong>
+          <span>@{proof.handle}</span>
+          <time datetime={proof.datetime}>{proof.date}</time>
+        </figcaption>
+        <p class="post-text">{proof.text}</p>
+        {proof.image && <div class="image-frame">
+          <img src={proof.image.src} alt={proof.image.alt} width={proof.image.width} height={proof.image.height} loading="lazy" />
+          {proof.image.video && <span class="video-label">Video</span>}
+        </div>}
+        <a class="source-link" href={proof.url} target="_blank" rel="noopener noreferrer">View on X ↗</a>
+      </>
+    ) : (
+      <>
+        {proof.url ? (
+          <a class="image-frame" href={proof.url} target="_blank" rel="noopener noreferrer">
+            <img src={proof.image.src} alt={proof.image.alt} width={proof.image.width} height={proof.image.height} loading="lazy" style={{ objectPosition: proof.image.position }} />
+          </a>
+        ) : (
+          <div class="image-frame">
+            <img src={proof.image.src} alt={proof.image.alt} width={proof.image.width} height={proof.image.height} loading="lazy" style={{ objectPosition: proof.image.position }} />
+          </div>
+        )}
+        {proof.caption && <figcaption class="caption">{proof.caption}</figcaption>}
+        {proof.url && <a class="source-link" href={proof.url} target="_blank" rel="noopener noreferrer">{proof.linkLabel ?? 'View source'} ↗</a>}
+      </>
+    )}
+  </figure>
+</article>
+<style>
+  .chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; align-items: center; padding: 3.5rem 0; border-top: 1px solid var(--line); }
+  .chapter-story, .proof { min-width: 0; }
+  .chapter-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 1rem; }
+  h3 { font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.08; margin-bottom: 1rem; }
+  .chapter-copy { font-size: 0.94rem; line-height: 1.8; color: var(--text-soft); }
+  .chapter-stat { margin-top: 2rem; }
+  .stat-value { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; letter-spacing: -0.04em; }
+  .stat-label { margin-top: 0.65rem; max-width: 30ch; color: var(--text-faint); font-size: 0.78rem; line-height: 1.6; }
+  .proof { margin: 0; }
+  .post { padding: 1.4rem; border: 1px solid var(--line); background: var(--bg-raised); border-radius: 8px; }
+  .post-header { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.8rem; }
+  .post-header strong { font-weight: 500; }
+  .post-header span, time { color: var(--text-faint); font-size: 0.72rem; }
+  time { margin-top: 0.4rem; }
+  .post-text { margin: 1.4rem 0; font-size: 0.91rem; line-height: 1.75; overflow-wrap: anywhere; }
+  .image-frame { display: block; position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; background: var(--surface); }
+  .image-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .video-label { position: absolute; left: 0.65rem; bottom: 0.65rem; padding: 0.2rem 0.45rem; border-radius: 3px; background: var(--bg); color: var(--text); font-family: var(--font-mono); font-size: 0.6rem; }
+  .source-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 0.5rem; font-size: 0.72rem; line-height: 1.6; text-decoration: underline; text-underline-offset: 0.2em; color: var(--text-soft); }
+  .caption { font-size: 0.75rem; line-height: 1.6; color: var(--text-faint); margin-top: 0.75rem; }
+  @media (max-width: 640px) {
+    .chapter { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding: 2.75rem 0; }
+    .post { padding: 1.25rem; }
+  }
+</style>

@@ -73,3 +73,39 @@ export const projectsSchema = z.array(z.object({
     height: z.number().int().positive(),
   }),
 })).superRefine(uniqueSlugs);
+
+const workImageSchema = z.object({
+  src: nonEmptyString,
+  alt: nonEmptyString,
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+  position: nonEmptyString.optional(),
+  video: z.boolean().optional(),
+});
+
+export const workChapterSchema = z.object({
+  label: nonEmptyString,
+  title: nonEmptyString,
+  copy: nonEmptyString,
+  stat: nonEmptyString,
+  statLabel: nonEmptyString,
+  proof: z.discriminatedUnion('kind', [
+    z.object({
+      kind: z.literal('post'),
+      name: nonEmptyString,
+      handle: nonEmptyString,
+      date: nonEmptyString,
+      datetime: isoDate,
+      text: nonEmptyString,
+      url: z.string().url(),
+      image: workImageSchema.optional(),
+    }),
+    z.object({
+      kind: z.literal('image'),
+      image: workImageSchema,
+      url: z.string().url().optional(),
+      linkLabel: nonEmptyString.optional(),
+      caption: nonEmptyString.optional(),
+    }),
+  ]),
+});

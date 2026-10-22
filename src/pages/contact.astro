@@ -1,4 +1,5 @@
 ---
+import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
@@ -11,21 +12,23 @@ const pageSchema = {
 ---
 
 <Layout
-  title="Contact Juan Esquivel — Work & Speaking"
-  description="Contact Juan Esquivel for collaborations, speaking, or brand work. Email is best, with X and LinkedIn as secondary ways to reach out."
+  title="Contact"
+  description="Email Juan Esquivel about Content, Social, Creative, or Marketing roles in crypto and AI. X and LinkedIn work too."
   canonicalPath="/contact"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
 
+  <Nav active="contact" />
   <PageHeader
     title="Contact"
-    subtitle="If you want to collaborate, speak, or just say hi, email me or reach out on X or LinkedIn."
+    subtitle="Email me about Content, Social, Creative, or Marketing roles in crypto and AI. X and LinkedIn work too."
     compact={true}
   />
 
   <section class="surface-list">
+    <a class="surface-link" href="/JUAN-ESQUIVEL-resume.pdf"><span class="surface-title">Resume</span><span class="surface-arrow">View →</span></a>
     <a class="surface-link" href="mailto:juanesquivel138@gmail.com">
       <div class="surface-body">
         <span class="surface-title">juanesquivel138@gmail.com</span>
