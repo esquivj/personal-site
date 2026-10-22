@@ -1,13 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
-  <!-- Single rounded rectangle chain link -->
-  <rect x="24" y="16" width="80" height="96" rx="40" stroke="currentColor" stroke-width="8" fill="none"/>
-  <rect x="44" y="44" width="40" height="40" rx="20" fill="#0a0a0a"/>
-  <style>
-    rect:first-of-type { stroke: #FFF; }
-    rect:last-of-type { fill: #0a0a0a; }
-    @media (prefers-color-scheme: light) {
-      rect:first-of-type { stroke: #000; }
-      rect:last-of-type { fill: #FFF; }
-    }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title">
+  <title id="title">Brick-red squircle</title>
+  <path fill="#9C3923" d="M64 8C114.907 8 120 13.093 120 64S114.907 120 64 120 8 114.907 8 64 13.093 8 64 8Z"/>
 </svg>
