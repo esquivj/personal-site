@@ -51,6 +51,12 @@ const stackSections = [
     intro: "Consumer AI and agent harnesses I'm constantly playing with.",
     items: [
       {
+        name: 'Grok Bot',
+        desc: 'AI agents',
+        href: 'https://x.ai/bot',
+        icon: '/images/stack/grok-bot.png',
+      },
+      {
         name: 'Claude Code',
         desc: 'AI coding assistant',
         href: 'https://claude.ai/code',
@@ -201,7 +207,7 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
   title="Stack — Tools & Apps Used by Juan Esquivel"
   description="Tools, apps, and gear that power Juan Esquivel's day-to-day. AI tools and agents, productivity apps, and creative software."
   canonicalPath="/stack"
-  preloadImages={['/images/stack/anthropic.jpg', '/images/stack/openai.png', '/images/stack/hermes.png']}
+  preloadImages={['/images/stack/grok-bot.png', '/images/stack/anthropic.jpg', '/images/stack/openai.png']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
