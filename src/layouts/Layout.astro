@@ -1,6 +1,5 @@
 ---
 import AgentationOverlay from '../components/AgentationOverlay';
-import EditorialSeal from '../components/EditorialSeal.astro';
 
 interface Props {
   title?: string;
@@ -95,7 +94,6 @@ const isAbout = canonicalPath === '/about';
       </main>
       {isHome ? (
         <footer class="footer">
-          <div class="footer-signoff"><EditorialSeal /></div>
           <div class="footer-mark">
             <div class="footer-wordmark" aria-hidden="true" data-footer-wordmark>ESQUIVEL</div>
           </div>
@@ -812,8 +810,6 @@ const isAbout = canonicalPath === '/about';
     gap: 0;
     overflow: hidden;
   }
-
-  .footer-signoff { display: flex; justify-content: flex-end; width: min(776px, 100%); margin: 0 auto; padding: 1.3rem 0 1.6rem; }
 
   .footer-wordmark {
     width: max-content;
