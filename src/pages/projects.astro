@@ -265,10 +265,10 @@ const pageSchema = {
     min-height: 44px;
     max-width: 100%;
     padding: 0.7rem 1rem;
-    border: 1px solid transparent;
+    border: 1px solid var(--line-strong);
     border-radius: 0.65rem;
-    background: var(--text);
-    color: var(--bg);
+    background: transparent;
+    color: color-mix(in srgb, var(--accent) 85%, var(--text));
     font-family: var(--font-ui);
     font-size: 0.875rem;
     font-weight: 500;
@@ -278,6 +278,7 @@ const pageSchema = {
     text-decoration: none;
     transition:
       background-color 160ms var(--ease-out),
+      border-color 160ms var(--ease-out),
       transform 160ms var(--ease-out);
   }
 
@@ -342,7 +343,8 @@ const pageSchema = {
 
   @media (hover: hover) and (pointer: fine) {
     .project-link:hover {
-      background: var(--text-soft);
+      background: var(--accent-soft);
+      border-color: var(--accent);
       transform: translateY(-1px);
     }
 
