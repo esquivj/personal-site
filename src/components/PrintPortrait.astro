@@ -1,0 +1,42 @@
+---
+const cell = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><defs><radialGradient id="dot"><stop stop-color="black"/><stop offset="1" stop-color="white"/></radialGradient></defs><rect width="4" height="4" fill="url(#dot)"/></svg>');
+---
+
+<svg class="portrait-filter" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="portrait-halftone" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="saturate" values="0" />
+      <feComponentTransfer result="tone"><feFuncR type="gamma" exponent="0.9" /><feFuncG type="gamma" exponent="0.9" /><feFuncB type="gamma" exponent="0.9" /></feComponentTransfer>
+      <feImage href={cell} width="2.5" height="2.5" result="cell" />
+      <feTile in="cell" result="dots" />
+      <feComposite in="tone" in2="dots" operator="arithmetic" k2="1" k3="1" k4="-0.5" />
+      <feComponentTransfer><feFuncR type="discrete" tableValues="0 1" /><feFuncG type="discrete" tableValues="0 1" /><feFuncB type="discrete" tableValues="0 1" /></feComponentTransfer>
+      <feColorMatrix type="matrix" values="0.875 0 0 0 0.078  0 0.870 0 0 0.075  0 0 0.855 0 0.067  0 0 0 1 0" />
+    </filter>
+  </defs>
+</svg>
+
+<button class="print-portrait" type="button" aria-label="Show original portrait" aria-pressed="false" data-print-portrait>
+  <img src="/images/avatar.jpg" alt="Juan Esquivel" width="176" height="216" loading="eager" decoding="async" fetchpriority="high" />
+  <img class="portrait-ink" src="/images/avatar.jpg" alt="" aria-hidden="true" width="176" height="216" loading="eager" decoding="async" />
+</button>
+
+<script>
+  const portrait = document.querySelector<HTMLButtonElement>('[data-print-portrait]');
+  portrait?.addEventListener('click', () => {
+    const original = portrait.getAttribute('aria-pressed') !== 'true';
+    portrait.setAttribute('aria-pressed', String(original));
+    portrait.setAttribute('aria-label', original ? 'Show halftone portrait' : 'Show original portrait');
+  });
+</script>
+
+<style>
+  .portrait-filter { position: absolute; pointer-events: none; }
+  .print-portrait { position: relative; display: block; width: 176px; height: 216px; padding: 0; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 0; background: var(--bg); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .print-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .portrait-ink { position: absolute; inset: 0; filter: url(#portrait-halftone); pointer-events: none; transition: opacity 350ms var(--ease-out); }
+  .print-portrait[aria-pressed="true"] .portrait-ink { opacity: 0; }
+  .print-portrait:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+  @media (hover: hover) and (pointer: fine) { .print-portrait:hover .portrait-ink { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .portrait-ink { transition: none; } }
+</style>

@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/JUAN-ESQUIVEL-resume.html",
+      "destination": "/JUAN-ESQUIVEL-resume.pdf",
+      "permanent": true
+    }
+  ]
+}

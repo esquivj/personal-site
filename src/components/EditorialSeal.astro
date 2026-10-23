@@ -1,0 +1,19 @@
+<svg class="editorial-seal" viewBox="0 0 120 120" role="img" aria-label="JE. Build your way in. Los Angeles.">
+  <defs><path id="seal-ring" d="M 60,12 a 48,48 0 1,1 0,96 a 48,48 0 1,1 0,-96" /></defs>
+  <circle cx="60" cy="60" r="57" class="seal-edge" />
+  <circle cx="60" cy="60" r="36" class="seal-inner" />
+  <text class="seal-motto" textLength="300" lengthAdjust="spacing"><textPath href="#seal-ring">BUILD YOUR WAY IN · LOS ANGELES · </textPath></text>
+  <text class="seal-initials" x="60" y="70" text-anchor="middle">JE</text>
+  <path class="seal-tick" d="M 56,84 h 8" />
+</svg>
+
+<style>
+  .editorial-seal { display: block; width: 104px; height: 104px; color: var(--accent); transform: rotate(-9deg); }
+  .seal-edge, .seal-inner, .seal-tick { fill: none; stroke: currentColor; stroke-width: .65; }
+  .seal-edge { opacity: .65; }
+  .seal-inner { opacity: .4; }
+  .seal-motto { fill: currentColor; font: 7.5px var(--font-mono); letter-spacing: 1.5px; }
+  .seal-initials { fill: currentColor; font: 44px var(--font-display); letter-spacing: -3px; }
+  .seal-tick { stroke-width: 1; }
+  @media (max-width: 760px) { .editorial-seal { width: 88px; height: 88px; } }
+</style>
