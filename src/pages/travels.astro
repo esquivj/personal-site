@@ -30,10 +30,8 @@ const pageSchema = {
       {stats.map(stat => <div><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}
     </dl>
     <div class="travel-colophon">
-      <p>{travelStats.totalAirlines} airlines <span>·</span> {travelStats.totalAircraftTypes} aircraft types <span>·</span> Tracked since {travelStats.firstFlight.slice(0, 4)}</p>
       <p>Flighty export · {date}</p>
     </div>
-    <p class="travel-method">Past, non-cancelled flights, including connections. City markers show recorded arrivals. Lines illustrate connections; distances are great-circle estimates. Airport data: <a href="https://ourairports.com/data/">OurAirports</a>.</p>
   </div>
 </Layout>
 
@@ -46,9 +44,6 @@ const pageSchema = {
   .travel-stat-strip dd { font: 400 clamp(2.5rem, 4vw, 3.4rem)/1.05 var(--font-display); letter-spacing: -.055em; }
   .travel-stat-strip dt { margin-top: .6rem; font: .55rem/1.5 var(--font-mono); text-transform: uppercase; letter-spacing: .09em; color: var(--text-faint); }
   .travel-colophon { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; font: .61rem/1.8 var(--font-mono); color: var(--text-soft); }
-  .travel-colophon span { padding: 0 .35rem; color: var(--text-faint); }
-  .travel-method { max-width: 78ch; margin-top: 1rem; font-size: .74rem; line-height: 1.8; color: var(--text-faint); }
-  .travel-method a { text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 720px) {
     .travel-breakout { width: calc(100vw - 2rem); }
     .travel-stat-strip { grid-template-columns: 1fr 1fr; gap: 1.3rem 0; margin-top: 1.3rem; padding-bottom: 1.3rem; }
