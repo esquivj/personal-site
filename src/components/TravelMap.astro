@@ -1,0 +1,146 @@
+---
+import { geoMercator, geoPath } from 'd3-geo';
+import { feature } from 'topojson-client';
+import landData from 'world-atlas/land-110m.json';
+import { travelStats } from '../data/travels';
+import reference from '../data/travel-airports.json';
+import { routeDistance, routeGeometry } from '../lib/travel-routes.mjs';
+
+const airports = travelStats.airports.map(code => ({
+  code, ...reference[code as keyof typeof reference],
+  flights: travelStats.routes.reduce((sum, route) => sum + (route.from === code || route.to === code ? route.count : 0), 0),
+}));
+const routes = travelStats.routes.map(route => {
+  const from = reference[route.from as keyof typeof reference];
+  const to = reference[route.to as keyof typeof reference];
+  return { ...route, id: `${route.from}-${route.to}`, distance: routeDistance([from.lon, from.lat], [to.lon, to.lat]), geometry: routeGeometry([from.lon, from.lat], [to.lon, to.lat]) };
+}).sort((a, b) => b.count - a.count || a.id.localeCompare(b.id));
+const projection = geoMercator().scale(158).translate([500, 330]);
+const path = geoPath(projection);
+const land = feature(landData as any, (landData as any).objects.land);
+const payload = JSON.stringify({ airports, routes }).replace(/</g, '\\u003c');
+---
+
+<section class="flight-atlas" data-flight-atlas aria-label="Explore my flight routes">
+  <div class="atlas-toolbar">
+    <div class="atlas-label"><span class="atlas-dot"></span> Flight log <span class="atlas-years">2018 — {travelStats.lastUpdated.slice(0, 4)}</span></div>
+    <div class="atlas-tools">
+      <label class="sr-only" for="airport-select">Explore an airport</label>
+      <select id="airport-select" data-airport-select>
+        <option value="">All airports</option>
+        {[...airports].sort((a, b) => a.city.localeCompare(b.city) || a.code.localeCompare(b.code)).map(airport => (
+          <option value={airport.code}>{airport.city || airport.name} · {airport.code}</option>
+        ))}
+      </select>
+      <button type="button" data-map-reset title="Show all routes and reset the map">Reset view <span aria-hidden="true">↺</span></button>
+    </div>
+  </div>
+
+  <div class="atlas-viewport">
+    <div class="atlas-fallback" data-map-fallback>
+      <svg viewBox="0 0 1000 530" role="img" aria-label="World map showing my recorded flight routes">
+        <path d={path(land)} fill="#f3f0e8" stroke="#c9c9bd" stroke-width="0.6" />
+        {routes.map(route => <path d={path(route.geometry)} fill="none" stroke="#c24a2d" stroke-width="1" opacity="0.45" />)}
+        {airports.map(airport => {
+          const p = projection([airport.lon, airport.lat])!;
+          return <circle cx={p[0]} cy={p[1]} r="2.5" fill="#c24a2d" stroke="#f7f5f1" stroke-width="1" />;
+        })}
+      </svg>
+    </div>
+    <div class="atlas-canvas" data-map-canvas aria-label="Interactive flight map. Use arrow keys to pan and plus or minus to zoom."></div>
+    <div class="atlas-map-note" data-map-note>Drag to explore · select an airport or route</div>
+    <div class="atlas-hover" data-map-hover hidden></div>
+  </div>
+
+  <div class="atlas-details" aria-live="polite" aria-atomic="true">
+    <div>
+      <span class="atlas-eyebrow" data-detail-label>The full picture</span>
+      <h2 data-detail-title>{routes.length} routes around the world.</h2>
+      <p data-detail-copy>Select an airport to explore its connections, or a route to see the details.</p>
+    </div>
+    <div class="atlas-selection-meta" data-detail-meta>{airports.length} airports · {travelStats.totalFlights} flights</div>
+  </div>
+
+  <details class="atlas-route-browser" data-route-browser>
+    <summary>Browse routes <span data-route-count>{routes.length}</span><span class="route-disclosure" aria-hidden="true">+</span></summary>
+    <div class="atlas-route-list">
+      {routes.map(route => (
+        <button type="button" class="atlas-route" data-route-id={route.id} data-from={route.from} data-to={route.to} aria-pressed="false">
+          <span>{route.from} <span class="route-connector" aria-hidden="true">↔</span> {route.to}</span>
+          <span>{route.count} {route.count === 1 ? 'flight' : 'flights'}</span>
+        </button>
+      ))}
+    </div>
+  </details>
+  <noscript><p class="atlas-noscript">This is the static map. Enable JavaScript to pan, zoom, and select routes.</p></noscript>
+  <script type="application/json" data-map-data set:html={payload} />
+</section>
+
+<script>
+  import { initTravelMap } from '../lib/travel-map';
+  document.querySelectorAll<HTMLElement>('[data-flight-atlas]').forEach(initTravelMap);
+</script>
+
+<style is:global>
+  .flight-atlas .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .flight-atlas { color-scheme: light; border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .atlas-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.3rem; border-bottom: 1px solid var(--line); }
+  .atlas-label, .atlas-eyebrow, .atlas-selection-meta, .atlas-map-note, .atlas-route-browser summary, .atlas-route { font-family: var(--font-mono); }
+  .atlas-label { display: flex; align-items: center; gap: .65rem; font-size: .61rem; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+  .atlas-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .atlas-years { color: var(--text-faint); margin-left: .75rem; }
+  .atlas-tools { display: flex; align-items: center; gap: .6rem; }
+  .atlas-tools select, .atlas-tools button { font: 400 .76rem var(--font-ui); color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 0; min-height: 38px; padding: .45rem .7rem; cursor: pointer; }
+  .atlas-tools select { width: 205px; text-overflow: ellipsis; }
+  .atlas-tools button { white-space: nowrap; }
+  .atlas-tools button span { margin-left: .4rem; font-size: 1rem; }
+  .atlas-tools :is(button, select):focus-visible, .atlas-route:focus-visible, .atlas-route-browser summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .atlas-viewport { height: clamp(410px, 47vw, 570px); position: relative; background: #e8ece8; overflow: hidden; }
+  .atlas-fallback, .atlas-canvas { position: absolute; inset: 0; }
+  .atlas-fallback svg { width: 100%; height: 100%; object-fit: cover; }
+  .atlas-fallback[hidden] { display: none; }
+  .atlas-map-note { position: absolute; left: 1.2rem; bottom: 1.1rem; color: #555d55; font-size: .57rem; letter-spacing: .025em; pointer-events: none; padding: .35rem .5rem; background: rgba(247,245,241,.9); }
+  .atlas-hover { position: absolute; max-width: 240px; pointer-events: none; padding: .5rem .65rem; color: var(--text); background: var(--bg-raised); border: 1px solid var(--line-strong); font: .72rem var(--font-ui); box-shadow: 0 3px 10px #1413110c; z-index: 3; }
+  .atlas-details { display: flex; justify-content: space-between; gap: 1.5rem; align-items: center; padding: 1.35rem 1.5rem; border-top: 1px solid var(--line); min-height: 146px; }
+  .atlas-eyebrow { display: block; font-size: .54rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .13em; margin-bottom: .5rem; }
+  .atlas-details h2 { font: 400 clamp(1.6rem, 2.8vw, 2.1rem)/1.12 var(--font-display); letter-spacing: -.03em; }
+  .atlas-details p { font: .81rem/1.6 var(--font-ui); color: var(--text-soft); margin-top: .45rem; max-width: 58ch; }
+  .atlas-selection-meta { max-width: 200px; text-align: right; font-size: .64rem; line-height: 1.9; color: var(--text-soft); flex-shrink: 0; }
+  .atlas-route-browser { border-top: 1px solid var(--line); }
+  .atlas-route-browser summary { display: flex; align-items: center; gap: .7rem; cursor: pointer; padding: .9rem 1.5rem; font-size: .6rem; text-transform: uppercase; letter-spacing: .07em; list-style: none; }
+  .atlas-route-browser summary::-webkit-details-marker { display: none; }
+  .atlas-route-browser summary > span:first-of-type { color: var(--text-faint); }
+  .route-disclosure { margin-left: auto; font-size: 1rem; }
+  .atlas-route-browser[open] .route-disclosure { transform: rotate(45deg); }
+  .atlas-route-list { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0 1.5rem; padding: 0 1.5rem 1.2rem; max-height: 270px; overflow-y: auto; }
+  .atlas-route { display: flex; align-items: center; justify-content: space-between; gap: .7rem; border: 0; border-bottom: 1px solid var(--line); padding: .7rem .3rem; background: transparent; color: var(--text); text-align: left; cursor: pointer; font-size: .65rem; }
+  .atlas-route[hidden] { display: none; }
+  .atlas-route > span:last-child { font-size: .56rem; color: var(--text-faint); white-space: nowrap; }
+  .atlas-route[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+  .atlas-route:hover { color: var(--accent); }
+  .route-connector { color: var(--text-faint); margin: 0 .3rem; }
+  .atlas-airport-label { pointer-events: none; font: 500 10px var(--font-mono); color: #4d514a; background: rgba(247,245,241,.86); padding: 2px 4px; }
+  .atlas-noscript { padding: .75rem 1.5rem; font-size: .75rem; color: var(--text-soft); }
+  .flight-atlas .maplibregl-ctrl-group { border-radius: 0; background: var(--bg-raised); border: 1px solid var(--line); box-shadow: none; }
+  .flight-atlas .maplibregl-ctrl-group button { width: 36px; height: 36px; }
+  .flight-atlas .maplibregl-ctrl-attrib { font: 10px/1.5 var(--font-ui); color: var(--text-faint); background: rgba(247,245,241,.88); }
+  .flight-atlas .maplibregl-canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .flight-atlas .maplibregl-ctrl-bottom-right { bottom: 5px; right: 5px; }
+  @media (max-width: 720px) {
+    .atlas-toolbar { padding: .9rem; flex-wrap: wrap; gap: .75rem; }
+    .atlas-label { width: 100%; justify-content: flex-start; }
+    .atlas-years { margin-left: auto; }
+    .atlas-tools { width: 100%; }
+    .atlas-tools select { flex: 1; min-width: 0; width: auto; }
+    .atlas-tools button { font-size: .72rem; }
+    .atlas-viewport { height: 440px; }
+    .atlas-details { padding: 1.1rem; flex-direction: column; align-items: flex-start; gap: .8rem; min-height: 180px; }
+    .atlas-selection-meta { text-align: left; max-width: none; }
+    .atlas-map-note { left: .6rem; bottom: 2rem; max-width: calc(100% - 65px); font-size: .5rem; }
+    .atlas-route-browser summary { padding: .9rem 1.1rem; }
+    .atlas-route-list { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 0 1.1rem 1rem; gap: 0 1rem; }
+    .atlas-route { font-size: .59rem; }
+    .route-connector { margin: 0 .1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .flight-atlas *, .flight-atlas *::before { transition: none !important; } }
+</style>
