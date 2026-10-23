@@ -4,12 +4,10 @@ const cityNames = {
   KUL: 'Kuala Lumpur', LYS: 'Lyon', NCE: 'Nice', FRA: 'Frankfurt', BOG: 'Bogotá',
 };
 
-export function travelCities(airports, landedAirports) {
-  const landed = new Set(landedAirports);
+export function travelCities(airports) {
   const cities = new Map();
-  // Use the busiest arrival airport to anchor a city with multiple airports.
+  // Use the busiest recorded airport to anchor a city with multiple airports.
   for (const airport of [...airports].sort((a, b) => b.flights - a.flights)) {
-    if (!landed.has(airport.code)) continue;
     const name = cityNames[airport.code] || airport.city;
     const key = `${airport.country}:${name}`;
     const existing = cities.get(key);

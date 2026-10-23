@@ -11,7 +11,7 @@ const airports = travelStats.airports.map(code => ({
   code, ...reference[code as keyof typeof reference],
   flights: travelStats.routes.reduce((sum, route) => sum + (route.from === code || route.to === code ? route.count : 0), 0),
 }));
-const cities = travelCities(airports, travelStats.landedAirports);
+const cities = travelCities(airports);
 const routes = travelStats.routes.map(route => {
   const from = reference[route.from as keyof typeof reference];
   const to = reference[route.to as keyof typeof reference];
@@ -23,10 +23,10 @@ const land = feature(landData as any, (landData as any).objects.land);
 const payload = JSON.stringify({ cities, routes }).replace(/</g, '\\u003c');
 ---
 
-<section class="flight-atlas" data-flight-atlas aria-label="Cities I have landed in">
+<section class="flight-atlas" data-flight-atlas aria-label="Cities in my flight history">
   <div class="atlas-viewport">
     <div class="atlas-fallback" data-map-fallback>
-      <svg viewBox="0 0 1000 530" role="img" aria-label="Cities I have landed in, connected by illustrative flight routes">
+      <svg viewBox="0 0 1000 530" role="img" aria-label="Cities in my flight history, connected by illustrative flight routes">
         <path d={path(land)} fill="#f3f0e8" stroke="#d4d3c9" stroke-width="0.5" />
         {routes.map(route => <path d={path(route)} fill="none" stroke="#b67560" stroke-width="0.8" opacity="0.28" />)}
         {cities.map((city, index) => {
@@ -40,7 +40,7 @@ const payload = JSON.stringify({ cities, routes }).replace(/</g, '\\u003c');
     <div class="atlas-canvas" data-map-canvas aria-label="City map. Drag left or right to explore the world. Use arrow keys to pan and plus or minus to zoom."></div>
     <div class="atlas-map-note" data-map-note>Drag to explore</div>
   </div>
-  <p class="atlas-sr-only">Cities with recorded arrivals, including connections: {cities.map(city => city.name).sort().join(', ')}.</p>
+  <p class="atlas-sr-only">Cities in recorded flights, including connections: {cities.map(city => city.name).sort().join(', ')}.</p>
   <script type="application/json" data-map-data set:html={payload} />
 </section>
 

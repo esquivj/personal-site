@@ -23,7 +23,7 @@ export function initTravelMap(root: HTMLElement) {
     root.dataset.mapState = 'fallback';
     fallback.hidden = false;
     container.hidden = true;
-    note.textContent = 'Cities with recorded arrivals';
+    note.textContent = 'Cities in my flight history';
   }
 
   const style: StyleSpecification = {
