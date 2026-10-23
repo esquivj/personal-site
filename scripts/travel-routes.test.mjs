@@ -24,3 +24,22 @@ test('Atlantic routes remain continuous and preserve endpoint coordinates', () =
   assert.ok(Math.abs(geometry.coordinates[0].at(-1)[1] - 51.47) < 1e-6);
   assert.ok(routeDistance([-118.4, 33.94], [-.45, 51.47]) > 8700);
 });
+
+test('country boundaries do not draw across the date line at visible latitudes', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const world = JSON.parse(await readFile(new URL('../public/maps/countries.geojson', import.meta.url), 'utf8'));
+  assert.equal(world.features.length, 241);
+  for (const feature of world.features) {
+    for (const polygon of feature.geometry.coordinates) {
+      for (const ring of polygon) {
+        assert.deepEqual(ring[0], ring.at(-1));
+        for (let i = 1; i < ring.length; i++) {
+          if (Math.abs(ring[i][1]) >= 85 && Math.abs(ring[i - 1][1]) >= 85) continue;
+          assert.ok(Math.abs(ring[i][0] - ring[i - 1][0]) <= 180, feature.properties.name);
+        }
+      }
+    }
+  }
+  const southAfrica = world.features.find(f => f.properties.name === 'South Africa');
+  assert.ok(southAfrica.geometry.coordinates.some(p => p.length > 1), 'preserves the Lesotho interior boundary');
+});
