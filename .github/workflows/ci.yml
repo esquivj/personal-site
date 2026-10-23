@@ -25,3 +25,19 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+      - name: Cache browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install browser
+        run: npx playwright install --with-deps chromium --only-shell
+      - name: Verify interactive travel map
+        run: npm run test:browser
+      - name: Save map screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: travel-map-screenshots
+          path: test-results/travel-map/
+          if-no-files-found: ignore
