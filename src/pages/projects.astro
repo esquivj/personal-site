@@ -8,6 +8,24 @@ import UiIcon from '../components/UiIcon.astro';
 const projects = projectsSchema.parse([
   {
     number: '01',
+    slug: 'compound-bots',
+    kicker: 'Built on Grok Bot',
+    title: 'Compound Grok Bots',
+    line: 'Two agents I built on Grok Bot for my work at Compound Foundation.',
+    description:
+      'One pulls together a weekly read on community sentiment, with links to the conversations behind it. The other checks governance proposals every hour and flags what changed. Both are available as reusable Grok Bot templates.',
+    facts: [],
+    href: 'https://app.notion.com/p/cadenaa/AI-Agents-I-Built-For-Compound-40048e9e83398181a75ef2f6d03a7673',
+    linkLabel: 'Read how I built them',
+    image: {
+      src: '/images/projects/compound-grok-bots.webp',
+      alt: 'Compound Grok Bots illustrated as two Grok-style blob avatars in Compound green and pale mint on charcoal.',
+      width: 1672,
+      height: 941,
+    },
+  },
+  {
+    number: '02',
     slug: 'dial',
     kicker: 'Private software',
     title: 'Dial',
@@ -29,7 +47,7 @@ const projects = projectsSchema.parse([
     },
   },
   {
-    number: '02',
+    number: '03',
     slug: 'tokenization-map',
     kicker: 'Live project',
     title: 'The Tokenization Map',
@@ -46,24 +64,6 @@ const projects = projectsSchema.parse([
       height: 630,
     },
   },
-  {
-    number: '03',
-    slug: 'compound-bots',
-    kicker: 'Built on Grok Bot',
-    title: 'Compound Grok Bots',
-    line: 'Two agents I built on Grok Bot for my work at Compound Foundation.',
-    description:
-      'One pulls together a weekly read on community sentiment, with links to the conversations behind it. The other checks governance proposals every hour and flags what changed. Both are available as reusable Grok Bot templates.',
-    facts: [],
-    href: 'https://app.notion.com/p/cadenaa/AI-Agents-I-Built-For-Compound-40048e9e83398181a75ef2f6d03a7673',
-    linkLabel: 'Read how I built them',
-    image: {
-      src: '/images/projects/compound-grok-bots.webp',
-      alt: 'Compound Grok Bots: two agents built on Grok Bot for weekly community sentiment and hourly governance monitoring.',
-      width: 1672,
-      height: 941,
-    },
-  },
 ]);
 
 const pageSchema = {
@@ -72,7 +72,7 @@ const pageSchema = {
   name: 'Projects by Juan Esquivel',
   url: 'https://juanesquivel.xyz/projects',
   description:
-    'Software, tools, and experiments by Juan Esquivel, including Dial, The Tokenization Map, and Compound Grok Bots.',
+    'Software, tools, and experiments by Juan Esquivel, including Compound Grok Bots, Dial, and The Tokenization Map.',
   author: {
     '@type': 'Person',
     name: 'Juan Esquivel',
@@ -83,7 +83,7 @@ const pageSchema = {
 
 <Layout
   title="Projects — Juan Esquivel"
-  description="Software, tools, and experiments by Juan Esquivel, including Dial, The Tokenization Map, and Compound Grok Bots."
+  description="Software, tools, and experiments by Juan Esquivel, including Compound Grok Bots, Dial, and The Tokenization Map."
   canonicalPath="/projects"
 >
   <Fragment slot="head">
