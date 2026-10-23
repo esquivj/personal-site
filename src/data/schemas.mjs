@@ -40,6 +40,11 @@ export const travelStatsSchema = z.object({
   lastUpdated: isoDate,
   airports: z.array(z.string().regex(/^[A-Z]{3}$/, 'Expected a three-letter uppercase airport code')),
   countries: z.array(nonEmptyString),
+  routes: z.array(z.object({
+    from: z.string().regex(/^[A-Z]{3}$/),
+    to: z.string().regex(/^[A-Z]{3}$/),
+    count: z.number().int().positive(),
+  })),
 });
 
 export const writingPostSchema = z.object({

@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { travelStats } from '../data/travels';
+import airportReference from '../data/travel-airports.json';
 import { geoNaturalEarth1, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 import landData from 'world-atlas/land-110m.json';
@@ -23,25 +24,10 @@ const pageSchema = {
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const flightHours = Math.round(travelStats.totalDistance / 800);
 
-const travelPins = [
-  { name: 'United States', lon: -118.2437, lat: 34.0522 },
-  { name: 'Mexico', lon: -99.1332, lat: 19.4326 },
-  { name: 'Colombia', lon: -74.0721, lat: 4.711 },
-  { name: 'Belgium', lon: 4.3517, lat: 50.8503 },
-  { name: 'France', lon: 2.3522, lat: 48.8566 },
-  { name: 'Germany', lon: 8.6821, lat: 50.1109 },
-  { name: 'Hong Kong', lon: 114.1694, lat: 22.3193 },
-  { name: 'Ireland', lon: -6.2603, lat: 53.3498 },
-  { name: 'Japan', lon: 139.6917, lat: 35.6895 },
-  { name: 'Malaysia', lon: 101.6869, lat: 3.139 },
-  { name: 'Portugal', lon: -9.1393, lat: 38.7223 },
-  { name: 'Singapore', lon: 103.8198, lat: 1.3521 },
-  { name: 'South Korea', lon: 126.978, lat: 37.5665 },
-  { name: 'Spain', lon: -3.7038, lat: 40.4168 },
-  { name: 'Thailand', lon: 100.5018, lat: 13.7563 },
-  { name: 'Turkey', lon: 28.9784, lat: 41.0082 },
-  { name: 'United Kingdom', lon: -0.1276, lat: 51.5072 },
-];
+const travelPins = travelStats.airports.map(code => {
+  const airport = airportReference[code as keyof typeof airportReference];
+  return { name: `${airport.city || airport.name} · ${code}`, lon: airport.lon, lat: airport.lat };
+});
 
 const MAP_WIDTH = 1000;
 const MAP_HEIGHT = 500;
@@ -55,7 +41,7 @@ const projection = geoNaturalEarth1().fitExtent(
 const path = geoPath(projection);
 const land = feature(landData as any, (landData as any).objects.land);
 const landPath = path(land) ?? '';
-const visitedCountries = travelPins.map((pin) => pin.name);
+const visitedCountries = travelStats.countries.map(country => country.replace(/^\S+\s/, ''));
 
 const projectedPins = travelPins
   .map((pin) => {
@@ -72,7 +58,7 @@ const projectedPins = travelPins
 
 <Layout
   title="Travels — Flight Stats & Countries Visited by Juan Esquivel"
-  description="Flight statistics and travel data from Juan Esquivel's journeys around the world. Airports, airlines, countries visited, and total distance traveled since 2021."
+  description="Flight statistics and travel data from Juan Esquivel's journeys around the world. Airports, airlines, countries visited, and estimated flight distance since 2018."
   canonicalPath="/travels"
 >
   <Fragment slot="head">
@@ -84,7 +70,7 @@ const projectedPins = travelPins
 
   <section class="stat-hero">
     <div class="stat-hero-value">{formatNumber(travelStats.totalDistance)}</div>
-    <div class="stat-hero-label">Kilometers flown</div>
+    <div class="stat-hero-label">Estimated kilometers flown</div>
   </section>
 
   <section class="inline-stats">
@@ -95,12 +81,12 @@ const projectedPins = travelPins
     <span class="inline-divider">·</span>
     <div class="inline-stat">
       <span class="inline-stat-value">{flightHours}</span>
-      <span class="inline-stat-label">Hours</span>
+      <span class="inline-stat-label">Est. flight hours</span>
     </div>
     <span class="inline-divider">·</span>
     <div class="inline-stat">
       <span class="inline-stat-value">{travelStats.totalCountries}</span>
-      <span class="inline-stat-label">Countries</span>
+      <span class="inline-stat-label">Countries &amp; territories</span>
     </div>
   </section>
 
@@ -124,10 +110,10 @@ const projectedPins = travelPins
   </section>
 
   <section class="travel-map-section travel-breakout">
-    <h2>Countries</h2>
+    <h2>Places flown</h2>
     <div class="travel-map-shell">
-      <div class="travel-map" aria-hidden="true">
-        <svg viewBox="0 0 1000 500" class="travel-map-svg" role="img" aria-label="World map with visited countries marked">
+      <div class="travel-map">
+        <svg viewBox="0 0 1000 500" class="travel-map-svg" role="img" aria-label="World map with recorded airports marked">
           <g class="map-graticule">
             <path d="M28 120H972" />
             <path d="M28 200H972" />
@@ -159,19 +145,25 @@ const projectedPins = travelPins
       </div>
 
       <div class="travel-map-legend">
-        <span class="travel-map-legend-label">Visited</span>
+        <span class="travel-map-legend-label">Flight destinations</span>
         {visitedCountries.map((name) => <span class="travel-map-country">{name}</span>)}
       </div>
     </div>
   </section>
 
   <p class="page-note">
-    Stats from Flighty. Last updated: {
-      new Date(travelStats.lastUpdated).toLocaleDateString('en-US', {
+    Past, non-cancelled flights from Flighty, including connections. Data through: {
+      new Date(`${travelStats.lastUpdated}T12:00:00Z`).toLocaleDateString('en-US', {
         month: 'long',
+        day: 'numeric',
         year: 'numeric',
+        timeZone: 'UTC',
       })
     }
+  </p>
+  <p class="page-note">
+    Distance estimates use airport-to-airport great-circle routes; flight hours are estimated at 800 km/h.
+    Airport coordinates from <a href="https://ourairports.com/data/">OurAirports</a>.
   </p>
 </Layout>
 

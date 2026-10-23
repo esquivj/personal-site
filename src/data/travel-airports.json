@@ -1,0 +1,247 @@
+{
+  "AUS": {
+    "name": "Austin Bergstrom International Airport",
+    "city": "Austin",
+    "country": "🇺🇸 United States",
+    "lon": -97.662015,
+    "lat": 30.197535
+  },
+  "BJV": {
+    "name": "Milas Bodrum International Airport",
+    "city": "Bodrum",
+    "country": "🇹🇷 Turkey",
+    "lon": 27.66401,
+    "lat": 37.249314
+  },
+  "BKK": {
+    "name": "Suvarnabhumi Airport",
+    "city": "Bangkok",
+    "country": "🇹🇭 Thailand",
+    "lon": 100.747002,
+    "lat": 13.6811
+  },
+  "BOG": {
+    "name": "El Dorado International Airport",
+    "city": "Bogota",
+    "country": "🇨🇴 Colombia",
+    "lon": -74.1469,
+    "lat": 4.70159
+  },
+  "BRU": {
+    "name": "Brussels Airport",
+    "city": "Zaventem",
+    "country": "🇧🇪 Belgium",
+    "lon": 4.48444,
+    "lat": 50.901402
+  },
+  "BUR": {
+    "name": "Hollywood Burbank/Bob Hope Airport",
+    "city": "Burbank",
+    "country": "🇺🇸 United States",
+    "lon": -118.35805,
+    "lat": 34.202834
+  },
+  "CDG": {
+    "name": "Charles de Gaulle International Airport",
+    "city": "Paris (Roissy-en-France, Val-d'Oise)",
+    "country": "🇫🇷 France",
+    "lon": 2.554117,
+    "lat": 49.00896
+  },
+  "DMK": {
+    "name": "Don Mueang International Airport",
+    "city": "Bangkok",
+    "country": "🇹🇭 Thailand",
+    "lon": 100.607002,
+    "lat": 13.9126
+  },
+  "DUB": {
+    "name": "Dublin Airport",
+    "city": "Dublin",
+    "country": "🇮🇪 Ireland",
+    "lon": -6.262121,
+    "lat": 53.428713
+  },
+  "EWR": {
+    "name": "Newark Liberty International Airport",
+    "city": "Newark",
+    "country": "🇺🇸 United States",
+    "lon": -74.170545,
+    "lat": 40.6894
+  },
+  "FRA": {
+    "name": "Frankfurt Main Airport",
+    "city": "Frankfurt am Main",
+    "country": "🇩🇪 Germany",
+    "lon": 8.55835,
+    "lat": 50.026706
+  },
+  "HKG": {
+    "name": "Hong Kong International Airport",
+    "city": "Hong Kong",
+    "country": "🇭🇰 Hong Kong",
+    "lon": 113.914862,
+    "lat": 22.31184
+  },
+  "HKT": {
+    "name": "Phuket International Airport",
+    "city": "Phuket",
+    "country": "🇹🇭 Thailand",
+    "lon": 98.3174,
+    "lat": 8.113257
+  },
+  "HND": {
+    "name": "Tokyo Haneda International Airport",
+    "city": "Tokyo",
+    "country": "🇯🇵 Japan",
+    "lon": 139.786958,
+    "lat": 35.549678
+  },
+  "ICN": {
+    "name": "Incheon International Airport",
+    "city": "Seoul",
+    "country": "🇰🇷 South Korea",
+    "lon": 126.450996,
+    "lat": 37.469101
+  },
+  "IST": {
+    "name": "İstanbul Airport",
+    "city": "Istanbul",
+    "country": "🇹🇷 Turkey",
+    "lon": 28.732136,
+    "lat": 41.274874
+  },
+  "JFK": {
+    "name": "John F. Kennedy International Airport",
+    "city": "New York",
+    "country": "🇺🇸 United States",
+    "lon": -73.779317,
+    "lat": 40.639447
+  },
+  "KUL": {
+    "name": "Kuala Lumpur International Airport",
+    "city": "Sepang",
+    "country": "🇲🇾 Malaysia",
+    "lon": 101.709999,
+    "lat": 2.74558
+  },
+  "LAX": {
+    "name": "Los Angeles International Airport",
+    "city": "Los Angeles",
+    "country": "🇺🇸 United States",
+    "lon": -118.407997,
+    "lat": 33.942501
+  },
+  "LHR": {
+    "name": "London Heathrow Airport",
+    "city": "London",
+    "country": "🇬🇧 United Kingdom",
+    "lon": -0.459909,
+    "lat": 51.470748
+  },
+  "LIS": {
+    "name": "Lisbon Humberto Delgado Airport",
+    "city": "Lisbon",
+    "country": "🇵🇹 Portugal",
+    "lon": -9.13592,
+    "lat": 38.7813
+  },
+  "LYS": {
+    "name": "Lyon Saint-Exupéry Airport",
+    "city": "Colombier-Saugnieu, Rhône",
+    "country": "🇫🇷 France",
+    "lon": 5.090139,
+    "lat": 45.725996
+  },
+  "MAD": {
+    "name": "Adolfo Suárez Madrid–Barajas Airport",
+    "city": "Madrid",
+    "country": "🇪🇸 Spain",
+    "lon": -3.572249,
+    "lat": 40.493407
+  },
+  "MEX": {
+    "name": "Mexico City Benito Juárez International Airport",
+    "city": "Mexico City",
+    "country": "🇲🇽 Mexico",
+    "lon": -99.07033,
+    "lat": 19.435822
+  },
+  "MTY": {
+    "name": "Monterrey International Airport",
+    "city": "Monterrey",
+    "country": "🇲🇽 Mexico",
+    "lon": -100.106989,
+    "lat": 25.778521
+  },
+  "NCE": {
+    "name": "Nice-Côte d'Azur Airport",
+    "city": "Nice, Alpes-Maritimes",
+    "country": "🇫🇷 France",
+    "lon": 7.21587,
+    "lat": 43.658401
+  },
+  "OPO": {
+    "name": "Francisco de Sá Carneiro Airport",
+    "city": "Porto",
+    "country": "🇵🇹 Portugal",
+    "lon": -8.68138980865,
+    "lat": 41.2481002808
+  },
+  "ORY": {
+    "name": "Paris-Orly Airport",
+    "city": "Paris (Orly, Val-de-Marne)",
+    "country": "🇫🇷 France",
+    "lon": 2.358963,
+    "lat": 48.729499
+  },
+  "PDX": {
+    "name": "Portland International Airport",
+    "city": "Portland",
+    "country": "🇺🇸 United States",
+    "lon": -122.598,
+    "lat": 45.588699
+  },
+  "PHL": {
+    "name": "Philadelphia International Airport",
+    "city": "Philadelphia",
+    "country": "🇺🇸 United States",
+    "lon": -75.241096,
+    "lat": 39.871899
+  },
+  "PVR": {
+    "name": "Puerto Vallarta International Airport",
+    "city": "Puerto Vallarta",
+    "country": "🇲🇽 Mexico",
+    "lon": -105.254391,
+    "lat": 20.679913
+  },
+  "SIN": {
+    "name": "Singapore Changi Airport",
+    "city": "Singapore",
+    "country": "🇸🇬 Singapore",
+    "lon": 103.994003,
+    "lat": 1.35019
+  },
+  "STN": {
+    "name": "London Stansted Airport",
+    "city": "London, Essex",
+    "country": "🇬🇧 United Kingdom",
+    "lon": 0.235,
+    "lat": 51.884998
+  },
+  "TIJ": {
+    "name": "General Abelardo L. Rodriguez International Airport",
+    "city": "Tijuana",
+    "country": "🇲🇽 Mexico",
+    "lon": -116.969976,
+    "lat": 32.541043
+  },
+  "ZCL": {
+    "name": "General Leobardo C. Ruiz International Airport",
+    "city": "Zacatecas",
+    "country": "🇲🇽 Mexico",
+    "lon": -102.687154,
+    "lat": 22.894942
+  }
+}

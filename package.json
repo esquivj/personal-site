@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "astro check",
-    "test": "node --test scripts/data.test.mjs"
+    "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.3",
