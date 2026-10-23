@@ -28,35 +28,39 @@ try {
   await page.locator('[data-map-state="ready"]').waitFor({ timeout: 45000 });
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: 'test-results/travel-map/desktop.png', fullPage: true });
-  assert.equal(await page.locator('[data-airport-select] option').count(), 36);
-  const label = await page.locator('.atlas-airport-label').filter({ hasText: /^LAX$/ }).boundingBox();
-  assert.ok(label);
-  await page.mouse.click(label.x - 8, label.y + label.height / 2);
-  await page.waitForFunction(() => document.querySelector('[data-airport-select]').value === 'LAX');
-  assert.equal(await page.locator('[data-detail-title]').textContent(), 'Los Angeles');
-  await page.locator('[data-route-browser] summary').click();
-  const route = page.locator('[data-route-id="LAX-LHR"]');
-  await route.focus(); await page.keyboard.press('Enter');
-  assert.equal(await route.getAttribute('aria-pressed'), 'true');
-  assert.match(await page.locator('[data-detail-copy]').textContent(), /6 recorded flights/);
-  await page.screenshot({ path: 'test-results/travel-map/route-selection.png', fullPage: true });
-  await page.keyboard.press('Escape');
-  assert.equal(await page.locator('[data-airport-select]').inputValue(), '');
-  assert.equal(await page.locator('[data-route-count]').textContent(), '42');
-  assert.equal(await page.locator('[data-route-id]:not([hidden])').count(), 42);
+  assert.equal(await page.locator('select, [data-map-reset], [data-route-browser], [data-detail-title]').count(), 0);
+  const payload = await page.locator('[data-map-data]').textContent();
+  const cities = JSON.parse(payload).cities.map(city => city.name);
+  assert.ok(cities.includes('Los Angeles') && cities.includes('Lisbon') && cities.includes('Kuala Lumpur'));
+  assert.equal(cities.filter(name => name === 'Paris').length, 1);
+  assert.ok(!cities.includes('LAX'));
+  const canvas = page.locator('.maplibregl-canvas');
+  const bounds = await canvas.boundingBox();
+  assert.ok(bounds);
+  // Drag beyond a whole world in both directions: land and labels should repeat.
+  for (const direction of [1, -1]) {
+    for (let i = 0; i < 3; i++) {
+      const start = bounds.x + bounds.width * (direction > 0 ? .2 : .8);
+      const end = bounds.x + bounds.width * (direction > 0 ? .8 : .2);
+      await page.mouse.move(start, bounds.y + bounds.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(end, bounds.y + bounds.height / 2, { steps: 20 });
+      await page.mouse.up();
+    }
+    await page.screenshot({ path: `test-results/travel-map/wrapped-${direction}.png`, fullPage: true });
+  }
+  await canvas.focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('+');
   assert.deepEqual(errors, []);
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   await mobile.goto(url);
   await mobile.locator('[data-map-state="ready"]').waitFor({ timeout: 45000 });
   await mobile.screenshot({ path: 'test-results/travel-map/mobile.png', fullPage: true });
-  await mobile.locator('[data-airport-select]').selectOption('LIS');
-  assert.equal(await mobile.locator('[data-detail-title]').textContent(), 'Lisbon');
   assert.ok(await mobile.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
   await mobile.getByRole('button', { name: 'Zoom in', exact: true }).click();
-  await mobile.screenshot({ path: 'test-results/travel-map/mobile-selected.png', fullPage: true });
-  await mobile.locator('[data-map-reset]').click();
-  assert.equal(await mobile.locator('[data-airport-select]').inputValue(), '');
+  await mobile.screenshot({ path: 'test-results/travel-map/mobile-zoomed.png', fullPage: true });
 
   const fallback = await browser.newPage();
   await fallback.addInitScript(() => {
@@ -69,12 +73,10 @@ try {
   await fallback.goto(url);
   await fallback.locator('[data-map-state="fallback"]').waitFor();
   assert.ok(await fallback.locator('[data-map-fallback]').isVisible());
-  await fallback.locator('[data-airport-select]').selectOption('LAX');
-  assert.equal(await fallback.locator('[data-detail-title]').textContent(), 'Los Angeles');
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(url);
   assert.ok(await noJS.locator('[data-map-fallback] svg').isVisible());
-  console.log('Travel map passed: rendering, map clicks, route selection, keyboard reset, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
+  console.log('Travel map passed: city data, minimal controls, horizontal panning, keyboard navigation, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
 } finally {
   await browser?.close();
   server.close();

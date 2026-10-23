@@ -43,3 +43,16 @@ test('country boundaries do not draw across the date line at visible latitudes',
   const southAfrica = world.features.find(f => f.properties.name === 'South Africa');
   assert.ok(southAfrica.geometry.coordinates.some(p => p.length > 1), 'preserves the Lesotho interior boundary');
 });
+
+test('city labels combine airports serving the same city and require a recorded arrival', async () => {
+  const { travelCities } = await import('../src/lib/travel-cities.mjs');
+  const cities = travelCities([
+    { code: 'CDG', city: 'Roissy', country: 'France', lon: 2.5, lat: 49, flights: 3 },
+    { code: 'ORY', city: 'Orly', country: 'France', lon: 2.3, lat: 48.7, flights: 2 },
+    { code: 'MTY', city: 'Monterrey', country: 'Mexico', lon: -100, lat: 25, flights: 1 },
+  ], ['CDG', 'ORY']);
+  assert.equal(cities.length, 1);
+  assert.equal(cities[0].name, 'Paris');
+  assert.equal(cities[0].flights, 5);
+  assert.equal(cities[0].lon, 2.5);
+});

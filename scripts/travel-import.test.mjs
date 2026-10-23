@@ -19,6 +19,7 @@ test('future and cancelled flights cannot inflate past stats or airport list', (
   const stats = computeTravelStats(`${header}\n2026-10-20,AAA,BBB,false,Airline,Plane,\n2026-11-20,AAA,CCC,false,Future,Future,\n2026-10-20,AAA,CCC,true,Cancelled,Cancelled,`, airports, '2026-10-21');
   assert.equal(stats.totalFlights, 1);
   assert.deepEqual(stats.airports, ['AAA', 'BBB']);
+  assert.deepEqual(stats.landedAirports, ['BBB']);
   assert.equal(stats.totalCountries, 2);
   assert.equal(stats.totalAirlines, 1);
   assert.equal(stats.totalAircraftTypes, 1);
@@ -34,6 +35,7 @@ test('great-circle distances replace arbitrary defaults and aggregate return rou
 test('diversions use the actual destination', () => {
   const stats = computeTravelStats(`${header}\n2026-01-01,AAA,BBB,false,Airline,Plane,CCC`, airports, '2026-10-21');
   assert.deepEqual(stats.airports, ['AAA', 'CCC']);
+  assert.deepEqual(stats.landedAirports, ['CCC']);
 });
 
 test('unknown airports and malformed dates fail instead of inventing stats', () => {

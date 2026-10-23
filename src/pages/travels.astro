@@ -14,12 +14,12 @@ const stats = [
 const date = new Date(`${travelStats.lastUpdated}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const pageSchema = {
   '@context': 'https://schema.org', '@type': 'WebPage', name: "Juan Esquivel's Travels",
-  url: 'https://juanesquivel.xyz/travels', description: 'An interactive map of my flights, airports, and journeys since 2018.',
+  url: 'https://juanesquivel.xyz/travels', description: 'An interactive map of my flights, cities, and journeys since 2018.',
   author: { '@type': 'Person', name: 'Juan Esquivel', url: 'https://juanesquivel.xyz' },
 };
 ---
 
-<Layout title="Travels — Juan Esquivel" description="An interactive map of my flights and airports around the world. Travel history from Flighty, since 2018." canonicalPath="/travels">
+<Layout title="Travels — Juan Esquivel" description="An interactive map of my flights and cities around the world. Travel history from Flighty, since 2018." canonicalPath="/travels">
   <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(pageSchema)} /></Fragment>
   <Nav active="travels" />
   <PageHeader title="Travels" subtitle="Flights and places, since 2018." compact />
@@ -33,7 +33,7 @@ const pageSchema = {
       <p>{travelStats.totalAirlines} airlines <span>·</span> {travelStats.totalAircraftTypes} aircraft types <span>·</span> Tracked since {travelStats.firstFlight.slice(0, 4)}</p>
       <p>Flighty export · {date}</p>
     </div>
-    <p class="travel-method">Past, non-cancelled flights, including connections. Lines show airport-to-airport routes; distances are great-circle estimates, not actual flight tracks. Airport data: <a href="https://ourairports.com/data/">OurAirports</a>.</p>
+    <p class="travel-method">Past, non-cancelled flights, including connections. City markers show recorded arrivals. Lines illustrate connections; distances are great-circle estimates. Airport data: <a href="https://ourairports.com/data/">OurAirports</a>.</p>
   </div>
 </Layout>
 

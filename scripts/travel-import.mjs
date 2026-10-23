@@ -45,10 +45,12 @@ export function computeTravelStats(content, airportReference, asOf) {
   if (!flights.length) throw new Error('No past, non-cancelled flights in export');
   const airports = new Set(), airlines = new Set(), aircraft = new Set(), countries = new Set();
   const routeCounts = new Map();
+  const landedAirports = new Set();
   let totalDistance = 0;
   for (const flight of flights) {
     // A diversion's actual arrival takes precedence over the booked destination.
     const from = flight.From, to = flight['Diverted To'] || flight.To;
+    landedAirports.add(to);
     for (const code of [from, to]) {
       if (!airportReference[code]) throw new Error(`Missing airport reference: ${code}`);
       airports.add(code);
@@ -71,6 +73,7 @@ export function computeTravelStats(content, airportReference, asOf) {
     firstFlight: flights.map(flight => flight.Date).sort()[0],
     lastUpdated: asOf,
     airports: [...airports].sort(),
+    landedAirports: [...landedAirports].sort(),
     countries: [...countries].sort(),
     routes: [...routeCounts].sort(([a], [b]) => a.localeCompare(b)).map(([route, count]) => {
       const [from, to] = route.split('-');
