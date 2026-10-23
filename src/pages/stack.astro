@@ -23,7 +23,7 @@ const favorites = [
     name: 'Claude Code',
     role: 'Thinking + shipping',
     href: 'https://claude.ai/code',
-    icon: '/images/stack/anthropic.jpg',
+    icon: '/images/stack/claude-code.png',
   },
   {
     name: 'ChatGPT',
@@ -35,7 +35,7 @@ const favorites = [
     name: 'Obsidian',
     role: 'Notes + ideas',
     href: 'https://obsidian.md',
-    icon: '/images/stack/obsidian.jpg',
+    icon: '/images/stack/obsidian.png',
   },
   {
     name: 'Dia',
@@ -54,13 +54,13 @@ const stackSections = [
         name: 'Grok Bot',
         desc: 'AI agents',
         href: 'https://x.ai/bot',
-        icon: '/images/stack/grok-bot.png',
+        icon: '/images/stack/grok-bot-app.png',
       },
       {
         name: 'Claude Code',
         desc: 'AI coding assistant',
         href: 'https://claude.ai/code',
-        icon: '/images/stack/anthropic.jpg',
+        icon: '/images/stack/claude-code.png',
         note: 'Primary thinking partner',
       },
       {
@@ -73,7 +73,7 @@ const stackSections = [
         name: 'Hermes Agent',
         desc: 'Agent harness',
         href: 'https://github.com/NousResearch/hermes-agent',
-        icon: '/images/stack/hermes.png',
+        icon: '/images/stack/hermes-light.png',
         note: 'Agent orchestration layer',
       },
       {
@@ -98,7 +98,7 @@ const stackSections = [
         name: 'Obsidian',
         desc: 'Knowledge management',
         href: 'https://obsidian.md',
-        icon: '/images/stack/obsidian.jpg',
+        icon: '/images/stack/obsidian.png',
         note: 'Second brain',
       },
       {
@@ -119,7 +119,7 @@ const stackSections = [
         name: 'Things 3',
         desc: 'Task management',
         href: 'https://culturedcode.com/things/',
-        icon: '/images/stack/things.jpg',
+        icon: '/images/stack/things.png',
         note: 'Daily todos',
       },
     ],
@@ -160,7 +160,7 @@ const stackSections = [
         name: 'Eagle',
         desc: 'Image and video library',
         href: 'https://eagle.cool',
-        icon: '/images/stack/eagle.jpg',
+        icon: '/images/stack/eagle.png',
         note: 'Reference archive',
       },
     ],
@@ -207,7 +207,7 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
   title="Stack — Tools & Apps Used by Juan Esquivel"
   description="Tools, apps, and gear that power Juan Esquivel's day-to-day. AI tools and agents, productivity apps, and creative software."
   canonicalPath="/stack"
-  preloadImages={['/images/stack/grok-bot.png', '/images/stack/anthropic.jpg', '/images/stack/openai.png']}
+  preloadImages={['/images/stack/grok-bot-app.png', '/images/stack/claude-code.png', '/images/stack/openai.png']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
@@ -339,7 +339,7 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
     width: 36px;
     height: 36px;
     border: 1px solid rgba(20, 19, 17, 0.1);
-    background: rgba(20, 19, 17, 0.03);
+    background: var(--bg-raised);
     overflow: hidden;
     flex-shrink: 0;
   }
@@ -455,10 +455,11 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
   }
 
   .stack-ledger-icon {
+    color-scheme: light;
     width: 40px;
     height: 40px;
     border: 1px solid rgba(20, 19, 17, 0.1);
-    background: rgba(20, 19, 17, 0.03);
+    background: var(--bg-raised);
     overflow: hidden;
     flex-shrink: 0;
   }
