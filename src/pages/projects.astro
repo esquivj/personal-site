@@ -112,13 +112,13 @@ const pageSchema = {
                 ))}
               </ul>}
 
-              {project.href && (
-                <a href={project.href} target="_blank" rel="noopener" class="project-link">
-                  {project.linkLabel}
-                  <UiIcon name="arrow-up-right" size={16} class="project-link-icon" />
-                </a>
-              )}
             </div>
+            {project.href && (
+              <a href={project.href} target="_blank" rel="noopener" class="project-link">
+                <span>{project.linkLabel}</span>
+                <UiIcon name="arrow-right" size={22} class="project-link-icon" />
+              </a>
+            )}
           </div>
 
           {project.image && <figure class="project-figure">
@@ -258,28 +258,23 @@ const pageSchema = {
   }
 
   .project-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    min-height: 44px;
-    max-width: 100%;
-    padding: 0.7rem 1rem;
-    border: 1px solid var(--line-strong);
-    border-radius: 0.65rem;
-    background: transparent;
-    color: color-mix(in srgb, var(--accent) 85%, var(--text));
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 56px;
+    width: 100%;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+    color: var(--text);
     font-family: var(--font-ui);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: 0;
-    margin-top: 1.35rem;
+    margin-top: 1.5rem;
     text-decoration: none;
-    transition:
-      background-color 160ms var(--ease-out),
-      border-color 160ms var(--ease-out),
-      transform 160ms var(--ease-out);
+    transition: border-color 160ms var(--ease-out);
   }
 
   .project-link:focus-visible {
@@ -288,10 +283,13 @@ const pageSchema = {
   }
 
   .project-link-icon {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
-    opacity: 0.75;
+    margin-right: 3px;
+    transition:
+      color 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
   }
 
   .project-figure {
@@ -305,6 +303,10 @@ const pageSchema = {
 
   .project-entry--compact .project-copy {
     margin-bottom: 0;
+  }
+
+  .project-entry--compact .project-link {
+    max-width: 760px;
   }
 
   .project-entry--compact .project-figure {
@@ -343,9 +345,18 @@ const pageSchema = {
 
   @media (hover: hover) and (pointer: fine) {
     .project-link:hover {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      transform: translateY(-1px);
+      border-color: var(--line-strong);
+    }
+
+    .project-link:hover span {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+    }
+
+    .project-link:hover .project-link-icon {
+      color: var(--accent);
+      transform: translateX(3px);
     }
 
     .project-image-frame--link:hover img {
@@ -354,11 +365,12 @@ const pageSchema = {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .project-link {
+    .project-link,
+    .project-link-icon {
       transition: none;
     }
 
-    .project-link:hover {
+    .project-link:hover .project-link-icon {
       transform: none;
     }
   }
