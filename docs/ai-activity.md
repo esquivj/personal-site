@@ -19,6 +19,39 @@ Default roots are `~/.claude` and `~/.codex`. `CLAUDE_CONFIG_DIR` and `CODEX_HOM
 
 The original `activity:import` command is retained for historical combined exports from `claude-count-tokens@1.2.0`. Those exports use the upstream counting behavior described below; prefer the audited local collector for new snapshots.
 
+## Add another Mac
+
+Run this in Terminal **on the MacBook**, with Node 22.13 or newer. Use a new checkout so existing work is untouched:
+
+```sh
+git clone --branch codex/ai-activity-panel --single-branch https://github.com/esquivj/personal-site.git "$HOME/personal-site-token-export"
+cd "$HOME/personal-site-token-export"
+npm ci
+npm run activity:export -- --device macbook --out "$HOME/Desktop/macbook.activity.json"
+```
+
+Transfer `macbook.activity.json` privately to the coordinating Mac (AirDrop, or attach it in the working conversation). Do not transfer the entire Claude/Codex folders. This file contains token counters, dates/timestamps, and one-way fingerprints needed to recognize duplicated responses and threads. It excludes prompts, code, paths, raw IDs, credentials, and models. It is private reconciliation data, not a website asset; do not commit it. The default export directory `private-activity/` and `*.activity.json` files are ignored by Git, and export rejects destinations inside the website source/public directories.
+
+On the coordinating Mac, refresh its local data and combine it with the transferred export:
+
+```sh
+npm run activity:refresh -- /absolute/path/to/macbook.activity.json
+git diff -- src/data/ai-activity.json
+```
+
+Or explicitly export each machine and merge the files:
+
+```sh
+npm run activity:export -- --device desktop
+npm run activity:merge -- private-activity/desktop.activity.json /absolute/path/to/macbook.activity.json
+```
+
+The merge unions response records, keeps final streaming counters, and combines legacy events before calculating increments. Importing the same export twice does not increase the total. A Codex thread summary is a lower bound for that thread, not another amount to add to detailed responses. If both machines only retain summaries of the same thread, the largest total is kept; exact overlap and daily timing cannot be recovered without detailed logs. Distinct thread IDs remain separate.
+
+Only the usual daily snapshot is written to `src/data/ai-activity.json`. The console report shows each source's export date, overlaps, and fallback coverage. Older exports remain older data; the merge does not make them current. Keep exports from all machines for future refreshes. After a merged snapshot exists, a plain `activity:refresh` refuses to replace it with just one Mac; pass the other exports again. Neither command publishes the website automatically.
+
+Signing into the same account is not a device merge. This workflow can recover records present on the MacBook, but cannot recover deleted logs, other omitted machines, or cloud-only usage.
+
 ## Counting and coverage
 
 - **Claude Code:** recursively reads project and subagent JSONL logs. Deduplicates by message ID and request ID (message ID alone if no request ID, UUID only as a fallback). Keeps the maximum counters for each streamed response, rather than summing content fragments. Includes input, output, cache creation, and cache reads.

@@ -14,6 +14,8 @@
     "test:browser": "node scripts/verify-travel-map.mjs",
     "activity:refresh": "node scripts/refresh-ai-activity.mjs",
     "activity:audit": "node scripts/collect-ai-activity.mjs",
+    "activity:export": "node scripts/device-ai-activity.mjs export",
+    "activity:merge": "node scripts/device-ai-activity.mjs merge",
     "activity:import": "node scripts/import-ai-activity.mjs"
   },
   "dependencies": {

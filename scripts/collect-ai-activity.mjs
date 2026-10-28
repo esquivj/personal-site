@@ -1,4 +1,5 @@
 import { createReadStream } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { readdir, stat } from 'node:fs/promises';
 import { createInterface } from 'node:readline';
 import { homedir } from 'node:os';
@@ -25,6 +26,7 @@ const day = (timestamp) => {
   return Number.isFinite(date.getTime()) ? dateFormatter.format(date) : null;
 };
 const sum = (values) => values.reduce((total, value) => total + value, 0);
+const fingerprint = (kind, value) => createHash('sha256').update(`${kind}:${value}`).digest('hex');
 const codexTokens = (usage) => number(usage?.input_tokens) + number(usage?.output_tokens);
 const add = (map, date, tokens) => {
   if (date && tokens > 0) map.set(date, (map.get(date) ?? 0) + tokens);
@@ -96,6 +98,10 @@ export function createClaudeAccumulator() {
       }
       return {
         daily,
+        records: [...responses].map(([key, response]) => ({
+          id: fingerprint('claude-response', key),
+          ...response,
+        })),
         audit: {
           usageRecords,
           uniqueResponses: responses.size,
@@ -158,6 +164,7 @@ export function collectCodexRecords(entries) {
 export async function collectActivity({
   claudeRoot = process.env.CLAUDE_CONFIG_DIR || join(homedir(), '.claude'),
   codexRoot = process.env.CODEX_HOME || join(homedir(), '.codex'),
+  includeTransfer = false,
 } = {}) {
   const audit = { invalidLines: 0 };
   const claudeFiles = await filesUnder(join(claudeRoot, 'projects'));
@@ -216,6 +223,7 @@ export async function collectActivity({
   const parsed = new Map();
   const threadIds = new Set();
   const groups = new Map();
+  const transferableThreads = new Map();
   const codexDaily = new Map();
   let modernResponses = 0;
   let legacyFiles = 0;
@@ -231,6 +239,7 @@ export async function collectActivity({
     let threadId;
     for await (const entry of records(path, audit)) {
       if (entry.type === 'session_meta') threadId = entry.payload?.id;
+      if (!threadId && entry.type === 'token_usage_record') threadId = entry.payload?.thread_id;
       if (
         entry.type === 'token_usage_record' ||
         (entry.type === 'event_msg' && entry.payload?.type === 'token_count')
@@ -241,6 +250,11 @@ export async function collectActivity({
       threadId ||
       threads.find((thread) => thread.rollout_path && resolve(thread.rollout_path) === path)?.id ||
       path;
+    if (includeTransfer && key === path) {
+      throw new Error(
+        'A Codex log has no stable thread ID. Cannot safely export it for cross-device deduplication.'
+      );
+    }
     const group = groups.get(key) || { entries: [], paths: [] };
     group.entries.push(...entries);
     group.paths.push(path);
@@ -252,6 +266,45 @@ export async function collectActivity({
       ...new Map(group.entries.map((entry) => [JSON.stringify(entry), entry])).values(),
     ];
     const result = collectCodexRecords(entries);
+    if (includeTransfer) {
+      const counters = (usage) =>
+        usage
+          ? {
+              input: number(usage.input_tokens),
+              output: number(usage.output_tokens),
+            }
+          : null;
+      const events = entries
+        .filter((entry) => day(entry.timestamp))
+        .flatMap((entry) => {
+          const timestamp = new Date(entry.timestamp).toISOString();
+          if (entry.type === 'token_usage_record' && entry.payload?.response_id) {
+            return [
+              {
+                type: 'response',
+                timestamp,
+                id: fingerprint('codex-response', entry.payload.response_id),
+                usage: counters(entry.payload.usage) ?? { input: 0, output: 0 },
+              },
+            ];
+          }
+          const info = entry.payload?.info;
+          if (entry.type !== 'event_msg' || !info) return [];
+          return [
+            {
+              type: 'counter',
+              timestamp,
+              total: counters(info.total_token_usage),
+              last: counters(info.last_token_usage),
+            },
+          ];
+        });
+      transferableThreads.set(threadId, {
+        id: fingerprint('codex-thread', threadId),
+        events,
+        fallback: null,
+      });
+    }
     const tokens = sum([...result.daily.values()]);
     group.paths.forEach((path) => parsed.set(path, tokens));
     if (tokens > 0 && threadId) threadIds.add(threadId);
@@ -262,6 +315,18 @@ export async function collectActivity({
   let fallbackThreads = 0;
   let fallbackTokens = 0;
   for (const thread of threads) {
+    if (includeTransfer) {
+      const transferred = transferableThreads.get(thread.id) ?? {
+        id: fingerprint('codex-thread', thread.id),
+        events: [],
+        fallback: null,
+      };
+      transferred.fallback = {
+        timestamp: new Date((thread.updated_at || thread.created_at) * 1000).toISOString(),
+        tokens: number(thread.tokens_used),
+      };
+      transferableThreads.set(thread.id, transferred);
+    }
     if (
       threadIds.has(thread.id) ||
       (thread.rollout_path && parsed.get(resolve(thread.rollout_path)) > 0)
@@ -296,7 +361,18 @@ export async function collectActivity({
       codex: codexDaily.get(date) ?? 0,
     })),
   });
-  return { snapshot, audit };
+  return {
+    snapshot,
+    audit,
+    ...(includeTransfer
+      ? {
+          transfer: {
+            claude: claudeResult.records,
+            codex: [...transferableThreads.values()],
+          },
+        }
+      : {}),
+  };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

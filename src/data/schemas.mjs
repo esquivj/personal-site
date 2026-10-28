@@ -15,7 +15,7 @@ export const aiActivitySchema = z.object({
   version: z.literal(1),
   updatedAt: z.string().datetime().nullable(),
   timeZone: z.literal('America/Los_Angeles'),
-  collector: z.enum(['claude-count-tokens@1.2.0', 'local-usage-v2']),
+  collector: z.enum(['claude-count-tokens@1.2.0', 'local-usage-v2', 'merged-local-usage-v1']),
   days: z.array(z.object({
     date: isoDate,
     claude: nonnegativeInteger.max(Number.MAX_SAFE_INTEGER),
@@ -39,6 +39,41 @@ export const aiActivitySchema = z.object({
   if (end && data.days.some(day => day.date > end)) context.addIssue({
     code: z.ZodIssueCode.custom, path: ['days'], message: 'Activity cannot follow its snapshot date',
   });
+});
+
+// Private, portable device export. Never embed this ledger in the website.
+const usageFingerprint = z.string().regex(/^[a-f0-9]{64}$/);
+const usageCount = nonnegativeInteger.max(Number.MAX_SAFE_INTEGER);
+const codexUsageCounters = z.object({ input: usageCount, output: usageCount }).strict();
+export const deviceActivitySchema = z.object({
+  kind: z.literal('personal-site-device-usage'),
+  version: z.literal(1),
+  device: z.string().regex(/^[a-z0-9-]{1,40}$/),
+  exportedAt: z.string().datetime(),
+  timeZone: z.literal('America/Los_Angeles'),
+  claude: z.array(z.object({
+    id: usageFingerprint,
+    date: isoDate,
+    values: z.tuple([usageCount, usageCount, usageCount, usageCount]),
+  }).strict()),
+  codex: z.array(z.object({
+    id: usageFingerprint,
+    events: z.array(z.discriminatedUnion('type', [
+      z.object({ type: z.literal('response'), id: usageFingerprint,
+        timestamp: z.string().datetime(), usage: codexUsageCounters }).strict(),
+      z.object({ type: z.literal('counter'), timestamp: z.string().datetime(),
+        total: codexUsageCounters.nullable(), last: codexUsageCounters.nullable() }).strict(),
+    ])),
+    fallback: z.object({ timestamp: z.string().datetime(), tokens: usageCount }).strict().nullable(),
+  }).strict()),
+}).strict().superRefine((data, context) => {
+  const end = new Intl.DateTimeFormat('en-CA', {
+    timeZone: data.timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date(data.exportedAt));
+  if (data.claude.some(record => record.date > end) || data.codex.some(thread =>
+    thread.events.some(event => Date.parse(event.timestamp) > Date.parse(data.exportedAt)) ||
+    (thread.fallback && Date.parse(thread.fallback.timestamp) > Date.parse(data.exportedAt))
+  )) context.addIssue({ code: z.ZodIssueCode.custom, message: 'Usage cannot follow its device export date' });
 });
 
 /**
