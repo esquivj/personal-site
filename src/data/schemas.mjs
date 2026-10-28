@@ -15,7 +15,7 @@ export const aiActivitySchema = z.object({
   version: z.literal(1),
   updatedAt: z.string().datetime().nullable(),
   timeZone: z.literal('America/Los_Angeles'),
-  collector: z.literal('claude-count-tokens@1.2.0'),
+  collector: z.enum(['claude-count-tokens@1.2.0', 'local-usage-v2']),
   days: z.array(z.object({
     date: isoDate,
     claude: nonnegativeInteger.max(Number.MAX_SAFE_INTEGER),

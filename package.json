@@ -13,6 +13,7 @@
     "test": "node --test scripts/*.test.mjs",
     "test:browser": "node scripts/verify-travel-map.mjs",
     "activity:refresh": "node scripts/refresh-ai-activity.mjs",
+    "activity:audit": "node scripts/collect-ai-activity.mjs",
     "activity:import": "node scripts/import-ai-activity.mjs"
   },
   "dependencies": {
