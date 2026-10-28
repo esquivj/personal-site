@@ -16,24 +16,14 @@ const focusDate = view.cells
   .at(-1)?.date;
 ---
 
-<section class="ai-activity" id="ai-activity" aria-labelledby="activity-title" data-activity>
-  <div class="activity-heading">
-    <div>
-      <span class="activity-eyebrow">Behind the builds</span>
-      <h3 id="activity-title">Building with AI</h3>
-    </div>
-    <a href="/projects" class="activity-projects"
-      >See the projects <span aria-hidden="true">↗</span></a
-    >
-  </div>
-
+<section class="ai-activity" id="ai-activity" aria-label="AI token activity" data-activity>
   {
     hasData ? (
       <>
         <div class="activity-controls">
           <div class="activity-sources" role="group" aria-label="Activity source">
             <button type="button" data-source="all" aria-pressed="true">
-              All activity
+              All
             </button>
             <button type="button" data-source="claude" aria-pressed="false">
               Claude
@@ -43,7 +33,6 @@ const focusDate = view.cells
             </button>
           </div>
           <label class="activity-year">
-            Year
             <select data-year aria-label="Activity year">
               {years.map((value) => (
                 <option value={value} selected={value === year}>
@@ -59,7 +48,7 @@ const focusDate = view.cells
               {compactTokens(view.total)}
             </strong>
             <span>
-              recorded tokens <span data-period>in {year}</span>
+              tokens <span data-period>in {year}</span>
             </span>
           </div>
           <dl class="activity-stats">
@@ -136,9 +125,7 @@ const focusDate = view.cells
           </div>
         </div>
         <div class="activity-graph-footer">
-          <p class="activity-selection" data-selection aria-live="polite">
-            Select a day to explore.
-          </p>
+          <p class="activity-selection" data-selection aria-live="polite" />
           <div
             class="activity-legend"
             aria-label="Darker squares mean more tokens; scale is relative to the selected source and year."
@@ -159,34 +146,20 @@ const focusDate = view.cells
     ) : (
       <div class="activity-empty">
         <>
-          <p>Activity is taking shape.</p>
-          <span>No usage snapshot has been published yet.</span>
+          <p>No activity published yet.</p>
         </>
       </div>
     )
   }
 
   <div class="activity-bottom">
-    <span>{updated ? `Snapshot · ${formatDay(updated)}` : 'Awaiting first snapshot'}</span>
+    <span>{updated ? `Updated ${formatDay(updated)}` : 'Awaiting first snapshot'}</span>
     <details>
-      <summary>What gets counted?</summary>
+      <summary>About</summary>
       <div class="activity-method">
         <p>
-          Recorded usage from local Claude Code and Codex logs on my Mac. Tokens include cached
-          context; they aren’t a measure of cost or finished work. Empty days mean no recorded usage
-          in this snapshot.
-        </p>
-        <p>
-          Days use Los Angeles time. This is a dated snapshot, not a live feed. The collector may
-          estimate older sessions with missing token details, and activity in other apps or on other
-          devices may be absent.
-        </p>
-        <p>
-          Only daily totals are published. Prompts, code, conversations, project names, and hourly
-          records stay off this page.
-        </p>
-        <p>
-          Inspired by <a
+          Local Claude/Codex totals, including cached tokens and some estimates. Updated as a
+          snapshot in Los Angeles time. Inspired by <a
             href="https://www.vitorialima.com/combined-code-tokens"
             target="_blank"
             rel="noopener noreferrer">Vitoria Lima’s activity widgets ↗</a
@@ -237,16 +210,10 @@ const focusDate = view.cells
       panel!
         .querySelector('[data-total]')!
         .setAttribute('title', `${view.total.toLocaleString('en-US')} tokens`);
-      text(
-        '[data-period]',
-        `in ${year} · ${source === 'all' ? 'all activity' : source === 'claude' ? 'Claude' : 'Codex'}`
-      );
+      text('[data-period]', `in ${year}`);
       text('[data-days]', String(view.activeDays));
       text('[data-peak]', view.peak[0] ? formatDay(view.peak[0]).replace(`, ${year}`, '') : '—');
-      text(
-        '[data-selection]',
-        view.activeDays ? 'Select a day to explore.' : 'No recorded usage for this source and year.'
-      );
+      text('[data-selection]', view.activeDays ? '' : 'No recorded usage.');
       panel!
         .querySelector<HTMLElement>('.activity-calendar')!
         .style.setProperty('--weeks', String(view.columns));
@@ -346,40 +313,12 @@ const focusDate = view.cells
     --activity-3: #819c7e;
     --activity-4: #516f4e;
   }
-  .ai-activity .activity-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-  }
-  .ai-activity .activity-eyebrow {
-    font: 0.55rem var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-soft);
-  }
-  .ai-activity h3 {
-    font: 2rem/1.2 var(--font-display);
-    letter-spacing: -0.025em;
-    margin: 0.35rem 0 0;
-  }
-  .ai-activity .activity-projects {
-    font-size: 0.75rem;
-    color: var(--text-soft);
-    white-space: nowrap;
-    text-decoration: none;
-  }
-  .ai-activity .activity-projects:hover {
-    color: var(--accent);
-  }
   .ai-activity .activity-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
-    margin: 1.5rem 0;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
+    margin: 0 0 1.25rem;
   }
   .ai-activity .activity-sources {
     display: flex;
@@ -427,7 +366,7 @@ const focusDate = view.cells
   }
   .ai-activity .activity-total strong {
     display: block;
-    font: 3.1rem/1.05 var(--font-display);
+    font: 2.5rem/1.05 var(--font-display);
     letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
   }
@@ -463,7 +402,7 @@ const focusDate = view.cells
     margin: -3px;
   }
   .ai-activity .activity-calendar {
-    min-width: 530px;
+    min-width: 300px;
   }
   .ai-activity .activity-months {
     display: grid;
@@ -551,7 +490,7 @@ const focusDate = view.cells
     justify-content: space-between;
     gap: 0.75rem;
     margin-top: 0.75rem;
-    min-height: 2.5rem;
+    min-height: 1.75rem;
   }
   .ai-activity p.activity-selection {
     font: 0.58rem/1.65 var(--font-mono);
@@ -631,17 +570,11 @@ const focusDate = view.cells
     .ai-activity {
       padding: 1rem;
     }
-    .ai-activity h3 {
-      font-size: 1.75rem;
-    }
-    .ai-activity .activity-projects {
-      font-size: 0.65rem;
-    }
     .ai-activity .activity-stats {
       gap: 0.8rem;
     }
     .ai-activity .activity-total strong {
-      font-size: 2.7rem;
+      font-size: 2.25rem;
     }
     .ai-activity .activity-total > span {
       max-width: 15ch;
@@ -654,14 +587,20 @@ const focusDate = view.cells
     .ai-activity .activity-year {
       font-size: 0.55rem;
     }
+    .ai-activity .activity-grid,
+    .ai-activity .activity-months,
+    .ai-activity .activity-weekdays {
+      gap: 2px;
+    }
+    .ai-activity .activity-months {
+      font-size: 0.42rem;
+    }
     .ai-activity .activity-graph-footer {
-      flex-direction: column;
-      gap: 0.65rem;
-      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
     }
     .ai-activity p.activity-selection {
       max-width: 100%;
-      min-height: 2.25em;
     }
   }
 </style>

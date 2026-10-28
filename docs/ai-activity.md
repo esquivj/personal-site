@@ -18,7 +18,7 @@ The JSON snapshot lives in `src/data/ai-activity.json`; its shape is defined in 
 
 ## Coverage
 
-The collector supports local Claude Code, Conductor, Zed, and Codex sources. Its Claude grouping can include Conductor/Zed if those sources are available. Update the public explanation to match the sources being published. The repository ships an empty snapshot; publish personal usage totals only after the owner explicitly approves sharing them in this public repository.
+The collector supports local Claude Code, Conductor, Zed, and Codex sources. Its Claude grouping can include Conductor/Zed if those sources are available. Update the public explanation to match the sources being published. The owner approved publishing daily Claude/Codex totals for this widget. Only the sanitized daily snapshot is committed; raw records and hourly usage remain local.
 
 Tokens include cached context. The collector may estimate old Claude sessions from prompt history and Codex sessions from thread totals when rollout events are missing. The panel does not imply billing accuracy, productivity, complete account usage, or coverage across devices. Gaps mean no recorded data, not confirmed inactivity. Totals, active days, and peak days are recomputed for the selected provider/year. Heatmap levels are relative quartiles of active days. Dates after the snapshot are outlined and noninteractive.
 
@@ -28,4 +28,4 @@ This version is a reviewed snapshot. An hourly local export alone does not updat
 
 ## Verification
 
-Run `npm ci`, `npm run typecheck`, `npm test`, and `npm run build`. Check `/now#ai-activity` at desktop and phone widths, including source/year controls, arrow keys, day taps, the disclosure, and the Projects link. The chart scrolls horizontally on narrow screens; the page must not overflow. No snapshot produces an honest empty state, never synthetic usage.
+Run `npm ci`, `npm run typecheck`, `npm test`, and `npm run build`. Check `/now#ai-activity` at desktop and phone widths, including source/year controls, arrow keys, day taps, and the compact About disclosure. The chart scrolls horizontally on narrow screens; the page must not overflow. No snapshot produces an honest empty state, never synthetic usage.
