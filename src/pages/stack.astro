@@ -224,6 +224,9 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
           <span class="stack-section-kicker">{String(sectionIndex + 1).padStart(2, '0')}</span>
           <h2>{section.title}</h2>
           <p>{section.intro}</p>
+          {section.title === 'AI & Agents' && (
+            <a href="/now#ai-activity" class="inline-link">See my activity ↗</a>
+          )}
         </div>
 
         <div class="stack-ledger">

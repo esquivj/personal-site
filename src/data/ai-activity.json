@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "updatedAt": null,
+  "timeZone": "America/Los_Angeles",
+  "collector": "claude-count-tokens@1.2.0",
+  "days": []
+}

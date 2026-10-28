@@ -11,7 +11,9 @@
     "format:check": "prettier --check .",
     "typecheck": "astro check",
     "test": "node --test scripts/*.test.mjs",
-    "test:browser": "node scripts/verify-travel-map.mjs"
+    "test:browser": "node scripts/verify-travel-map.mjs",
+    "activity:refresh": "node scripts/refresh-ai-activity.mjs",
+    "activity:import": "node scripts/import-ai-activity.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.3",
@@ -34,6 +36,7 @@
     "@types/d3-geo": "^3.1.1",
     "@types/topojson-client": "^3.1.5",
     "agentation": "^3.0.2",
+    "claude-count-tokens": "1.2.0",
     "playwright": "^1.59.1",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
