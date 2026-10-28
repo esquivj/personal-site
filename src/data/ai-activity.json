@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-28T03:41:47.478Z",
+  "updatedAt": "2026-10-28T03:53:59.552Z",
   "timeZone": "America/Los_Angeles",
   "collector": "merged-local-usage-v1",
   "days": [
@@ -586,7 +586,7 @@
     },
     {
       "date": "2026-10-27",
-      "claude": 462910371,
+      "claude": 485260612,
       "codex": 0
     }
   ]
