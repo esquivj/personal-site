@@ -76,7 +76,44 @@ The replacement is independently covered with synthetic streaming, duplicate, le
 
 Totals and peaks are recomputed for the selected provider/year. Heatmap levels use active-day quartiles with restrained warm, clay, and sage palettes. Dates after the snapshot are outlined and noninteractive. Explanations remain in the collapsed About disclosure.
 
-Automatic publishing is not enabled. An hourly local export alone does not update the deployed site. Any future publishing job needs a visible freshness/error state and must publish only the daily snapshot.
+## Private GitHub sync
+
+Private device exports live in `esquivj/personal-site-activity`. Public daily snapshots stay in `esquivj/personal-site`. Each machine needs Node 22.13+ and GitHub CLI authenticated as an account that can write the private repository. No access tokens are stored in this project.
+
+```sh
+# Run hourly on the desktop
+npm run activity:sync -- upload --device desktop
+
+# Run hourly on the MacBook
+npm run activity:sync -- upload --device macbook
+
+# Run daily on the coordinating desktop
+npm run activity:sync -- publish
+```
+
+Use `--dry-run` on either command to validate without writing. `upload --device macbook --file /path/macbook.activity.json` can seed storage from an already validated export; recurring jobs should collect fresh data rather than reuse a file.
+
+Uploads check that the storage repository is private, validate its device identity, and retain historical records before replacing its export. This prevents routine local log cleanup from dropping old usage. Conflicting uploads retry against the latest stored version. Only allowlisted counters, timestamps, and hashed IDs enter the private repository.
+
+The daily job requires both devices, merges their records, and refuses a decrease in either provider total. It prints each device's last export date; a sleeping/offline Mac retains its last successful export. If the daily counts are unchanged, it creates no commit. It publishes only `src/data/ai-activity.json`, first to the existing widget PR while that is open, then to a dedicated draft data-update PR after the widget is merged. It never writes to public `main`, merges a PR, or triggers a production deployment itself.
+
+The coordinating Mac's hourly upload and daily publication can run as local Codex automations. They require this Mac and Codex to be available. The MacBook needs its own hourly local automation; a desktop schedule cannot read MacBook files.
+
+### MacBook setup
+
+In the export checkout created earlier:
+
+```sh
+cd "$HOME/personal-site-token-export"
+git pull --ff-only
+npm ci
+gh auth status
+npm run activity:sync -- upload --device macbook
+```
+
+If GitHub CLI is not signed in, complete `gh auth login` first. In Codex **on the MacBook**, create an hourly local automation to run `npm run activity:sync -- upload --device macbook` from that checkout. It should report failures, never publish from the MacBook, and leave raw logs local. Pause either automation through Codex to stop its recurring writes.
+
+Changing the counting algorithm may intentionally lower totals. That requires a reviewed correction; the automatic path preserves the last snapshot until the discrepancy is resolved. Private history retention also means deleting local logs does not remove already exported counters; removing retained data is a separate intentional operation.
 
 ## Verification
 

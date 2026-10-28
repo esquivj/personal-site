@@ -16,6 +16,7 @@
     "activity:audit": "node scripts/collect-ai-activity.mjs",
     "activity:export": "node scripts/device-ai-activity.mjs export",
     "activity:merge": "node scripts/device-ai-activity.mjs merge",
+    "activity:sync": "node scripts/sync-ai-activity.mjs",
     "activity:import": "node scripts/import-ai-activity.mjs"
   },
   "dependencies": {
