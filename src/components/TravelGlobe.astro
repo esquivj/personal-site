@@ -37,10 +37,16 @@ const cityList = travelCities(
 <figure class="travel-globe" data-travel-globe>
   <div class="globe-stage">
     <svg class="globe-fallback" data-globe-fallback viewBox="0 0 500 500" role="img" aria-label="Globe showing the routes I've flown">
-      <path d={path({ type: 'Sphere' })} fill="none" stroke="var(--line)" />
+      <defs>
+        <radialGradient id="globe-shade" cx="38%" cy="32%" r="75%">
+          <stop offset="0%" stop-color="var(--text)" stop-opacity="0.02" />
+          <stop offset="100%" stop-color="var(--text)" stop-opacity="0.14" />
+        </radialGradient>
+      </defs>
+      <path d={path({ type: 'Sphere' })} fill="url(#globe-shade)" stroke="var(--line-strong)" />
       <path d={path(land)} fill="var(--surface-strong)" stroke="var(--line)" stroke-width="0.5" />
       {routeLines.map((line) => <path d={path(line)} fill="none" stroke="var(--accent)" stroke-width="0.8" opacity="0.45" />)}
-      {visibleAirports.map(({ p }) => <circle cx={p![0]} cy={p![1]} r="2.6" fill="var(--accent)" />)}
+      {visibleAirports.map(({ a, p }) => <circle cx={p![0]} cy={p![1]} r="2.6" fill="var(--accent)"><title>{a.name} · {a.code}</title></circle>)}
     </svg>
     <canvas
       class="globe-canvas"
@@ -49,6 +55,12 @@ const cityList = travelCities(
       role="img"
       aria-label="Interactive globe of the routes I've flown. Drag or use the arrow keys to rotate. Pinch, or press plus and minus, to zoom."
     ></canvas>
+    <div class="globe-tip" data-globe-tip hidden aria-live="polite">
+      <div class="globe-tip-card">
+        <span class="globe-tip-city" data-tip-city></span>
+        <span class="globe-tip-meta" data-tip-meta></span>
+      </div>
+    </div>
     <div class="globe-zoom" data-globe-controls>
       <button type="button" data-globe-zoom-in aria-label="Zoom in">
         <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
@@ -109,6 +121,48 @@ const cityList = travelCities(
   }
   [data-globe-state='fallback'] .globe-canvas {
     display: none;
+  }
+  .globe-tip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .globe-tip[hidden] {
+    display: none;
+  }
+  .globe-tip-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.5rem 0.7rem 0.55rem;
+    transform: translate(-50%, calc(-100% - 14px));
+    background: var(--bg-raised);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+    animation: globe-tip-in 160ms var(--ease-out);
+  }
+  .globe-tip-city {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .globe-tip-meta {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  @keyframes globe-tip-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, calc(-100% - 8px));
+    }
   }
   .globe-zoom {
     position: absolute;

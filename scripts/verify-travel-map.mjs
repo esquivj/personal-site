@@ -94,6 +94,26 @@ try {
   assert.equal(await zoomLevel(), before);
   assert.deepEqual(errors, []);
 
+  // Hovering a city dot shows its name. With motion reduced the globe holds still on Los Angeles.
+  const still = await browser.newPage({ viewport: { width: 1440, height: 1100 }, reducedMotion: 'reduce' });
+  await still.goto(url);
+  await still.locator('[data-globe-state="ready"]').waitFor({ timeout: 45000 });
+  const box = await still.locator('[data-globe-canvas]').boundingBox();
+  const tip = still.locator('[data-globe-tip]');
+  let found = '';
+  for (let dy = -40; dy <= 40 && !found; dy += 4) {
+    for (let dx = -40; dx <= 40 && !found; dx += 4) {
+      await still.mouse.move(box.x + box.width * 0.5 + dx, box.y + box.height * 0.432 + dy);
+      if (await tip.isVisible()) found = await still.locator('[data-tip-city]').textContent();
+    }
+  }
+  // LAX and Burbank sit a few pixels apart; either label proves hover works.
+  assert.ok(['Los Angeles', 'Burbank'].includes(found), `hover showed ${found}`);
+  assert.match(await still.locator('[data-tip-meta]').textContent(), /^(LAX|BUR) · \d+ flights?$/);
+  await still.screenshot({ path: 'test-results/travel-map/hover.png' });
+  await still.mouse.move(box.x + 4, box.y + 4);
+  assert.ok(await tip.isHidden());
+
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   await mobile.goto(url);
   await mobile.locator('[data-globe-state="ready"]').waitFor({ timeout: 45000 });
@@ -114,7 +134,7 @@ try {
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(url);
   assert.ok(await noJS.locator('[data-globe-fallback]').isVisible());
-  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, zoom, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
+  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, zoom, city hover, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
 } finally {
   await browser?.close();
   server.close();

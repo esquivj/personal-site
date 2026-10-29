@@ -1,4 +1,4 @@
-type Airport = { code: string; city: string; lat: number; lon: number };
+type Airport = { code: string; city: string; name: string; flights: number; lat: number; lon: number };
 type Route = { from: string; to: string; count: number };
 type GlobeData = { land: number[]; airports: Airport[]; routes: Route[] };
 
@@ -7,14 +7,18 @@ attribute vec4 aP;
 uniform mat3 uR;
 uniform float uS;
 uniform float uZ;
+uniform vec3 uHover;
 varying float vF;
 varying float vK;
+varying float vH;
 void main() {
   vec3 p = uR * aP.xyz;
-  vF = smoothstep(-0.2, 0.45, p.z);
+  vF = smoothstep(-0.02, 0.5, p.z);
   vK = aP.w;
+  vH = aP.w * step(distance(aP.xyz, uHover), 0.001);
   gl_Position = vec4(p.xy * 0.8 * uZ, 0.0, 1.0);
-  gl_PointSize = (aP.w > 0.5 ? 6.5 : 2.3) * uS;
+  float depth = mix(0.55, 1.0, vF);
+  gl_PointSize = (aP.w > 0.5 ? 6.5 * (1.0 + vH * 0.7) : 2.4 * depth) * uS;
 }`;
 
 const POINT_FS = `
@@ -23,14 +27,48 @@ uniform vec3 uInk;
 uniform vec3 uAcc;
 varying float vF;
 varying float vK;
+varying float vH;
 void main() {
   float d = length(gl_PointCoord - 0.5);
   if (d > 0.5) discard;
   if (vK > 0.5) {
-    gl_FragColor = vec4(uAcc, smoothstep(0.5, 0.42, d) * smoothstep(0.0, 0.25, vF));
+    // Accent dot with a light ring so markers lift off the land.
+    float body = smoothstep(0.5, 0.44, d);
+    vec3 col = d < 0.32 ? uAcc : vec3(0.98, 0.97, 0.95);
+    gl_FragColor = vec4(col, body * smoothstep(0.0, 0.2, vF));
   } else {
-    gl_FragColor = vec4(uInk, mix(0.05, 0.42, vF));
+    gl_FragColor = vec4(uInk, 0.72 * vF);
   }
+}`;
+
+// A shaded sphere behind the dots: lit from the upper left, darker toward the lower right, a soft rim,
+// and a faint halo, so the globe reads as an object rather than floating dots.
+const SPHERE_VS = `
+attribute vec2 aQ;
+varying vec2 vQ;
+void main() {
+  vQ = aQ;
+  gl_Position = vec4(aQ, 0.0, 1.0);
+}`;
+
+const SPHERE_FS = `
+precision mediump float;
+uniform float uRad;
+uniform vec3 uInk;
+uniform vec3 uAcc;
+varying vec2 vQ;
+void main() {
+  float r = length(vQ) / uRad;
+  if (r > 1.0) {
+    float halo = smoothstep(1.14, 1.0, r);
+    gl_FragColor = vec4(uAcc, halo * halo * 0.07);
+    return;
+  }
+  vec3 n = vec3(vQ / uRad, sqrt(1.0 - r * r));
+  float light = dot(n, normalize(vec3(-0.55, 0.6, 0.6)));
+  float shade = mix(0.12, 0.02, smoothstep(-0.6, 0.9, light));
+  float rim = smoothstep(0.88, 1.0, r) * 0.08;
+  gl_FragColor = vec4(uInk, shade + rim);
 }`;
 
 const LINE_VS = `
@@ -101,9 +139,11 @@ export function initTravelGlobe(root: HTMLElement) {
 
   let program: WebGLProgram;
   let lineProgram: WebGLProgram;
+  let sphereProgram: WebGLProgram;
   try {
     program = compile(gl, POINT_VS, POINT_FS);
     lineProgram = compile(gl, LINE_VS, LINE_FS);
+    sphereProgram = compile(gl, SPHERE_VS, SPHERE_FS);
   } catch {
     root.dataset.globeState = 'fallback';
     return;
@@ -152,6 +192,17 @@ export function initTravelGlobe(root: HTMLElement) {
   gl.bindBuffer(gl.ARRAY_BUFFER, segmentBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(segments), gl.STATIC_DRAW);
 
+  const quadBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+
+  const airportVectors = data.airports.map((a) => ({ airport: a, v: byCode.get(a.code)! }));
+  const tip = root.querySelector<HTMLElement>('[data-globe-tip]');
+  const tipCity = tip?.querySelector<HTMLElement>('[data-tip-city]');
+  const tipMeta = tip?.querySelector<HTMLElement>('[data-tip-meta]');
+  let hover: { airport: Airport; v: [number, number, number] } | null = null;
+  let rotation = new Float32Array(9);
+
   const styles = getComputedStyle(root);
   const ink = hex(styles.getPropertyValue('--text'), [0.08, 0.07, 0.07]);
   const accent = hex(styles.getPropertyValue('--accent'), [0.76, 0.29, 0.18]);
@@ -185,6 +236,11 @@ export function initTravelGlobe(root: HTMLElement) {
     pZ: gl.getUniformLocation(program, 'uZ'),
     pInk: gl.getUniformLocation(program, 'uInk'),
     pAcc: gl.getUniformLocation(program, 'uAcc'),
+    pHover: gl.getUniformLocation(program, 'uHover'),
+    sQ: gl.getAttribLocation(sphereProgram, 'aQ'),
+    sRad: gl.getUniformLocation(sphereProgram, 'uRad'),
+    sInk: gl.getUniformLocation(sphereProgram, 'uInk'),
+    sAcc: gl.getUniformLocation(sphereProgram, 'uAcc'),
     lP: gl.getAttribLocation(lineProgram, 'aP'),
     lT: gl.getAttribLocation(lineProgram, 'aT'),
     lR: gl.getUniformLocation(lineProgram, 'uR'),
@@ -204,16 +260,27 @@ export function initTravelGlobe(root: HTMLElement) {
     }
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-    if (!drag && !reduced.matches) yaw += (dt * 0.12) / zoom;
+    if (!drag && !hover && !reduced.matches) yaw += (dt * 0.12) / zoom;
 
     const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
     const R = new Float32Array([cy, sp * sy, -cp * sy, 0, cp, sp, sy, -sp * cy, cp * cy]);
+    rotation = R;
 
     gl.viewport(0, 0, W, H);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    gl.useProgram(sphereProgram);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
+    gl.enableVertexAttribArray(loc.sQ);
+    gl.vertexAttribPointer(loc.sQ, 2, gl.FLOAT, false, 8, 0);
+    gl.uniform1f(loc.sRad, 0.8 * zoom);
+    gl.uniform3fv(loc.sInk, ink);
+    gl.uniform3fv(loc.sAcc, accent);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.disableVertexAttribArray(loc.sQ);
 
     gl.useProgram(program);
     gl.bindBuffer(gl.ARRAY_BUFFER, pointBuffer);
@@ -224,6 +291,7 @@ export function initTravelGlobe(root: HTMLElement) {
     gl.uniform1f(loc.pZ, zoom);
     gl.uniform3fv(loc.pInk, ink);
     gl.uniform3fv(loc.pAcc, accent);
+    gl.uniform3fv(loc.pHover, hover ? hover.v : [0, 0, 0]);
     gl.drawArrays(gl.POINTS, 0, pointCount);
     gl.disableVertexAttribArray(loc.p);
 
@@ -241,7 +309,60 @@ export function initTravelGlobe(root: HTMLElement) {
     gl.drawArrays(gl.LINES, 0, segmentCount);
     gl.disableVertexAttribArray(loc.lP);
     gl.disableVertexAttribArray(loc.lT);
+    placeTip();
   };
+
+  // Screen position (relative to the canvas box) of a point on the globe.
+  const project = (v: [number, number, number]) => {
+    const R = rotation;
+    const x = R[0] * v[0] + R[3] * v[1] + R[6] * v[2];
+    const y = R[1] * v[0] + R[4] * v[1] + R[7] * v[2];
+    const z = R[2] * v[0] + R[5] * v[1] + R[8] * v[2];
+    const k = 0.8 * zoom * 0.5;
+    return { x: (x * k + 0.5) * canvas.clientWidth, y: (0.5 - y * k) * canvas.clientHeight, front: z > 0.05 };
+  };
+  const pick = (clientX: number, clientY: number) => {
+    const box = canvas.getBoundingClientRect();
+    const mx = clientX - box.left;
+    const my = clientY - box.top;
+    let best: (typeof airportVectors)[number] | null = null;
+    let bestD = 16;
+    for (const item of airportVectors) {
+      const p = project(item.v);
+      if (!p.front) continue;
+      const d = Math.hypot(p.x - mx, p.y - my);
+      if (d < bestD) {
+        bestD = d;
+        best = item;
+      }
+    }
+    return best;
+  };
+  const setHover = (item: (typeof airportVectors)[number] | null) => {
+    if (item?.airport.code === hover?.airport.code) return;
+    hover = item;
+    canvas.style.cursor = item ? 'pointer' : '';
+    if (!tip || !tipCity || !tipMeta) return;
+    if (!item) {
+      tip.hidden = true;
+      return;
+    }
+    const { name, code, flights } = item.airport;
+    tipCity.textContent = name;
+    tipMeta.textContent = `${code} · ${flights} ${flights === 1 ? 'flight' : 'flights'}`;
+    tip.hidden = false;
+    placeTip();
+    kick();
+  };
+  function placeTip() {
+    if (!hover || !tip) return;
+    const p = project(hover.v);
+    if (!p.front) {
+      setHover(null);
+      return;
+    }
+    tip.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y)}px)`;
+  }
 
   const loop = (now: number) => {
     raf = 0;
@@ -257,7 +378,9 @@ export function initTravelGlobe(root: HTMLElement) {
     const [a, b] = [...pointers.values()];
     return Math.hypot(a.x - b.x, a.y - b.y);
   };
+  let downAt: { x: number; y: number } | null = null;
   canvas.addEventListener('pointerdown', (event) => {
+    downAt = { x: event.clientX, y: event.clientY };
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     canvas.setPointerCapture(event.pointerId);
     if (pointers.size === 2) {
@@ -269,7 +392,11 @@ export function initTravelGlobe(root: HTMLElement) {
     kick();
   });
   canvas.addEventListener('pointermove', (event) => {
-    if (!pointers.has(event.pointerId)) return;
+    if (!pointers.has(event.pointerId)) {
+      if (event.pointerType === 'mouse') setHover(pick(event.clientX, event.clientY));
+      return;
+    }
+    if (hover && event.pointerType !== 'mouse') setHover(null);
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (pinch && pointers.size === 2) {
       setZoom(pinch.zoom * (distance() / Math.max(1, pinch.distance)));
@@ -282,6 +409,11 @@ export function initTravelGlobe(root: HTMLElement) {
     kick();
   });
   const release = (event: PointerEvent) => {
+    // A tap (no real drag) picks the nearest city; that's how touch users get the label.
+    if (downAt && Math.hypot(event.clientX - downAt.x, event.clientY - downAt.y) < 5) {
+      setHover(pick(event.clientX, event.clientY));
+    }
+    downAt = null;
     pointers.delete(event.pointerId);
     if (pointers.size < 2) pinch = null;
     const rest = [...pointers.values()][0];
@@ -290,6 +422,9 @@ export function initTravelGlobe(root: HTMLElement) {
   };
   canvas.addEventListener('pointerup', release);
   canvas.addEventListener('pointercancel', release);
+  canvas.addEventListener('pointerleave', (event) => {
+    if (event.pointerType === 'mouse' && !pointers.size) setHover(null);
+  });
   // Trackpad pinch and Ctrl/Cmd + scroll zoom; a plain scroll keeps scrolling the page.
   canvas.addEventListener(
     'wheel',

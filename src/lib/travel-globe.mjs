@@ -1,4 +1,5 @@
 import { geoContains } from 'd3-geo';
+import { cityName } from './travel-cities.mjs';
 
 /**
  * Evenly spaced points on the sphere (Fibonacci lattice) that fall on land.
@@ -23,14 +24,21 @@ export function landDots(land, count = 16000, minLat = -58) {
  * Airports used by at least one route, with coordinates, plus routes keyed by code.
  * @param {{ routes: { from: string, to: string, count: number }[] }} stats
  * @param {Record<string, { city: string, lat: number, lon: number }>} reference
- * @returns {{ airports: { code: string, city: string, lat: number, lon: number }[], routes: { from: string, to: string, count: number }[] }}
+ * @returns {{ airports: { code: string, city: string, name: string, flights: number, lat: number, lon: number }[], routes: { from: string, to: string, count: number }[] }}
  */
 export function globeNetwork(stats, reference) {
   const codes = new Set(stats.routes.flatMap((route) => [route.from, route.to]));
   const airports = [...codes]
     .filter((code) => reference[code])
     .sort()
-    .map((code) => ({ code, city: reference[code].city, lat: reference[code].lat, lon: reference[code].lon }));
+    .map((code) => ({
+      code,
+      city: reference[code].city,
+      name: cityName(code, reference[code].city),
+      flights: stats.routes.reduce((sum, r) => sum + (r.from === code || r.to === code ? r.count : 0), 0),
+      lat: reference[code].lat,
+      lon: reference[code].lon,
+    }));
   const routes = stats.routes
     .filter((route) => reference[route.from] && reference[route.to])
     .map((route) => ({ from: route.from, to: route.to, count: route.count }));
