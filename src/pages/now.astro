@@ -156,18 +156,6 @@ const pageSchema = {
 
     <p class="now-signoff">Juan</p>
 
-    <details class="now-everything">
-      <summary>Everything I'm listening to</summary>
-      <div class="now-albums">
-        {albums.map((album) => (
-          <a href={album.href} target="_blank" rel="noopener" class="now-album">
-            <img src={album.src} alt={`${album.artist}, ${album.title}`} width="300" height="300" loading="lazy" decoding="async" />
-            <span>{album.title}</span>
-          </a>
-        ))}
-      </div>
-    </details>
-
     <p class="now-note">Updated October 22, 2026. Creators last updated April 2026.</p>
   </article>
 </Layout>
@@ -237,44 +225,6 @@ const pageSchema = {
     font-size: 2.1rem;
     letter-spacing: -0.02em;
     color: var(--text);
-  }
-
-  .now-everything {
-    margin: 2.5rem 0 1rem;
-    border-top: 1px solid var(--line);
-    padding-top: 1rem;
-  }
-
-  .now-everything summary {
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-soft);
-  }
-
-  .now-albums {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-
-  .now-album {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    font-family: var(--font-ui);
-    font-size: 0.75rem;
-    line-height: 1.3;
-    color: var(--text-soft);
-  }
-
-  .now-album img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
   }
 
   .now-note {

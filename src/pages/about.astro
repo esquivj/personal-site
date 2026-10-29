@@ -29,14 +29,14 @@ const pageSchema = {
   </Fragment>
   <Nav active="about" />
 
-  <div class="about-layout">
-    <figure class="about-portrait">
+  <article class="about">
+    <h1 class="about-lead">I'm Juan. From Los Angeles, son of Mexican immigrants, <em>raised by the internet.</em></h1>
+
+    <figure class="about-image">
       <img src="/images/about/about-stage.avif" alt="" width="528" height="576" loading="eager" decoding="async" fetchpriority="high" />
     </figure>
 
-    <article class="about-essay">
-      <h1 class="about-lead">I'm Juan. From Los Angeles, son of Mexican immigrants, <em>raised by the internet.</em></h1>
-
+    <div class="about-body">
       <p>
         Most recently, I was the founding Socials and Community Lead at Compound Foundation. Before
         that, I spent three years leading marketing at StableLab. Right now: a crypto native building with AI.
@@ -57,7 +57,7 @@ const pageSchema = {
 
       <blockquote class="about-quote">
         <p class="about-quote-line">Build your way in.</p>
-        <p class="about-quote-body">I'm a generalist by nature. That's how I approach it: make things, put them out, and let the right people react.</p>
+        <p>I'm a generalist by nature. That's how I approach it: make things, put them out, and let the right people react.</p>
       </blockquote>
 
       <p>
@@ -67,61 +67,20 @@ const pageSchema = {
       </p>
 
       <a href="/resume" target="_blank" rel="noopener" class="about-resume">View my resume <span aria-hidden="true">→</span></a>
-    </article>
-  </div>
+    </div>
+  </article>
 </Layout>
 
 <style>
-  .about-layout {
-    position: relative;
-    left: 50%;
-    width: min(1120px, calc(100vw - 4rem));
-    transform: translateX(-50%);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: start;
-  }
-
-  .about-portrait {
-    position: sticky;
-    top: 2rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .about-portrait img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border: 1px solid var(--line);
-    filter: saturate(0.82) contrast(1.03);
-  }
-
-  .about-portrait figcaption {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-  }
-
-  .about-essay {
-    display: flex;
-    flex-direction: column;
-    gap: 1.35rem;
+  .about {
+    max-width: 680px;
   }
 
   .about-lead {
-    font-size: clamp(2.3rem, 4.4vw, 3rem);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
+    margin-bottom: 2.25rem;
+    font-size: clamp(2.4rem, 5.4vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
     text-wrap: balance;
   }
 
@@ -129,47 +88,68 @@ const pageSchema = {
     color: var(--text-faint);
   }
 
-  .about-essay > p {
+  .about-image {
+    margin: 0 0 2.5rem;
+  }
+
+  .about-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.4 / 1;
+    object-fit: cover;
+    object-position: center 40%;
+    border: 1px solid var(--line);
+    filter: saturate(0.82) contrast(1.03);
+  }
+
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+  }
+
+  .about-body > p {
+    max-width: 62ch;
     color: var(--text-soft);
     font-size: 1.05rem;
-    line-height: 1.78;
+    line-height: 1.8;
   }
 
   .about-quote {
     position: relative;
-    margin: 0.75rem 0;
-    padding: 1.35rem 0;
-    border-top: 1px solid var(--line-strong);
-    border-bottom: 1px solid var(--line-strong);
+    margin: 1rem 0;
+    padding-left: 1.5rem;
   }
 
   .about-quote::before {
     content: '';
     position: absolute;
     left: 0;
-    top: -4px;
+    top: 0.85rem;
     width: 7px;
     height: 7px;
     background: var(--accent);
   }
 
   .about-quote-line {
+    margin-bottom: 0.5rem;
     font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5vw, 3.5rem);
-    line-height: 0.95;
+    font-size: clamp(2.2rem, 4.6vw, 2.9rem);
+    line-height: 1;
     letter-spacing: -0.045em;
     color: var(--text);
   }
 
-  .about-quote-body {
-    margin-top: 0.6rem;
+  .about-quote p:not(.about-quote-line) {
+    max-width: 48ch;
     color: var(--text-soft);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .about-resume {
     align-self: flex-start;
+    margin-top: 0.5rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.12em;
@@ -185,20 +165,6 @@ const pageSchema = {
   @media (hover: hover) and (pointer: fine) {
     .about-resume:hover span {
       transform: translateX(3px);
-    }
-  }
-
-  @media (max-width: 860px) {
-    .about-layout {
-      width: 100%;
-      left: 0;
-      transform: none;
-      grid-template-columns: 1fr;
-    }
-
-    .about-portrait {
-      position: static;
-      max-width: 420px;
     }
   }
 </style>

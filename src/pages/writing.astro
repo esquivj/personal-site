@@ -5,15 +5,6 @@ import { postsNewestFirst } from '../data/writing';
 
 const preloadImages: string[] = [];
 
-// Group essays by month, newest first.
-const monthFormat = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
-const groups = postsNewestFirst.reduce<{ label: string; posts: typeof postsNewestFirst }[]>((acc, post) => {
-  const label = monthFormat.format(new Date(`${post.publishedTime}T12:00:00Z`));
-  const last = acc.at(-1);
-  if (last?.label === label) last.posts.push(post);
-  else acc.push({ label, posts: [post] });
-  return acc;
-}, []);
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -47,29 +38,22 @@ const pageSchema = {
     <p class="writing-subtitle">Essays on marketing, storytelling, and building your way in.</p>
   </header>
 
-  {
-    groups.map((group) => (
-      <section class="writing-month" aria-label={group.label}>
-        <h2 class="writing-month-label">{group.label}</h2>
-        <ol class="writing-list">
-          {group.posts.map((post) => (
-            <li>
-              <a href={`/writing/${post.slug}`} class="writing-row">
-                <time class="writing-day" datetime={post.publishedTime}>{post.date.slice(5)}</time>
-                <span class="writing-text">
-                  <span class="writing-row-title">{post.title}</span>
-                  <span class="writing-row-subtitle">{post.subtitle}</span>
-                </span>
-                <span class="writing-meta">
-                  {post.readingTime ? post.readingTime.replace(/^RT:\s*/i, '') : 'Read'} <span class="writing-arrow" aria-hidden="true">→</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </section>
-    ))
-  }
+  <ol class="writing-list" aria-label="Essays, newest first">
+    {postsNewestFirst.map((post) => (
+      <li>
+        <a href={`/writing/${post.slug}`} class="writing-row">
+          <time class="writing-day" datetime={post.publishedTime}>{post.date}</time>
+          <span class="writing-text">
+            <span class="writing-row-title">{post.title}</span>
+            <span class="writing-row-subtitle">{post.subtitle}</span>
+          </span>
+          <span class="writing-meta">
+            {post.readingTime ? post.readingTime.replace(/^RT:\s*/i, '') : 'Read'} <span class="writing-arrow" aria-hidden="true">→</span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
 </Layout>
 
 <style>
@@ -95,23 +79,14 @@ const pageSchema = {
     line-height: 1.7;
   }
 
-  .writing-month {
-    margin-bottom: 2.5rem;
-  }
-
-  .writing-month-label {
-    margin: 0 !important;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--line-strong);
-  }
-
   .writing-list {
     list-style: none;
+    border-top: 1px solid var(--line-strong);
   }
 
   .writing-row {
     display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr) auto;
+    grid-template-columns: 6rem minmax(0, 1fr) auto;
     align-items: baseline;
     gap: 0.4rem 1.75rem;
     padding: 1.6rem 0 1.5rem;

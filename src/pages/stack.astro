@@ -176,20 +176,18 @@ const totalTools = stackSections.reduce((count, section) => count + section.item
 // Mirrors the Dock on my Mac, left to right.
 type DockItem = { name: string; icon: string; category: string; desc: string; note?: string; href?: string; badge?: string; raw?: boolean; dial?: boolean };
 const dock: DockItem[] = [
-  { name: 'Finder', icon: '/images/stack/dock/finder.png', category: 'macOS', desc: 'File manager' },
+  { name: 'Finder', icon: '/images/stack/dock/finder.png', category: 'macOS', desc: 'File manager', note: 'Where the files live' },
   { name: 'Dia', icon: '/images/stack/dia.png', category: 'Research & Browsing', desc: 'Web browser', note: 'Default browser', href: 'https://www.diabrowser.com' },
   { name: 'Obsidian', icon: '/images/stack/obsidian.png', category: 'Productivity', desc: 'Knowledge management', note: 'Second brain', href: 'https://obsidian.md' },
   { name: 'Things 3', icon: '/images/stack/things.png', category: 'Productivity', desc: 'Task management', note: 'Daily todos', href: 'https://culturedcode.com/things/' },
-  { name: 'Grok Bot', icon: '/images/stack/grok-bot-app.png', category: 'AI & Agents', desc: 'AI agents', href: 'https://x.ai/bot' },
+  { name: 'Grok Bot', icon: '/images/stack/grok-bot-app.png', category: 'AI & Agents', desc: 'AI agents', note: 'Where I built the Compound bots', href: 'https://x.ai/bot' },
   { name: 'Hermes Agent', icon: '/images/stack/dock/hermes-agent.png', category: 'AI & Agents', desc: 'Agent harness', note: 'Agent orchestration layer', href: 'https://github.com/NousResearch/hermes-agent' },
-  { name: 'Linear', icon: '/images/stack/linear.png', category: 'Productivity', desc: 'Issue tracking', href: 'https://linear.app' },
-  { name: 'Cursor', icon: '/images/stack/cursor.png', category: 'Building', desc: 'Code editor', href: 'https://cursor.com' },
-  { name: 'Ghostty', icon: '/images/stack/ghostty.png', category: 'Building', desc: 'Terminal', href: 'https://ghostty.org' },
-  { name: 'Claude', icon: '/images/stack/dock/claude.png', category: 'AI & Agents', desc: 'AI assistant', note: 'Primary thinking partner', href: 'https://claude.ai' },
+  { name: 'Linear', icon: '/images/stack/linear.png', category: 'Productivity', desc: 'Issue tracking', note: "Tracks what I'm building", href: 'https://linear.app' },
+  { name: 'Cursor', icon: '/images/stack/cursor.png', category: 'Building', desc: 'Code editor', note: 'For hands-on edits', href: 'https://cursor.com' },
+  { name: 'Claude', icon: '/images/stack/dock/claude.png', category: 'AI & Agents', desc: 'AI assistant and Claude Code', note: 'Primary thinking partner', href: 'https://claude.ai' },
   { name: 'Beeper', icon: '/images/stack/dock/beeper.png', category: 'Communication', desc: 'All-in-one messaging', note: 'Inbox for everything', href: 'https://www.beeper.com', badge: '19', raw: true },
-  { name: 'Coindock', icon: '/images/stack/dock/coindock.png', category: 'Crypto', desc: 'Prices in the dock' },
+  { name: 'Coindock', icon: '/images/stack/dock/coindock.png', category: 'Crypto', desc: 'Prices in the dock', note: 'Markets at a glance' },
   { name: 'Dial', icon: '/images/listening/drake-iceman.jpg', category: 'Built by me', desc: 'Now playing, remembered.', note: 'Icon shows the album playing', href: '/projects', dial: true },
-  { name: 'Spotify', icon: '/images/stack/spotify.png', category: 'Music', desc: 'Music streaming', href: 'https://spotify.com' },
 ];
 const defaultPick = dock.findIndex((item) => item.name === 'Claude');
 const picked = dock[defaultPick];
@@ -200,10 +198,11 @@ const dialCovers = [
   'deftones-white-pony', 'deftones-diamond-eyes', 'juniorh-sad-boyz', 'pesopluma-dinastia', 'pesopluma-exodo',
 ].map((name) => `/images/listening/${name}.jpg`);
 
-const inDock = new Set(dock.map((item) => item.name));
-const alsoInRotation = stackSections.flatMap((section) => section.items).filter((item, i, all) =>
-  !inDock.has(item.name) && all.findIndex((other) => other.name === item.name) === i,
-);
+// Everything else from the stack, grouped as before. Claude Code lives in the dock as Claude.
+const inDock = new Set([...dock.map((item) => item.name), 'Claude Code']);
+const shelves = stackSections
+  .map((section) => ({ ...section, items: section.items.filter((item) => !inDock.has(item.name)) }))
+  .filter((section) => section.items.length > 0);
 
 ---
 
@@ -275,22 +274,29 @@ const alsoInRotation = stackSections.flatMap((section) => section.items).filter(
     </div>
   </section>
 
-  <section class="stack-rotation">
-    <h2>Also in rotation</h2>
-    <ul class="rotation-list">
-      {alsoInRotation.map((item) => (
-        <li>
-          <a href={item.href} target="_blank" rel="noopener" class="rotation-row">
-            <img src={item.icon} alt="" width="28" height="28" loading="lazy" decoding="async" />
-            <span class="rotation-text">
-              <span class="rotation-name">{item.name}</span>
-              <span class="rotation-desc">{item.note || item.desc}</span>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <h2 class="stack-more-title">Also in rotation</h2>
+  {shelves.map((section) => (
+    <section class="stack-shelf">
+      <div class="stack-shelf-head">
+        <h3>{section.title}</h3>
+        <p>{section.intro}</p>
+      </div>
+      <ul class="rotation-list">
+        {section.items.map((item) => (
+          <li>
+            <a href={item.href} target="_blank" rel="noopener" class="rotation-row">
+              <img src={item.icon} alt="" width="28" height="28" loading="lazy" decoding="async" />
+              <span class="rotation-text">
+                <span class="rotation-name">{item.name}</span>
+                <span class="rotation-desc">{item.desc}</span>
+              </span>
+              {item.note && <span class="rotation-note">{item.note}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </Layout>
 
 <script>
@@ -588,15 +594,44 @@ const alsoInRotation = stackSections.flatMap((section) => section.items).filter(
     display: none;
   }
 
-  .stack-rotation h2 {
-    margin-bottom: 0.4rem !important;
+  .stack-more-title {
+    margin-bottom: 1.5rem;
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+  }
+
+  .stack-shelf {
+    margin-bottom: 2.25rem;
+  }
+
+  .stack-shelf-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .stack-shelf-head h3 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .stack-shelf-head p {
+    font-size: 0.875rem;
+    color: var(--text-faint);
   }
 
   .rotation-list {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    column-gap: 2rem;
   }
 
   .rotation-row {
@@ -616,9 +651,18 @@ const alsoInRotation = stackSections.flatMap((section) => section.items).filter(
   }
 
   .rotation-text {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     min-width: 0;
+  }
+
+  .rotation-note {
+    flex: 0 0 auto;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-soft);
   }
 
   .rotation-name {
