@@ -411,11 +411,26 @@ const shelves = stackSections
     // (cosine falloff), eased with a spring. Sizes change layout, so neighbors make room.
     const dockList = dockRoot.querySelector<HTMLElement>('.dock');
     const slots = [...dockRoot.querySelectorAll<HTMLElement>('.dock-slot')];
-    const fineHover = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 800px)');
-    const BASE = 56;
-    const PEAK = 92;
-    const REACH = 170;
+    const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+    let BASE = 56;
+    let PEAK = 92;
+    let REACH = 170;
     const state = slots.map(() => ({ size: BASE, velocity: 0 }));
+
+    // Fit the resting icon size to the available width so the dock stays on one line.
+    const fit = () => {
+      if (!dockList) return;
+      const available = (dockRoot.clientWidth || window.innerWidth) - 32;
+      const gap = 8;
+      BASE = fineHover.matches ? Math.max(34, Math.min(56, Math.floor((available - 24 - gap * (slots.length - 1)) / slots.length))) : 56;
+      PEAK = Math.round(BASE * 1.65);
+      REACH = BASE * 3;
+      dockList.style.setProperty('--base', `${BASE}px`);
+      state.forEach((s, i) => { s.size = BASE; s.velocity = 0; slots[i].style.removeProperty('--size'); });
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    fineHover.addEventListener?.('change', fit);
     let pointerX: number | null = null;
     let frame = 0;
     let last = 0;
@@ -432,10 +447,16 @@ const shelves = stackSections
           if (d < REACH) target = BASE + (PEAK - BASE) * (Math.cos((Math.PI * d) / REACH) + 1) / 2;
         }
         const s = state[i];
-        // Damped spring toward the target size.
-        const force = 320 * (target - s.size) - 28 * s.velocity;
-        s.velocity += force * dt;
-        s.size += s.velocity * dt;
+        if (reduced.matches) {
+          // No spring when motion is reduced: sizes follow the cursor directly.
+          s.size = target;
+          s.velocity = 0;
+        } else {
+          // Damped spring toward the target size.
+          const force = 320 * (target - s.size) - 28 * s.velocity;
+          s.velocity += force * dt;
+          s.size += s.velocity * dt;
+        }
         if (Math.abs(target - s.size) > 0.05 || Math.abs(s.velocity) > 0.05) moving = true;
         else { s.size = target; s.velocity = 0; }
         slot.style.setProperty('--size', `${s.size.toFixed(2)}px`);
@@ -447,7 +468,7 @@ const shelves = stackSections
 
     if (dockList) {
       dockList.addEventListener('pointermove', (event) => {
-        if (event.pointerType !== 'mouse' || !fineHover.matches || reduced.matches) return;
+        if (event.pointerType === 'touch' || !fineHover.matches) return;
         pointerX = event.clientX;
         kick();
       });
@@ -525,7 +546,7 @@ const shelves = stackSections
     justify-content: center;
     align-items: flex-end;
     gap: 0.5rem;
-    min-height: 74px;
+    min-height: calc(var(--base, 56px) + 18px);
     padding: 0.5rem 0.75rem 0.4rem;
     list-style: none;
     border-radius: 24px;
@@ -535,7 +556,7 @@ const shelves = stackSections
   }
 
   .dock-slot {
-    --size: 56px;
+    --size: var(--base, 56px);
   }
 
   .dock-item {
@@ -635,10 +656,10 @@ const shelves = stackSections
   }
 
   /* With a mouse, the dock stays on one line so icons can grow and push their neighbors apart. */
-  @media (hover: hover) and (pointer: fine) and (min-width: 800px) {
+  @media (hover: hover) and (pointer: fine) {
     .dock {
       flex-wrap: nowrap;
-      height: 74px;
+      height: calc(var(--base, 56px) + 18px);
     }
   }
 
