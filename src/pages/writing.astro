@@ -1,10 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import PageHeader from '../components/PageHeader.astro';
 import { postsNewestFirst } from '../data/writing';
 
-const preloadImages = postsNewestFirst.slice(0, 3).map((post) => post.cover);
+const preloadImages: string[] = [];
+
+// Group essays by month, newest first.
+const monthFormat = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+const groups = postsNewestFirst.reduce<{ label: string; posts: typeof postsNewestFirst }[]>((acc, post) => {
+  const label = monthFormat.format(new Date(`${post.publishedTime}T12:00:00Z`));
+  const last = acc.at(-1);
+  if (last?.label === label) last.posts.push(post);
+  else acc.push({ label, posts: [post] });
+  return acc;
+}, []);
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -33,138 +42,142 @@ const pageSchema = {
   </Fragment>
   <Nav active="writing" />
 
-  <PageHeader
-    title="Writing"
-    subtitle="Essays on marketing, storytelling, and building your way in."
-  />
+  <header class="writing-header">
+    <h1 class="writing-title">Writing</h1>
+    <p class="writing-subtitle">Essays on marketing, storytelling, and building your way in.</p>
+  </header>
 
-  <section class="posts">
-    {
-      postsNewestFirst.map((post) => (
-        <a href={`/writing/${post.slug}`} class="post-card">
-          <div class="post-card-cover">
-            <img
-              src={post.cover}
-              alt={post.title}
-              width="640"
-              height="360"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <div class="post-card-content">
-            <p class="post-card-kicker">Essay</p>
-            <h2 class="post-card-title">{post.title}</h2>
-            <p class="post-card-subtitle">{post.subtitle}</p>
-            <time class="post-card-date">{post.date}</time>
-          </div>
-        </a>
-      ))
-    }
-  </section>
+  {
+    groups.map((group) => (
+      <section class="writing-month" aria-label={group.label}>
+        <h2 class="writing-month-label">{group.label}</h2>
+        <ol class="writing-list">
+          {group.posts.map((post) => (
+            <li>
+              <a href={`/writing/${post.slug}`} class="writing-row">
+                <time class="writing-day" datetime={post.publishedTime}>{post.date.slice(5)}</time>
+                <span class="writing-text">
+                  <span class="writing-row-title">{post.title}</span>
+                  <span class="writing-row-subtitle">{post.subtitle}</span>
+                </span>
+                <span class="writing-meta">
+                  {post.readingTime ? post.readingTime.replace(/^RT:\s*/i, '') : 'Read'} <span class="writing-arrow" aria-hidden="true">→</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
 </Layout>
 
 <style>
-  .posts {
+  .writing-header {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 0;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2.5rem;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
   }
 
-  .post-card {
+  .writing-title {
+    font-size: clamp(4rem, 12vw, 7.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+  }
+
+  .writing-subtitle {
+    max-width: 32ch;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  .writing-month {
+    margin-bottom: 2.5rem;
+  }
+
+  .writing-month-label {
+    margin: 0 !important;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .writing-list {
+    list-style: none;
+  }
+
+  .writing-row {
     display: grid;
-    grid-template-columns: 184px minmax(0, 1fr);
-    gap: 1.25rem;
-    padding: 1.45rem 0;
-    border-top: 1px solid var(--line);
-    transition: background-color 180ms var(--ease-out);
-  }
-
-  .post-card:last-child {
+    grid-template-columns: 4rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.4rem 1.75rem;
+    padding: 1.6rem 0 1.5rem;
     border-bottom: 1px solid var(--line);
   }
 
-  .post-card:focus-visible {
-    outline: 2px solid var(--line-strong);
-    outline-offset: 4px;
-  }
-
-  .post-card-cover {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: var(--bg-raised);
-    border: 1px solid var(--line);
-  }
-
-  .post-card-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition:
-      transform 200ms var(--ease-out),
-      filter 200ms var(--ease-out);
-  }
-
-  .post-card-content {
-    padding: 0.15rem 0 0;
-  }
-
-  .post-card-kicker {
+  .writing-day,
+  .writing-meta {
     font-family: var(--font-mono);
-    color: var(--text-faint);
     font-size: 0.68rem;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.45rem;
+    color: var(--text-faint);
   }
 
-  .post-card-title {
-    font-size: 1.18rem;
-    font-weight: 400;
+  .writing-meta {
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .writing-arrow {
+    color: var(--accent);
+    display: inline-block;
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .writing-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .writing-row-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
     color: var(--text);
-    line-height: 1.24;
-    margin-bottom: 0.5rem;
-    text-transform: none;
-    letter-spacing: -0.02em;
+    text-wrap: balance;
     transition: color 150ms var(--ease-out);
   }
 
-  .post-card-subtitle {
-    max-width: 42ch;
-    font-size: 0.98rem;
+  .writing-row-subtitle {
+    max-width: 60ch;
     color: var(--text-soft);
-    line-height: 1.64;
-    margin-bottom: 0.75rem;
-  }
-
-  .post-card-date {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-faint);
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .post-card:hover {
-      background: rgba(0, 0, 0, 0.015);
-    }
-
-    .post-card:hover .post-card-cover img {
-      transform: scale(1.015);
-      filter: brightness(1.05);
-    }
-
-    .post-card:hover .post-card-title {
+    .writing-row:hover .writing-row-title {
       color: var(--accent);
+    }
+
+    .writing-row:hover .writing-arrow {
+      transform: translateX(3px);
     }
   }
 
-  @media (max-width: 720px) {
-    .post-card {
+  @media (max-width: 640px) {
+    .writing-row {
       grid-template-columns: 1fr;
-      gap: 0.9rem;
+    }
+
+    .writing-meta {
+      display: none;
     }
   }
 </style>

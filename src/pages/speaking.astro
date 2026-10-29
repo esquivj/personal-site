@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -29,36 +28,226 @@ const pageSchema = {
   </Fragment>
   <Nav active="speaking" />
 
-  <PageHeader title="Speaking" subtitle="Podcasts, interviews, and talks." />
+  <header class="speaking-header">
+    <h1 class="speaking-title">Speaking</h1>
+    <p class="speaking-subtitle">Podcasts, interviews, and talks on crypto marketing, DAO governance, and brand building.</p>
+  </header>
 
-  <section>
-    <div class="surface-list">
+  <section class="speaking-stage" aria-label="Featured talk">
+    <div class="speaking-stage-inner">
       <a
         href="https://youtu.be/CYTEW2VF4n8"
         target="_blank"
         rel="noopener"
-        class="surface-link surface-link--speaking"
+        class="speaking-video"
+        aria-label="Watch Governance Solution Providers and DAO Marketing on YouTube"
       >
-        <div class="surface-media surface-media--wide">
-          <img
-            src="/images/dao-talk-thumbnail.jpg"
-            alt="DAO Talk thumbnail"
-            width="120"
-            height="68"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </div>
-        <div class="surface-body">
-          <span class="surface-title">Governance Solution Providers & DAO Marketing</span>
-          <span class="surface-meta">DAO Talk by Tally</span>
-        </div>
-        <span class="surface-arrow">Watch ↗</span>
+        <img
+          src="/images/dao-talk-thumbnail.jpg"
+          alt=""
+          width="800"
+          height="438"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <span class="speaking-play" aria-hidden="true">
+          <svg width="22" height="24" viewBox="0 0 22 24"><path d="M3 2.5v19l17-9.5z" fill="currentColor" /></svg>
+        </span>
       </a>
+      <div class="speaking-info">
+        <p class="speaking-kicker">Podcast · DAO Talk by Tally</p>
+        <h2 class="speaking-talk-title">Governance Solution Providers &amp; DAO Marketing</h2>
+        <a href="https://youtu.be/CYTEW2VF4n8" target="_blank" rel="noopener" class="speaking-watch">
+          Watch on YouTube <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
   </section>
+
+  <aside class="speaking-invite">
+    <h2 class="speaking-invite-title">Invite me</h2>
+    <p>For podcasts, panels, and Spaces. I've been on the other side too, interviewing nearly 30 guests on <a href="/writing/stablepod-lessons" class="text-link">StablePod</a>.</p>
+    <a href="mailto:juanesquivel138@gmail.com" class="speaking-email">Email me →</a>
+  </aside>
 </Layout>
 
 <style>
+  .speaking-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .speaking-title {
+    font-size: clamp(3.5rem, 10vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .speaking-subtitle {
+    max-width: 34ch;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  .speaking-stage {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    margin-bottom: 4rem;
+    padding: 3.5rem 1.5rem;
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .speaking-stage-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 2rem 3rem;
+  }
+
+  .speaking-video {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid rgba(243, 241, 235, 0.12);
+  }
+
+  .speaking-video img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85);
+  }
+
+  .speaking-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 76px;
+    height: 76px;
+    margin: -38px 0 0 -38px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fbf7f2;
+    display: grid;
+    place-items: center;
+    transition: transform 180ms var(--ease-out);
+  }
+
+  .speaking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .speaking-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8f8a81;
+  }
+
+  .speaking-talk-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: none;
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--bg);
+  }
+
+  .speaking-watch {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bg);
+  }
+
+  .speaking-watch span {
+    color: #e0694a;
+  }
+
+  .speaking-invite {
+    position: relative;
+    max-width: 520px;
+    padding: 1.75rem;
+    border: 1px solid var(--line-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .speaking-invite::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+  }
+
+  .speaking-invite-title {
+    font-family: var(--font-display);
+    font-size: 2.1rem;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .speaking-invite p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .speaking-email {
+    align-self: flex-start;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1.1rem;
+    background: var(--text);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .speaking-video:hover .speaking-play {
+      transform: scale(1.06);
+    }
+
+    .speaking-watch:hover,
+    .speaking-email:hover {
+      color: var(--bg);
+      opacity: 0.85;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .speaking-stage {
+      padding: 2.25rem 1.15rem;
+    }
+
+    .speaking-stage-inner {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

@@ -1,7 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import PageHeader from '../components/PageHeader.astro';
+
+const albums = [
+  {
+    "href": "https://open.spotify.com/album/0OAv7DCME2AV4q1KPO95HY",
+    "src": "/images/listening/drake-iceman.jpg",
+    "artist": "Drake",
+    "title": "Iceman"
+  },
+  {
+    "href": "https://open.spotify.com/album/5poA9SAx0Xiz1cf17fWBLS",
+    "src": "/images/listening/kanye-bully.jpg",
+    "artist": "Kanye West",
+    "title": "Bully"
+  },
+  {
+    "href": "https://open.spotify.com/album/4jI9SU1GmpIVhHMuYZuvX7",
+    "src": "/images/listening/jcole-fall-off.jpg",
+    "artist": "J Cole",
+    "title": "The Fall Off"
+  },
+  {
+    "href": "https://open.spotify.com/album/7MbDS0Fnw0buDkSjS1l4vd",
+    "src": "/images/listening/chevelle-wonder-whats-next.jpg",
+    "artist": "Chevelle",
+    "title": "Wonder What's Next"
+  },
+  {
+    "href": "https://open.spotify.com/album/2ANVost0y2y52ema1E9xAZ",
+    "src": "/images/listening/deftones-private-music.jpg",
+    "artist": "Deftones",
+    "title": "private music"
+  },
+  {
+    "href": "https://open.spotify.com/album/5LEXck3kfixFaA3CqVE7bC",
+    "src": "/images/listening/deftones-white-pony.jpg",
+    "artist": "Deftones",
+    "title": "White Pony"
+  },
+  {
+    "href": "https://open.spotify.com/album/4z7MXxGMbJOoYczjce8hQL",
+    "src": "/images/listening/deftones-diamond-eyes.jpg",
+    "artist": "Deftones",
+    "title": "Diamond Eyes"
+  },
+  {
+    "href": "https://open.spotify.com/album/2jkFEBmGBnpJEEMsCJBbMd",
+    "src": "/images/listening/juniorh-sad-boyz.jpg",
+    "artist": "Junior H",
+    "title": "$AD BOYZ 4 LIFE II"
+  },
+  {
+    "href": "https://open.spotify.com/album/2d9BCmHnVcnWfOWBdnFkq0",
+    "src": "/images/listening/pesopluma-dinastia.jpg",
+    "artist": "Peso Pluma",
+    "title": "DINASTÍA"
+  },
+  {
+    "href": "https://open.spotify.com/album/1lGnl3jV1fiujKBNhcH3yr",
+    "src": "/images/listening/pesopluma-exodo.jpg",
+    "artist": "Peso Pluma",
+    "title": "ÉXODO"
+  }
+];
+const books = [
+  {
+    "href": "https://www.penguinrandomhouse.com/books/717356/the-creative-act-by-rick-rubin/9780593652886/",
+    "src": "/images/reading/the-creative-act.jpg",
+    "author": "Rick Rubin",
+    "title": "The Creative Act"
+  },
+  {
+    "href": "https://www.penguinrandomhouse.com/books/318795/psycho-cybernetics-by-maxwell-maltz-md-fics/",
+    "src": "/images/reading/psycho-cybernetics.jpg",
+    "author": "Maxwell Maltz",
+    "title": "Psycho-Cybernetics"
+  },
+  {
+    "href": "https://press.stripe.com/poor-charlies-almanack",
+    "src": "/images/reading/poor-charlies-almanack.jpg",
+    "author": "Charles T. Munger",
+    "title": "Poor Charlie's Almanack"
+  }
+];
+const onRepeat = ['Iceman', 'White Pony', 'The Fall Off', 'ÉXODO'].map((title) => albums.find((album) => album.title === title)!);
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -28,288 +111,179 @@ const pageSchema = {
   </Fragment>
   <Nav active="now" />
 
-  <PageHeader title="Now" subtitle="What I'm focused on at the moment." />
+  <article class="now-letter">
+    <p class="now-dateline"><span>Los Angeles</span><time datetime="2026-10-22">October 22, 2026</time></p>
 
-  <div class="now-ledger">
-    <section class="now-row">
-      <h2>Work</h2>
-      <div class="now-row-body">
-        <p>
-          Most recently, I was the founding social lead at <a href="https://compound.xyz" target="_blank" rel="noopener" class="text-link">Compound Foundation</a>.
-          Before that, three years leading marketing at StableLab across content, brand, product, and GTM.
-        </p>
+    <h1 class="now-lede">Back in Los Angeles after living in Lisbon for a year and a half.</h1>
+
+    <p>Re-settling into the city, spending more time with family, lifting consistently, and reading more.</p>
+
+    <p>
+      Most recently, I was the founding social lead at <a href="https://compound.xyz" target="_blank" rel="noopener" class="text-link">Compound Foundation</a>.
+      Before that, three years leading marketing at StableLab across content, brand, product, and GTM.
+      Frequently playing with agentic harnesses like Grok Bot, Muse, Instinct, and Hermes Agent.
+    </p>
+
+    <p>
+      Listening to{' '}
+      {onRepeat.map((album, i) => (
+        <>
+          <a href={album.href} target="_blank" rel="noopener" class="now-inline" title={`${album.artist}, ${album.title}`}>
+            <img src={album.src} alt="" width="40" height="40" loading="lazy" decoding="async" class="now-cover now-cover--album" />
+            <em>{album.title}</em></a>{i < onRepeat.length - 2 ? ', ' : i === onRepeat.length - 2 ? ', and ' : '.'}
+        </>
+      ))}{' '}
+      The rest is on <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="text-link">Spotify</a>.
+    </p>
+
+    <p>
+      Reading{' '}
+      {books.map((book, i) => (
+        <>
+          <a href={book.href} target="_blank" rel="noopener" class="now-inline" title={`${book.title} by ${book.author}`}>
+            <img src={book.src} alt="" width="28" height="42" loading="lazy" decoding="async" class="now-cover now-cover--book" />
+            <em>{book.title}</em></a>{i < books.length - 2 ? ', ' : i === books.length - 2 ? ', and ' : '.'}
+        </>
+      ))}
+    </p>
+
+    <p>
+      Watching <a href="https://letterboxd.com/cadena/" target="_blank" rel="noopener" class="text-link"><em>The Deer Hunter</em>, <em>The Odyssey</em>, <em>One Battle After Another</em>, <em>Bugonia</em>, and <em>Weapons</em></a>.
+      On TV, <em>Silo</em>, <em>Entourage</em>, <em>Pluribus</em>, and <em>IT: Welcome to Derry</em>.
+    </p>
+
+    <p>Following George Heaton, Kai Cenat, Agent00, Daniel Simmons, and Sam Sulek.</p>
+
+    <p class="now-signoff">Juan</p>
+
+    <details class="now-everything">
+      <summary>Everything I'm listening to</summary>
+      <div class="now-albums">
+        {albums.map((album) => (
+          <a href={album.href} target="_blank" rel="noopener" class="now-album">
+            <img src={album.src} alt={`${album.artist}, ${album.title}`} width="300" height="300" loading="lazy" decoding="async" />
+            <span>{album.title}</span>
+          </a>
+        ))}
       </div>
-    </section>
+    </details>
 
-    <section class="now-row">
-      <h2>Building</h2>
-      <div class="now-row-body">
-        <p>
-          Frequently playing with agentic harnesses like Grok Bot, Muse, Instinct, and Hermes Agent.
-        </p>
-      </div>
-    </section>
-
-    <section class="now-row">
-      <h2>Life</h2>
-      <div class="now-row-body">
-        <p>
-          Back in Los Angeles after living in Lisbon for a year and a half. Re-settling into the city,
-          spending more time with family, lifting consistently, and reading more.
-        </p>
-      </div>
-    </section>
-
-    <section class="now-row">
-      <h2>Listening</h2>
-      <div class="now-row-body">
-        <div class="album-grid">
-          <a href="https://open.spotify.com/album/0OAv7DCME2AV4q1KPO95HY" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/drake-iceman.jpg" alt="Drake — Iceman" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Drake</span>
-            <span class="album-title">Iceman</span>
-          </a>
-          <a href="https://open.spotify.com/album/5poA9SAx0Xiz1cf17fWBLS" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/kanye-bully.jpg" alt="Kanye West — Bully" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Kanye West</span>
-            <span class="album-title">Bully</span>
-          </a>
-          <a href="https://open.spotify.com/album/4jI9SU1GmpIVhHMuYZuvX7" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/jcole-fall-off.jpg" alt="J Cole — The Fall Off" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">J Cole</span>
-            <span class="album-title">The Fall Off</span>
-          </a>
-          <a href="https://open.spotify.com/album/7MbDS0Fnw0buDkSjS1l4vd" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/chevelle-wonder-whats-next.jpg" alt="Chevelle — Wonder What's Next" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Chevelle</span>
-            <span class="album-title">Wonder What's Next</span>
-          </a>
-          <a href="https://open.spotify.com/album/2ANVost0y2y52ema1E9xAZ" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/deftones-private-music.jpg" alt="Deftones — private music" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Deftones</span>
-            <span class="album-title">private music</span>
-          </a>
-          <a href="https://open.spotify.com/album/5LEXck3kfixFaA3CqVE7bC" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/deftones-white-pony.jpg" alt="Deftones — White Pony" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Deftones</span>
-            <span class="album-title">White Pony</span>
-          </a>
-          <a href="https://open.spotify.com/album/4z7MXxGMbJOoYczjce8hQL" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/deftones-diamond-eyes.jpg" alt="Deftones — Diamond Eyes" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Deftones</span>
-            <span class="album-title">Diamond Eyes</span>
-          </a>
-          <a href="https://open.spotify.com/album/2jkFEBmGBnpJEEMsCJBbMd" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/juniorh-sad-boyz.jpg" alt="Junior H — $AD BOYZ 4 LIFE II" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Junior H</span>
-            <span class="album-title">$AD BOYZ 4 LIFE II</span>
-          </a>
-          <a href="https://open.spotify.com/album/2d9BCmHnVcnWfOWBdnFkq0" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/pesopluma-dinastia.jpg" alt="Peso Pluma — DINASTÍA" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Peso Pluma</span>
-            <span class="album-title">DINASTÍA</span>
-          </a>
-          <a href="https://open.spotify.com/album/1lGnl3jV1fiujKBNhcH3yr" target="_blank" rel="noopener" class="album-card">
-            <img src="/images/listening/pesopluma-exodo.jpg" alt="Peso Pluma — ÉXODO" width="300" height="300" loading="lazy" decoding="async" />
-            <span class="album-artist">Peso Pluma</span>
-            <span class="album-title">ÉXODO</span>
-          </a>
-        </div>
-        <a href="https://open.spotify.com/user/caveatt" target="_blank" rel="noopener" class="inline-link listening-profile"
-          >Spotify profile ↗</a
-        >
-      </div>
-    </section>
-
-    <section class="now-row">
-      <h2>Reading</h2>
-      <div class="now-row-body">
-        <div class="book-grid">
-          <a href="https://www.penguinrandomhouse.com/books/717356/the-creative-act-by-rick-rubin/9780593652886/" target="_blank" rel="noopener" class="book-card">
-            <img src="/images/reading/the-creative-act.jpg" alt="Cover of The Creative Act by Rick Rubin" width="306" height="450" loading="lazy" decoding="async" />
-            <span class="book-author">Rick Rubin</span>
-            <span class="book-title">The Creative Act</span>
-          </a>
-          <a href="https://www.penguinrandomhouse.com/books/318795/psycho-cybernetics-by-maxwell-maltz-md-fics/" target="_blank" rel="noopener" class="book-card">
-            <img src="/images/reading/psycho-cybernetics.jpg" alt="Cover of Psycho-Cybernetics by Maxwell Maltz" width="300" height="450" loading="lazy" decoding="async" />
-            <span class="book-author">Maxwell Maltz</span>
-            <span class="book-title">Psycho-Cybernetics</span>
-          </a>
-          <a href="https://press.stripe.com/poor-charlies-almanack" target="_blank" rel="noopener" class="book-card">
-            <img src="/images/reading/poor-charlies-almanack.jpg" alt="Cover of Poor Charlie's Almanack by Charles T. Munger" width="843" height="1200" loading="lazy" decoding="async" />
-            <span class="book-author">Charles T. Munger</span>
-            <span class="book-title">Poor Charlie's Almanack</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="now-row now-row--watching">
-      <h2>Watching</h2>
-      <div class="now-row-body">
-        <div class="watching-block">
-          <h3>Movies</h3>
-          <a href="https://letterboxd.com/cadena/" target="_blank" rel="noopener" class="inline-link"
-            >The Deer Hunter, The Odyssey, One Battle After Another, Bugonia, Weapons ↗</a
-          >
-        </div>
-
-        <div class="watching-block">
-          <h3>Shows</h3>
-          <p class="watching-text">Silo, Entourage, Pluribus, IT: Welcome to Derry</p>
-        </div>
-
-        <div class="watching-block">
-          <h3>Creators</h3>
-          <p class="watching-text">George Heaton, Kai Cenat, Agent00, Daniel Simmons, Sam Sulek</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <p class="page-note">Updated: October 22, 2026. Creators last updated: April 2026.</p>
+    <p class="now-note">Updated October 22, 2026. Creators last updated April 2026.</p>
+  </article>
 </Layout>
 
 <style>
-  .now-ledger {
+  .now-letter {
+    max-width: 640px;
+    margin: 1.5rem auto 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    line-height: 1.5;
+    color: #2f2c28;
+  }
+
+  .now-letter p {
+    margin-bottom: 1.5rem;
+  }
+
+  .now-dateline {
     display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--line);
-  }
-
-  .now-row {
-    display: grid;
-    grid-template-columns: 128px minmax(0, 1fr);
-    gap: 1.5rem;
-    padding: 1.35rem 0;
-    margin-bottom: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-
-  .now-row h2 {
-    margin-bottom: 0;
-  }
-
-  .now-row-body {
-    min-width: 0;
-  }
-
-  .now-row p {
-    color: var(--text-soft);
-    max-width: 62ch;
-    font-size: 1rem;
-    line-height: 1.82;
-  }
-
-  .watching-block + .watching-block {
-    margin-top: 1.5rem;
-  }
-
-  .watching-block h3 {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: var(--text-soft);
-    margin-bottom: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-
-  .watching-text,
-  .inline-link {
-    color: var(--text-soft);
-    font-size: 1rem;
-    line-height: 1.82;
-  }
-
-  .album-grid,
-  .book-grid {
-    display: flex;
-    gap: 1rem;
+    justify-content: space-between;
+    gap: 0.75rem;
     flex-wrap: wrap;
-  }
-
-  .album-card,
-  .book-card {
-    display: flex;
-    flex-direction: column;
-    width: 96px;
-    text-decoration: none;
-    transition: transform 160ms var(--ease-out);
-  }
-
-  .album-card img,
-  .book-card img {
-    width: 96px;
-    height: 96px;
-    object-fit: cover;
-    border: 1px solid var(--line);
-    transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
-  }
-
-  .book-card {
-    width: 112px;
-  }
-
-  .book-card img {
-    width: 100%;
-    height: auto;
-  }
-
-  .album-artist,
-  .book-author {
-    margin-top: 0.4rem;
+    margin-bottom: 2.5rem !important;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--line-strong);
     font-family: var(--font-mono);
-    font-size: 0.56rem;
-    color: var(--text-faint);
-    letter-spacing: 0.1em;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    line-height: 1.3;
+    color: var(--text-faint);
   }
 
-  .album-title,
-  .book-title {
-    font-size: 0.78rem;
-    color: var(--text-soft);
-    line-height: 1.3;
-    margin-top: 0.1rem;
+  .now-lede {
+    margin-bottom: 1.75rem;
+    font-size: clamp(2rem, 4.6vw, 2.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: var(--text);
   }
 
-  .listening-profile {
+  .now-inline {
+    white-space: nowrap;
+  }
+
+  .now-cover {
     display: inline-block;
+    object-fit: cover;
+    margin: 0 0.2em 0 0.1em;
+    vertical-align: -0.2em;
+  }
+
+  .now-cover--album {
+    width: 1.1em;
+    height: 1.1em;
+  }
+
+  .now-cover--book {
+    width: 0.8em;
+    height: 1.2em;
+    vertical-align: -0.24em;
+  }
+
+  .now-signoff {
+    margin-top: 2.5rem;
+    font-style: italic;
+    font-size: 2.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .now-everything {
+    margin: 2.5rem 0 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+
+  .now-everything summary {
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .now-albums {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 0.75rem;
     margin-top: 1rem;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    .album-card:hover,
-    .book-card:hover {
-      transform: translateY(-3px) rotate(-1deg);
-    }
-
-    .album-card:hover img,
-    .book-card:hover img {
-      border-color: var(--line-strong);
-      box-shadow: 0 6px 16px rgba(17, 15, 13, 0.1);
-    }
-
-    .album-card:hover .album-title,
-    .book-card:hover .book-title {
-      color: var(--text);
-    }
+  .now-album {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    color: var(--text-soft);
   }
 
-  .inline-link:hover {
-    color: var(--accent);
+  .now-album img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
   }
 
-  .page-note {
-    margin-top: 3rem;
-  }
-
-  @media (max-width: 700px) {
-    .now-row {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
+  .now-note {
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
   }
 </style>
