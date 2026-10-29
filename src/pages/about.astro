@@ -55,10 +55,10 @@ const pageSchema = {
         feels close to design, where the details matter and judgment shows up in the work.
       </p>
 
-      <blockquote class="about-quote">
-        <p class="about-quote-line">Build your way in.</p>
-        <p>I'm a generalist by nature. That's how I approach it: make things, put them out, and let the right people react.</p>
-      </blockquote>
+      <p>
+        I'm a generalist by nature. “Build your way in” is how I approach it: make things, put them out,
+        and let the right people react.
+      </p>
 
       <p>
         Outside work, I like traveling, watching films, finding music, following the Dodgers, and
@@ -114,37 +114,6 @@ const pageSchema = {
     color: var(--text-soft);
     font-size: 1.05rem;
     line-height: 1.8;
-  }
-
-  .about-quote {
-    position: relative;
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-  }
-
-  .about-quote::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.85rem;
-    width: 7px;
-    height: 7px;
-    background: var(--accent);
-  }
-
-  .about-quote-line {
-    margin-bottom: 0.5rem;
-    font-family: var(--font-display);
-    font-size: clamp(2.2rem, 4.6vw, 2.9rem);
-    line-height: 1;
-    letter-spacing: -0.045em;
-    color: var(--text);
-  }
-
-  .about-quote p:not(.about-quote-line) {
-    max-width: 48ch;
-    color: var(--text-soft);
-    line-height: 1.65;
   }
 
   .about-resume {
