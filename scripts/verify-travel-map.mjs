@@ -71,6 +71,27 @@ try {
   await page.keyboard.press('ArrowRight');
   await page.keyboard.press('ArrowUp');
   await page.screenshot({ path: 'test-results/travel-map/rotated.png', fullPage: true });
+
+  // Zoom: buttons, keyboard, and limits.
+  const zoomLevel = async () => Number(await page.locator('[data-travel-globe]').getAttribute('data-globe-zoom'));
+  assert.equal(await zoomLevel(), 1);
+  await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+  assert.ok(await zoomLevel() > 1);
+  await canvas.focus();
+  await page.keyboard.press('+');
+  const zoomed = await zoomLevel();
+  for (let i = 0; i < 8; i++) await page.getByRole('button', { name: 'Zoom in', exact: true }).click({ force: true });
+  assert.equal(await zoomLevel(), 3);
+  assert.ok(await page.getByRole('button', { name: 'Zoom in', exact: true }).isDisabled());
+  await canvas.focus();
+  await page.keyboard.press('-');
+  assert.ok(await zoomLevel() < 3 && zoomed > 1);
+  await page.screenshot({ path: 'test-results/travel-map/zoomed.png', fullPage: true });
+  // A plain scroll over the globe scrolls the page instead of zooming.
+  const before = await zoomLevel();
+  await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+  await page.mouse.wheel(0, 200);
+  assert.equal(await zoomLevel(), before);
   assert.deepEqual(errors, []);
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
@@ -93,7 +114,7 @@ try {
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(url);
   assert.ok(await noJS.locator('[data-globe-fallback]').isVisible());
-  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
+  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, zoom, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
 } finally {
   await browser?.close();
   server.close();
