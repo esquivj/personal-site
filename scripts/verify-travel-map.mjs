@@ -25,42 +25,59 @@ try {
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   await page.goto(url);
-  await page.locator('[data-map-state="ready"]').waitFor({ timeout: 45000 });
+  await page.locator('[data-globe-state="ready"]').waitFor({ timeout: 45000 });
   await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(600);
   await page.screenshot({ path: 'test-results/travel-map/desktop.png', fullPage: true });
-  assert.equal(await page.locator('select, [data-map-reset], [data-route-browser], [data-detail-title]').count(), 0);
-  const payload = await page.locator('[data-map-data]').textContent();
-  const cities = JSON.parse(payload).cities.map(city => city.name);
+
+  const payload = JSON.parse(await page.locator('[data-globe-data]').textContent());
+  const codes = payload.airports.map(a => a.code);
+  assert.ok(codes.includes('LAX') && codes.includes('LIS') && codes.includes('KUL'));
+  const cities = (await page.locator('[data-globe-cities]').textContent()).replace(/^[^:]*:\s*/, '').replace(/\.$/, '').split(', ');
   assert.ok(cities.includes('Los Angeles') && cities.includes('Lisbon') && cities.includes('Kuala Lumpur'));
   assert.equal(cities.filter(name => name === 'Paris').length, 1);
-  assert.ok(!cities.includes('LAX'));
-  const canvas = page.locator('.maplibregl-canvas');
+  assert.ok(payload.land.length > 4000, 'land dots present');
+  assert.ok(payload.routes.length > 0 && payload.routes.every(r => payload.airports.some(a => a.code === r.from)));
+
+  // The canvas actually draws something: compare a screenshot of it against the flat page background.
+  const canvas = page.locator('[data-globe-canvas]');
+  const shot = (await canvas.screenshot()).toString('base64');
+  const painted = await page.evaluate(async (src) => {
+    const img = new Image();
+    img.src = `data:image/png;base64,${src}`;
+    await img.decode();
+    const c = document.createElement('canvas');
+    c.width = img.width; c.height = img.height;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const { data } = ctx.getImageData(0, 0, c.width, c.height);
+    const [r0, g0, b0] = data;
+    let n = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      if (Math.abs(data[i] - r0) + Math.abs(data[i + 1] - g0) + Math.abs(data[i + 2] - b0) > 24) n++;
+    }
+    return n;
+  }, shot);
+  assert.ok(painted > 1000, `globe painted ${painted} pixels`);
+
+  // Drag and keyboard rotate without errors.
   const bounds = await canvas.boundingBox();
   assert.ok(bounds);
-  // Drag beyond a whole world in both directions: land and labels should repeat.
-  for (const direction of [1, -1]) {
-    for (let i = 0; i < 3; i++) {
-      const start = bounds.x + bounds.width * (direction > 0 ? .2 : .8);
-      const end = bounds.x + bounds.width * (direction > 0 ? .8 : .2);
-      await page.mouse.move(start, bounds.y + bounds.height / 2);
-      await page.mouse.down();
-      await page.mouse.move(end, bounds.y + bounds.height / 2, { steps: 20 });
-      await page.mouse.up();
-    }
-    await page.screenshot({ path: `test-results/travel-map/wrapped-${direction}.png`, fullPage: true });
-  }
+  await page.mouse.move(bounds.x + bounds.width * .3, bounds.y + bounds.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(bounds.x + bounds.width * .7, bounds.y + bounds.height / 2, { steps: 20 });
+  await page.mouse.up();
   await canvas.focus();
   await page.keyboard.press('ArrowRight');
-  await page.keyboard.press('+');
+  await page.keyboard.press('ArrowUp');
+  await page.screenshot({ path: 'test-results/travel-map/rotated.png', fullPage: true });
   assert.deepEqual(errors, []);
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   await mobile.goto(url);
-  await mobile.locator('[data-map-state="ready"]').waitFor({ timeout: 45000 });
+  await mobile.locator('[data-globe-state="ready"]').waitFor({ timeout: 45000 });
   await mobile.screenshot({ path: 'test-results/travel-map/mobile.png', fullPage: true });
   assert.ok(await mobile.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
-  await mobile.getByRole('button', { name: 'Zoom in', exact: true }).click();
-  await mobile.screenshot({ path: 'test-results/travel-map/mobile-zoomed.png', fullPage: true });
 
   const fallback = await browser.newPage();
   await fallback.addInitScript(() => {
@@ -71,12 +88,12 @@ try {
     };
   });
   await fallback.goto(url);
-  await fallback.locator('[data-map-state="fallback"]').waitFor();
-  assert.ok(await fallback.locator('[data-map-fallback]').isVisible());
+  await fallback.locator('[data-globe-state="fallback"]').waitFor();
+  assert.ok(await fallback.locator('[data-globe-fallback]').isVisible());
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(url);
-  assert.ok(await noJS.locator('[data-map-fallback] svg').isVisible());
-  console.log('Travel map passed: city data, minimal controls, horizontal panning, keyboard navigation, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
+  assert.ok(await noJS.locator('[data-globe-fallback]').isVisible());
+  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
 } finally {
   await browser?.close();
   server.close();

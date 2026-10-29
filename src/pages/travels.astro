@@ -1,56 +1,84 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import PageHeader from '../components/PageHeader.astro';
-import TravelMap from '../components/TravelMap.astro';
+import TravelGlobe from '../components/TravelGlobe.astro';
 import { travelStats } from '../data/travels';
 
-const stats = [
-  { value: travelStats.totalFlights.toLocaleString('en-US'), label: 'Flights' },
-  { value: travelStats.totalAirports.toLocaleString('en-US'), label: 'Airports' },
-  { value: travelStats.totalCountries.toLocaleString('en-US'), label: 'Countries & territories' },
-  { value: travelStats.totalDistance.toLocaleString('en-US'), label: 'Estimated kilometers' },
-];
-const date = new Date(`${travelStats.lastUpdated}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const summary = [
+  `${travelStats.totalFlights.toLocaleString('en-US')} flights`,
+  `${travelStats.totalCountries.toLocaleString('en-US')} countries`,
+  `${travelStats.totalDistance.toLocaleString('en-US')} km`,
+].join(' · ');
+
 const pageSchema = {
   '@context': 'https://schema.org', '@type': 'WebPage', name: "Juan Esquivel's Travels",
-  url: 'https://juanesquivel.xyz/travels', description: 'An interactive map of my flights, cities, and journeys since 2018.',
+  url: 'https://juanesquivel.xyz/travels', description: 'An interactive globe of the routes I have flown since 2018.',
   author: { '@type': 'Person', name: 'Juan Esquivel', url: 'https://juanesquivel.xyz' },
 };
 ---
 
-<Layout title="Travels — Juan Esquivel" description="An interactive map of my flights and cities around the world. Travel history from Flighty, since 2018." canonicalPath="/travels">
+<Layout title="Travels — Juan Esquivel" description="An interactive globe of the routes I've flown since 2018, from my Flighty history." canonicalPath="/travels">
   <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(pageSchema)} /></Fragment>
   <Nav active="travels" />
-  <PageHeader title="Travels" subtitle="Flights and places, since 2018." compact />
 
-  <div class="travel-breakout">
-    <TravelMap />
-    <dl class="travel-stat-strip" aria-label="Travel totals">
-      {stats.map(stat => <div><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}
-    </dl>
-    <div class="travel-colophon">
-      <p>Flighty export · {date}</p>
+  <section class="travels-hero">
+    <div class="travels-copy">
+      <h1 class="travels-title">Where I've been, <em>so far.</em></h1>
+      <p class="travels-summary">{summary}</p>
     </div>
-  </div>
+    <div class="travels-globe">
+      <TravelGlobe />
+    </div>
+  </section>
 </Layout>
 
 <style>
-  .travel-breakout { position: relative; left: 50%; width: min(1120px, calc(100vw - 4rem)); transform: translateX(-50%); }
-  .travel-stat-strip { display: grid; grid-template-columns: 1fr 1fr 1.3fr 1.6fr; margin-top: 1.7rem; padding: 0 0 1.7rem; border-bottom: 1px solid var(--line); }
-  .travel-stat-strip > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; padding: 0 1.7rem; border-right: 1px solid var(--line); }
-  .travel-stat-strip > div:first-child { padding-left: 0; }
-  .travel-stat-strip > div:last-child { border: 0; }
-  .travel-stat-strip dd { font: 400 clamp(2.5rem, 4vw, 3.4rem)/1.05 var(--font-display); letter-spacing: -.055em; }
-  .travel-stat-strip dt { margin-top: .6rem; font: .55rem/1.5 var(--font-mono); text-transform: uppercase; letter-spacing: .09em; color: var(--text-faint); }
-  .travel-colophon { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; font: .61rem/1.8 var(--font-mono); color: var(--text-soft); }
-  @media (max-width: 720px) {
-    .travel-breakout { width: calc(100vw - 2rem); }
-    .travel-stat-strip { grid-template-columns: 1fr 1fr; gap: 1.3rem 0; margin-top: 1.3rem; padding-bottom: 1.3rem; }
-    .travel-stat-strip > div { padding: 0 1rem; }
-    .travel-stat-strip > div:nth-child(odd) { padding-left: 0; }
-    .travel-stat-strip > div:nth-child(even) { border: 0; }
-    .travel-stat-strip dd { font-size: 2.5rem; }
-    .travel-colophon { flex-direction: column; gap: .3rem; font-size: .58rem; }
+  .travels-hero {
+    position: relative;
+    left: 50%;
+    width: min(1120px, calc(100vw - 4rem));
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-bottom: 0;
+  }
+  .travels-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .travels-title {
+    font-size: clamp(2.8rem, 5.6vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+  .travels-title em {
+    color: var(--text-faint);
+  }
+  .travels-summary {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .travels-globe {
+    width: 100%;
+    max-width: 640px;
+    justify-self: end;
+  }
+  @media (max-width: 760px) {
+    .travels-hero {
+      width: 100%;
+      left: 0;
+      transform: none;
+      grid-template-columns: 1fr;
+    }
+    .travels-globe {
+      justify-self: center;
+    }
   }
 </style>
