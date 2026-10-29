@@ -33,9 +33,13 @@ try {
   const payload = JSON.parse(await page.locator('[data-globe-data]').textContent());
   const codes = payload.airports.map(a => a.code);
   assert.ok(codes.includes('LAX') && codes.includes('LIS') && codes.includes('KUL'));
-  const cities = (await page.locator('[data-globe-cities]').textContent()).replace(/^[^:]*:\s*/, '').replace(/\.$/, '').split(', ');
+  // Markers are cities: airports serving one city merge into a single marker.
+  const cities = payload.cities.map(c => c.name);
   assert.ok(cities.includes('Los Angeles') && cities.includes('Lisbon') && cities.includes('Kuala Lumpur'));
   assert.equal(cities.filter(name => name === 'Paris').length, 1);
+  assert.deepEqual(payload.cities.find(c => c.name === 'Paris').codes, ['CDG', 'ORY']);
+  assert.ok(!cities.includes('Sepang') && !cities.includes('LAX'));
+  assert.match(await page.locator('.travels-summary').textContent(), new RegExp(`^${cities.length} cities · `));
   assert.ok(payload.land.length > 4000, 'land dots present');
   assert.ok(payload.routes.length > 0 && payload.routes.every(r => payload.airports.some(a => a.code === r.from)));
 
@@ -109,7 +113,7 @@ try {
   }
   // LAX and Burbank sit a few pixels apart; either label proves hover works.
   assert.ok(['Los Angeles', 'Burbank'].includes(found), `hover showed ${found}`);
-  assert.match(await still.locator('[data-tip-meta]').textContent(), /^(LAX|BUR) · \d+ flights?$/);
+  assert.equal(await still.locator('[data-tip-meta]').textContent(), 'United States');
   await still.screenshot({ path: 'test-results/travel-map/hover.png' });
   await still.mouse.move(box.x + 4, box.y + 4);
   assert.ok(await tip.isHidden());

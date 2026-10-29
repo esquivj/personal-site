@@ -3,21 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import TravelGlobe from '../components/TravelGlobe.astro';
 import { travelStats } from '../data/travels';
+import reference from '../data/travel-airports.json';
+import { globeNetwork } from '../lib/travel-globe.mjs';
+
+const { cities } = globeNetwork(travelStats, reference);
 
 const summary = [
-  `${travelStats.totalFlights.toLocaleString('en-US')} flights`,
+  `${cities.length} cities`,
   `${travelStats.totalCountries.toLocaleString('en-US')} countries`,
-  `${travelStats.totalDistance.toLocaleString('en-US')} km`,
+  `${travelStats.totalFlights.toLocaleString('en-US')} flights`,
 ].join(' · ');
 
 const pageSchema = {
   '@context': 'https://schema.org', '@type': 'WebPage', name: "Juan Esquivel's Travels",
-  url: 'https://juanesquivel.xyz/travels', description: 'An interactive globe of the routes I have flown since 2018.',
+  url: 'https://juanesquivel.xyz/travels', description: 'An interactive globe of the cities I have visited since 2018.',
   author: { '@type': 'Person', name: 'Juan Esquivel', url: 'https://juanesquivel.xyz' },
 };
 ---
 
-<Layout title="Travels — Juan Esquivel" description="An interactive globe of the routes I've flown since 2018, from my Flighty history." canonicalPath="/travels">
+<Layout title="Travels — Juan Esquivel" description="An interactive globe of the cities I've visited since 2018, from my Flighty history." canonicalPath="/travels">
   <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(pageSchema)} /></Fragment>
   <Nav active="travels" />
 

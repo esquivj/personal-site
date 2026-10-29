@@ -19,15 +19,28 @@ test('land dots fall on land and skip open ocean', () => {
   assert.ok(!pairs.some(([lat, lon]) => Math.abs(lat) < 10 && lon > -170 && lon < -140));
 });
 
-test('globe network keeps only routes with known airports', () => {
+test('globe network has one marker per city and keeps airports for routes', () => {
   const reference = {
-    LAX: { city: 'Los Angeles', lat: 33.9, lon: -118.4 },
-    LHR: { city: 'London', lat: 51.5, lon: -0.5 },
+    LHR: { city: 'London', country: '🇬🇧 United Kingdom', lat: 51.47, lon: -0.45 },
+    STN: { city: 'London, Essex', country: '🇬🇧 United Kingdom', lat: 51.88, lon: 0.23 },
+    LIS: { city: 'Lisbon', country: '🇵🇹 Portugal', lat: 38.77, lon: -9.13 },
   };
-  const { airports, routes } = globeNetwork(
-    { routes: [{ from: 'LAX', to: 'LHR', count: 6 }, { from: 'LAX', to: 'XXX', count: 1 }] },
+  const { cities, airports, routes } = globeNetwork(
+    {
+      routes: [
+        { from: 'LHR', to: 'LIS', count: 3 },
+        { from: 'LIS', to: 'STN', count: 1 },
+        { from: 'LIS', to: 'XXX', count: 1 },
+      ],
+    },
     reference,
   );
-  assert.deepEqual(airports.map((a) => a.code), ['LAX', 'LHR']);
-  assert.deepEqual(routes, [{ from: 'LAX', to: 'LHR', count: 6 }]);
+  assert.deepEqual(cities.map((c) => [c.name, c.country, c.codes]), [
+    ['Lisbon', 'Portugal', ['LIS']],
+    ['London', 'United Kingdom', ['LHR', 'STN']],
+  ]);
+  // London is anchored on its busiest airport.
+  assert.equal(cities[1].lat, 51.47);
+  assert.deepEqual(airports.map((a) => a.code), ['LHR', 'LIS', 'STN']);
+  assert.equal(routes.length, 2);
 });

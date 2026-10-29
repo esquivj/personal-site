@@ -1,6 +1,7 @@
-type Airport = { code: string; city: string; name: string; flights: number; lat: number; lon: number };
+type City = { name: string; country: string; codes: string[]; lat: number; lon: number };
+type Airport = { code: string; lat: number; lon: number };
 type Route = { from: string; to: string; count: number };
-type GlobeData = { land: number[]; airports: Airport[]; routes: Route[] };
+type GlobeData = { land: number[]; cities: City[]; airports: Airport[]; routes: Route[] };
 
 const POINT_VS = `
 attribute vec4 aP;
@@ -18,7 +19,7 @@ void main() {
   vH = aP.w * step(distance(aP.xyz, uHover), 0.001);
   gl_Position = vec4(p.xy * 0.8 * uZ, 0.0, 1.0);
   float depth = mix(0.55, 1.0, vF);
-  gl_PointSize = (aP.w > 0.5 ? 6.5 * (1.0 + vH * 0.7) : 2.4 * depth) * uS;
+  gl_PointSize = (aP.w > 0.5 ? 8.0 * (1.0 + vH * 0.6) : 2.4 * depth) * uS;
 }`;
 
 const POINT_FS = `
@@ -95,7 +96,7 @@ varying vec3 vT;
 void main() {
   float h = fract(uTime * 0.18 + vT.y);
   float pulse = smoothstep(0.1, 0.0, abs(vT.x - h)) * uPulse;
-  float a = (0.3 * vT.z + 0.75 * pulse) * vF;
+  float a = (0.16 * vT.z + 0.4 * pulse) * vF;
   gl_FragColor = vec4(uAcc, a);
 }`;
 
@@ -153,11 +154,10 @@ export function initTravelGlobe(root: HTMLElement) {
   const byCode = new Map<string, [number, number, number]>();
   const points: number[] = [];
   for (let i = 0; i < data.land.length; i += 2) points.push(...xyz(data.land[i], data.land[i + 1]), 0);
-  for (const a of data.airports) {
-    const p = xyz(a.lat, a.lon);
-    byCode.set(a.code, p);
-    points.push(...p, 1);
-  }
+  // Routes run between airports; markers are cities.
+  for (const a of data.airports) byCode.set(a.code, xyz(a.lat, a.lon));
+  const cityVectors = data.cities.map((city) => ({ city, v: xyz(city.lat, city.lon) }));
+  for (const { v } of cityVectors) points.push(...v, 1);
   const pointCount = points.length / 4;
   const pointBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, pointBuffer);
@@ -196,11 +196,10 @@ export function initTravelGlobe(root: HTMLElement) {
   gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
 
-  const airportVectors = data.airports.map((a) => ({ airport: a, v: byCode.get(a.code)! }));
   const tip = root.querySelector<HTMLElement>('[data-globe-tip]');
   const tipCity = tip?.querySelector<HTMLElement>('[data-tip-city]');
   const tipMeta = tip?.querySelector<HTMLElement>('[data-tip-meta]');
-  let hover: { airport: Airport; v: [number, number, number] } | null = null;
+  let hover: (typeof cityVectors)[number] | null = null;
   let rotation = new Float32Array(9);
 
   const styles = getComputedStyle(root);
@@ -325,9 +324,9 @@ export function initTravelGlobe(root: HTMLElement) {
     const box = canvas.getBoundingClientRect();
     const mx = clientX - box.left;
     const my = clientY - box.top;
-    let best: (typeof airportVectors)[number] | null = null;
+    let best: (typeof cityVectors)[number] | null = null;
     let bestD = 16;
-    for (const item of airportVectors) {
+    for (const item of cityVectors) {
       const p = project(item.v);
       if (!p.front) continue;
       const d = Math.hypot(p.x - mx, p.y - my);
@@ -338,8 +337,8 @@ export function initTravelGlobe(root: HTMLElement) {
     }
     return best;
   };
-  const setHover = (item: (typeof airportVectors)[number] | null) => {
-    if (item?.airport.code === hover?.airport.code) return;
+  const setHover = (item: (typeof cityVectors)[number] | null) => {
+    if (item?.city === hover?.city) return;
     hover = item;
     canvas.style.cursor = item ? 'pointer' : '';
     if (!tip || !tipCity || !tipMeta) return;
@@ -347,9 +346,8 @@ export function initTravelGlobe(root: HTMLElement) {
       tip.hidden = true;
       return;
     }
-    const { name, code, flights } = item.airport;
-    tipCity.textContent = name;
-    tipMeta.textContent = `${code} · ${flights} ${flights === 1 ? 'flight' : 'flights'}`;
+    tipCity.textContent = item.city.name;
+    tipMeta.textContent = item.city.country;
     tip.hidden = false;
     placeTip();
     kick();

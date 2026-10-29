@@ -21,26 +21,36 @@ export function landDots(land, count = 16000, minLat = -58) {
 }
 
 /**
- * Airports used by at least one route, with coordinates, plus routes keyed by code.
+ * The globe is about cities visited: one marker per city (airports serving the same
+ * city merge, anchored on the busiest one). Airports are kept only to draw routes.
  * @param {{ routes: { from: string, to: string, count: number }[] }} stats
- * @param {Record<string, { city: string, lat: number, lon: number }>} reference
- * @returns {{ airports: { code: string, city: string, name: string, flights: number, lat: number, lon: number }[], routes: { from: string, to: string, count: number }[] }}
+ * @param {Record<string, { city: string, country: string, lat: number, lon: number }>} reference
+ * @returns {{
+ *   cities: { name: string, country: string, codes: string[], lat: number, lon: number }[],
+ *   airports: { code: string, lat: number, lon: number }[],
+ *   routes: { from: string, to: string, count: number }[],
+ * }}
  */
 export function globeNetwork(stats, reference) {
-  const codes = new Set(stats.routes.flatMap((route) => [route.from, route.to]));
-  const airports = [...codes]
-    .filter((code) => reference[code])
-    .sort()
-    .map((code) => ({
-      code,
-      city: reference[code].city,
-      name: cityName(code, reference[code].city),
-      flights: stats.routes.reduce((sum, r) => sum + (r.from === code || r.to === code ? r.count : 0), 0),
-      lat: reference[code].lat,
-      lon: reference[code].lon,
-    }));
   const routes = stats.routes
     .filter((route) => reference[route.from] && reference[route.to])
     .map((route) => ({ from: route.from, to: route.to, count: route.count }));
-  return { airports, routes };
+  const flights = (code) => routes.reduce((sum, r) => sum + (r.from === code || r.to === code ? r.count : 0), 0);
+  const codes = [...new Set(routes.flatMap((route) => [route.from, route.to]))].sort();
+  const airports = codes.map((code) => ({ code, lat: reference[code].lat, lon: reference[code].lon }));
+
+  const byCity = new Map();
+  for (const code of [...codes].sort((a, b) => flights(b) - flights(a))) {
+    const ref = reference[code];
+    const name = cityName(code, ref.city);
+    const country = ref.country.replace(/^[^\p{L}]+/u, '');
+    const key = `${country}:${name}`;
+    const city = byCity.get(key);
+    if (city) city.codes.push(code);
+    else byCity.set(key, { name, country, codes: [code], lat: ref.lat, lon: ref.lon });
+  }
+  const cities = [...byCity.values()]
+    .map((city) => ({ ...city, codes: city.codes.sort() }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  return { cities, airports, routes };
 }
