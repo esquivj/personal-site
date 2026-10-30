@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -29,17 +30,16 @@ const pageSchema = {
   </Fragment>
   <Nav active="about" />
 
-  <section class="about-stage-shell">
-    <div class="about-stage">
-    <article class="about-pane">
-      <header class="about-pane-header">
-        <h1 class="about-pane-title">About</h1>
-      </header>
+  <PageHeader title="About" subtitle="Marketing generalist and narrative storyteller in Los Angeles." />
 
-      <p class="about-pane-lead">
-        I'm Juan. From Los Angeles, son of Mexican immigrants, raised by the internet.
-      </p>
+  <article class="about">
+    <p class="about-lead">I'm Juan. From Los Angeles, son of Mexican immigrants, <em>raised by the internet.</em></p>
 
+    <figure class="about-image">
+      <img src="/images/about/about-stage.avif" alt="" width="528" height="576" loading="eager" decoding="async" fetchpriority="high" />
+    </figure>
+
+    <div class="about-body">
       <p>
         Most recently, I was the founding Socials and Community Lead at Compound Foundation. Before
         that, I spent three years leading marketing at StableLab. Right now: a crypto native building with AI.
@@ -69,175 +69,75 @@ const pageSchema = {
         electronic music label and tried my hand at DJing. Everything bleeds into the work sooner or later.
       </p>
 
-      <p class="resume-link"><a href="/resume" target="_blank" rel="noopener">View my resume →</a></p>
-    </article>
+      <a href="/resume" target="_blank" rel="noopener" class="about-resume">View my resume <span aria-hidden="true">→</span></a>
     </div>
-  </section>
+  </article>
 </Layout>
 
 <style>
-  .about-stage-shell {
-    width: 100vw;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: clamp(4rem, 9vw, 6rem);
+  .about {
+    max-width: 680px;
   }
 
-  .about-stage {
-    position: relative;
-    min-height: clamp(38rem, 62vw, 48rem);
-    padding: clamp(2.8rem, 5vw, 4.2rem);
-    background:
-      linear-gradient(180deg, rgba(243, 241, 235, 0.06), rgba(243, 241, 235, 0.18)),
-      linear-gradient(90deg, rgba(243, 241, 235, 0.16), rgba(243, 241, 235, 0.04) 38%, rgba(243, 241, 235, 0.02)),
-      url('/images/about/about-stage.avif') center center / cover no-repeat;
-    box-shadow: 0 22px 58px rgba(17, 15, 13, 0.08);
+  .about-lead {
+    margin-bottom: 2.25rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.2vw, 2.4rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .about-lead em {
+    color: var(--text-faint);
+  }
+
+  .about-image {
+    margin: 0 0 2.5rem;
+  }
+
+  .about-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.4 / 1;
+    object-fit: cover;
+    object-position: center 40%;
+    border: 1px solid var(--line);
+    filter: saturate(0.82) contrast(1.03);
+  }
+
+  .about-body {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    flex-direction: column;
+    gap: 1.35rem;
   }
 
-  .about-stage::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(42% 34% at 18% 24%, rgba(255, 255, 255, 0.26), transparent 72%),
-      radial-gradient(34% 28% at 76% 74%, rgba(255, 255, 255, 0.18), transparent 70%),
-      radial-gradient(36% 26% at 52% 14%, rgba(161, 176, 191, 0.14), transparent 74%);
-    mix-blend-mode: screen;
-    opacity: 0.72;
-    pointer-events: none;
-  }
-
-  .about-stage::after {
-    content: '';
-    position: absolute;
-    inset: 1.6rem;
-    border: 1px solid rgba(243, 241, 235, 0.34);
-    pointer-events: none;
-  }
-
-  .about-pane {
-    position: relative;
-    width: min(43rem, calc(100% - 7rem));
-    padding: 2.05rem 2.25rem 1.9rem;
-    border: 1px solid rgba(20, 19, 17, 0.16);
-    background:
-      linear-gradient(180deg, rgba(248, 246, 242, 0.95), rgba(243, 240, 235, 0.94)),
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.28), transparent 42%);
-    box-shadow:
-      0 20px 46px rgba(17, 15, 13, 0.07),
-      0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  }
-
-  .about-pane {
-    background-image:
-      linear-gradient(180deg, rgba(248, 246, 242, 0.95), rgba(243, 240, 235, 0.94)),
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.28), transparent 42%),
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.18'/%3E%3C/svg%3E");
-    background-size: auto, auto, 180px 180px;
-    background-repeat: no-repeat, no-repeat, repeat;
-  }
-
-  .about-pane::before {
-    content: '';
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    width: 3.75rem;
-    height: 1px;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, rgba(194, 74, 45, 0.9), rgba(20, 19, 17, 0.1));
-  }
-
-  .about-pane::after {
-    content: '';
-    position: absolute;
-    inset: 0.8rem;
-    border: 1px solid rgba(20, 19, 17, 0.035);
-    pointer-events: none;
-  }
-
-  .about-pane-header {
-    margin-bottom: 1.2rem;
-    padding-top: 0.7rem;
-  }
-
-  .about-pane-title {
-    font-size: clamp(2.7rem, 5vw, 4rem);
-    line-height: 0.94;
-    letter-spacing: -0.06em;
-    margin-bottom: 0.7rem;
-  }
-
-  .about-pane-lead {
-    color: var(--text);
-    max-width: 46ch;
-    font-size: 1.06rem;
-    line-height: 1.62;
-    margin-bottom: 0.9rem;
-  }
-
-  .about-pane p:not(.about-pane-lead):not(.resume-link) {
+  .about-body > p {
+    max-width: 62ch;
     color: var(--text-soft);
-    font-size: 0.95rem;
-    line-height: 1.74;
+    font-size: 1.05rem;
+    line-height: 1.8;
   }
 
-  .about-pane p + p {
-    margin-top: 0.8rem;
-  }
-
-  .resume-link {
-    margin-top: 1.5rem;
-  }
-
-  .resume-link a {
-    color: var(--accent);
+  .about-resume {
+    align-self: flex-start;
+    margin-top: 0.5rem;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    transition: opacity 0.15s ease;
   }
 
-  .resume-link a:hover {
-    opacity: 0.8;
+  .about-resume span {
+    display: inline-block;
+    color: var(--accent);
+    transition: transform 160ms var(--ease-out);
   }
 
-  @media (max-width: 760px) {
-    .about-stage-shell {
-      width: 100%;
-      margin-left: 0;
-      transform: none;
-      margin-bottom: 3.25rem;
-    }
-
-    .about-stage {
-      min-height: auto;
-      align-items: stretch;
-      padding: 0;
-      background-position: center top;
-    }
-
-    .about-pane {
-      width: 100%;
-      margin-top: 12rem;
-      padding: 1.65rem 1.2rem 1.5rem;
-      border-left: 0;
-      border-right: 0;
-      border-bottom: 0;
-      box-shadow: none;
-    }
-
-    .about-pane::before {
-      top: 0.85rem;
-    }
-
-    .about-pane::after {
-      inset: 0.55rem 0.75rem;
+  @media (hover: hover) and (pointer: fine) {
+    .about-resume:hover span {
+      transform: translateX(3px);
     }
   }
 </style>

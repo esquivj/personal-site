@@ -1,0 +1,205 @@
+---
+import { geoOrthographic, geoPath } from 'd3-geo';
+import { feature } from 'topojson-client';
+import landData from 'world-atlas/land-110m.json';
+import { travelStats } from '../data/travels';
+import reference from '../data/travel-airports.json';
+import { landDots, globeNetwork } from '../lib/travel-globe.mjs';
+
+const land = feature(landData as any, (landData as any).objects.land) as any;
+const { cities, airports, routes } = globeNetwork(travelStats, reference);
+const payload = JSON.stringify({ land: landDots(land), cities, airports, routes }).replace(/</g, '\\u003c');
+
+// Static fallback for no-JS / no-WebGL, framed like the live globe's starting view.
+const projection = geoOrthographic().scale(200).translate([250, 250]).rotate([118, -24]).clipAngle(90);
+const path = geoPath(projection);
+const byCode = Object.fromEntries(airports.map((a) => [a.code, a]));
+const routeLines = routes.map((r) => ({
+  type: 'LineString' as const,
+  coordinates: [[byCode[r.from].lon, byCode[r.from].lat], [byCode[r.to].lon, byCode[r.to].lat]],
+}));
+const visibleCities = cities
+  .map((c) => ({ c, p: projection([c.lon, c.lat]), d: path({ type: 'Point', coordinates: [c.lon, c.lat] }) }))
+  .filter((x) => x.p && x.d);
+const cityList = cities.map((c) => c.name).join(', ');
+---
+
+<figure class="travel-globe" data-travel-globe>
+  <div class="globe-stage">
+    <svg class="globe-fallback" data-globe-fallback viewBox="0 0 500 500" role="img" aria-label="Globe of the cities I've visited">
+      <defs>
+        <radialGradient id="globe-shade" cx="38%" cy="32%" r="75%">
+          <stop offset="0%" stop-color="var(--text)" stop-opacity="0.02" />
+          <stop offset="100%" stop-color="var(--text)" stop-opacity="0.14" />
+        </radialGradient>
+      </defs>
+      <path d={path({ type: 'Sphere' })} fill="url(#globe-shade)" stroke="var(--line-strong)" />
+      <path d={path(land)} fill="var(--surface-strong)" stroke="var(--line)" stroke-width="0.5" />
+      {routeLines.map((line) => <path d={path(line)} fill="none" stroke="var(--accent)" stroke-width="0.7" opacity="0.25" />)}
+      {visibleCities.map(({ c, p }) => <circle cx={p![0]} cy={p![1]} r="3.2" fill="var(--accent)"><title>{c.name}, {c.country}</title></circle>)}
+    </svg>
+    <canvas
+      class="globe-canvas"
+      data-globe-canvas
+      tabindex="0"
+      role="img"
+      aria-label="Interactive globe of the cities I've visited. Drag or use the arrow keys to rotate. Pinch, or press plus and minus, to zoom."
+    ></canvas>
+    <div class="globe-tip" data-globe-tip hidden aria-live="polite">
+      <div class="globe-tip-card">
+        <span class="globe-tip-city" data-tip-city></span>
+        <span class="globe-tip-meta" data-tip-meta></span>
+      </div>
+    </div>
+    <div class="globe-zoom" data-globe-controls>
+      <button type="button" data-globe-zoom-in aria-label="Zoom in">
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+      </button>
+      <button type="button" data-globe-zoom-out aria-label="Zoom out">
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+  </div>
+  <figcaption class="globe-sr-only" data-globe-cities>Cities I've visited: {cityList}.</figcaption>
+  <script type="application/json" data-globe-data set:html={payload} />
+</figure>
+
+<script>
+  import { initTravelGlobe } from '../lib/travel-globe-client';
+  document.querySelectorAll<HTMLElement>('[data-travel-globe]').forEach(initTravelGlobe);
+</script>
+
+<style>
+  .travel-globe {
+    margin: 0;
+    width: 100%;
+  }
+  .globe-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  .globe-fallback,
+  .globe-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .globe-canvas {
+    display: block;
+    cursor: grab;
+    touch-action: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 400ms var(--ease-out);
+  }
+  .globe-canvas:active {
+    cursor: grabbing;
+  }
+  .globe-canvas:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 50%;
+  }
+  [data-globe-state='ready'] .globe-canvas {
+    opacity: 1;
+    visibility: visible;
+  }
+  [data-globe-state='ready'] .globe-fallback {
+    display: none;
+  }
+  [data-globe-state='fallback'] .globe-canvas {
+    display: none;
+  }
+  .globe-tip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .globe-tip[hidden] {
+    display: none;
+  }
+  .globe-tip-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.5rem 0.7rem 0.55rem;
+    transform: translate(-50%, calc(-100% - 14px));
+    background: var(--bg-raised);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+    animation: globe-tip-in 160ms var(--ease-out);
+  }
+  .globe-tip-city {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .globe-tip-meta {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  @keyframes globe-tip-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, calc(-100% - 8px));
+    }
+  }
+  .globe-zoom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+  }
+  [data-globe-state='ready'] .globe-zoom {
+    display: flex;
+  }
+  .globe-zoom button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+  }
+  .globe-zoom button + button {
+    border-top: 1px solid var(--line);
+  }
+  .globe-zoom button:disabled {
+    color: var(--line-strong);
+    cursor: default;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .globe-zoom button:not(:disabled):hover {
+      color: var(--text);
+      background: var(--surface-strong);
+    }
+  }
+  .globe-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

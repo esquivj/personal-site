@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import PageHeader from '../components/PageHeader.astro';
-import UiIcon from '../components/UiIcon.astro';
+import { ethTile } from '../lib/eth-tile';
+import AIActivity from '../components/AIActivity.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -17,33 +18,6 @@ const pageSchema = {
     url: 'https://juanesquivel.xyz',
   },
 };
-
-const favorites = [
-  {
-    name: 'Claude Code',
-    role: 'Thinking + shipping',
-    href: 'https://claude.ai/code',
-    icon: '/images/stack/claude-code.png',
-  },
-  {
-    name: 'ChatGPT',
-    role: 'AI assistant',
-    href: 'https://chatgpt.com',
-    icon: '/images/stack/openai.png',
-  },
-  {
-    name: 'Obsidian',
-    role: 'Notes + ideas',
-    href: 'https://obsidian.md',
-    icon: '/images/stack/obsidian.png',
-  },
-  {
-    name: 'Dia',
-    role: 'Research',
-    href: 'https://www.diabrowser.com',
-    icon: '/images/stack/dia.png',
-  },
-];
 
 const stackSections = [
   {
@@ -67,7 +41,7 @@ const stackSections = [
         name: 'ChatGPT',
         desc: 'AI assistant',
         href: 'https://chatgpt.com',
-        icon: '/images/stack/openai.png',
+        icon: '/images/stack/mac/chatgpt.webp',
       },
       {
         name: 'Hermes Agent',
@@ -86,7 +60,13 @@ const stackSections = [
         name: 'Muse',
         desc: 'Personal AI agent',
         href: 'https://muse.ai',
-        icon: '/images/stack/muse.svg',
+        icon: '/images/stack/mac/muse.webp',
+      },
+      {
+        name: 'Openclaw',
+        desc: 'Personal AI agent',
+        href: 'https://openclaw.ai',
+        icon: '/images/stack/openclaw.jpg',
       },
     ],
   },
@@ -105,15 +85,14 @@ const stackSections = [
         name: 'Notion',
         desc: 'Docs and wikis',
         href: 'https://notion.so',
-        icon: '/images/stack/notion.png',
+        icon: '/images/stack/mac/notion.webp',
         note: 'Shared workspace',
       },
       {
-        name: 'Granola',
-        desc: 'AI meeting notes',
-        href: 'https://granola.ai',
-        icon: '/images/stack/granola.png',
-        note: 'Auto-transcripts',
+        name: 'Wispr Flow',
+        desc: 'Voice dictation',
+        href: 'https://wisprflow.ai',
+        icon: '/images/stack/mac/wispr-flow.webp',
       },
       {
         name: 'Things 3',
@@ -160,8 +139,80 @@ const stackSections = [
         name: 'Eagle',
         desc: 'Image and video library',
         href: 'https://eagle.cool',
-        icon: '/images/stack/eagle.png',
+        icon: '/images/stack/mac/eagle.webp',
         note: 'Reference archive',
+      },
+      {
+        name: 'Dune',
+        desc: 'Onchain data and dashboards',
+        href: 'https://dune.com',
+        icon: '/images/stack/dune.png',
+      },
+      {
+        name: 'Mixpanel',
+        desc: 'Product analytics',
+        href: 'https://mixpanel.com',
+        icon: '/images/stack/mixpanel.png',
+      },
+    ],
+  },
+  {
+    title: 'Design & Content',
+    intro: 'Where things get designed, recorded, and published.',
+    items: [
+      {
+        name: 'Figma',
+        desc: 'Design',
+        href: 'https://figma.com',
+        icon: '/images/stack/mac/figma.webp',
+      },
+      {
+        name: 'Paper',
+        desc: 'Design canvas',
+        href: 'https://paper.design',
+        icon: '/images/stack/mac/paper.webp',
+      },
+      {
+        name: 'Framer',
+        desc: 'Website builder',
+        href: 'https://framer.com',
+        icon: '/images/stack/mac/framer.webp',
+      },
+      {
+        name: 'Riverside',
+        desc: 'Podcast and video recording',
+        href: 'https://riverside.com',
+        icon: '/images/stack/riverside.png',
+      },
+    ],
+  },
+  {
+    title: 'Building',
+    intro: 'What this site and my side projects run on.',
+    items: [
+      {
+        name: 'Next.js',
+        desc: 'React framework',
+        href: 'https://nextjs.org',
+        icon: '/images/stack/nextjs.png',
+      },
+      {
+        name: 'Astro',
+        desc: 'Web framework',
+        href: 'https://astro.build',
+        icon: '/images/stack/astro.png',
+      },
+      {
+        name: 'Vercel',
+        desc: 'Hosting and deploys',
+        href: 'https://vercel.com',
+        icon: '/images/stack/vercel.png',
+      },
+      {
+        name: 'Supabase',
+        desc: 'Database and auth',
+        href: 'https://supabase.com',
+        icon: '/images/stack/supabase.png',
       },
     ],
   },
@@ -180,7 +231,7 @@ const stackSections = [
         name: 'Notion Mail',
         desc: 'Email client',
         href: 'https://notion.so/product/mail',
-        icon: '/images/stack/notion.png',
+        icon: '/images/stack/mac/notion-mail.webp',
         note: 'Current email setup',
       },
     ],
@@ -193,7 +244,7 @@ const stackSections = [
         name: 'Spotify',
         desc: 'Music streaming',
         href: 'https://spotify.com',
-        icon: '/images/stack/spotify.png',
+        icon: '/images/stack/mac/spotify.webp',
         note: 'Always on',
       },
     ],
@@ -201,410 +252,655 @@ const stackSections = [
 ];
 
 const totalTools = stackSections.reduce((count, section) => count + section.items.length, 0);
+
+// Mirrors the Dock on my Mac, left to right.
+type DockItem = { name: string; icon: string; category: string; desc: string; note?: string; href?: string; badge?: string; dial?: boolean; live?: boolean };
+const dock: DockItem[] = [
+  { name: 'Dia', icon: '/images/stack/mac/dia.webp', category: 'Research & Browsing', desc: 'Web browser', note: 'Default browser', href: 'https://www.diabrowser.com' },
+  { name: 'Obsidian', icon: '/images/stack/mac/obsidian.webp', category: 'Productivity', desc: 'Knowledge management', note: 'Second brain', href: 'https://obsidian.md' },
+  { name: 'Things 3', icon: '/images/stack/mac/things3.webp', category: 'Productivity', desc: 'Task management', note: 'Daily todos', href: 'https://culturedcode.com/things/' },
+  { name: 'Grok Bot', icon: '/images/stack/mac/grok-bot.webp', category: 'AI & Agents', desc: 'AI agents', note: 'Where I built the Compound bots', href: 'https://x.ai/bot' },
+  { name: 'Hermes Agent', icon: '/images/stack/mac/hermes.webp', category: 'AI & Agents', desc: 'Agent harness', note: 'Agent orchestration layer', href: 'https://github.com/NousResearch/hermes-agent' },
+  { name: 'Linear', icon: '/images/stack/mac/linear.webp', category: 'Productivity', desc: 'Issue tracking', note: "Tracks what I'm building", href: 'https://linear.app' },
+  { name: 'Cursor', icon: '/images/stack/mac/cursor.webp', category: 'Building', desc: 'Code editor', note: 'For hands-on edits', href: 'https://cursor.com' },
+  { name: 'Claude', icon: '/images/stack/mac/claude.webp', category: 'AI & Agents', desc: 'AI assistant and Claude Code', note: 'Primary thinking partner', href: 'https://claude.ai' },
+  { name: 'Beeper', icon: '/images/stack/mac/beeper-desktop.webp', category: 'Communication', desc: 'All-in-one messaging', note: 'Inbox for everything', href: 'https://www.beeper.com', badge: '19' },
+  { name: 'Coindock', icon: ethTile(), category: 'Crypto', desc: 'Live ETH price in the dock', note: 'Markets at a glance', live: true },
+  { name: 'Dial', icon: '/images/listening/drake-iceman.jpg', category: 'Built by me', desc: 'Now playing, remembered.', note: 'Icon shows the album playing', href: '/projects', dial: true },
+];
+const defaultPick = dock.findIndex((item) => item.name === 'Claude');
+const picked = dock[defaultPick];
+
+// Dial's icon shows whatever album is playing; cycle through what I'm listening to.
+const dialCovers = [
+  'drake-iceman', 'kanye-bully', 'jcole-fall-off', 'chevelle-wonder-whats-next', 'deftones-private-music',
+  'deftones-white-pony', 'deftones-diamond-eyes', 'juniorh-sad-boyz', 'pesopluma-dinastia', 'pesopluma-exodo',
+].map((name) => `/images/listening/${name}.jpg`);
+
+// Everything else from the stack, grouped as before. Claude Code lives in the dock as Claude.
+const inDock = new Set([...dock.map((item) => item.name), 'Claude Code']);
+const shelves = stackSections
+  .map((section) => ({ ...section, items: section.items.filter((item) => !inDock.has(item.name)) }))
+  .filter((section) => section.items.length > 0);
+
 ---
 
 <Layout
   title="Stack — Tools & Apps Used by Juan Esquivel"
   description="Tools, apps, and gear that power Juan Esquivel's day-to-day. AI tools and agents, productivity apps, and creative software."
   canonicalPath="/stack"
-  preloadImages={['/images/stack/grok-bot-app.png', '/images/stack/claude-code.png', '/images/stack/openai.png']}
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </Fragment>
   <Nav active="stack" />
 
-  <PageHeader title="Stack" subtitle="The software I actually like using day to day." />
+  <PageHeader title="Stack" subtitle="The software I actually like using day to day. This is my actual dock." />
 
+  <figure class="dock-figure" data-dock>
+    <ul class="dock" aria-label="Apps in my dock">
+      {dock.map((item, i) => (
+        <li class="dock-slot">
+          <button
+            type="button"
+            class="dock-item"
+            aria-label={item.name}
+            aria-pressed={i === defaultPick ? 'true' : 'false'}
+            data-index={i}
+            data-name={item.name}
+            data-category={item.category}
+            data-desc={item.desc}
+            data-note={item.note ?? ''}
+            data-href={item.href ?? ''}
+            data-icon={item.icon}
+          >
+            <span class="dock-label" aria-hidden="true">{item.name}</span>
+            <span class="dock-icon">
+              <img
+                src={item.icon}
+                alt=""
+                width="56"
+                height="56"
+                decoding="async"
+                data-dial-cover={item.dial ? '' : undefined}
+                data-eth-tile={item.live ? '' : undefined}
+              />
+              {item.badge && <span class="dock-badge" aria-hidden="true">{item.badge}</span>}
+            </span>
+            <span class="dock-dot" aria-hidden="true"></span>
+          </button>
+        </li>
+      ))}
+    </ul>
+    <figcaption><span class="dock-hint-fine">Hover to magnify · click for the why</span><span class="dock-hint-touch">Tap an icon for the why</span></figcaption>
+    <script type="application/json" data-dial-covers set:html={JSON.stringify(dialCovers)} />
+  </figure>
 
-  {
-    stackSections.map((section, sectionIndex) => (
-      <section class="stack-shelf stack-breakout">
-        <div class="stack-section-head">
-          <span class="stack-section-kicker">{String(sectionIndex + 1).padStart(2, '0')}</span>
-          <h2>{section.title}</h2>
-          <p>{section.intro}</p>
-        </div>
+  <section class="dock-detail" aria-live="polite" data-dock-detail>
+    <img src={picked.icon} alt="" width="96" height="96" class:list={['dock-detail-icon', { 'is-cover': picked.dial }]} data-detail-icon />
+    <div class="dock-detail-body">
+      <span class="dock-detail-category" data-detail-category>{picked.category}</span>
+      <span class="dock-detail-name" data-detail-name>{picked.name}</span>
+      <span class="dock-detail-desc" data-detail-desc>{picked.desc}</span>
+    </div>
+    <div class="dock-detail-side">
+      <span class="dock-detail-note" data-detail-note>{picked.note}</span>
+      <a href={picked.href} target="_blank" rel="noopener" class="dock-detail-link" data-detail-link>Visit <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 
-        <div class="stack-ledger">
-          {section.items.map((item) => (
-            <a
-              href={item.href}
-              target="_blank"
-              rel="noopener"
-              class="stack-ledger-row"
-            >
-              <div class="stack-ledger-icon">
-                <img src={item.icon} alt={item.name} width="40" height="40" loading="lazy" decoding="async" class="contain" />
-              </div>
-              <div class="stack-ledger-body">
-                <span class="stack-ledger-name">{item.name}</span>
-                <span class="stack-ledger-desc">
-                  {item.desc}{item.note && <em class="stack-ledger-note"> — {item.note}</em>}
-                </span>
-              </div>
-              <UiIcon name="arrow-up-right" size={13} class="stack-ledger-arrow" />
+  <section class="stack-activity" aria-labelledby="ai-activity-title">
+    <h2 class="stack-more-title" id="ai-activity-title">AI activity</h2>
+    <p class="stack-activity-intro">Daily tokens across Claude and Codex.</p>
+    <AIActivity />
+  </section>
+
+  <h2 class="stack-more-title">Also in rotation</h2>
+  {shelves.map((section) => (
+    <section class="stack-shelf">
+      <div class="stack-shelf-head">
+        <h3>{section.title}</h3>
+        <p>{section.intro}</p>
+      </div>
+      <ul class="rotation-list">
+        {section.items.map((item) => (
+          <li>
+            <a href={item.href} target="_blank" rel="noopener" class="rotation-row">
+              {item.icon ? (
+                <img src={item.icon} alt="" width="28" height="28" loading="lazy" decoding="async" />
+              ) : (
+                <span class="rotation-monogram" aria-hidden="true">{item.name[0]}</span>
+              )}
+              <span class="rotation-text">
+                <span class="rotation-name">{item.name}</span>
+                <span class="rotation-desc">{item.desc}</span>
+              </span>
+              {item.note && <span class="rotation-note">{item.note}</span>}
             </a>
-          ))}
-        </div>
-      </section>
-    ))
-  }
-
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </Layout>
 
+<script>
+  import { ethTile, formatEthPrice } from '../lib/eth-tile';
+
+  const dockRoot = document.querySelector<HTMLElement>('[data-dock]');
+  const detail = document.querySelector<HTMLElement>('[data-dock-detail]');
+  if (dockRoot && detail) {
+    const items = [...dockRoot.querySelectorAll<HTMLButtonElement>('.dock-item')];
+    const icon = detail.querySelector<HTMLImageElement>('[data-detail-icon]')!;
+    const category = detail.querySelector<HTMLElement>('[data-detail-category]')!;
+    const name = detail.querySelector<HTMLElement>('[data-detail-name]')!;
+    const desc = detail.querySelector<HTMLElement>('[data-detail-desc]')!;
+    const note = detail.querySelector<HTMLElement>('[data-detail-note]')!;
+    const link = detail.querySelector<HTMLAnchorElement>('[data-detail-link]')!;
+    const dialCover = dockRoot.querySelector<HTMLImageElement>('[data-dial-cover]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const show = (button: HTMLButtonElement) => {
+      items.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      const d = button.dataset;
+      const img = button.querySelector('img');
+      icon.src = img?.src ?? d.icon ?? '';
+      icon.classList.toggle('is-cover', d.name === 'Dial');
+      category.textContent = d.category ?? '';
+      name.textContent = d.name ?? '';
+      desc.textContent = d.desc ?? '';
+      note.textContent = d.note ?? '';
+      link.hidden = !d.href;
+      if (d.href) {
+        link.href = d.href;
+        const external = d.href.startsWith('http');
+        link.target = external ? '_blank' : '';
+        link.firstChild!.textContent = external ? 'Visit ' : 'See the project ';
+      }
+    };
+    items.forEach((button) => button.addEventListener('click', () => show(button)));
+
+    // Magnification: each icon's size follows the cursor's distance from its center
+    // (cosine falloff), eased with a spring. Sizes change layout, so neighbors make room.
+    const dockList = dockRoot.querySelector<HTMLElement>('.dock');
+    const slots = [...dockRoot.querySelectorAll<HTMLElement>('.dock-slot')];
+    const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+    let BASE = 56;
+    let PEAK = 92;
+    let REACH = 170;
+    const state = slots.map(() => ({ size: BASE, velocity: 0 }));
+
+    // Fit the resting icon size to the available width so the dock stays on one line.
+    const fit = () => {
+      if (!dockList) return;
+      const available = (dockRoot.clientWidth || window.innerWidth) - 32;
+      const gap = 8;
+      BASE = fineHover.matches ? Math.max(34, Math.min(56, Math.floor((available - 24 - gap * (slots.length - 1)) / slots.length))) : 56;
+      PEAK = Math.round(BASE * 1.65);
+      REACH = BASE * 3;
+      dockList.style.setProperty('--base', `${BASE}px`);
+      state.forEach((s, i) => { s.size = BASE; s.velocity = 0; slots[i].style.removeProperty('--size'); });
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    fineHover.addEventListener?.('change', fit);
+    let pointerX: number | null = null;
+    let frame = 0;
+    let last = 0;
+
+    const step = (now: number) => {
+      const dt = Math.min(0.032, (now - (last || now)) / 1000) || 1 / 60;
+      last = now;
+      let moving = false;
+      slots.forEach((slot, i) => {
+        let target = BASE;
+        if (pointerX !== null) {
+          const box = slot.getBoundingClientRect();
+          const d = Math.abs(pointerX - (box.left + box.width / 2));
+          if (d < REACH) target = BASE + (PEAK - BASE) * (Math.cos((Math.PI * d) / REACH) + 1) / 2;
+        }
+        const s = state[i];
+        if (reduced.matches) {
+          // No spring when motion is reduced: sizes follow the cursor directly.
+          s.size = target;
+          s.velocity = 0;
+        } else {
+          // Damped spring toward the target size.
+          const force = 320 * (target - s.size) - 28 * s.velocity;
+          s.velocity += force * dt;
+          s.size += s.velocity * dt;
+        }
+        if (Math.abs(target - s.size) > 0.05 || Math.abs(s.velocity) > 0.05) moving = true;
+        else { s.size = target; s.velocity = 0; }
+        slot.style.setProperty('--size', `${s.size.toFixed(2)}px`);
+      });
+      frame = moving || pointerX !== null ? requestAnimationFrame(step) : 0;
+      if (!frame) last = 0;
+    };
+    const kick = () => { if (!frame) frame = requestAnimationFrame(step); };
+
+    if (dockList) {
+      dockList.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'touch' || !fineHover.matches) return;
+        pointerX = event.clientX;
+        kick();
+      });
+      dockList.addEventListener('pointerleave', () => {
+        pointerX = null;
+        kick();
+      });
+    }
+
+    // CoinDock's icon is the live ETH price; refresh it every minute while the page is open.
+    const ethImg = dockRoot.querySelector<HTMLImageElement>('[data-eth-tile]');
+    if (ethImg) {
+      const refresh = async () => {
+        try {
+          const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+          const usd = (await res.json())?.ethereum?.usd;
+          if (typeof usd !== 'number') return;
+          ethImg.src = ethTile(formatEthPrice(usd));
+          ethImg.closest('button')?.setAttribute('title', `ETH $${formatEthPrice(usd)}`);
+          if (ethImg.closest('[aria-pressed="true"]')) icon.src = ethImg.src;
+        } catch {
+          // Offline or rate limited: keep the last tile.
+        }
+      };
+      refresh();
+      setInterval(() => { if (!document.hidden) refresh(); }, 60_000);
+    }
+
+    // Dial's icon shows the album playing.
+    const covers: string[] = JSON.parse(dockRoot.querySelector('[data-dial-covers]')?.textContent ?? '[]');
+    if (dialCover && covers.length && !reduced.matches) {
+      covers.forEach((src) => { const pre = new Image(); pre.src = src; });
+      let n = 0;
+      setInterval(() => {
+        n = (n + 1) % covers.length;
+        dialCover.src = covers[n];
+        if (dialCover.closest('[aria-pressed="true"]')) icon.src = covers[n];
+      }, 3500);
+    }
+  }
+</script>
+
 <style>
-  .stack-breakout {
+
+
+
+  .dock-figure {
     position: relative;
     left: 50%;
-    width: min(720px, calc(100vw - 4rem));
+    width: min(1040px, calc(100vw - 2rem));
     transform: translateX(-50%);
-  }
-
-  /* ── Daily Drivers Hero ── */
-
-  .stack-stage {
-    display: grid;
-    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
-    gap: 2.2rem;
-    align-items: start;
-    padding: 0 0 2.45rem;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .stack-stage-copy {
-    max-width: 15.5rem;
-    padding-top: 0.3rem;
-  }
-
-  .stack-stage-kicker {
-    display: inline-flex;
+    margin: 0 0 2.5rem;
+    padding-top: 3.25rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.45rem;
-    margin-bottom: 0.9rem;
+    gap: 0.9rem;
+  }
+
+  .dock-hint-touch { display: none; }
+
+  @media not ((hover: hover) and (pointer: fine)) {
+    .dock-hint-fine { display: none; }
+    .dock-hint-touch { display: inline; }
+  }
+
+  .dock-figure figcaption {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
-    color: var(--text-faint);
-    letter-spacing: 0.13em;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: var(--text-faint);
   }
 
-  .stack-stage-text {
-    max-width: 22ch;
-    color: var(--text-soft);
-    font-size: 1rem;
-    line-height: 1.72;
-  }
-
-  .stack-stage-meta {
+  .dock {
+    max-width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem 0.75rem;
-    margin-top: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    color: var(--text-faint);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.5rem;
+    min-height: calc(var(--base, 56px) + 18px);
+    padding: 0.5rem 0.75rem 0.4rem;
+    list-style: none;
+    border-radius: 24px;
+    background: rgba(24, 22, 24, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(18, 14, 10, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
-  .stack-kicker-icon {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
+  .dock-slot {
+    --size: var(--base, 56px);
   }
 
-  /* ── Driver Rows (hero list) ── */
-
-  .stack-drivers {
+  .dock-item {
+    position: relative;
+    width: var(--size);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid var(--line);
-    align-self: start;
-  }
-
-  .stack-driver-row {
-    display: grid;
-    grid-template-columns: 36px minmax(0, 1fr) minmax(0, 1fr) auto;
-    gap: 0.85rem;
     align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    transition:
-      background 180ms var(--ease-out);
+    gap: 5px;
   }
 
-  .stack-driver-icon {
-    width: 36px;
-    height: 36px;
-    border: 1px solid rgba(20, 19, 17, 0.1);
-    background: var(--bg-raised);
-    overflow: hidden;
-    flex-shrink: 0;
+  .dock-icon {
+    position: relative;
+    display: block;
+    width: var(--size);
+    height: var(--size);
   }
 
-  .stack-driver-icon img {
+  .dock-icon img {
+    display: block;
     width: 100%;
     height: 100%;
-    display: block;
+    object-fit: contain;
+  }
+
+  /* Dial shows the album playing, so its cover gets the macOS icon shape and inset. */
+  .dock-icon img[data-dial-cover] {
+    width: 92%;
+    height: 92%;
+    margin: 4%;
+    border-radius: 22.5%;
     object-fit: cover;
   }
 
-  .stack-driver-icon img.contain {
+  .dock-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #e5483b;
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+  }
+
+  .dock-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(243, 241, 235, 0.45);
+  }
+
+  .dock-item[aria-pressed='true'] .dock-dot {
+    background: #f3f1eb;
+  }
+
+  .dock-label {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: rgba(30, 28, 30, 0.92);
+    color: #f3f1eb;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 120ms var(--ease-out);
+    z-index: 2;
+  }
+
+  .dock-item:focus-visible {
+    outline: none;
+  }
+
+  .dock-item:focus-visible .dock-icon img {
+    outline: 2px solid #f3f1eb;
+    outline-offset: 2px;
+  }
+
+  .dock-item:focus-visible .dock-label {
+    opacity: 1;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .dock-slot:hover .dock-label { opacity: 1; }
+  }
+
+  /* With a mouse, the dock stays on one line so icons can grow and push their neighbors apart. */
+  @media (hover: hover) and (pointer: fine) {
+    .dock {
+      flex-wrap: nowrap;
+      height: calc(var(--base, 56px) + 18px);
+    }
+  }
+
+  .dock-detail {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 1.75rem;
+    padding: 1.75rem 0;
+    margin-bottom: 4rem;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .dock-detail::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+  }
+
+  .dock-detail-icon {
+    flex: 0 0 96px;
+    width: 96px;
+    height: 96px;
     object-fit: contain;
-    padding: 0.1rem;
   }
 
-  .stack-driver-name {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: var(--text);
+  .dock-detail-icon.is-cover {
+    width: 88px;
+    height: 88px;
+    flex-basis: 88px;
+    margin: 4px;
+    border-radius: 20px;
+    object-fit: cover;
   }
 
-  .stack-driver-role {
+  .dock-detail-body {
+    flex: 1 1 260px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .dock-detail-category {
     font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-faint);
+  }
+
+  .dock-detail-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .dock-detail-desc {
+    color: var(--text-soft);
+  }
+
+  .dock-detail-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .dock-detail-note {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-soft);
+    text-align: right;
+  }
+
+  .dock-detail-link {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  .stack-driver-arrow {
-    width: 13px;
-    height: 13px;
-    flex-shrink: 0;
-    color: var(--text-faint);
-    transition:
-      transform 180ms var(--ease-out),
-      color 180ms var(--ease-out);
+  .dock-detail-link[hidden] {
+    display: none;
   }
 
-  /* ── Section Shelves ── */
+  .stack-activity {
+    margin-bottom: 4rem;
+  }
+
+  .stack-activity-intro {
+    margin: -1rem 0 1.25rem;
+    color: var(--text-soft);
+  }
+
+  .stack-more-title {
+    margin-bottom: 1.5rem;
+    text-transform: none;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+  }
 
   .stack-shelf {
-    display: grid;
-    grid-template-columns: 158px minmax(0, 1fr);
-    gap: 1.6rem;
-    align-items: start;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
+    margin-bottom: 2.25rem;
   }
 
-  .stack-shelf:first-child {
-    border-top: none;
+  .stack-shelf-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line-strong);
   }
 
-  .stack-shelf + .stack-shelf {
-    margin-top: 2.5rem;
-  }
-
-  .stack-section-head {
-    max-width: 14rem;
-  }
-
-  .stack-section-kicker {
-    display: block;
-    margin-bottom: 0.55rem;
+  .stack-shelf-head h3 {
     font-family: var(--font-mono);
-    font-size: 0.56rem;
-    color: var(--text-faint);
-    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-
-  .stack-section-head h2 {
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .stack-section-head p {
-    margin-top: 0.7rem;
-    max-width: 18ch;
     color: var(--text-soft);
-    font-size: 0.95rem;
-    line-height: 1.72;
   }
 
-  /* ── Ledger Rows (section items) ── */
+  .stack-shelf-head p {
+    font-size: 0.875rem;
+    color: var(--text-faint);
+  }
 
-  .stack-ledger {
+  .rotation-list {
+    list-style: none;
+  }
+
+  .rotation-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .rotation-row img {
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  /* Web-only tools use their logo tiles: inset and round them to sit with the macOS icons. */
+  .rotation-row img:not([src*='/mac/']) {
+    width: 26px;
+    height: 26px;
+    margin: 2px;
+    border-radius: 6px;
+  }
+
+  .rotation-monogram {
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+    margin: 2px;
+    border-radius: 6px;
+    background: var(--text);
+    color: var(--bg);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .rotation-text {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-  }
-
-  .stack-ledger-row {
-    display: grid;
-    grid-template-columns: 40px minmax(0, 1fr) auto;
-    gap: 0.85rem;
-    align-items: center;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    transition:
-      background 180ms var(--ease-out);
-  }
-
-  .stack-ledger-row:first-child {
-    border-top: 1px solid var(--line);
-  }
-
-  .stack-ledger-icon {
-    color-scheme: light;
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(20, 19, 17, 0.1);
-    background: var(--bg-raised);
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .stack-ledger-icon img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .stack-ledger-icon img.contain {
-    object-fit: contain;
-    padding: 0.15rem;
-  }
-
-  .stack-ledger-body {
     min-width: 0;
   }
 
-  .stack-ledger-name {
-    display: block;
+  .rotation-note {
+    flex: 0 0 auto;
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: var(--text);
-  }
-
-  .stack-ledger-desc {
-    display: block;
-    margin-top: 0.2rem;
-    color: var(--text-soft);
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-
-  .stack-ledger-note {
-    color: var(--text-faint);
     font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-soft);
   }
 
-  .stack-ledger-arrow {
-    width: 13px;
-    height: 13px;
-    flex-shrink: 0;
+  .rotation-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .rotation-desc {
     color: var(--text-faint);
-    transition:
-      transform 180ms var(--ease-out),
-      color 180ms var(--ease-out);
+    font-size: 0.82rem;
   }
-
-  /* ── Hover States ── */
 
   @media (hover: hover) and (pointer: fine) {
-    .stack-driver-row:hover {
-      background: rgba(20, 19, 17, 0.02);
-    }
-
-    .stack-driver-row:hover .stack-driver-arrow {
-      transform: translate(2px, -2px);
-      color: var(--text);
-    }
-
-    .stack-ledger-row:hover {
-      background: rgba(20, 19, 17, 0.02);
-    }
-
-    .stack-ledger-row:hover .stack-ledger-arrow {
-      transform: translate(2px, -2px);
-      color: var(--text);
+    .rotation-row:hover .rotation-name {
+      color: var(--accent);
     }
   }
 
-  /* ── Responsive ── */
-
-  @media (max-width: 960px) {
-    .stack-breakout {
-      left: auto;
-      width: auto;
-      transform: none;
+  @media (max-width: 640px) {
+    .dock-detail-side {
+      align-items: flex-start;
     }
 
-    .stack-stage {
-      grid-template-columns: 1fr;
-      gap: 1.35rem;
-    }
-
-    .stack-stage-copy {
-      max-width: 34rem;
-    }
-
-    .stack-stage-text {
-      max-width: 36ch;
-    }
-
-    .stack-shelf {
-      grid-template-columns: 1fr;
-      gap: 0.85rem;
-    }
-
-    .stack-section-head {
-      max-width: 34rem;
-    }
-
-    .stack-section-head p {
-      max-width: 34ch;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .stack-driver-row {
-      grid-template-columns: 32px minmax(0, 1fr) auto;
-      gap: 0.65rem;
-    }
-
-    .stack-driver-icon {
-      width: 32px;
-      height: 32px;
-    }
-
-    .stack-driver-role {
-      display: none;
-    }
-
-    .stack-driver-name {
-      font-size: 1.05rem;
-    }
-
-    .stack-ledger-row {
-      grid-template-columns: 34px minmax(0, 1fr) auto;
-      gap: 0.65rem;
-    }
-
-    .stack-ledger-icon {
-      width: 34px;
-      height: 34px;
-    }
-
-    .stack-ledger-name {
-      font-size: 1rem;
-    }
-
-    .stack-ledger-desc {
-      font-size: 0.84rem;
+    .dock-detail-note {
+      text-align: left;
     }
   }
 </style>

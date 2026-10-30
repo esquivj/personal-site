@@ -4,6 +4,11 @@ const cityNames = {
   KUL: 'Kuala Lumpur', LYS: 'Lyon', NCE: 'Nice', FRA: 'Frankfurt', BOG: 'Bogotá',
 };
 
+/** Display name for the city an airport serves. */
+export function cityName(code, city) {
+  return cityNames[code] || city;
+}
+
 export function travelCities(airports) {
   const cities = new Map();
   // Use the busiest recorded airport to anchor a city with multiple airports.

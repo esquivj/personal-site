@@ -34,3 +34,7 @@ public/work/behind-the-scenes-hq.jpg
 
 # Browser verification artifacts
 test-results/
+
+# Private device exports for cross-machine activity reconciliation
+private-activity/
+*.activity.json
