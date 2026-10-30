@@ -38,7 +38,7 @@ const stackSections = [
         name: 'ChatGPT',
         desc: 'AI assistant',
         href: 'https://chatgpt.com',
-        icon: '/images/stack/openai.png',
+        icon: '/images/stack/mac/chatgpt.webp',
       },
       {
         name: 'Hermes Agent',
@@ -57,7 +57,7 @@ const stackSections = [
         name: 'Muse',
         desc: 'Personal AI agent',
         href: 'https://muse.ai',
-        icon: '/images/stack/muse.svg',
+        icon: '/images/stack/mac/muse.webp',
       },
       {
         name: 'Openclaw',
@@ -82,14 +82,14 @@ const stackSections = [
         name: 'Notion',
         desc: 'Docs and wikis',
         href: 'https://notion.so',
-        icon: '/images/stack/notion.png',
+        icon: '/images/stack/mac/notion.webp',
         note: 'Shared workspace',
       },
       {
         name: 'Wispr Flow',
         desc: 'Voice dictation',
         href: 'https://wisprflow.ai',
-        icon: '/images/stack/wispr-flow.png',
+        icon: '/images/stack/mac/wispr-flow.webp',
       },
       {
         name: 'Things 3',
@@ -136,7 +136,7 @@ const stackSections = [
         name: 'Eagle',
         desc: 'Image and video library',
         href: 'https://eagle.cool',
-        icon: '/images/stack/eagle.png',
+        icon: '/images/stack/mac/eagle.webp',
         note: 'Reference archive',
       },
       {
@@ -161,19 +161,19 @@ const stackSections = [
         name: 'Figma',
         desc: 'Design',
         href: 'https://figma.com',
-        icon: '/images/stack/figma.png',
+        icon: '/images/stack/mac/figma.webp',
       },
       {
         name: 'Paper',
         desc: 'Design canvas',
         href: 'https://paper.design',
-        icon: '/images/stack/paper.png',
+        icon: '/images/stack/mac/paper.webp',
       },
       {
         name: 'Framer',
         desc: 'Website builder',
         href: 'https://framer.com',
-        icon: '/images/stack/framer.png',
+        icon: '/images/stack/mac/framer.webp',
       },
       {
         name: 'Riverside',
@@ -222,7 +222,7 @@ const stackSections = [
         name: 'Notion Mail',
         desc: 'Email client',
         href: 'https://notion.so/product/mail',
-        icon: '/images/stack/notion.png',
+        icon: '/images/stack/mac/notion-mail.webp',
         note: 'Current email setup',
       },
     ],
@@ -235,7 +235,7 @@ const stackSections = [
         name: 'Spotify',
         desc: 'Music streaming',
         href: 'https://spotify.com',
-        icon: '/images/stack/spotify.png',
+        icon: '/images/stack/mac/spotify.webp',
         note: 'Always on',
       },
     ],
@@ -245,18 +245,18 @@ const stackSections = [
 const totalTools = stackSections.reduce((count, section) => count + section.items.length, 0);
 
 // Mirrors the Dock on my Mac, left to right.
-type DockItem = { name: string; icon: string; category: string; desc: string; note?: string; href?: string; badge?: string; raw?: boolean; dial?: boolean };
+type DockItem = { name: string; icon: string; category: string; desc: string; note?: string; href?: string; badge?: string; dial?: boolean };
 const dock: DockItem[] = [
-  { name: 'Dia', icon: '/images/stack/dia.png', category: 'Research & Browsing', desc: 'Web browser', note: 'Default browser', href: 'https://www.diabrowser.com' },
-  { name: 'Obsidian', icon: '/images/stack/dock/obsidian.png', category: 'Productivity', desc: 'Knowledge management', note: 'Second brain', href: 'https://obsidian.md' },
-  { name: 'Things 3', icon: '/images/stack/things.png', category: 'Productivity', desc: 'Task management', note: 'Daily todos', href: 'https://culturedcode.com/things/' },
-  { name: 'Grok Bot', icon: '/images/stack/grok-bot-app.png', category: 'AI & Agents', desc: 'AI agents', note: 'Where I built the Compound bots', href: 'https://x.ai/bot' },
-  { name: 'Hermes Agent', icon: '/images/stack/dock/hermes-agent.png', category: 'AI & Agents', desc: 'Agent harness', note: 'Agent orchestration layer', href: 'https://github.com/NousResearch/hermes-agent' },
-  { name: 'Linear', icon: '/images/stack/dock/linear.png', category: 'Productivity', desc: 'Issue tracking', note: "Tracks what I'm building", href: 'https://linear.app' },
-  { name: 'Cursor', icon: '/images/stack/dock/cursor.png', category: 'Building', desc: 'Code editor', note: 'For hands-on edits', href: 'https://cursor.com' },
-  { name: 'Claude', icon: '/images/stack/dock/claude.png', category: 'AI & Agents', desc: 'AI assistant and Claude Code', note: 'Primary thinking partner', href: 'https://claude.ai' },
-  { name: 'Beeper', icon: '/images/stack/dock/beeper.png', category: 'Communication', desc: 'All-in-one messaging', note: 'Inbox for everything', href: 'https://www.beeper.com', badge: '19', raw: true },
-  { name: 'Coindock', icon: '/images/stack/dock/coindock.png', category: 'Crypto', desc: 'Prices in the dock', note: 'Markets at a glance' },
+  { name: 'Dia', icon: '/images/stack/mac/dia.webp', category: 'Research & Browsing', desc: 'Web browser', note: 'Default browser', href: 'https://www.diabrowser.com' },
+  { name: 'Obsidian', icon: '/images/stack/mac/obsidian.webp', category: 'Productivity', desc: 'Knowledge management', note: 'Second brain', href: 'https://obsidian.md' },
+  { name: 'Things 3', icon: '/images/stack/mac/things3.webp', category: 'Productivity', desc: 'Task management', note: 'Daily todos', href: 'https://culturedcode.com/things/' },
+  { name: 'Grok Bot', icon: '/images/stack/mac/grok-bot.webp', category: 'AI & Agents', desc: 'AI agents', note: 'Where I built the Compound bots', href: 'https://x.ai/bot' },
+  { name: 'Hermes Agent', icon: '/images/stack/mac/hermes.webp', category: 'AI & Agents', desc: 'Agent harness', note: 'Agent orchestration layer', href: 'https://github.com/NousResearch/hermes-agent' },
+  { name: 'Linear', icon: '/images/stack/mac/linear.webp', category: 'Productivity', desc: 'Issue tracking', note: "Tracks what I'm building", href: 'https://linear.app' },
+  { name: 'Cursor', icon: '/images/stack/mac/cursor.webp', category: 'Building', desc: 'Code editor', note: 'For hands-on edits', href: 'https://cursor.com' },
+  { name: 'Claude', icon: '/images/stack/mac/claude.webp', category: 'AI & Agents', desc: 'AI assistant and Claude Code', note: 'Primary thinking partner', href: 'https://claude.ai' },
+  { name: 'Beeper', icon: '/images/stack/mac/beeper-desktop.webp', category: 'Communication', desc: 'All-in-one messaging', note: 'Inbox for everything', href: 'https://www.beeper.com', badge: '19' },
+  { name: 'Coindock', icon: '/images/stack/mac/coindock.webp', category: 'Crypto', desc: 'Prices in the dock', note: 'Markets at a glance' },
   { name: 'Dial', icon: '/images/listening/drake-iceman.jpg', category: 'Built by me', desc: 'Now playing, remembered.', note: 'Icon shows the album playing', href: '/projects', dial: true },
 ];
 const defaultPick = dock.findIndex((item) => item.name === 'Claude');
@@ -307,7 +307,6 @@ const shelves = stackSections
             data-note={item.note ?? ''}
             data-href={item.href ?? ''}
             data-icon={item.icon}
-            data-raw={item.raw ? 'true' : 'false'}
           >
             <span class="dock-label" aria-hidden="true">{item.name}</span>
             <span class="dock-icon">
@@ -317,7 +316,6 @@ const shelves = stackSections
                 width="56"
                 height="56"
                 decoding="async"
-                class:list={[{ 'dock-img--raw': item.raw }]}
                 data-dial-cover={item.dial ? '' : undefined}
               />
               {item.badge && <span class="dock-badge" aria-hidden="true">{item.badge}</span>}
@@ -332,7 +330,7 @@ const shelves = stackSections
   </figure>
 
   <section class="dock-detail" aria-live="polite" data-dock-detail>
-    <img src={picked.icon} alt="" width="96" height="96" class:list={['dock-detail-icon', { 'dock-img--raw': picked.raw }]} data-detail-icon />
+    <img src={picked.icon} alt="" width="96" height="96" class:list={['dock-detail-icon', { 'is-cover': picked.dial }]} data-detail-icon />
     <div class="dock-detail-body">
       <span class="dock-detail-category" data-detail-category>{picked.category}</span>
       <span class="dock-detail-name" data-detail-name>{picked.name}</span>
@@ -392,7 +390,7 @@ const shelves = stackSections
       const d = button.dataset;
       const img = button.querySelector('img');
       icon.src = img?.src ?? d.icon ?? '';
-      icon.classList.toggle('dock-img--raw', d.raw === 'true');
+      icon.classList.toggle('is-cover', d.name === 'Dial');
       category.textContent = d.category ?? '';
       name.textContent = d.name ?? '';
       desc.textContent = d.desc ?? '';
@@ -583,13 +581,16 @@ const shelves = stackSections
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 22.5%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
-  .dock-img--raw {
-    border-radius: 0 !important;
-    box-shadow: none !important;
+  /* Dial shows the album playing, so its cover gets the macOS icon shape and inset. */
+  .dock-icon img[data-dial-cover] {
+    width: 92%;
+    height: 92%;
+    margin: 4%;
+    border-radius: 22.5%;
+    object-fit: cover;
   }
 
   .dock-badge {
@@ -686,12 +687,19 @@ const shelves = stackSections
   }
 
   .dock-detail-icon {
-    flex: 0 0 88px;
+    flex: 0 0 96px;
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+  }
+
+  .dock-detail-icon.is-cover {
     width: 88px;
     height: 88px;
+    flex-basis: 88px;
+    margin: 4px;
     border-radius: 20px;
     object-fit: cover;
-    box-shadow: 0 10px 24px rgba(18, 14, 10, 0.16);
   }
 
   .dock-detail-body {
@@ -796,18 +804,26 @@ const shelves = stackSections
   }
 
   .rotation-row img {
-    flex: 0 0 28px;
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
   }
 
+  /* Web-only tools use their logo tiles: inset and round them to sit with the macOS icons. */
+  .rotation-row img:not([src*='/mac/']) {
+    width: 26px;
+    height: 26px;
+    margin: 2px;
+    border-radius: 6px;
+  }
+
   .rotation-monogram {
-    flex: 0 0 28px;
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+    margin: 2px;
+    border-radius: 6px;
     background: var(--text);
     color: var(--bg);
     display: grid;
