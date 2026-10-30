@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import { ethTile } from '../lib/eth-tile';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -205,6 +206,12 @@ const stackSections = [
         href: 'https://vercel.com',
         icon: '/images/stack/vercel.png',
       },
+      {
+        name: 'Supabase',
+        desc: 'Database and auth',
+        href: 'https://supabase.com',
+        icon: '/images/stack/supabase.png',
+      },
     ],
   },
   {
@@ -245,7 +252,7 @@ const stackSections = [
 const totalTools = stackSections.reduce((count, section) => count + section.items.length, 0);
 
 // Mirrors the Dock on my Mac, left to right.
-type DockItem = { name: string; icon: string; category: string; desc: string; note?: string; href?: string; badge?: string; dial?: boolean };
+type DockItem = { name: string; icon: string; category: string; desc: string; note?: string; href?: string; badge?: string; dial?: boolean; live?: boolean };
 const dock: DockItem[] = [
   { name: 'Dia', icon: '/images/stack/mac/dia.webp', category: 'Research & Browsing', desc: 'Web browser', note: 'Default browser', href: 'https://www.diabrowser.com' },
   { name: 'Obsidian', icon: '/images/stack/mac/obsidian.webp', category: 'Productivity', desc: 'Knowledge management', note: 'Second brain', href: 'https://obsidian.md' },
@@ -256,7 +263,7 @@ const dock: DockItem[] = [
   { name: 'Cursor', icon: '/images/stack/mac/cursor.webp', category: 'Building', desc: 'Code editor', note: 'For hands-on edits', href: 'https://cursor.com' },
   { name: 'Claude', icon: '/images/stack/mac/claude.webp', category: 'AI & Agents', desc: 'AI assistant and Claude Code', note: 'Primary thinking partner', href: 'https://claude.ai' },
   { name: 'Beeper', icon: '/images/stack/mac/beeper-desktop.webp', category: 'Communication', desc: 'All-in-one messaging', note: 'Inbox for everything', href: 'https://www.beeper.com', badge: '19' },
-  { name: 'Coindock', icon: '/images/stack/mac/coindock.webp', category: 'Crypto', desc: 'Prices in the dock', note: 'Markets at a glance' },
+  { name: 'Coindock', icon: ethTile(), category: 'Crypto', desc: 'Live ETH price in the dock', note: 'Markets at a glance', live: true },
   { name: 'Dial', icon: '/images/listening/drake-iceman.jpg', category: 'Built by me', desc: 'Now playing, remembered.', note: 'Icon shows the album playing', href: '/projects', dial: true },
 ];
 const defaultPick = dock.findIndex((item) => item.name === 'Claude');
@@ -317,6 +324,7 @@ const shelves = stackSections
                 height="56"
                 decoding="async"
                 data-dial-cover={item.dial ? '' : undefined}
+                data-eth-tile={item.live ? '' : undefined}
               />
               {item.badge && <span class="dock-badge" aria-hidden="true">{item.badge}</span>}
             </span>
@@ -372,6 +380,8 @@ const shelves = stackSections
 </Layout>
 
 <script>
+  import { ethTile, formatEthPrice } from '../lib/eth-tile';
+
   const dockRoot = document.querySelector<HTMLElement>('[data-dock]');
   const detail = document.querySelector<HTMLElement>('[data-dock-detail]');
   if (dockRoot && detail) {
@@ -474,6 +484,25 @@ const shelves = stackSections
         pointerX = null;
         kick();
       });
+    }
+
+    // CoinDock's icon is the live ETH price; refresh it every minute while the page is open.
+    const ethImg = dockRoot.querySelector<HTMLImageElement>('[data-eth-tile]');
+    if (ethImg) {
+      const refresh = async () => {
+        try {
+          const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+          const usd = (await res.json())?.ethereum?.usd;
+          if (typeof usd !== 'number') return;
+          ethImg.src = ethTile(formatEthPrice(usd));
+          ethImg.closest('button')?.setAttribute('title', `ETH $${formatEthPrice(usd)}`);
+          if (ethImg.closest('[aria-pressed="true"]')) icon.src = ethImg.src;
+        } catch {
+          // Offline or rate limited: keep the last tile.
+        }
+      };
+      refresh();
+      setInterval(() => { if (!document.hidden) refresh(); }, 60_000);
     }
 
     // Dial's icon shows the album playing.
