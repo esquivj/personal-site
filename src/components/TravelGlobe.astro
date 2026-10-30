@@ -124,13 +124,17 @@ const cityList = cities.map((c) => c.name).join(', ');
   .globe-canvas:focus-visible {
     outline: none;
   }
-  .globe-stage:has(.globe-canvas:focus-visible)::after {
+  /* Focus ring for keyboard users only, sized to the globe at the current zoom. */
+  [data-globe-keyboard] .globe-stage::after {
     content: '';
     position: absolute;
-    inset: 9%;
+    left: 50%;
+    top: 50%;
+    width: calc(80% * var(--globe-zoom, 1) + 12px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--globe-accent);
     border-radius: 50%;
-    outline: 1px solid var(--globe-accent);
-    outline-offset: 4px;
     pointer-events: none;
   }
   [data-globe-state='ready'] .globe-canvas {
