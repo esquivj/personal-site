@@ -304,6 +304,7 @@ export function initTravelGlobe(root: HTMLElement) {
   const setZoom = (value: number) => {
     zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, value));
     root.dataset.globeZoom = zoom.toFixed(2);
+    root.style.setProperty('--globe-zoom', zoom.toFixed(3));
     zoomIn?.toggleAttribute('disabled', zoom >= MAX_ZOOM);
     zoomOut?.toggleAttribute('disabled', zoom <= MIN_ZOOM);
   };
@@ -533,7 +534,20 @@ export function initTravelGlobe(root: HTMLElement) {
     return Math.hypot(a.x - b.x, a.y - b.y);
   };
   let downAt: { x: number; y: number } | null = null;
+  // Show the focus ring only when the globe was reached with Tab, not after a click.
+  let viaKeyboard = false;
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab') viaKeyboard = true;
+  }, true);
+  window.addEventListener('pointerdown', () => {
+    viaKeyboard = false;
+  }, true);
+  canvas.addEventListener('focus', () => {
+    if (viaKeyboard) root.dataset.globeKeyboard = '';
+  });
+  canvas.addEventListener('blur', () => delete root.dataset.globeKeyboard);
   canvas.addEventListener('pointerdown', (event) => {
+    delete root.dataset.globeKeyboard;
     downAt = { x: event.clientX, y: event.clientY };
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     canvas.setPointerCapture(event.pointerId);

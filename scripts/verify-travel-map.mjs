@@ -106,6 +106,14 @@ try {
   await page.waitForTimeout(300);
   assert.equal(await zoomLevel(), 0.85);
   assert.ok(await page.evaluate(() => window.scrollY) > scrollTop, 'page scrolls at min zoom');
+  // Clicking the globe and pressing Esc shows no focus ring; tabbing to it does.
+  await canvas.click({ position: { x: 20, y: (await canvas.boundingBox()).height / 2 } });
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('[data-travel-globe]').getAttribute('data-globe-keyboard'), null);
+  await page.locator('[data-globe-zoom-in]').focus();
+  await page.keyboard.press('Shift+Tab');
+  assert.ok(await page.evaluate(() => document.activeElement?.hasAttribute('data-globe-canvas')));
+  assert.equal(await page.locator('[data-travel-globe]').getAttribute('data-globe-keyboard'), '');
   assert.deepEqual(errors, []);
 
   // Hovering a city dot shows its name. With motion reduced the globe holds still on Los Angeles.
