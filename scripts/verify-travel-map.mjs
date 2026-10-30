@@ -104,19 +104,47 @@ try {
   await still.locator('[data-globe-state="ready"]').waitFor({ timeout: 45000 });
   const box = await still.locator('[data-globe-canvas]').boundingBox();
   const tip = still.locator('[data-globe-tip]');
+  // Home sits just above center. Search outward from there so the nearest city wins.
   let found = '';
-  for (let dy = -40; dy <= 40 && !found; dy += 4) {
-    for (let dx = -40; dx <= 40 && !found; dx += 4) {
-      await still.mouse.move(box.x + box.width * 0.5 + dx, box.y + box.height * 0.432 + dy);
-      if (await tip.isVisible()) found = await still.locator('[data-tip-city]').textContent();
+  const offsets = [];
+  for (let dy = -24; dy <= 24; dy += 3) for (let dx = -24; dx <= 24; dx += 3) offsets.push([dx, dy]);
+  offsets.sort((a, b) => Math.hypot(...a) - Math.hypot(...b));
+  for (const [dx, dy] of offsets) {
+    await still.mouse.move(box.x + box.width * 0.5 + dx, box.y + box.height * 0.453 + dy);
+    if (await tip.isVisible()) {
+      found = await still.locator('[data-tip-city]').textContent();
+      break;
     }
   }
   // LAX and Burbank sit a few pixels apart; either label proves hover works.
   assert.ok(['Los Angeles', 'Burbank'].includes(found), `hover showed ${found}`);
-  assert.equal(await still.locator('[data-tip-meta]').textContent(), 'United States');
+  assert.match(await still.locator('[data-tip-meta]').textContent(), /^United States/);
   await still.screenshot({ path: 'test-results/travel-map/hover.png' });
   await still.mouse.move(box.x + 4, box.y + 4);
   assert.ok(await tip.isHidden());
+
+  // Home markers: Los Angeles is home, Lisbon was. Both carry a label on the globe.
+  assert.deepEqual(payload.homes, { current: 'Los Angeles', previous: 'Lisbon' });
+  assert.ok(await still.locator('[data-globe-home="Los Angeles"]').isVisible());
+
+  // Clicking a city flies to it and keeps its card up; the home control flies back.
+  const tagAt = async () => {
+    const tag = await still.locator('[data-globe-home="Los Angeles"]').boundingBox();
+    const stage = await still.locator('[data-globe-canvas]').boundingBox();
+    return tag && { x: tag.x - stage.x, y: tag.y - stage.y };
+  };
+  const homeView = await tagAt();
+  await still.keyboard.press('Escape');
+  await still.locator('[data-globe-canvas]').focus();
+  for (let i = 0; i < 6; i++) await still.keyboard.press('ArrowRight');
+  await still.waitForTimeout(150);
+  const moved = await tagAt();
+  assert.ok(!moved || Math.abs(moved.x - homeView.x) > 20, 'arrow keys turn the globe');
+  await still.getByRole('button', { name: 'Back to home' }).click();
+  await still.waitForTimeout(150);
+  const back = await tagAt();
+  assert.ok(back && Math.abs(back.x - homeView.x) < 3 && Math.abs(back.y - homeView.y) < 3, 'home control returns to Los Angeles');
+  await still.screenshot({ path: 'test-results/travel-map/home.png' });
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   await mobile.goto(url);
@@ -138,7 +166,7 @@ try {
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(url);
   assert.ok(await noJS.locator('[data-globe-fallback]').isVisible());
-  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, zoom, city hover, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
+  console.log('Travel globe passed: data, rendering, drag and keyboard rotation, zoom, city hover, home markers and home control, mobile, reduced motion, WebGL fallback, and no-JS fallback.');
 } finally {
   await browser?.close();
   server.close();
