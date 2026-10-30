@@ -52,7 +52,7 @@ const cityList = cities.map((c) => c.name).join(', ');
       data-globe-canvas
       tabindex="0"
       role="img"
-      aria-label="Interactive globe of the cities I've visited. Drag or use the arrow keys to rotate. Pinch, or press plus and minus, to zoom. Click a city to see its routes. Press H to return home."
+      aria-label="Interactive globe of the cities I've visited. Drag or use the arrow keys to rotate. Scroll, pinch, or press plus and minus to zoom. Click a city to see its routes. Press H to return home."
     ></canvas>
     <span class="globe-home-tag" data-globe-home={homes.current} hidden aria-hidden="true">Home</span>
     <span class="globe-home-tag is-previous" data-globe-home={homes.previous} hidden aria-hidden="true">Once home</span>
@@ -105,6 +105,12 @@ const cityList = cities.map((c) => c.name).join(', ');
     height: 100%;
   }
   .globe-canvas {
+    /* Wider than the globe so zooming in can fill the stage; the page clips it. */
+    top: -12%;
+    left: 50%;
+    width: 100vw;
+    height: 124%;
+    margin-left: -50vw;
     display: block;
     cursor: grab;
     touch-action: none;
@@ -116,9 +122,16 @@ const cityList = cities.map((c) => c.name).join(', ');
     cursor: grabbing;
   }
   .globe-canvas:focus-visible {
+    outline: none;
+  }
+  .globe-stage:has(.globe-canvas:focus-visible)::after {
+    content: '';
+    position: absolute;
+    inset: 9%;
+    border-radius: 50%;
     outline: 1px solid var(--globe-accent);
     outline-offset: 4px;
-    border-radius: 50%;
+    pointer-events: none;
   }
   [data-globe-state='ready'] .globe-canvas {
     opacity: 1;

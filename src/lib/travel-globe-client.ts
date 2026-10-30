@@ -11,6 +11,7 @@ attribute float aI;
 uniform mat3 uR;
 uniform float uS;
 uniform float uZ;
+uniform vec2 uFit;
 uniform float uHover;
 uniform float uFocus;
 varying float vF;
@@ -24,7 +25,7 @@ void main() {
   vH = step(abs(aI - uHover), 0.5);
   // While a city is focused, other cities step back.
   vDim = (uFocus > -0.5 && vK > 0.5 && abs(aI - uFocus) > 0.5) ? 0.45 : 1.0;
-  gl_Position = vec4(p.xy * 0.8 * uZ, 0.0, 1.0);
+  gl_Position = vec4(p.xy * 0.8 * uZ * uFit, 0.0, 1.0);
   float depth = mix(0.55, 1.0, vF);
   float size = 2.4 * depth;
   if (vK > 2.5) size = 15.0;
@@ -73,9 +74,10 @@ void main() {
 
 const SPHERE_VS = `
 attribute vec2 aQ;
+uniform vec2 uFit;
 varying vec2 vQ;
 void main() {
-  vQ = aQ;
+  vQ = aQ / uFit;
   gl_Position = vec4(aQ, 0.0, 1.0);
 }`;
 
@@ -107,6 +109,7 @@ attribute vec3 aT;
 attribute vec3 aE;
 uniform mat3 uR;
 uniform float uZ;
+uniform vec2 uFit;
 uniform float uFocus;
 varying float vF;
 varying vec3 vT;
@@ -117,7 +120,7 @@ void main() {
   vT = vec3(aT.xy, aE.z);
   float touches = step(abs(aE.x - uFocus), 0.5) + step(abs(aE.y - uFocus), 0.5);
   vOn = uFocus < -0.5 ? 0.5 : (touches > 0.5 ? 1.0 : 0.0);
-  gl_Position = vec4(p.xy * 0.8 * uZ, 0.0, 1.0);
+  gl_Position = vec4(p.xy * 0.8 * uZ * uFit, 0.0, 1.0);
 }`;
 
 const LINE_FS = `
@@ -178,6 +181,7 @@ export function initTravelGlobe(root: HTMLElement) {
   const payload = root.querySelector('[data-globe-data]')?.textContent;
   if (!canvas || !payload) return;
 
+  const stage = canvas.parentElement!;
   const gl = canvas.getContext('webgl', { antialias: true, premultipliedAlpha: false });
   if (!gl) {
     root.dataset.globeState = 'fallback';
@@ -327,6 +331,9 @@ export function initTravelGlobe(root: HTMLElement) {
     pPulse: gl.getUniformLocation(program, 'uPulse'),
     sQ: gl.getAttribLocation(sphereProgram, 'aQ'),
     sRad: gl.getUniformLocation(sphereProgram, 'uRad'),
+    sFit: gl.getUniformLocation(sphereProgram, 'uFit'),
+    pFit: gl.getUniformLocation(program, 'uFit'),
+    lFit: gl.getUniformLocation(lineProgram, 'uFit'),
     sInk: gl.getUniformLocation(sphereProgram, 'uInk'),
     sAcc: gl.getUniformLocation(sphereProgram, 'uAcc'),
     lP: gl.getAttribLocation(lineProgram, 'aP'),
@@ -346,7 +353,8 @@ export function initTravelGlobe(root: HTMLElement) {
     const y = R[1] * v[0] + R[4] * v[1] + R[7] * v[2];
     const z = R[2] * v[0] + R[5] * v[1] + R[8] * v[2];
     const k = 0.8 * zoom * 0.5;
-    return { x: (x * k + 0.5) * canvas.clientWidth, y: (0.5 - y * k) * canvas.clientHeight, front: z > 0.08 };
+    const S = stage.clientWidth;
+    return { x: (x * k + 0.5) * S, y: (0.5 - y * k) * stage.clientHeight, front: z > 0.08 };
   };
 
   const placeOverlays = () => {
@@ -369,6 +377,8 @@ export function initTravelGlobe(root: HTMLElement) {
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     const W = Math.round(canvas.clientWidth * dpr);
     const H = Math.round(canvas.clientHeight * dpr);
+    // The canvas can be wider than the globe's square so a zoomed globe isn't cropped.
+    const fit = new Float32Array([stage.clientWidth / Math.max(1, canvas.clientWidth), stage.clientHeight / Math.max(1, canvas.clientHeight)]);
     if (canvas.width !== W || canvas.height !== H) {
       canvas.width = W;
       canvas.height = H;
@@ -408,6 +418,7 @@ export function initTravelGlobe(root: HTMLElement) {
     gl.enableVertexAttribArray(loc.sQ);
     gl.vertexAttribPointer(loc.sQ, 2, gl.FLOAT, false, 8, 0);
     gl.uniform1f(loc.sRad, 0.8 * zoom);
+    gl.uniform2fv(loc.sFit, fit);
     gl.uniform3fv(loc.sInk, ink);
     gl.uniform3fv(loc.sAcc, accent);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -424,6 +435,7 @@ export function initTravelGlobe(root: HTMLElement) {
     gl.vertexAttribPointer(loc.lE, 3, gl.FLOAT, false, 12, 0);
     gl.uniformMatrix3fv(loc.lR, false, R);
     gl.uniform1f(loc.lZ, zoom);
+    gl.uniform2fv(loc.lFit, fit);
     gl.uniform1f(loc.lFocus, focusId);
     gl.uniform3fv(loc.lAcc, accent);
     gl.uniform1f(loc.lTime, time);
@@ -441,8 +453,9 @@ export function initTravelGlobe(root: HTMLElement) {
     gl.enableVertexAttribArray(loc.i);
     gl.vertexAttribPointer(loc.i, 1, gl.FLOAT, false, 4, 0);
     gl.uniformMatrix3fv(loc.pR, false, R);
-    gl.uniform1f(loc.pS, dpr * Math.max(0.7, canvas.clientWidth / 560) * Math.sqrt(zoom));
+    gl.uniform1f(loc.pS, dpr * Math.max(0.7, stage.clientWidth / 560) * Math.sqrt(zoom));
     gl.uniform1f(loc.pZ, zoom);
+    gl.uniform2fv(loc.pFit, fit);
     gl.uniform3fv(loc.pInk, ink);
     gl.uniform3fv(loc.pAcc, accent);
     gl.uniform1f(loc.pHover, hover ? hover.index : -10);
@@ -481,7 +494,7 @@ export function initTravelGlobe(root: HTMLElement) {
   };
 
   const pick = (clientX: number, clientY: number) => {
-    const box = canvas.getBoundingClientRect();
+    const box = stage.getBoundingClientRect();
     const mx = clientX - box.left;
     const my = clientY - box.top;
     let best: (typeof cityVectors)[number] | null = null;
@@ -584,12 +597,15 @@ export function initTravelGlobe(root: HTMLElement) {
   canvas.addEventListener('pointerleave', (event) => {
     if (event.pointerType === 'mouse' && !pointers.size && !focus) setHover(null);
   });
-  canvas.addEventListener(
+  // The wheel zooms anywhere over the globe's band. At either zoom limit it lets the page scroll on.
+  const wheelArea = root.closest<HTMLElement>('[data-globe-wheel]') ?? canvas;
+  wheelArea.addEventListener(
     'wheel',
     (event) => {
-      if (!event.ctrlKey && !event.metaKey) return;
+      const dy = event.deltaMode === 1 ? event.deltaY * 16 : event.deltaY;
+      if ((dy > 0 && zoom <= MIN_ZOOM) || (dy < 0 && zoom >= MAX_ZOOM)) return;
       event.preventDefault();
-      setZoom(zoom * Math.exp(-event.deltaY * 0.01));
+      setZoom(zoom * Math.exp(-dy * (event.ctrlKey ? 0.01 : 0.0025)));
       kick();
     },
     { passive: false },

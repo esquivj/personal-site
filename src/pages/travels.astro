@@ -29,7 +29,7 @@ const pageSchema = {
   <PageHeader title="Travels" subtitle={"Where I've been, so far."} />
   <p class="travels-summary">{summary}</p>
 
-  <section class="travels-stage" aria-label="Globe of cities visited">
+  <section class="travels-stage" data-globe-wheel aria-label="Globe of cities visited">
     <div class="travels-hero">
       <TravelGlobe />
     </div>
@@ -37,7 +37,7 @@ const pageSchema = {
       <span><i class="key key-home"></i>Home</span>
       <span><i class="key key-previous"></i>Once home</span>
       <span><i class="key key-city"></i>Visited</span>
-      <span class="travels-hint">Drag to spin · Click a city</span>
+      <span class="travels-hint">Drag to spin · Scroll to zoom · Click a city</span>
     </div>
   </section>
 </Layout>
@@ -67,6 +67,7 @@ const pageSchema = {
       radial-gradient(60% 55% at 50% 45%, rgba(224, 105, 74, 0.07), transparent 70%),
       #12110f;
     color: #f3f1eb;
+    overflow: hidden;
   }
 
   .travels-hero {
