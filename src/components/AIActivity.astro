@@ -1,0 +1,621 @@
+---
+import snapshot from '../data/ai-activity.json';
+import { aiActivitySchema } from '../data/schemas.mjs';
+import { activityView, compactTokens, formatDay, snapshotDay } from '../lib/ai-activity.mjs';
+
+const data = aiActivitySchema.parse(snapshot);
+const updated = snapshotDay(data);
+const years = [...new Set(data.days.map((day) => Number(day.date.slice(0, 4))))].sort(
+  (a, b) => b - a
+);
+const year = years[0] ?? Number((updated ?? '2026').slice(0, 4));
+const view = activityView(data, year);
+const hasData = view.activeDays > 0;
+const focusDate = view.cells
+  .filter((cell) => cell.inYear && !cell.future && cell.tokens > 0)
+  .at(-1)?.date;
+---
+
+<section class="ai-activity" id="ai-activity" aria-label="AI token activity" data-activity>
+  {
+    hasData ? (
+      <>
+        <div class="activity-controls">
+          <div class="activity-sources" role="group" aria-label="Activity source">
+            <button type="button" data-source="all" aria-pressed="true">
+              All
+            </button>
+            <button type="button" data-source="claude" aria-pressed="false">
+              <img src="/images/stack/claude-code.png" alt="" width="28" height="28" />
+              Claude
+            </button>
+            <button type="button" data-source="codex" aria-pressed="false">
+              <img src="/images/stack/openai.png" alt="" width="28" height="28" />
+              Codex
+            </button>
+          </div>
+          <label class="activity-year">
+            <select data-year aria-label="Activity year">
+              {years.map((value) => (
+                <option value={value} selected={value === year}>
+                  {value}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div class="activity-summary" aria-live="polite" aria-atomic="true">
+          <div class="activity-total">
+            <strong data-total title={`${view.total.toLocaleString('en-US')} tokens`}>
+              {compactTokens(view.total)}
+            </strong>
+            <span>
+              recorded tokens <span data-period>in {year}</span>
+            </span>
+          </div>
+          <dl class="activity-stats">
+            <div>
+              <>
+                <dt>Active days</dt>
+                <dd data-days>{view.activeDays}</dd>
+              </>
+            </div>
+            <div>
+              <>
+                <dt>Busiest day</dt>
+                <dd data-peak>
+                  {view.peak[0] ? formatDay(view.peak[0]).replace(`, ${year}`, '') : '—'}
+                </dd>
+              </>
+            </div>
+          </dl>
+        </div>
+        <div
+          class="activity-scroll"
+          tabindex="0"
+          role="region"
+          aria-label="Daily token heatmap. Scroll horizontally on small screens."
+        >
+          <div class="activity-calendar" style={`--weeks: ${view.columns}`}>
+            <div class="activity-months" aria-hidden="true" data-months>
+              {view.months.map((month) => (
+                <span style={`grid-column: ${month.column}`}>{month.label}</span>
+              ))}
+            </div>
+            <div class="activity-chart">
+              <div class="activity-weekdays" aria-hidden="true">
+                <>
+                  <span>Sun</span>
+                  <span>Mon</span>
+                  <span>Tue</span>
+                  <span>Wed</span>
+                  <span>Thu</span>
+                  <span>Fri</span>
+                  <span>Sat</span>
+                </>
+              </div>
+              <div
+                class="activity-grid"
+                role="group"
+                aria-label="Daily recorded tokens. Use arrow keys to explore days."
+                data-grid
+              >
+                {view.cells.map((cell) =>
+                  cell.inYear && !cell.future ? (
+                    <button
+                      type="button"
+                      class="activity-cell"
+                      data-date={cell.date}
+                      data-level={cell.level}
+                      aria-label={cell.label}
+                      title={cell.label}
+                      tabindex={cell.date === focusDate ? 0 : -1}
+                    />
+                  ) : (
+                    <span
+                      class:list={[
+                        'activity-cell',
+                        !cell.inYear && 'outside-year',
+                        cell.future && 'future-day',
+                      ]}
+                      aria-hidden="true"
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="activity-graph-footer">
+          <p class="activity-selection" data-selection aria-live="polite" />
+          <div
+            class="activity-legend"
+            aria-label="Darker squares mean more tokens; scale is relative to the selected source and year."
+          >
+            <span>Less</span>
+            {[0, 1, 2, 3, 4].map((level) => (
+              <i data-level={level} aria-hidden="true" />
+            ))}
+            <span>More</span>
+          </div>
+        </div>
+        <noscript>
+          <p class="activity-note">
+            Showing all activity for {year}. Enable JavaScript to change the source or year.
+          </p>
+        </noscript>
+      </>
+    ) : (
+      <div class="activity-empty">
+        <>
+          <p>No activity published yet.</p>
+        </>
+      </div>
+    )
+  }
+
+  <div class="activity-bottom">
+    <span>{updated ? `Updated ${formatDay(updated)}` : 'Awaiting first snapshot'}</span>
+    <details>
+      <summary>About</summary>
+      <div class="activity-method">
+        <p>
+          My Claude and Codex usage across both Macs. Includes cached tokens; some daily totals are
+          approximate. Inspired by <a
+            href="https://www.vitorialima.com/combined-code-tokens"
+            target="_blank"
+            rel="noopener noreferrer">Vitoria Lima’s activity widgets ↗</a
+          >.
+        </p>
+      </div>
+    </details>
+  </div>
+  <script
+    type="application/json"
+    data-activity-snapshot
+    set:html={JSON.stringify(data).replace(/</g, '\\u003c')}
+  />
+</section>
+
+<script>
+  import { activityView, compactTokens, formatDay } from '../lib/ai-activity.mjs';
+  import type { z } from 'astro/zod';
+  import type { aiActivitySchema } from '../data/schemas.mjs';
+  type Source = 'all' | 'claude' | 'codex';
+
+  const panel = document.querySelector<HTMLElement>('[data-activity]');
+  if (panel?.querySelector('[data-grid]')) {
+    const data = JSON.parse(
+      panel.querySelector('[data-activity-snapshot]')!.textContent!
+    ) as z.infer<typeof aiActivitySchema>;
+    const select = panel.querySelector<HTMLSelectElement>('[data-year]')!;
+    const grid = panel.querySelector<HTMLElement>('[data-grid]')!;
+    let source: Source = 'all';
+    let view = activityView(data, Number(select.value), source);
+    const text = (selector: string, value: string) => {
+      panel.querySelector(selector)!.textContent = value;
+    };
+
+    function inspect(button: HTMLButtonElement) {
+      grid.querySelectorAll<HTMLButtonElement>('button').forEach((cell) => {
+        cell.tabIndex = cell === button ? 0 : -1;
+      });
+      grid.querySelector('[aria-current]')?.removeAttribute('aria-current');
+      button.setAttribute('aria-current', 'true');
+      text('[data-selection]', button.getAttribute('aria-label')!);
+    }
+
+    function render() {
+      const year = Number(select.value);
+      view = activityView(data, year, source);
+      text('[data-total]', compactTokens(view.total));
+      panel!
+        .querySelector('[data-total]')!
+        .setAttribute('title', `${view.total.toLocaleString('en-US')} tokens`);
+      text('[data-period]', `in ${year}`);
+      text('[data-days]', String(view.activeDays));
+      text('[data-peak]', view.peak[0] ? formatDay(view.peak[0]).replace(`, ${year}`, '') : '—');
+      text('[data-selection]', view.activeDays ? '' : 'No recorded usage.');
+      panel!
+        .querySelector<HTMLElement>('.activity-calendar')!
+        .style.setProperty('--weeks', String(view.columns));
+      const months = panel!.querySelector('[data-months]')!;
+      months.replaceChildren(
+        ...view.months.map((month) => {
+          const el = document.createElement('span');
+          el.textContent = month.label;
+          el.style.gridColumn = String(month.column);
+          return el;
+        })
+      );
+      const focus =
+        view.cells.filter((cell) => cell.inYear && !cell.future && cell.tokens > 0).at(-1)?.date ??
+        view.cells.find((cell) => cell.inYear && !cell.future)?.date;
+      grid.replaceChildren(
+        ...view.cells.map((cell) => {
+          if (!cell.inYear || cell.future) {
+            const el = document.createElement('span');
+            el.className = `activity-cell ${!cell.inYear ? 'outside-year' : 'future-day'}`;
+            el.setAttribute('aria-hidden', 'true');
+            return el;
+          }
+          const el = document.createElement('button');
+          el.type = 'button';
+          el.className = 'activity-cell';
+          el.dataset.date = cell.date;
+          el.dataset.level = String(cell.level);
+          el.setAttribute('aria-label', cell.label);
+          el.title = cell.label;
+          el.tabIndex = cell.date === focus ? 0 : -1;
+          return el;
+        })
+      );
+    }
+
+    panel.querySelectorAll<HTMLButtonElement>('[data-source]').forEach((button) => {
+      button.addEventListener('click', () => {
+        source = button.dataset.source as Source;
+        panel
+          .querySelectorAll('[data-source]')
+          .forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        panel.dataset.source = source;
+        render();
+      });
+    });
+    select.addEventListener('change', render);
+    grid.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLButtonElement) inspect(event.target);
+    });
+    grid.addEventListener('focusin', (event) => {
+      if (event.target instanceof HTMLButtonElement) inspect(event.target);
+    });
+    grid.addEventListener('keydown', (event) => {
+      if (!(event.target instanceof HTMLButtonElement)) return;
+      const buttons = [...grid.querySelectorAll<HTMLButtonElement>('button')];
+      const index = buttons.indexOf(event.target);
+      const offsets: Record<string, number> = {
+        ArrowUp: -1,
+        ArrowDown: 1,
+        ArrowLeft: -7,
+        ArrowRight: 7,
+      };
+      let next = index;
+      if (event.key in offsets) next += offsets[event.key];
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = buttons.length - 1;
+      else return;
+      event.preventDefault();
+      buttons[Math.max(0, Math.min(next, buttons.length - 1))]?.focus();
+    });
+  }
+</script>
+
+<style is:global>
+  .ai-activity {
+    --activity-1: #e4ded4;
+    --activity-2: #d4c5b3;
+    --activity-3: #c1ab94;
+    --activity-4: #ab8e75;
+    margin-top: 1.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    min-width: 0;
+    scroll-margin-top: 2rem;
+  }
+  .ai-activity[data-source='claude'] {
+    --activity-1: #ecdfd6;
+    --activity-2: #dec7b7;
+    --activity-3: #cdac96;
+    --activity-4: #b88e72;
+  }
+  .ai-activity[data-source='codex'] {
+    --activity-1: #e0e4dc;
+    --activity-2: #c9d2c4;
+    --activity-3: #adbda6;
+    --activity-4: #91a48a;
+  }
+  .ai-activity .activity-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+  }
+  .ai-activity .activity-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+  .ai-activity .activity-sources button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    appearance: none;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-soft);
+    font: 0.75rem var(--font-ui);
+    padding: 0.5rem 0.65rem;
+    cursor: pointer;
+    border-radius: 3px;
+    min-height: 44px;
+  }
+  .ai-activity .activity-sources img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  .ai-activity .activity-sources button[aria-pressed='true'] {
+    border-color: var(--line-strong);
+    background: var(--bg);
+    color: var(--text);
+  }
+  .ai-activity .activity-year {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font: 0.6rem var(--font-mono);
+    color: var(--text-soft);
+  }
+  .ai-activity select {
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.4rem;
+    font: inherit;
+    min-height: 36px;
+  }
+  .ai-activity .activity-summary {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .ai-activity .activity-total strong {
+    display: block;
+    font: 2.5rem/1.05 var(--font-display);
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .ai-activity .activity-total > span {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-soft);
+    margin-top: 0.45rem;
+  }
+  .ai-activity .activity-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0 0 0.2rem;
+  }
+  .ai-activity .activity-stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.45rem;
+  }
+  .ai-activity dt {
+    font: 0.55rem var(--font-mono);
+    color: var(--text-soft);
+  }
+  .ai-activity dd {
+    font: 0.9rem var(--font-mono);
+    margin: 0;
+    color: var(--text);
+  }
+  .ai-activity .activity-scroll {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding: 3px 3px 7px;
+    margin: -3px;
+  }
+  .ai-activity .activity-calendar {
+    min-width: 300px;
+  }
+  .ai-activity .activity-months {
+    display: grid;
+    grid-template-columns: repeat(var(--weeks), minmax(0, 1fr));
+    margin-left: 28px;
+    gap: 3px;
+    margin-bottom: 8px;
+    font: 0.5rem var(--font-mono);
+    color: var(--text-soft);
+  }
+  .ai-activity .activity-chart {
+    display: flex;
+    gap: 7px;
+  }
+  .ai-activity .activity-weekdays {
+    width: 21px;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+    font: 0.45rem var(--font-mono);
+    color: var(--text-soft);
+  }
+  .ai-activity .activity-weekdays span {
+    display: flex;
+    align-items: center;
+  }
+  .ai-activity .activity-weekdays span:nth-child(odd) {
+    visibility: hidden;
+  }
+  .ai-activity .activity-grid {
+    flex: 1;
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: repeat(var(--weeks), minmax(0, 1fr));
+    grid-auto-flow: column;
+    gap: 3px;
+  }
+  .ai-activity .activity-cell {
+    display: block;
+    min-width: 0;
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 2px;
+    background: #e9e6df;
+    padding: 0;
+  }
+  .ai-activity button.activity-cell {
+    cursor: pointer;
+  }
+  .ai-activity .activity-cell[aria-current='true'] {
+    outline: 1px solid var(--text);
+    outline-offset: 1px;
+  }
+  .ai-activity .activity-cell.outside-year {
+    visibility: hidden;
+  }
+  .ai-activity .activity-cell.future-day {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--line);
+    opacity: 0.45;
+  }
+  .ai-activity [data-level='1'] {
+    background: var(--activity-1);
+  }
+  .ai-activity [data-level='2'] {
+    background: var(--activity-2);
+  }
+  .ai-activity [data-level='3'] {
+    background: var(--activity-3);
+  }
+  .ai-activity [data-level='4'] {
+    background: var(--activity-4);
+  }
+  .ai-activity button:focus-visible,
+  .ai-activity select:focus-visible,
+  .ai-activity summary:focus-visible,
+  .ai-activity .activity-scroll:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .ai-activity .activity-graph-footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    min-height: 1.75rem;
+  }
+  .ai-activity p.activity-selection {
+    font: 0.58rem/1.65 var(--font-mono);
+    margin: 0;
+    color: var(--text-soft);
+    max-width: 65%;
+  }
+  .ai-activity .activity-legend {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font: 0.5rem var(--font-mono);
+    color: var(--text-soft);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .ai-activity .activity-legend i {
+    width: 8px;
+    height: 8px;
+    border-radius: 1px;
+  }
+  .ai-activity .activity-legend i[data-level='0'] {
+    background: #e9e6df;
+  }
+  .ai-activity .activity-legend span {
+    margin: 0 3px;
+  }
+  .ai-activity .activity-bottom {
+    border-top: 1px solid var(--line);
+    padding-top: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.65rem;
+    font: 0.55rem/1.6 var(--font-mono);
+    color: var(--text-soft);
+  }
+  .ai-activity details {
+    display: contents;
+  }
+  .ai-activity summary {
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .ai-activity .activity-method {
+    flex-basis: 100%;
+    padding-top: 0.5rem;
+  }
+  .ai-activity details:not([open]) .activity-method {
+    display: none;
+  }
+  .ai-activity .activity-method p,
+  .ai-activity p.activity-note {
+    font: 0.78rem/1.75 var(--font-ui);
+    margin: 0 0 0.65rem;
+    color: var(--text-soft);
+    max-width: none;
+  }
+  .ai-activity .activity-method a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .ai-activity .activity-empty {
+    padding: 2rem 0;
+  }
+  .ai-activity .activity-empty p {
+    font: 1.4rem var(--font-display);
+    margin-bottom: 0.5rem;
+  }
+  .ai-activity .activity-empty span {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+  }
+  @media (max-width: 600px) {
+    .ai-activity {
+      padding: 1rem;
+    }
+    .ai-activity .activity-stats {
+      gap: 0.8rem;
+    }
+    .ai-activity .activity-total strong {
+      font-size: 2.25rem;
+    }
+    .ai-activity .activity-total > span {
+      max-width: 15ch;
+      line-height: 1.6;
+    }
+    .ai-activity .activity-sources button {
+      padding: 0.4rem;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+    }
+    .ai-activity .activity-sources img {
+      width: 24px;
+      height: 24px;
+    }
+    .ai-activity .activity-year {
+      font-size: 0.55rem;
+    }
+    .ai-activity .activity-grid,
+    .ai-activity .activity-months,
+    .ai-activity .activity-weekdays {
+      gap: 2px;
+    }
+    .ai-activity .activity-months {
+      font-size: 0.42rem;
+    }
+    .ai-activity .activity-graph-footer {
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    .ai-activity p.activity-selection {
+      max-width: 100%;
+    }
+  }
+</style>

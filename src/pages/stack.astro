@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import { ethTile } from '../lib/eth-tile';
+import AIActivity from '../components/AIActivity.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -348,6 +349,12 @@ const shelves = stackSections
       <span class="dock-detail-note" data-detail-note>{picked.note}</span>
       <a href={picked.href} target="_blank" rel="noopener" class="dock-detail-link" data-detail-link>Visit <span aria-hidden="true">↗</span></a>
     </div>
+  </section>
+
+  <section class="stack-activity" aria-labelledby="ai-activity-title">
+    <h2 class="stack-more-title" id="ai-activity-title">AI activity</h2>
+    <p class="stack-activity-intro">Daily tokens across Claude and Codex.</p>
+    <AIActivity />
   </section>
 
   <h2 class="stack-more-title">Also in rotation</h2>
@@ -784,8 +791,19 @@ const shelves = stackSections
     display: none;
   }
 
+  .stack-activity {
+    margin-bottom: 4rem;
+  }
+
+  .stack-activity-intro {
+    margin: -1rem 0 1.25rem;
+    color: var(--text-soft);
+  }
+
   .stack-more-title {
     margin-bottom: 1.5rem;
+    text-transform: none;
+    color: var(--text);
     font-family: var(--font-display);
     font-size: 2.25rem;
     font-weight: 400;
