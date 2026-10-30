@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { postsNewestFirst } from '../data/writing';
 
 const preloadImages: string[] = [];
@@ -33,10 +34,7 @@ const pageSchema = {
   </Fragment>
   <Nav active="writing" />
 
-  <header class="writing-header">
-    <h1 class="writing-title">Writing</h1>
-    <p class="writing-subtitle">Essays on marketing, storytelling, and building your way in.</p>
-  </header>
+  <PageHeader title="Writing" subtitle="Essays on marketing, storytelling, and building your way in." />
 
   <ol class="writing-list" aria-label="Essays, newest first">
     {postsNewestFirst.map((post) => (
@@ -57,31 +55,12 @@ const pageSchema = {
 </Layout>
 
 <style>
-  .writing-header {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem 2.5rem;
-    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-  }
 
-  .writing-title {
-    font-size: clamp(4rem, 12vw, 7.5rem);
-    line-height: 0.85;
-    letter-spacing: -0.06em;
-  }
 
-  .writing-subtitle {
-    max-width: 32ch;
-    color: var(--text-soft);
-    line-height: 1.7;
-  }
 
   .writing-list {
     list-style: none;
-    border-top: 1px solid var(--line-strong);
+    margin-top: -1.5rem;
   }
 
   .writing-row {

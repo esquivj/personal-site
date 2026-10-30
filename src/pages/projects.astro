@@ -2,6 +2,7 @@
 import { projectsSchema } from '../data/schemas.mjs';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const projects = projectsSchema.parse([
   {
@@ -88,9 +89,7 @@ const pageSchema = {
   </Fragment>
   <Nav active="projects" />
 
-  <header class="projects-header">
-    <h1 class="projects-title">Software, tools, <em>and experiments I've built.</em></h1>
-  </header>
+  <PageHeader title="Projects" subtitle={"Software, tools, and experiments I've built."} />
 
   <section class="projects-list" aria-label="Selected projects">
     {
@@ -138,20 +137,8 @@ const pageSchema = {
 </Layout>
 
 <style>
-  .projects-header {
-    margin-bottom: clamp(2rem, 5vw, 3rem);
-  }
 
-  .projects-title {
-    max-width: 18ch;
-    font-size: clamp(2.8rem, 6vw, 4rem);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-  }
 
-  .projects-title em {
-    color: var(--text-faint);
-  }
 
   .project-entry {
     position: relative;

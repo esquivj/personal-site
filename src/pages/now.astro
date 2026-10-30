@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const albums = [
   {
@@ -111,10 +112,12 @@ const pageSchema = {
   </Fragment>
   <Nav active="now" />
 
+  <PageHeader title="Now" subtitle={"What I'm focused on at the moment."} />
+
   <article class="now-letter">
     <p class="now-dateline"><span>Los Angeles</span><time datetime="2026-10-22">October 22, 2026</time></p>
 
-    <h1 class="now-lede">Back in Los Angeles after living in Lisbon for a year and a half.</h1>
+    <p class="now-lede">Back in Los Angeles after living in Lisbon for a year and a half.</p>
 
     <p>Re-settling into the city, spending more time with family, lifting consistently, and reading more.</p>
 
@@ -191,7 +194,7 @@ const pageSchema = {
 
   .now-lede {
     margin-bottom: 1.75rem;
-    font-size: clamp(2rem, 4.6vw, 2.5rem);
+    font-size: clamp(1.75rem, 4vw, 2.1rem);
     line-height: 1.12;
     letter-spacing: -0.03em;
     color: var(--text);

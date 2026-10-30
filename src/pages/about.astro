@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -29,8 +30,10 @@ const pageSchema = {
   </Fragment>
   <Nav active="about" />
 
+  <PageHeader title="About" subtitle="Marketing generalist and narrative storyteller in Los Angeles." />
+
   <article class="about">
-    <h1 class="about-lead">I'm Juan. From Los Angeles, son of Mexican immigrants, <em>raised by the internet.</em></h1>
+    <p class="about-lead">I'm Juan. From Los Angeles, son of Mexican immigrants, <em>raised by the internet.</em></p>
 
     <figure class="about-image">
       <img src="/images/about/about-stage.avif" alt="" width="528" height="576" loading="eager" decoding="async" fetchpriority="high" />
@@ -78,7 +81,8 @@ const pageSchema = {
 
   .about-lead {
     margin-bottom: 2.25rem;
-    font-size: clamp(2.4rem, 5.4vw, 3.4rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.2vw, 2.4rem);
     line-height: 1;
     letter-spacing: -0.045em;
     text-wrap: balance;

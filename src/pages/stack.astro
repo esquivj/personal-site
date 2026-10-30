@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { ethTile } from '../lib/eth-tile';
 import AIActivity from '../components/AIActivity.astro';
 
@@ -294,10 +295,7 @@ const shelves = stackSections
   </Fragment>
   <Nav active="stack" />
 
-  <header class="stack-header">
-    <h1 class="stack-title">Stack</h1>
-    <p class="stack-subtitle">The software I actually like using day to day. This is my actual dock.</p>
-  </header>
+  <PageHeader title="Stack" subtitle="The software I actually like using day to day. This is my actual dock." />
 
   <figure class="dock-figure" data-dock>
     <ul class="dock" aria-label="Apps in my dock">
@@ -527,23 +525,8 @@ const shelves = stackSections
 </script>
 
 <style>
-  .stack-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
 
-  .stack-title {
-    font-size: clamp(3rem, 7vw, 4rem);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-  }
 
-  .stack-subtitle {
-    color: var(--text-soft);
-    line-height: 1.7;
-  }
 
   .dock-figure {
     position: relative;
