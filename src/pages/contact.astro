@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
+// TODO(Juan): replace with the real Google Calendar appointment schedule link.
+const BOOKING_URL = 'https://calendar.app.google/REPLACE_ME';
+
 const CONTACT_EMAIL = 'juanesquivel138@gmail.com';
 
 const pageSchema = {
@@ -14,7 +17,7 @@ const pageSchema = {
 
 <Layout
   title="Contact Juan Esquivel — Work & Speaking"
-  description="Contact Juan Esquivel about a role or a project. Email reaches him fastest, with X and LinkedIn as other ways to reach out."
+  description="Contact Juan Esquivel about a role or a project. Book a call or send an email."
   canonicalPath="/contact"
 >
   <Fragment slot="head">
@@ -23,21 +26,31 @@ const pageSchema = {
 
   <PageHeader
     title="Hiring, or have something to build?"
-    subtitle="Email reaches me fastest. You can also find me on X and LinkedIn."
+    subtitle="Grab a time on my calendar or drop me a line."
     compact={true}
   />
+
+  <section class="booking-block" aria-labelledby="booking-heading">
+    <div>
+      <h2 class="contact-kicker" id="booking-heading">Book a call</h2>
+      <p class="booking-description">Pick a slot and tell me what you have in mind.</p>
+      <p class="local-time" data-local-time hidden></p>
+    </div>
+    <a class="booking-button" href={BOOKING_URL} target="_blank" rel="noopener">Find a time ↗</a>
+  </section>
 
   <section class="surface-list">
     <div class="surface-link email-row">
       <div class="surface-body">
-        <span class="surface-title">{CONTACT_EMAIL}</span>
-        <span class="surface-meta">Email</span>
+        <p class="contact-kicker">Email</p>
+        <button type="button" class="email-address" data-copy-email={CONTACT_EMAIL} title="Copy email address" aria-label="Copy email address">{CONTACT_EMAIL}</button>
       </div>
       <div class="email-actions">
         <a class="surface-arrow" href={`mailto:${CONTACT_EMAIL}`}>Email ↗</a>
         <button type="button" class="surface-arrow" data-copy-email={CONTACT_EMAIL}>Copy</button>
       </div>
     </div>
+    <h2 class="contact-kicker elsewhere-kicker">Elsewhere</h2>
     <a class="surface-link" href="https://x.com/0xCadena" target="_blank" rel="noopener">
       <div class="surface-body">
         <span class="surface-title">X (Twitter)</span>
@@ -57,11 +70,12 @@ const pageSchema = {
 </Layout>
 
 <script>
-  const button = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-copy-email]');
+  const copyButton = document.querySelector<HTMLButtonElement>('.email-actions [data-copy-email]');
   const announcement = document.querySelector<HTMLElement>('[data-copy-announcement]');
   let resetTimer: ReturnType<typeof setTimeout>;
 
-  function fallbackCopy(email: string) {
+  function fallbackCopy(email: string, trigger: HTMLButtonElement) {
     const textarea = document.createElement('textarea');
     textarea.value = email;
     textarea.readOnly = true;
@@ -73,30 +87,57 @@ const pageSchema = {
       if (!document.execCommand('copy')) throw new Error('Copy failed');
     } finally {
       textarea.remove();
-      button?.focus();
+      trigger.focus();
     }
   }
 
-  button?.addEventListener('click', async () => {
-    const email = button.dataset.copyEmail;
+  async function copyEmail(event: MouseEvent) {
+    const trigger = event.currentTarget as HTMLButtonElement;
+    const email = trigger.dataset.copyEmail;
     if (!email) return;
+    clearTimeout(resetTimer);
+    if (copyButton) copyButton.textContent = 'Copy';
+    if (announcement) announcement.textContent = '';
     try {
       try {
         await navigator.clipboard.writeText(email);
       } catch {
-        fallbackCopy(email);
+        fallbackCopy(email, trigger);
       }
       clearTimeout(resetTimer);
-      button.textContent = 'Copied';
+      if (copyButton) copyButton.textContent = 'Copied';
       if (announcement) announcement.textContent = 'Email address copied.';
       resetTimer = setTimeout(() => {
-        button.textContent = 'Copy';
+        if (copyButton) copyButton.textContent = 'Copy';
         if (announcement) announcement.textContent = '';
       }, 1800);
     } catch {
       if (announcement) announcement.textContent = 'Copy failed. Please select and copy the email address.';
     }
+  }
+
+  buttons.forEach((button) => button.addEventListener('click', copyEmail));
+
+  const localTime = document.querySelector<HTMLParagraphElement>('[data-local-time]');
+  const timeFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    hour: 'numeric',
+    minute: '2-digit',
   });
+
+  function updateLocalTime() {
+    if (!localTime) return;
+    localTime.textContent = `It's ${timeFormatter.format(new Date())} in Los Angeles`;
+    localTime.hidden = false;
+  }
+
+  if (localTime) {
+    updateLocalTime();
+    setTimeout(() => {
+      updateLocalTime();
+      setInterval(updateLocalTime, 60_000);
+    }, 60_000 - (Date.now() % 60_000));
+  }
 </script>
 
 <style>
@@ -108,8 +149,138 @@ const pageSchema = {
     transform: none;
   }
 
-  .email-row .surface-title {
+  .booking-block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0 1.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-kicker,
+  .local-time,
+  .booking-button {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .contact-kicker {
+    color: var(--text-faint);
+  }
+
+  .booking-description {
+    margin-top: 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.85rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .booking-button {
+    flex-shrink: 0;
+    padding: 1rem 1.3rem;
+    border-radius: 4px;
+    background: var(--text);
+    color: var(--bg);
+    text-align: center;
+    text-decoration: none;
+    transition: background 180ms var(--ease-out);
+  }
+
+  .booking-button:hover {
+    background: var(--accent);
+  }
+
+  .booking-button:focus-visible,
+  .email-address:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .local-time:not([hidden]) {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1rem;
+    color: var(--text-soft);
+  }
+
+  .local-time::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #3f8f5a;
+    animation: availability-pulse 2.4s var(--ease-out) infinite;
+  }
+
+  @keyframes availability-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .local-time::before {
+      animation: none;
+    }
+  }
+
+  .email-row .surface-body {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .email-address {
+    margin-top: 0.35rem;
+    padding: 0;
+    border: 0;
+    background: linear-gradient(var(--accent), var(--accent)) left bottom / 0% 1px no-repeat;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    text-align: left;
     overflow-wrap: anywhere;
+    max-width: 100%;
+    cursor: pointer;
+    transition: background-size 180ms var(--ease-out);
+  }
+
+  .email-address:hover {
+    background-size: 100% 1px;
+  }
+
+  .elsewhere-kicker {
+    margin-top: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  @media (max-width: 540px) {
+    .booking-block {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .booking-button {
+      width: 100%;
+    }
+
+    .email-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .email-address {
+      font-size: 1.45rem;
+    }
   }
 
   .email-actions {
