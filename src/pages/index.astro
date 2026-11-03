@@ -95,6 +95,10 @@ const websiteSchema = {
               </a>
             </div>
           </div>
+          <p class="availability">
+            <span class="availability-dot" aria-hidden="true"></span>
+            Open to full-time roles
+          </p>
         </div>
 
         <figure class="portrait-panel">
@@ -304,6 +308,39 @@ const websiteSchema = {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     white-space: nowrap;
+  }
+
+  .availability {
+    --availability-green: #3f8f5a;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .availability-dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--availability-green);
+    animation: availability-pulse 2.4s var(--ease-out) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .availability-dot {
+      animation: none;
+    }
+  }
+
+  @keyframes availability-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
   }
 
   .contact-kicker::after {
