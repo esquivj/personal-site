@@ -1,74 +1,182 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
-
 // TODO(Juan): replace with the real Google Calendar appointment schedule link.
 const BOOKING_URL = 'https://calendar.app.google/REPLACE_ME';
-
 const CONTACT_EMAIL = 'juanesquivel138@gmail.com';
-
-const pageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: 'Contact Juan Esquivel',
-  url: 'https://juanesquivel.xyz/contact',
-};
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <Layout
   title="Contact Juan Esquivel — Work & Speaking"
-  description="Contact Juan Esquivel about a role or a project. Book a call or send an email."
+  description="Contact Juan Esquivel about a role or a project. Book a call or leave a note."
   canonicalPath="/contact"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: 'Contact Juan Esquivel',
+        url: 'https://juanesquivel.xyz/contact',
+      })}
+    />
+    {
+      siteKey && (
+        <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+      )
+    }
   </Fragment>
-
-  <PageHeader
-    title="Hiring, or have something to build?"
-    subtitle="Grab a time on my calendar or drop me a line."
-    compact={true}
-  />
-
-  <section class="booking-block" aria-labelledby="booking-heading">
-    <div>
-      <h2 class="contact-kicker" id="booking-heading">Book a call</h2>
-      <p class="booking-description">Pick a slot and tell me what you have in mind.</p>
-      <p class="local-time" data-local-time hidden></p>
+  <div class="contact-column">
+    <div class="contact-heading">
+      <PageHeader
+        title="Hiring, or have something to build?"
+        subtitle="Grab a time on my calendar or leave a note below."
+        compact={true}
+      />
+      <p class="contact-status contact-mono">
+        <span class="contact-dot" aria-hidden="true"></span>Open to full-time roles
+      </p>
     </div>
-    <a class="booking-button" href={BOOKING_URL} target="_blank" rel="noopener">Find a time ↗</a>
-  </section>
-
-  <section class="surface-list">
-    <div class="surface-link email-row">
-      <div class="surface-body">
-        <p class="contact-kicker">Email</p>
-        <button type="button" class="email-address" data-copy-email={CONTACT_EMAIL} title="Copy email address" aria-label="Copy email address">{CONTACT_EMAIL}</button>
+    <section class="contact-calendar" aria-labelledby="booking-heading">
+      <div class="contact-calendar-head">
+        <div>
+          <h2 class="contact-mono" id="booking-heading">Book a call</h2><p class="contact-serif">
+            Pick a slot that works for you.
+          </p>
+        </div>
+        <a class="contact-button" href={BOOKING_URL} target="_blank" rel="noopener">Find a time ↗</a
+        >
       </div>
-      <div class="email-actions">
-        <a class="surface-arrow" href={`mailto:${CONTACT_EMAIL}`}>Email ↗</a>
-        <button type="button" class="surface-arrow" data-copy-email={CONTACT_EMAIL}>Copy</button>
+      <div class="contact-grid" aria-hidden="true">
+        <div class="contact-days contact-mono">
+          <span>PT</span>{
+            ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day) => <span data-day>{day}</span>)
+          }
+        </div>
+        <div class="contact-hours">
+          <div class="contact-hour-labels contact-mono">
+            {['8 AM', '9 AM', '10 AM'].map((hour) => <span data-hour>{hour}</span>)}
+          </div>
+          {[0, 1, 2, 3, 4].map(() => <div class="contact-day-column" data-column />)}
+          <div class="contact-now" data-now></div>
+        </div>
+      </div>
+      <div class="contact-calendar-foot contact-mono">
+        <p class="contact-status">
+          <span class="contact-dot" aria-hidden="true"></span><span data-local-time hidden></span>
+        </p><p>Opens Google Calendar</p>
+      </div>
+    </section>
+    <section id="note" class="contact-note" aria-labelledby="note-heading">
+      <div class="contact-note-heading">
+        <h2 id="note-heading" class="contact-serif">Prefer to write? Leave a note here.</h2><p
+          class="contact-mono"
+        >
+          Leave a note
+        </p>
+      </div>
+      <p
+        id="note-sent"
+        class="contact-native-feedback contact-status contact-mono"
+        data-native-feedback
+      >
+        <span class="contact-dot" aria-hidden="true"></span>Sent. Thanks for the note.
+      </p>
+      <p id="note-error" class="contact-native-feedback contact-native-error" data-native-feedback>
+        That note didn't go through. Check the email and message, then try again, or email
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      </p>
+      <div class="contact-error" data-general-error hidden>
+        <p>
+          That note didn't go through. Try again, or email <a href={`mailto:${CONTACT_EMAIL}`}
+            >{CONTACT_EMAIL}</a
+          >.
+        </p><p data-form-error></p>
+      </div>
+      <form method="post" action="/api/note" class="contact-paper" data-note-form>
+        <div class="contact-sheet">
+          <label for="note-message" class="sr-only">Message</label><textarea
+            id="note-message"
+            name="message"
+            required
+            minlength="2"
+            maxlength="2000"
+            placeholder="Dear Juan,"></textarea><p
+            id="message-error"
+            class="contact-field-error"
+            data-error="message"
+            hidden
+          >
+          </p>
+        </div>
+        <div class="contact-from">
+          <label for="note-email" class="contact-mono">From</label><div class="contact-email-field">
+            <input
+              id="note-email"
+              type="email"
+              name="email"
+              required
+              maxlength="254"
+              placeholder="you@company.com"
+              autocomplete="email"
+            /><p id="email-error" class="contact-field-error" data-error="email" hidden></p>
+          </div><button class="contact-button" type="submit"
+            >Send note <span class="contact-fold" aria-hidden="true"></span></button
+          >
+        </div>
+        <div class="contact-trap" aria-hidden="true">
+          <label for="note-company">Company</label><input
+            id="note-company"
+            name="company"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+        {siteKey && <div class="cf-turnstile" data-sitekey={siteKey} />}
+      </form>
+      <div class="contact-sent contact-paper" data-sent hidden>
+        <div class="contact-envelope" aria-hidden="true"></div><h3 tabindex="-1" data-sent-heading>
+          Sent. Thanks for the note.
+        </h3><p class="contact-status contact-mono">
+          <span class="contact-dot" aria-hidden="true"></span>Sent to my inbox
+        </p><button type="button" class="contact-write-another contact-mono" data-write-another
+          >Write another</button
+        >
+      </div>
+      <p class="sr-only" aria-live="polite" role="status" data-note-status></p>
+    </section>
+    <div class="contact-quiet">
+      <div class="contact-email">
+        <span class="contact-mono">Email</span><a
+          href={`mailto:${CONTACT_EMAIL}`}
+          class="contact-email-address">{CONTACT_EMAIL}</a
+        ><div class="email-actions">
+          <button type="button" class="contact-copy contact-mono" data-copy-email={CONTACT_EMAIL}
+            >Copy</button
+          >
+        </div>
+      </div><div class="contact-social contact-mono">
+        <a href="https://x.com/0xCadena" target="_blank" rel="noopener">X · @0xCadena ↗</a><a
+          href="https://www.linkedin.com/in/esquivj/"
+          target="_blank"
+          rel="noopener">LinkedIn ↗</a
+        >
       </div>
     </div>
-    <h2 class="contact-kicker elsewhere-kicker">Elsewhere</h2>
-    <a class="surface-link" href="https://x.com/0xCadena" target="_blank" rel="noopener">
-      <div class="surface-body">
-        <span class="surface-title">X (Twitter)</span>
-        <span class="surface-meta">@0xCadena</span>
-      </div>
-      <span class="surface-arrow">Open ↗</span>
-    </a>
-    <a class="surface-link" href="https://www.linkedin.com/in/esquivj/" target="_blank" rel="noopener">
-      <div class="surface-body">
-        <span class="surface-title">LinkedIn</span>
-        <span class="surface-meta">Professional profile</span>
-      </div>
-      <span class="surface-arrow">Open ↗</span>
-    </a>
-  </section>
-  <span class="sr-only" aria-live="polite" data-copy-announcement></span>
+    <span class="sr-only" aria-live="polite" data-copy-announcement></span>
+  </div>
 </Layout>
-
+<script is:inline>
+  const noteQuery = new URLSearchParams(location.search);
+  if (noteQuery.get('sent') === '1') {
+    document.querySelector('[data-note-form]').hidden = true;
+    document.querySelector('[data-sent]').hidden = false;
+  } else if (noteQuery.has('error')) {
+    document.querySelector('[data-general-error]').hidden = false;
+  }
+</script>
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('[data-copy-email]');
   const copyButton = document.querySelector<HTMLButtonElement>('.email-actions [data-copy-email]');
@@ -112,13 +220,14 @@ const pageSchema = {
         if (announcement) announcement.textContent = '';
       }, 1800);
     } catch {
-      if (announcement) announcement.textContent = 'Copy failed. Please select and copy the email address.';
+      if (announcement)
+        announcement.textContent = 'Copy failed. Please select and copy the email address.';
     }
   }
 
   buttons.forEach((button) => button.addEventListener('click', copyEmail));
 
-  const localTime = document.querySelector<HTMLParagraphElement>('[data-local-time]');
+  const localTime = document.querySelector<HTMLElement>('[data-local-time]');
   const timeFormatter = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Los_Angeles',
     hour: 'numeric',
@@ -133,179 +242,553 @@ const pageSchema = {
 
   if (localTime) {
     updateLocalTime();
-    setTimeout(() => {
-      updateLocalTime();
-      setInterval(updateLocalTime, 60_000);
-    }, 60_000 - (Date.now() % 60_000));
+    setTimeout(
+      () => {
+        updateLocalTime();
+        setInterval(updateLocalTime, 60_000);
+      },
+      60_000 - (Date.now() % 60_000)
+    );
+  }
+  const calendarFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hourCycle: 'h23',
+  });
+  function updateCalendar() {
+    const parts = Object.fromEntries(
+      calendarFormatter.formatToParts(new Date()).map((p) => [p.type, p.value])
+    );
+    const date = new Date(Date.UTC(+parts.year, +parts.month - 1, +parts.day));
+    const weekday = (date.getUTCDay() + 6) % 7;
+    const monday = new Date(date);
+    monday.setUTCDate(date.getUTCDate() - weekday);
+    document.querySelectorAll<HTMLElement>('[data-day]').forEach((cell, i) => {
+      const day = new Date(monday);
+      day.setUTCDate(monday.getUTCDate() + i);
+      cell.textContent = `${['Mon', 'Tue', 'Wed', 'Thu', 'Fri'][i]} ${day.getUTCDate()}`;
+      cell.classList.toggle('contact-today', i === weekday);
+    });
+    document
+      .querySelectorAll('[data-column]')
+      .forEach((cell, i) => cell.classList.toggle('contact-today', i === weekday));
+    const start = +parts.hour - 1;
+    document.querySelectorAll('[data-hour]').forEach((cell, i) => {
+      const hour = (start + i + 24) % 24;
+      cell.textContent = `${hour % 12 || 12} ${hour < 12 ? 'AM' : 'PM'}`;
+    });
+    document
+      .querySelector<HTMLElement>('[data-now]')
+      ?.style.setProperty('top', `${40 + (+parts.minute / 60) * 40}px`);
+  }
+  updateCalendar();
+  setTimeout(
+    () => {
+      updateCalendar();
+      setInterval(updateCalendar, 60_000);
+    },
+    60_000 - (Date.now() % 60_000)
+  );
+
+  const form = document.querySelector<HTMLFormElement>('[data-note-form]')!;
+  document.querySelector('.contact-note')?.setAttribute('data-enhanced', '');
+  const sent = document.querySelector<HTMLElement>('[data-sent]')!;
+  const heading = document.querySelector<HTMLElement>('[data-sent-heading]')!;
+  const status = document.querySelector<HTMLElement>('[data-note-status]')!;
+  const generalError = document.querySelector<HTMLElement>('[data-general-error]')!;
+  const submit = form.querySelector<HTMLButtonElement>('[type=submit]')!;
+  const submitMarkup = submit.innerHTML;
+  function clearErrors() {
+    generalError.hidden = true;
+    document.querySelector<HTMLElement>('[data-form-error]')!.textContent = '';
+    form.querySelectorAll<HTMLElement>('[data-error]').forEach((el) => {
+      el.hidden = true;
+      el.textContent = '';
+    });
+    form.querySelectorAll('[aria-invalid]').forEach((el) => {
+      el.removeAttribute('aria-invalid');
+      el.removeAttribute('aria-describedby');
+    });
+  }
+  function showSent() {
+    form.hidden = true;
+    sent.hidden = false;
+    status.textContent = 'Sent. Thanks for the note.';
+    heading.focus();
+  }
+  function resetVerification() {
+    (window as typeof window & { turnstile?: { reset: () => void } }).turnstile?.reset();
+  }
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    clearErrors();
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    status.textContent = 'Sending your note.';
+    try {
+      const response = await fetch('/api/note', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const result = await response.json();
+      if (response.ok && result.ok) {
+        showSent();
+        return;
+      }
+      const errors = result.errors || {};
+      for (const field of ['email', 'message']) {
+        if (typeof errors[field] !== 'string') continue;
+        const control = form.elements.namedItem(field) as HTMLInputElement | HTMLTextAreaElement;
+        const error = form.querySelector<HTMLElement>(`[data-error="${field}"]`)!;
+        error.textContent = errors[field];
+        error.hidden = false;
+        control.setAttribute('aria-invalid', 'true');
+        control.setAttribute('aria-describedby', error.id);
+      }
+      const fieldMessages = ['email', 'message']
+        .map((field) => errors[field])
+        .filter((message): message is string => typeof message === 'string');
+      if (fieldMessages.length && typeof errors.form !== 'string') {
+        status.textContent = fieldMessages.join(' ');
+        form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+        return;
+      }
+      document.querySelector<HTMLElement>('[data-form-error]')!.textContent =
+        typeof errors.form === 'string' ? errors.form : '';
+      throw new Error('Delivery failed');
+    } catch {
+      generalError.hidden = false;
+      status.textContent =
+        "That note didn't go through. Try again, or email juanesquivel138@gmail.com.";
+      resetVerification();
+    } finally {
+      submit.disabled = false;
+      submit.innerHTML = submitMarkup;
+    }
+  });
+  document.querySelector('[data-write-another]')?.addEventListener('click', () => {
+    form.reset();
+    clearErrors();
+    sent.hidden = true;
+    form.hidden = false;
+    status.textContent = '';
+    resetVerification();
+    history.replaceState(null, '', '/contact#note');
+    form.querySelector('textarea')?.focus();
+  });
+  const query = new URLSearchParams(location.search);
+  if (query.get('sent') === '1') showSent();
+  else if (query.has('error')) {
+    generalError.hidden = false;
+    const field = query.get('error');
+    if (field === 'email' || field === 'message') {
+      const control = form.elements.namedItem(field) as HTMLInputElement;
+      const error = form.querySelector<HTMLElement>(`[data-error="${field}"]`)!;
+      error.textContent =
+        field === 'email'
+          ? 'Enter a valid email address.'
+          : 'Write a note of 2 to 2,000 characters.';
+      error.hidden = false;
+      control.setAttribute('aria-invalid', 'true');
+      control.setAttribute('aria-describedby', error.id);
+    }
+    status.textContent =
+      "That note didn't go through. Try again, or email juanesquivel138@gmail.com.";
   }
 </script>
-
 <style>
-  .email-row {
-    flex-wrap: wrap;
+  .contact-column {
+    max-width: 840px;
+    margin-inline: auto;
   }
-
-  .email-row:active {
-    transform: none;
-  }
-
-  .booking-block {
+  .contact-heading {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem 0 1.75rem;
-    border-bottom: 1px solid var(--line);
   }
-
-  .contact-kicker,
-  .local-time,
-  .booking-button {
+  .contact-heading > .contact-status {
+    margin: -1.8rem 0 1.8rem;
+  }
+  .contact-mono,
+  .contact-button {
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.6rem;
     font-weight: 400;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-  }
-
-  .contact-kicker {
     color: var(--text-faint);
   }
-
-  .booking-description {
-    margin-top: 0.65rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 3vw, 1.85rem);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-  }
-
-  .booking-button {
-    flex-shrink: 0;
-    padding: 1rem 1.3rem;
-    border-radius: 4px;
-    background: var(--text);
-    color: var(--bg);
-    text-align: center;
-    text-decoration: none;
-    transition: background 180ms var(--ease-out);
-  }
-
-  .booking-button:hover {
-    background: var(--accent);
-  }
-
-  .booking-button:focus-visible,
-  .email-address:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
-  }
-
-  .local-time:not([hidden]) {
+  .contact-status {
     display: flex;
     align-items: center;
     gap: 0.55rem;
-    margin-top: 1rem;
-    color: var(--text-soft);
   }
-
-  .local-time::before {
-    content: '';
+  .contact-dot {
     width: 6px;
     height: 6px;
     flex-shrink: 0;
     border-radius: 50%;
     background: #3f8f5a;
-    animation: availability-pulse 2.4s var(--ease-out) infinite;
+    animation: contact-pulse 2.4s var(--ease-out) infinite;
   }
-
-  @keyframes availability-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.45; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .local-time::before {
-      animation: none;
+  @keyframes contact-pulse {
+    50% {
+      opacity: 0.45;
     }
   }
-
-  .email-row .surface-body {
-    min-width: 0;
-    width: 100%;
+  .contact-calendar {
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: var(--bg-raised);
+    overflow: hidden;
+    margin-bottom: 32px;
   }
-
-  .email-address {
-    margin-top: 0.35rem;
-    padding: 0;
-    border: 0;
-    background: linear-gradient(var(--accent), var(--accent)) left bottom / 0% 1px no-repeat;
-    color: var(--text);
-    font-family: var(--font-display);
-    font-size: clamp(1.6rem, 5vw, 2.6rem);
-    line-height: 1.25;
-    letter-spacing: -0.03em;
-    text-align: left;
-    overflow-wrap: anywhere;
-    max-width: 100%;
-    cursor: pointer;
-    transition: background-size 180ms var(--ease-out);
-  }
-
-  .email-address:hover {
-    background-size: 100% 1px;
-  }
-
-  .elsewhere-kicker {
-    margin-top: 1.5rem;
-    margin-bottom: 0.25rem;
-  }
-
-  @media (max-width: 540px) {
-    .booking-block {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .booking-button {
-      width: 100%;
-    }
-
-    .email-row {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .email-address {
-      font-size: 1.45rem;
-    }
-  }
-
-  .email-actions {
+  .contact-calendar-head {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-strong);
   }
-
-  .email-actions button {
+  .contact-calendar-head h2 {
+    margin: 0 0 4px;
+  }
+  .contact-serif,
+  section h2.contact-serif {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    color: var(--text);
+    font-weight: 400;
+    margin: 0;
+  }
+  .contact-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.95rem 1.2rem;
+    background: var(--text);
+    color: var(--bg);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .contact-button:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .contact-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+  }
+  .contact-days {
+    display: grid;
+    grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+    border-bottom: 1px solid var(--line);
+  }
+  .contact-days span {
+    padding: 8px 10px;
+    border-left: 1px solid var(--line);
+  }
+  .contact-days span:first-child {
+    border: 0;
+  }
+  .contact-hours {
+    height: 120px;
+    display: flex;
+    position: relative;
+  }
+  .contact-hour-labels {
+    flex: 0 0 64px;
+    display: flex;
+    flex-direction: column;
+  }
+  .contact-hour-labels span {
+    height: 40px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .contact-day-column {
+    flex: 1;
+    border-left: 1px solid var(--line);
+    background-image: repeating-linear-gradient(transparent 0 39px, var(--line) 39px 40px);
+  }
+  .contact-today {
+    background-color: rgba(194, 74, 45, 0.07);
+    color: var(--accent);
+  }
+  .contact-now {
+    position: absolute;
+    left: 64px;
+    right: 0;
+    top: 48px;
+    z-index: 2;
+    border-top: 1.5px solid var(--accent);
+  }
+  .contact-now::before {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    left: -4px;
+    top: -4.5px;
+  }
+  .contact-calendar-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+  }
+  .contact-note {
+    margin-bottom: 36px;
+    scroll-margin-top: 24px;
+  }
+  .contact-note-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .contact-paper {
+    position: relative;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: var(--bg-raised);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .contact-paper::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(225deg, var(--bg) 50%, var(--line) 50%, var(--bg-raised) 100%);
+    pointer-events: none;
+  }
+  .contact-sheet {
+    padding: 22px 24px 6px;
+    background-image: repeating-linear-gradient(transparent 0 31px, var(--line) 31px 32px);
+    background-position: 0 21px;
+  }
+  .contact-sheet textarea {
+    display: block;
+    width: 100%;
+    min-height: 128px;
     padding: 0;
     border: 0;
     background: transparent;
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-style: italic;
+    line-height: 32px;
+    color: var(--text);
+    resize: none;
+  }
+  .contact-sheet textarea::placeholder {
+    color: var(--text-faint);
+    opacity: 0.75;
+  }
+  textarea:focus-visible,
+  input:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .contact-from {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 24px;
+    border-top: 1px solid var(--line);
+  }
+  .contact-email-field {
+    flex: 1;
+    min-width: 0;
+  }
+  .contact-from input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px dashed var(--line-strong);
+    background: transparent;
+    font: 0.95rem var(--font-ui);
+    color: var(--text);
+    padding: 4px 0;
+    border-radius: 0;
+  }
+  .contact-fold {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(225deg, transparent 50%, var(--bg) 50%);
+  }
+  .contact-trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .cf-turnstile {
+    padding: 12px 24px;
+  }
+  .contact-field-error,
+  .contact-error {
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+  .contact-error {
+    padding: 12px 0;
+  }
+  .contact-error a {
+    text-decoration: underline;
+  }
+  .contact-sent {
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .contact-sent h3 {
+    font-size: 2rem;
+    margin: 14px 0;
+  }
+  .contact-sent .contact-status {
+    justify-content: center;
+  }
+  .contact-envelope {
+    width: 52px;
+    height: 34px;
+    margin: auto;
+    border: 1px solid var(--line-strong);
+    background:
+      linear-gradient(32deg, transparent 49%, var(--line) 50%, transparent 52%),
+      linear-gradient(-32deg, transparent 49%, var(--line) 50%, transparent 52%);
+  }
+  .contact-write-another {
+    margin-top: 18px;
+    border: 0;
+    background: none;
+    text-decoration: underline;
     cursor: pointer;
   }
-
-  .email-actions .surface-arrow {
-    transition: color 150ms var(--ease-out);
+  .contact-quiet,
+  .contact-email,
+  .contact-social {
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
-
-  .email-actions .surface-arrow:hover {
+  .contact-quiet {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .contact-email {
+    flex-wrap: wrap;
+  }
+  .contact-email-address {
+    font: 1.35rem var(--font-display);
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+  .contact-copy {
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .contact-social {
+    gap: 24px;
+  }
+  .contact-native-feedback {
+    display: none;
+    font-size: 0.85rem;
+    padding: 12px 0;
+  }
+  .contact-native-feedback:target {
+    display: flex;
+    gap: 0.55rem;
+    align-items: center;
+  }
+  .contact-native-error:target {
+    display: block;
     color: var(--accent);
   }
-
-  .email-actions .surface-arrow:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
+  .contact-note[data-enhanced] .contact-native-feedback {
+    display: none;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  .contact-days .contact-today::after {
+    content: ' · Today';
+  }
+  @media (max-width: 540px) {
+    .contact-days .contact-today::after {
+      content: '';
+    }
+    .contact-calendar-head {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .contact-button {
+      width: 100%;
+    }
+    .contact-days {
+      grid-template-columns: 44px repeat(5, minmax(0, 1fr));
+      font-size: 0.48rem;
+      letter-spacing: 0;
+    }
+    .contact-days span {
+      padding: 8px 4px;
+    }
+    .contact-hour-labels {
+      flex-basis: 44px;
+      font-size: 0.48rem;
+      letter-spacing: 0;
+    }
+    .contact-hour-labels span {
+      padding: 4px;
+    }
+    .contact-now {
+      left: 44px;
+    }
+    .contact-calendar-foot {
+      flex-direction: column;
+    }
+    .contact-note-heading {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .contact-from {
+      flex-wrap: wrap;
+      padding: 12px 16px;
+    }
+    .contact-sheet {
+      padding-inline: 16px;
+    }
+    .contact-quiet {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .contact-email-address {
+      font-size: 1.2rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .contact-dot {
+      animation: none;
+    }
   }
 </style>
