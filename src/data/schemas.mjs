@@ -153,7 +153,7 @@ const workImageSchema = z.object({
 });
 const workEvidenceSchema = workImageSchema.extend({
   size: z.enum(['standard', 'wide']).default('standard'),
-  href: z.string().url().optional(),
+  href: z.string().url().or(z.string().startsWith('/work/')).optional(),
   linkLabel: nonEmptyString.optional(),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
