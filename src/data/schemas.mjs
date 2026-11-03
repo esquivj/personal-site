@@ -145,3 +145,23 @@ export const projectsSchema = z.array(z.object({
     height: z.number().int().positive(),
   }).optional(),
 })).superRefine(uniqueSlugs);
+
+const workImageSchema = z.object({
+  src: nonEmptyString,
+  alt: nonEmptyString,
+  caption: nonEmptyString.optional(),
+});
+export const workCaseSchema = z.object({
+  slug: nonEmptyString,
+  title: nonEmptyString,
+  summary: nonEmptyString,
+  company: nonEmptyString,
+  role: nonEmptyString,
+  image: workImageSchema,
+  imageStyle: z.enum(['cover', 'contain']).default('cover'),
+  intro: nonEmptyString,
+  sections: z.array(z.object({ title: nonEmptyString, text: nonEmptyString })).min(1),
+  gallery: z.array(workImageSchema).default([]),
+  links: z.array(z.object({ label: nonEmptyString, href: z.string().url() })).default([]),
+});
+export const workCasesSchema = z.array(workCaseSchema).superRefine(uniqueSlugs);
