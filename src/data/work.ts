@@ -9,11 +9,11 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     summary: 'Product launches, partner co-marketing, and growth stories.',
     company: 'Compound Foundation', role: 'Founding Social & Community Lead',
     image: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch.' },
-    intro: 'As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance. Our own channels were small, so partner co-marketing became a central part of the approach.',
+    intro: 'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance. Our own channels were small, so partner co-marketing became a central part of the approach.',
     sections: [
       {
-        title: 'The $52M announcement',
-        text: 'I drafted social copy and supported the announcement of Compound’s new leadership team and $52M DAO-approved development program. The lead post reached 156.6K views.',
+        title: 'Introducing Compound’s Institutional Strategy',
+        text: 'Compound announced a new leadership team and a $52M DAO-approved development program to build lending infrastructure for financial institutions. The roadmap included Compound v4, improvements to v3, and institutional integrations. Our Head of Marketing led the announcement campaign; I contributed social copy and helped with campaign execution. The lead X post reached 156.6K views.',
         evidence: [{
           src: '/work/compound/52m-announcement.png',
           alt: 'Compound’s new leadership and $52M development program announcement, showing 156.6K views on X.',
@@ -23,8 +23,8 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         }],
       },
       {
-        title: 'The Institutional Market launch',
-        text: 'I owned the social launch sequence and partner coordination: partner-specific copy, publishing dates, direct outreach, and amplification.',
+        title: 'The Institutional Market Launch',
+        text: 'The Institutional Market introduced a USDC lending market with collateral requirements and risk parameters designed for institutional borrowers. I owned the social launch sequence and partner co-marketing: preparing partner-specific copy, coordinating publishing dates, managing direct outreach, and amplifying partner posts.',
         evidence: [{
           src: '/work/compound/institutional-market-launch.png',
           alt: 'Compound Foundation post announcing the September 8 Institutional Market launch.',
@@ -35,7 +35,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         title: 'Partner Spotlight',
-        text: 'I developed and ran a co-marketing series with Kiln, DeFi Saver, Chainlink, and Sky. The series earned 2.9× the median X views of other posts published during the same period. That comparison uses cumulative views; it does not isolate the effect of partner amplification.',
+        text: 'I developed and ran Partner Spotlight to show how longstanding integrations with Kiln, DeFi Saver, Chainlink, and Sky supported Compound’s markets. Partner amplification helped us reach beyond our own channels. The series earned 2.9× the median X views of other posts published during the same period, measured using cumulative views.',
         evidence: [
           {
             src: '/work/compound/sky-spotlight.png',
@@ -54,7 +54,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         ],
       },
       {
-        title: 'Making traction visible',
+        title: 'Making Traction Visible',
         text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL. Growth stories gave BD proof to use in allocator conversations as the combined total reached $60M.',
         evidence: [{
           src: '/work/compound/institutional-market-dashboard.png',
@@ -74,7 +74,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         }],
       },
       {
-        title: 'AI & agentic workflows',
+        title: 'AI & Agentic Workflows',
         text: 'I built an AI-assisted workflow that pulled Compound v3 data from the protocol API, Dune, and DeFiLlama, surfaced potential stories, and filtered out misleading signals. I reviewed candidates with Claude and turned selected stories into social cards in Figma. Separately, I built a Claude/Hermes workflow with MCP to compare post performance, track partner amplification, and produce weekly reports.',
         evidence: [{
           src: '/work/compound/v3-story-workflow.png',
@@ -92,10 +92,10 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     slug: 'forse', title: 'Forse', summary: 'Building the brand, launching it, and finding the right buyer.',
     company: 'StableLab', role: 'Head of Marketing',
     image: { src: '/work/forse-rebrand-hero.png', alt: 'Forse: The Intelligence Layer Fueling Web3 Growth' },
-    intro: 'I led Forse’s naming, brand, and launch as StableLab expanded into analytics products. When the buyers turned out to be foundations and protocol teams, we changed the positioning and how the product presented itself.',
+    intro: 'Forse was StableLab’s analytics product for tracking protocol incentives and growth programs. I led its naming, brand, and launch as the company expanded beyond governance services. When the buyers turned out to be foundations and protocol teams, we changed the positioning and how the product presented itself.',
     sections: [
-      { title: 'A different buyer', text: 'The early positioning spoke to DAOs and their communities. We shifted toward growth intelligence for foundations and core protocol teams: the people making decisions about incentives and growth programs.' },
-      { title: 'My part', text: 'I owned positioning, messaging, website structure and copy, and sales materials. I directed the visual refresh and worked with product and design through reviews and launch.' },
+      { title: 'A Different Buyer', text: 'The early positioning spoke to DAOs and their communities. We shifted toward growth intelligence for foundations and core protocol teams: the people making decisions about incentives and growth programs.' },
+      { title: 'My Part', text: 'I owned positioning, messaging, website structure and copy, and sales materials. I directed the visual refresh and worked with product and design through reviews and launch.' },
     ],
     gallery: [
       { src: '/work/forse-landing-hero.avif', alt: 'Forse landing page', caption: 'Website structure and messaging' },
@@ -107,32 +107,32 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
   },
   {
     slug: 'governance-lab', title: 'Governance Lab', summary: 'A newsletter following governance across the crypto ecosystem.',
-    company: 'StableLab', role: 'Editorial direction, writing & distribution',
+    company: 'StableLab', role: 'Editorial Direction, Writing & Distribution',
     image: { src: '/work/governance-lab-cover.jpg', alt: 'Governance Lab newsletter cover' },
-    intro: 'I built Governance Lab from zero as a recurring resource for people following governance across the crypto ecosystem.',
+    intro: 'I built Governance Lab, StableLab’s newsletter, from zero as a recurring resource covering governance across the crypto ecosystem.',
     sections: [
-      { title: 'The work', text: 'I handled editorial direction, writing, curation, and distribution. The newsletter also gave StableLab a regular place to share research, announcements, and product launches.' },
-      { title: 'The result', text: '121 issues, 920+ subscribers, and a 38% average open rate.' },
+      { title: 'The Work', text: 'I handled editorial direction, writing, curation, and distribution. The newsletter also gave StableLab a regular place to share research, announcements, and product launches.' },
+      { title: 'The Result', text: '121 issues, 920+ subscribers, and a 38% average open rate.' },
     ],
     links: [{ label: 'Read Governance Lab', href: 'https://stablelab.substack.com' }],
   },
   {
     slug: 'stablepod', title: 'StablePod', summary: 'Conversations with the people building crypto protocols.',
-    company: 'StableLab', role: 'Producer & co-host',
+    company: 'StableLab', role: 'Producer & Co-Host',
     image: { src: '/work/stablepod-cover.jpg', alt: 'StablePod podcast cover' }, imageStyle: 'contain',
     intro: 'I produced and co-hosted 29 episodes of StablePod, a podcast covering crypto protocols and governance with founders and industry leaders.',
     sections: [
-      { title: 'The work', text: 'I handled guest coordination, episode planning, production, and promotion. Guests included teams from Morpho, Euler, Gnosis, and the Uniswap Foundation.' },
-      { title: 'Why it mattered', text: 'The series gave guests another channel to share their work and launches. It helped the wider industry learn about their projects while deepening partner relationships and supporting business development.' },
+      { title: 'The Work', text: 'I handled guest coordination, episode planning, production, and promotion. Guests included teams from Morpho, Euler, Gnosis, and the Uniswap Foundation.' },
+      { title: 'Why It Mattered', text: 'The series gave guests another channel to share their work and launches. It helped the wider industry learn about their projects while deepening partner relationships and supporting business development.' },
     ],
     links: [{ label: 'Explore the episodes', href: 'https://stablepod.vercel.app' }, { label: 'Listen on Spotify', href: 'https://open.spotify.com/show/4LZVPrxKohIaLjgvQRbVwI' }],
   },
   {
     slug: 'governance-gathering', title: 'Governance Gathering', summary: 'Bringing partners and prospective clients together at EthCC Brussels.',
-    company: 'StableLab', role: 'Event lead',
+    company: 'StableLab', role: 'Event Lead',
     image: { src: '/work/agg/event-4.jpg', alt: 'Guests at Governance Gathering in Brussels' },
     intro: 'Governance Gathering was a sales and business development event during EthCC Brussels. It brought industry partners and prospective clients into one venue to deepen relationships and find opportunities.',
-    sections: [{ title: 'My part', text: 'I led the event, secured co-sponsors, and managed event delivery. The aim was to spend time with people we worked with and meet the teams we wanted to work with.' }],
+    sections: [{ title: 'My Part', text: 'I led the event, secured co-sponsors, and managed event delivery, bringing industry partners and prospective clients together for business development conversations.' }],
     gallery: [{ src: '/work/agg/event-5.jpg', alt: 'Governance Gathering event', caption: 'EthCC Brussels' }, { src: '/work/agg/event-6.jpg', alt: 'Conversations at Governance Gathering', caption: 'Partners and guests' }],
     links: [{ label: 'View the event', href: 'https://lu.ma/l5tvcrcb' }],
   },
