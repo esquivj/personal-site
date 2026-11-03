@@ -1,29 +1,20 @@
-# My portfolio
+# juanesquivel.xyz
 
-I'm Juan Esquivel. I built juanesquivel.xyz as my portfolio site. It covers my work and writing, with pages for projects and speaking. I also share my travels and what I'm doing on my Now page.
-
-[Visit the site](PERSONAL_SITE_URL)
-
-![Screenshot of the site](docs/screenshot.png)
-<!-- screenshot: add docs/screenshot.png -->
+This repo holds the source for my portfolio site at [juanesquivel.xyz](https://juanesquivel.xyz). The site covers my work and writing, with pages for projects and speaking.
 
 ## How I built it
 
-I directed Claude and Codex to build the site with Astro. Their `Co-authored-by` trailers in the git history document their contributions.
+I directed Claude and Codex to build the site. Their `Co-authored-by` trailers in the git history show each contribution.
 
-The site uses React islands and TypeScript. Zod schemas in `src/data/schemas.mjs` validate structured content. Vercel hosts the site.
+## Stack
+
+The site runs on Astro 5 and TypeScript, with React islands for the interactive parts. Zod schemas in `src/data/schemas.mjs` validate structured content, so bad data fails the build. The travels page draws its globe and map with d3-geo and MapLibre GL. Vercel hosts the site.
 
 ## Run it locally
-
-Install dependencies and start the dev server:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Build the site:
-
-```sh
-npm run build
-```
+`npm run build` builds the static site.
