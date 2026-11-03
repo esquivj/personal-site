@@ -145,3 +145,36 @@ export const projectsSchema = z.array(z.object({
     height: z.number().int().positive(),
   }).optional(),
 })).superRefine(uniqueSlugs);
+
+const workImageSchema = z.object({
+  src: nonEmptyString,
+  alt: nonEmptyString,
+  caption: nonEmptyString.optional(),
+});
+const workEvidenceSchema = workImageSchema.extend({
+  size: z.enum(['standard', 'wide']).default('standard'),
+  href: z.string().url().or(z.string().startsWith('/work/')).optional(),
+  linkLabel: nonEmptyString.optional(),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+}).refine(item => Boolean(item.href) === Boolean(item.linkLabel), {
+  message: 'Evidence links require both a URL and a label.',
+});
+export const workCaseSchema = z.object({
+  slug: nonEmptyString,
+  title: nonEmptyString,
+  summary: nonEmptyString,
+  company: nonEmptyString,
+  role: nonEmptyString,
+  image: workImageSchema,
+  imageStyle: z.enum(['cover', 'contain']).default('cover'),
+  intro: nonEmptyString,
+  sections: z.array(z.object({
+    title: nonEmptyString,
+    text: nonEmptyString,
+    evidence: z.array(workEvidenceSchema).default([]),
+  })).min(1),
+  gallery: z.array(workImageSchema).default([]),
+  links: z.array(z.object({ label: nonEmptyString, href: z.string().url() })).default([]),
+});
+export const workCasesSchema = z.array(workCaseSchema).superRefine(uniqueSlugs);

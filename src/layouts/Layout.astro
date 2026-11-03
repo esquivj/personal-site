@@ -9,6 +9,7 @@ interface Props {
   publishedTime?: string;
   canonicalPath?: string;
   preloadImages?: string[];
+  wide?: boolean;
 }
 
 const SITE_URL = 'https://juanesquivel.xyz';
@@ -22,6 +23,7 @@ const {
   publishedTime,
   canonicalPath,
   preloadImages = [],
+  wide = false,
 } = Astro.props;
 
 const canonicalURL = canonicalPath
@@ -88,7 +90,7 @@ const isAbout = canonicalPath === '/about';
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="container">
+    <div class:list={["container", wide && "container--wide"]}>
       <main id="main-content">
         <slot />
       </main>
@@ -354,6 +356,10 @@ const isAbout = canonicalPath === '/about';
     max-width: 840px;
     margin: 0 auto;
     padding: 3.25rem 2rem 0.75rem;
+  }
+
+  .container--wide {
+    max-width: 1160px;
   }
 
   main {
