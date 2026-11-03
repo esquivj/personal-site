@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
+const CONTACT_EMAIL = 'juanesquivel138@gmail.com';
+
 const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
@@ -12,7 +14,7 @@ const pageSchema = {
 
 <Layout
   title="Contact Juan Esquivel — Work & Speaking"
-  description="Contact Juan Esquivel for collaborations, speaking, or brand work. Email is best, with X and LinkedIn as secondary ways to reach out."
+  description="Contact Juan Esquivel about a role or a project. Email reaches him fastest, with X and LinkedIn as other ways to reach out."
   canonicalPath="/contact"
 >
   <Fragment slot="head">
@@ -20,19 +22,22 @@ const pageSchema = {
   </Fragment>
 
   <PageHeader
-    title="Contact"
-    subtitle="If you want to collaborate, speak, or just say hi, email me or reach out on X or LinkedIn."
+    title="Hiring, or have something to build?"
+    subtitle="Email reaches me fastest. You can also find me on X and LinkedIn."
     compact={true}
   />
 
   <section class="surface-list">
-    <a class="surface-link" href="mailto:juanesquivel138@gmail.com">
+    <div class="surface-link email-row">
       <div class="surface-body">
-        <span class="surface-title">juanesquivel138@gmail.com</span>
+        <span class="surface-title">{CONTACT_EMAIL}</span>
         <span class="surface-meta">Email</span>
       </div>
-      <span class="surface-arrow">Send ↗</span>
-    </a>
+      <div class="email-actions">
+        <a class="surface-arrow" href={`mailto:${CONTACT_EMAIL}`}>Email ↗</a>
+        <button type="button" class="surface-arrow" data-copy-email={CONTACT_EMAIL}>Copy</button>
+      </div>
+    </div>
     <a class="surface-link" href="https://x.com/0xCadena" target="_blank" rel="noopener">
       <div class="surface-body">
         <span class="surface-title">X (Twitter)</span>
@@ -48,4 +53,88 @@ const pageSchema = {
       <span class="surface-arrow">Open ↗</span>
     </a>
   </section>
+  <span class="sr-only" aria-live="polite" data-copy-announcement></span>
 </Layout>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+  const announcement = document.querySelector<HTMLElement>('[data-copy-announcement]');
+  let resetTimer: ReturnType<typeof setTimeout>;
+
+  function fallbackCopy(email: string) {
+    const textarea = document.createElement('textarea');
+    textarea.value = email;
+    textarea.readOnly = true;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    try {
+      textarea.select();
+      if (!document.execCommand('copy')) throw new Error('Copy failed');
+    } finally {
+      textarea.remove();
+      button?.focus();
+    }
+  }
+
+  button?.addEventListener('click', async () => {
+    const email = button.dataset.copyEmail;
+    if (!email) return;
+    try {
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        fallbackCopy(email);
+      }
+      clearTimeout(resetTimer);
+      button.textContent = 'Copied';
+      if (announcement) announcement.textContent = 'Email address copied.';
+      resetTimer = setTimeout(() => {
+        button.textContent = 'Copy';
+        if (announcement) announcement.textContent = '';
+      }, 1800);
+    } catch {
+      if (announcement) announcement.textContent = 'Copy failed. Please select and copy the email address.';
+    }
+  });
+</script>
+
+<style>
+  .email-row {
+    flex-wrap: wrap;
+  }
+
+  .email-row:active {
+    transform: none;
+  }
+
+  .email-row .surface-title {
+    overflow-wrap: anywhere;
+  }
+
+  .email-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .email-actions button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .email-actions .surface-arrow {
+    transition: color 150ms var(--ease-out);
+  }
+
+  .email-actions .surface-arrow:hover {
+    color: var(--accent);
+  }
+
+  .email-actions .surface-arrow:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+</style>
