@@ -151,6 +151,12 @@ const workImageSchema = z.object({
   alt: nonEmptyString,
   caption: nonEmptyString.optional(),
 });
+const workEvidenceSchema = workImageSchema.extend({
+  href: z.string().url(),
+  linkLabel: nonEmptyString,
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+});
 export const workCaseSchema = z.object({
   slug: nonEmptyString,
   title: nonEmptyString,
@@ -160,7 +166,11 @@ export const workCaseSchema = z.object({
   image: workImageSchema,
   imageStyle: z.enum(['cover', 'contain']).default('cover'),
   intro: nonEmptyString,
-  sections: z.array(z.object({ title: nonEmptyString, text: nonEmptyString })).min(1),
+  sections: z.array(z.object({
+    title: nonEmptyString,
+    text: nonEmptyString,
+    evidence: z.array(workEvidenceSchema).default([]),
+  })).min(1),
   gallery: z.array(workImageSchema).default([]),
   links: z.array(z.object({ label: nonEmptyString, href: z.string().url() })).default([]),
 });
