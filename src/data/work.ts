@@ -12,6 +12,17 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     intro: 'As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance. Our own channels were small, so partner co-marketing became a central part of the approach.',
     sections: [
       {
+        title: 'The $52M announcement',
+        text: 'I drafted social copy and supported the announcement of Compound’s new leadership team and $52M DAO-approved development program. The lead post reached 156.6K views.',
+        evidence: [{
+          src: '/work/compound/52m-announcement.png',
+          alt: 'Compound’s new leadership and $52M development program announcement, showing 156.6K views on X.',
+          width: 776, height: 705,
+          href: 'https://x.com/Compound_xyz/status/2089386082441871388',
+          linkLabel: 'Read the announcement',
+        }],
+      },
+      {
         title: 'The Institutional Market launch',
         text: 'I owned the social launch sequence and partner coordination: partner-specific copy, publishing dates, direct outreach, and amplification.',
         evidence: [{
@@ -49,9 +60,15 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
           src: '/work/compound/institutional-market-dashboard.png',
           alt: 'Compound Institutional Market dashboard by cadena on Dune, tracking deposits, loans, utilization, rates, and deposits plus collateral.',
           caption: 'Dashboard snapshot; figures change as the market updates.',
+          size: 'wide',
           width: 1817, height: 1225,
           href: 'https://dune.com/cadena/compound-institutional-market',
           linkLabel: 'Explore the Dune dashboard',
+        }, {
+          src: '/work/compound/60m-market-milestone.png',
+          alt: 'Published Compound Institutional Market milestone: over $60M in total deposits and collateral supplied, with over $18M in outstanding USDC loans.',
+          caption: 'The $60M milestone, turned into a public growth update.',
+          width: 776, height: 705,
         }],
       },
       { title: 'AI & agentic workflows', text: 'I also built a shared social analytics workflow with Claude, Hermes, and MCP to compare posts, track partner amplification, and produce weekly reports.' },

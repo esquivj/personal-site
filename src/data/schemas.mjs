@@ -152,10 +152,13 @@ const workImageSchema = z.object({
   caption: nonEmptyString.optional(),
 });
 const workEvidenceSchema = workImageSchema.extend({
-  href: z.string().url(),
-  linkLabel: nonEmptyString,
+  size: z.enum(['standard', 'wide']).default('standard'),
+  href: z.string().url().optional(),
+  linkLabel: nonEmptyString.optional(),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
+}).refine(item => Boolean(item.href) === Boolean(item.linkLabel), {
+  message: 'Evidence links require both a URL and a label.',
 });
 export const workCaseSchema = z.object({
   slug: nonEmptyString,
