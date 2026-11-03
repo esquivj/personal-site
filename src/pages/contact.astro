@@ -34,15 +34,12 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         subtitle="Grab a time on my calendar or leave a note below."
         compact={true}
       />
-      <p class="contact-status contact-mono">
-        <span class="contact-dot" aria-hidden="true"></span>Open to full-time roles
-      </p>
     </div>
     <section class="contact-calendar" aria-labelledby="booking-heading">
       <div class="contact-calendar-head">
         <div>
-          <h2 class="contact-mono" id="booking-heading">Book a call</h2><p class="contact-serif">
-            Pick a slot that works for you.
+          <h2 class="contact-mono" id="booking-heading">In LA?</h2><p class="contact-serif">
+            Let's grab a coffee.
           </p>
         </div>
         <a class="contact-button" href={BOOKING_URL} target="_blank" rel="noopener">Find a time ↗</a
@@ -84,7 +81,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         <span class="contact-dot" aria-hidden="true"></span>Sent. Thanks for the note.
       </p>
       <p id="note-error" class="contact-native-feedback contact-native-error" data-native-feedback>
-        That note didn't go through. Check the email and message, then try again, or email
+        That note didn't go through. Try again, or email
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
       <div class="contact-error" data-general-error hidden>
@@ -92,7 +89,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
           That note didn't go through. Try again, or email <a href={`mailto:${CONTACT_EMAIL}`}
             >{CONTACT_EMAIL}</a
           >.
-        </p><p data-form-error></p>
+        </p>
       </div>
       <form method="post" action="/api/note" class="contact-paper" data-note-form>
         <div class="contact-sheet">
@@ -138,25 +135,14 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       <div class="contact-sent contact-paper" data-sent hidden>
         <div class="contact-envelope" aria-hidden="true"></div><h3 tabindex="-1" data-sent-heading>
           Sent. Thanks for the note.
-        </h3><p class="contact-status contact-mono">
-          <span class="contact-dot" aria-hidden="true"></span>Sent to my inbox
-        </p><button type="button" class="contact-write-another contact-mono" data-write-another
+        </h3><button type="button" class="contact-write-another contact-mono" data-write-another
           >Write another</button
         >
       </div>
       <p class="sr-only" aria-live="polite" role="status" data-note-status></p>
     </section>
     <div class="contact-quiet">
-      <div class="contact-email">
-        <span class="contact-mono">Email</span><a
-          href={`mailto:${CONTACT_EMAIL}`}
-          class="contact-email-address">{CONTACT_EMAIL}</a
-        ><div class="email-actions">
-          <button type="button" class="contact-copy contact-mono" data-copy-email={CONTACT_EMAIL}
-            >Copy</button
-          >
-        </div>
-      </div><div class="contact-social contact-mono">
+      <div class="contact-social contact-mono">
         <a href="https://x.com/0xCadena" target="_blank" rel="noopener">X · @0xCadena ↗</a><a
           href="https://www.linkedin.com/in/esquivj/"
           target="_blank"
@@ -164,7 +150,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         >
       </div>
     </div>
-    <span class="sr-only" aria-live="polite" data-copy-announcement></span>
   </div>
 </Layout>
 <script is:inline>
@@ -177,55 +162,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   }
 </script>
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-copy-email]');
-  const copyButton = document.querySelector<HTMLButtonElement>('.email-actions [data-copy-email]');
-  const announcement = document.querySelector<HTMLElement>('[data-copy-announcement]');
-  let resetTimer: ReturnType<typeof setTimeout>;
-
-  function fallbackCopy(email: string, trigger: HTMLButtonElement) {
-    const textarea = document.createElement('textarea');
-    textarea.value = email;
-    textarea.readOnly = true;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.append(textarea);
-    try {
-      textarea.select();
-      if (!document.execCommand('copy')) throw new Error('Copy failed');
-    } finally {
-      textarea.remove();
-      trigger.focus();
-    }
-  }
-
-  async function copyEmail(event: MouseEvent) {
-    const trigger = event.currentTarget as HTMLButtonElement;
-    const email = trigger.dataset.copyEmail;
-    if (!email) return;
-    clearTimeout(resetTimer);
-    if (copyButton) copyButton.textContent = 'Copy';
-    if (announcement) announcement.textContent = '';
-    try {
-      try {
-        await navigator.clipboard.writeText(email);
-      } catch {
-        fallbackCopy(email, trigger);
-      }
-      clearTimeout(resetTimer);
-      if (copyButton) copyButton.textContent = 'Copied';
-      if (announcement) announcement.textContent = 'Email address copied.';
-      resetTimer = setTimeout(() => {
-        if (copyButton) copyButton.textContent = 'Copy';
-        if (announcement) announcement.textContent = '';
-      }, 1800);
-    } catch {
-      if (announcement)
-        announcement.textContent = 'Copy failed. Please select and copy the email address.';
-    }
-  }
-
-  buttons.forEach((button) => button.addEventListener('click', copyEmail));
-
   const localTime = document.querySelector<HTMLElement>('[data-local-time]');
   const timeFormatter = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Los_Angeles',
@@ -303,7 +239,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   const submitMarkup = submit.innerHTML;
   function clearErrors() {
     generalError.hidden = true;
-    document.querySelector<HTMLElement>('[data-form-error]')!.textContent = '';
     form.querySelectorAll<HTMLElement>('[data-error]').forEach((el) => {
       el.hidden = true;
       el.textContent = '';
@@ -357,8 +292,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
         return;
       }
-      document.querySelector<HTMLElement>('[data-form-error]')!.textContent =
-        typeof errors.form === 'string' ? errors.form : '';
       throw new Error('Delivery failed');
     } catch {
       generalError.hidden = false;
@@ -407,9 +340,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   }
   .contact-heading {
     position: relative;
-  }
-  .contact-heading > .contact-status {
-    margin: -1.8rem 0 1.8rem;
   }
   .contact-mono,
   .contact-button {
@@ -661,9 +591,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     font-size: 2rem;
     margin: 14px 0;
   }
-  .contact-sent .contact-status {
-    justify-content: center;
-  }
   .contact-envelope {
     width: 52px;
     height: 34px;
@@ -681,7 +608,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     cursor: pointer;
   }
   .contact-quiet,
-  .contact-email,
   .contact-social {
     display: flex;
     align-items: center;
@@ -689,23 +615,9 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   }
   .contact-quiet {
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 18px 0;
     border-top: 1px solid var(--line);
-  }
-  .contact-email {
-    flex-wrap: wrap;
-  }
-  .contact-email-address {
-    font: 1.35rem var(--font-display);
-    letter-spacing: -0.02em;
-    overflow-wrap: anywhere;
-  }
-  .contact-copy {
-    padding: 0;
-    background: none;
-    border: 0;
-    cursor: pointer;
   }
   .contact-social {
     gap: 24px;
@@ -776,13 +688,6 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     }
     .contact-sheet {
       padding-inline: 16px;
-    }
-    .contact-quiet {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-    .contact-email-address {
-      font-size: 1.2rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {
