@@ -9,7 +9,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     summary: 'Product launches, partner co-marketing, and growth stories.',
     company: 'Compound Foundation', role: 'Founding Social & Community Lead',
     image: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch.' },
-    intro: 'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance. Our own channels were small, so partner co-marketing became a central part of the approach.',
+    intro: 'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
     sections: [
       {
         title: 'Introducing Compound’s Institutional Strategy',
