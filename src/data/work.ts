@@ -9,7 +9,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     summary: 'First social hire. Launches, partner co-marketing, governance, and the reporting that showed what worked.',
     company: 'Compound Foundation', role: 'Founding Social & Community Lead',
     image: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch.' },
-    intro: 'Compound is one of the original lending protocols in crypto: an open market where anyone can lend and borrow digital dollars and other assets, with no bank in the middle. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance votes. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
+    intro: 'Compound is one of crypto’s original lending protocols, where anyone can lend and borrow without a bank. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance votes. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
     sections: [
       {
         title: 'Introducing Compound’s Institutional Strategy',
@@ -24,7 +24,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'institutional-market', title: 'The Institutional Market Launch',
-        text: 'The Institutional Market introduced a market for lending and borrowing USDC, a digital dollar, with collateral requirements and risk parameters designed for institutional borrowers. I owned the social launch sequence and partner co-marketing: preparing partner-specific copy, coordinating publishing dates, managing direct outreach, and amplifying partner posts.',
+        text: 'The Institutional Market introduced a USDC lending market with collateral requirements and risk parameters designed for institutional borrowers. I owned the social launch sequence and partner co-marketing: preparing partner-specific copy, coordinating publishing dates, managing direct outreach, and amplifying partner posts.',
         evidence: [{
           src: '/work/compound/institutional-market-launch.png',
           alt: 'Compound Foundation post announcing the September 8 Institutional Market launch.',
@@ -55,7 +55,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'traction', title: 'Making Traction Visible',
-        text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL (total value locked), the usual crypto headline number. Growth stories gave business development proof to use with institutional investors as the combined total reached $60M.',
+        text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL, the usual headline number. Growth stories gave business development proof to use with institutional investors as the combined total reached $60M.',
         evidence: [{
           src: '/work/compound/institutional-market-dashboard.png',
           alt: 'Compound Institutional Market dashboard by cadena on Dune, tracking deposits, loans, utilization, rates, and deposits plus collateral.',
@@ -101,7 +101,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     summary: 'Built marketing from zero at a company that worked with 40+ crypto protocols, then took its data product to market.',
     company: 'StableLab', role: 'Head of Marketing',
     image: { src: '/work/partners.jpg', alt: 'The StableLab logo surrounded by partner logos, including Uniswap, Aave, Arbitrum, Lido, and Sky.' },
-    intro: 'StableLab worked with 40+ crypto protocols, including Uniswap, Aave, and Arbitrum, on governance: how these networks propose, debate, and vote on changes. As Head of Marketing, I built the marketing function from zero. In the services era, the job was to make StableLab the name protocols knew and trusted, so sales conversations started warm. Later, I took Forse, the company’s data product, to market.',
+    intro: 'StableLab worked with 40+ crypto protocols, including Uniswap, Aave, and Arbitrum, on governance, the way these networks make decisions. As Head of Marketing, I built the marketing function from zero. In the services era, the job was to make StableLab the name protocols knew and trusted, so sales conversations started warm. Later, I took Forse, the company’s data product, to market.',
     sections: [
       {
         id: 'stablepod', kicker: 'Services Era', title: 'StablePod',
@@ -128,7 +128,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'proposal-amplification', title: 'Proposal Amplification',
-        text: 'In crypto, changes to a protocol go through public proposals that token holders vote on. Every proposal we submitted for a client needed to pass, and each community had its own dynamics. I built a comms plan for each one across its lifecycle: forum post, temperature check, onchain vote, and outcome. We amplified 50+ proposals. Passed proposals meant renewed contracts, so this work directly supported revenue.',
+        text: 'Our own governance proposals asked protocol communities to fund StableLab initiatives, and each community had its own dynamics. I built a campaign for every proposal, from forum post to temperature check, onchain vote, and outcome. We amplified 50+ of them. Passed proposals meant renewed contracts, so this work directly supported revenue.',
         evidence: [
           { src: '/work/proposals/unichain.jpg', alt: 'StableLab governance proposal graphic for Unichain.', width: 800, height: 400 },
           { src: '/work/proposals/gnosis.jpg', alt: 'StableLab governance proposal graphic for Gnosis.', width: 800, height: 400 },
@@ -146,7 +146,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'forse-launch', kicker: 'GTM for a Data Product', title: 'Launching Forse',
-        text: 'Forse was StableLab’s analytics product for measuring whether crypto growth programs, like token incentives and grants, actually worked. It was our first product launch, with no brand or playbook to start from. I ran naming workshops with the CEO, Head of Product, and our designer, and we landed on Forse, inspired by forsker, the Danish word for researcher. I built the visual identity with our designer, framed the product as Built by StableLab to carry over the trust we had earned, and ran the launch across the website, blog, X, LinkedIn, and email. Going live before EthCC gave BD a reason to reach out.',
+        text: 'Forse was StableLab’s analytics product for measuring whether crypto incentive and grant programs worked. It was our first product launch, with no brand or playbook to start from. I ran naming workshops with the CEO, Head of Product, and our designer, and we landed on Forse, inspired by forsker, the Danish word for researcher. I built the visual identity with our designer, framed the product as Built by StableLab to carry over the trust we had earned, and ran the launch across the website, blog, X, LinkedIn, and email. Going live before EthCC gave BD a reason to reach out.',
         evidence: [{
           src: '/work/forse-brand-system.jpg',
           alt: 'Forse launch brand board: name origin, color palette, wordmark, and the first product interface.',
@@ -165,7 +165,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'forse-repositioning', title: 'Finding the Right Buyer',
-        text: 'We first pitched Forse to DAOs, the community-run organizations that govern protocols. That wasn’t landing. The buyers with budget were the foundations and core teams behind those protocols. We repositioned Forse from DAO analytics to the intelligence layer fueling web3 growth. I pushed to keep everything under one brand instead of launching a third, directed a modern, minimal visual refresh, and owned the messaging, website structure, and copy.',
+        text: 'We first pitched Forse to DAOs, the communities that govern protocols, and it wasn’t landing. The buyers with budget were the foundations and core teams behind those protocols. We repositioned Forse from DAO analytics to the intelligence layer fueling web3 growth. I pushed to keep everything under one brand instead of launching a third, directed a modern, minimal visual refresh, and owned the messaging, website structure, and copy.',
         evidence: [{
           src: '/work/forse-landing-hero.webp',
           alt: 'Forse landing page: The Intelligence Layer Fueling Web3 Growth.',

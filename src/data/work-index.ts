@@ -15,7 +15,7 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
     stat: { value: '$60M', label: 'Institutional Market' },
     cover: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch' },
     intro:
-      'Compound is one of the original lending protocols in crypto: an open market where anyone can lend and borrow digital dollars and other assets, with no bank in the middle. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance votes.',
+      'Compound is one of crypto’s original lending protocols, where anyone can lend and borrow without a bank. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance votes.',
     figures: [
       { value: '$60M', label: 'In deposits and collateral on the new Institutional Market' },
       { value: '2.9×', label: 'the median X views, for Partner Spotlight' },
@@ -64,7 +64,7 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
     stat: { value: '40+', label: 'Crypto protocols' },
     cover: { src: '/work/partners.jpg', alt: 'The StableLab logo surrounded by partner logos, including Uniswap, Aave, Arbitrum, Lido, and Sky' },
     intro:
-      'StableLab worked with 40+ crypto protocols, including Uniswap, Aave, and Arbitrum, on governance: how these networks propose, debate, and vote on changes. It later built Forse, a data product for crypto growth teams.',
+      'StableLab worked with 40+ crypto protocols, including Uniswap, Aave, and Arbitrum, on governance, the way these networks make decisions. It later built Forse, a data product for crypto growth teams.',
     figures: [],
     phases: [
       {
@@ -87,7 +87,7 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
           },
           {
             title: 'Proposal Amplification',
-            text: 'Campaigns to get our clients’ governance proposals voted through. Passed proposals meant renewed contracts.',
+            text: 'Campaigns to get our funding proposals voted through by protocol communities. Passed proposals meant renewed contracts.',
             result: '50+ proposals',
             image: '/work/proposals/unichain.jpg',
             href: '/work/stablelab#proposal-amplification',
