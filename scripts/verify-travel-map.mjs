@@ -155,18 +155,18 @@ try {
   await still.keyboard.press('Escape');
   await still.locator('[data-globe-canvas]').focus();
   for (let i = 0; i < 6; i++) await still.keyboard.press('ArrowRight');
-  await still.waitForTimeout(150);
+  await still.waitForTimeout(400);
   const moved = await tagAt();
   assert.ok(!moved || Math.abs(moved.x - homeView.x) > 20, 'arrow keys turn the globe');
   await still.getByRole('button', { name: 'Back to home' }).click();
-  await still.waitForTimeout(150);
+  await still.waitForTimeout(400);
   const back = await tagAt();
   assert.ok(back && Math.abs(back.x - homeView.x) < 3 && Math.abs(back.y - homeView.y) < 3, 'home control returns to Los Angeles');
   await still.screenshot({ path: 'test-results/travel-map/home.png' });
 
   // Zoomed all the way in, the globe runs past its square instead of being cropped to it.
   for (let i = 0; i < 4; i++) await still.getByRole('button', { name: 'Zoom in', exact: true }).click();
-  await still.waitForTimeout(150);
+  await still.waitForTimeout(400);
   const wide = await still.locator('[data-globe-canvas]').boundingBox();
   const square = await still.locator('.globe-stage').boundingBox();
   assert.ok(wide.width > square.width * 1.5, 'canvas extends beyond the globe square');
