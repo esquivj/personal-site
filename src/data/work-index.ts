@@ -1,33 +1,11 @@
 // The /work index: one expandable row per employer. Case pages live in ./work.ts.
 
-export type WorkHighlight = {
-  title: string;
-  text: string;
-  result?: string;
-  image: string;
-  href?: string;
-};
+import { z } from 'astro/zod';
+import { workEmployerSchema, workEmployersSchema } from './schemas.mjs';
 
-export type WorkPhase = {
-  title: string;
-  text?: string;
-  items: WorkHighlight[];
-};
+export type WorkEmployer = z.infer<typeof workEmployerSchema>;
 
-export type WorkEmployer = {
-  id: string;
-  name: string;
-  role: string;
-  years: string;
-  summary: string;
-  stat: { value: string; label: string };
-  intro: string;
-  figures: { value: string; label: string }[];
-  phases: WorkPhase[];
-  cta?: { label: string; href: string };
-};
-
-export const workEmployers: WorkEmployer[] = [
+export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
   {
     id: 'compound',
     name: 'Compound Foundation',
@@ -35,6 +13,7 @@ export const workEmployers: WorkEmployer[] = [
     years: 'May-Oct 2026',
     summary: 'Product launches, partner co-marketing, and growth stories for the Institutional Market.',
     stat: { value: '$60M', label: 'Market milestone' },
+    cover: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch' },
     intro:
       'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance.',
     figures: [
@@ -83,6 +62,7 @@ export const workEmployers: WorkEmployer[] = [
     years: '2023-2026',
     summary: 'Built the marketing function from zero, first for governance services, then for a data product.',
     stat: { value: '40+', label: 'Protocol partners' },
+    cover: { src: '/work/partners.jpg', alt: 'The StableLab logo surrounded by partner logos, including Uniswap, Aave, Arbitrum, Lido, and Sky' },
     intro:
       'StableLab is a governance and data infrastructure company serving 40+ protocol partners, including Uniswap, Aave, and Arbitrum. I built its marketing function from zero.',
     figures: [],
@@ -148,4 +128,4 @@ export const workEmployers: WorkEmployer[] = [
       },
     ],
   },
-];
+]);

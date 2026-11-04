@@ -178,3 +178,30 @@ export const workCaseSchema = z.object({
   links: z.array(z.object({ label: nonEmptyString, href: z.string().url() })).default([]),
 });
 export const workCasesSchema = z.array(workCaseSchema).superRefine(uniqueSlugs);
+
+// The /work index: one expandable row per employer.
+const workHighlightSchema = z.object({
+  title: nonEmptyString,
+  text: nonEmptyString,
+  result: nonEmptyString.optional(),
+  image: nonEmptyString,
+  href: nonEmptyString.optional(),
+});
+export const workEmployerSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/),
+  name: nonEmptyString,
+  role: nonEmptyString,
+  years: nonEmptyString,
+  summary: nonEmptyString,
+  stat: z.object({ value: nonEmptyString, label: nonEmptyString }),
+  cover: z.object({ src: nonEmptyString, alt: nonEmptyString }),
+  intro: nonEmptyString,
+  figures: z.array(z.object({ value: nonEmptyString, label: nonEmptyString })).default([]),
+  phases: z.array(z.object({
+    title: nonEmptyString,
+    text: nonEmptyString.optional(),
+    items: z.array(workHighlightSchema).min(1),
+  })).min(1),
+  cta: z.object({ label: nonEmptyString, href: nonEmptyString }).optional(),
+});
+export const workEmployersSchema = z.array(workEmployerSchema);

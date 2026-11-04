@@ -29,6 +29,7 @@ import { workEmployers } from '../data/work-index';
         </summary>
 
         <div class="work-panel">
+          <figure class="work-cover"><img src={employer.cover.src} alt={employer.cover.alt} loading="lazy" decoding="async" /></figure>
           <div class="work-intro">
             <p>{employer.intro}</p>
             {employer.figures.length > 0 && (
@@ -220,6 +221,19 @@ import { workEmployers } from '../data/work-index';
     }
   }
 
+  .work-cover {
+    margin: calc(-1 * 1.75rem) calc(-1 * 1.75rem) 1.75rem;
+    aspect-ratio: 2;
+    overflow: hidden;
+    background: #0b0f17;
+    border-bottom: 1px solid var(--line);
+  }
+  .work-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   .work-intro {
     display: flex;
     flex-wrap: wrap;
@@ -415,6 +429,10 @@ import { workEmployers } from '../data/work-index';
     .work-panel {
       margin-left: 0;
       padding: 1.25rem;
+    }
+    .work-cover {
+      margin: -1.25rem -1.25rem 1.25rem;
+      aspect-ratio: 2;
     }
     .work-figures dd {
       font-size: 2.1rem;
