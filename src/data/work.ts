@@ -97,7 +97,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     ],
   },
   {
-    slug: 'forse', title: 'Forse', summary: 'Building the brand, launching it, and finding the right buyer.',
+    slug: 'forse', title: 'Forse', summary: 'GTM for StableLab’s data product: naming, brand, launch, and repositioning.',
     company: 'StableLab', role: 'Head of Marketing',
     image: { src: '/work/forse-rebrand-hero.png', alt: 'Forse: The Intelligence Layer Fueling Web3 Growth' },
     intro: 'Forse was StableLab’s analytics product for tracking protocol incentives and growth programs. I led its naming, brand, and launch as the company expanded beyond governance services. When the buyers turned out to be foundations and protocol teams, we changed the positioning and how the product presented itself.',
@@ -136,10 +136,10 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     links: [{ label: 'Explore the episodes', href: 'https://stablepod.vercel.app' }, { label: 'Listen on Spotify', href: 'https://open.spotify.com/show/4LZVPrxKohIaLjgvQRbVwI' }],
   },
   {
-    slug: 'governance-gathering', title: 'Governance Gathering', summary: 'Bringing partners and prospective clients together at EthCC Brussels.',
+    slug: 'governance-gathering', title: 'Governance Gathering', summary: 'A side event at EthCC Brussels with 150+ attendees.',
     company: 'StableLab', role: 'Event Lead',
     image: { src: '/work/agg/event-4.jpg', alt: 'Guests at Governance Gathering in Brussels' },
-    intro: 'Governance Gathering was a sales and business development event during EthCC Brussels. It brought industry partners and prospective clients into one venue to deepen relationships and find opportunities.',
+    intro: 'Governance Gathering was a sales and business development event during EthCC Brussels, co-hosted with UMA, Wormhole, and Tally. It brought 150+ industry partners and prospective clients into one venue to deepen relationships and find opportunities.',
     sections: [{ title: 'My Part', text: 'I led the event, secured co-sponsors, and managed event delivery, bringing industry partners and prospective clients together for business development conversations.' }],
     gallery: [{ src: '/work/agg/event-5.jpg', alt: 'Governance Gathering event', caption: 'EthCC Brussels' }, { src: '/work/agg/event-6.jpg', alt: 'Conversations at Governance Gathering', caption: 'Partners and guests' }],
     links: [{ label: 'View the event', href: 'https://lu.ma/l5tvcrcb' }],
