@@ -170,6 +170,8 @@ export const workCaseSchema = z.object({
   imageStyle: z.enum(['cover', 'contain']).default('cover'),
   intro: nonEmptyString,
   sections: z.array(z.object({
+    id: z.string().regex(/^[a-z0-9-]+$/).optional(),
+    kicker: nonEmptyString.optional(),
     title: nonEmptyString,
     text: nonEmptyString,
     evidence: z.array(workEvidenceSchema).default([]),

@@ -6,10 +6,10 @@ export type WorkCase = z.infer<typeof workCaseSchema>;
 export const workCases: WorkCase[] = workCasesSchema.parse([
   {
     slug: 'compound', title: 'Compound Foundation',
-    summary: 'Product launches, partner co-marketing, and growth stories.',
+    summary: 'First social hire. Launches, partner co-marketing, governance, and the reporting that showed what worked.',
     company: 'Compound Foundation', role: 'Founding Social & Community Lead',
     image: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch.' },
-    intro: 'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
+    intro: 'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
     sections: [
       {
         title: 'Introducing Compound’s Institutional Strategy',
@@ -23,7 +23,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         }],
       },
       {
-        title: 'The Institutional Market Launch',
+        id: 'institutional-market', title: 'The Institutional Market Launch',
         text: 'The Institutional Market introduced a USDC lending market with collateral requirements and risk parameters designed for institutional borrowers. I owned the social launch sequence and partner co-marketing: preparing partner-specific copy, coordinating publishing dates, managing direct outreach, and amplifying partner posts.',
         evidence: [{
           src: '/work/compound/institutional-market-launch.png',
@@ -34,7 +34,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         }],
       },
       {
-        title: 'Partner Spotlight',
+        id: 'partner-spotlight', title: 'Partner Spotlight',
         text: 'I developed and ran Partner Spotlight to show how longstanding integrations with Kiln, DeFi Saver, Chainlink, and Sky supported Compound’s markets. Partner amplification helped us reach beyond our own channels. The series earned 2.9× the median X views of other posts published during the same period, measured using cumulative views.',
         evidence: [
           {
@@ -54,7 +54,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         ],
       },
       {
-        title: 'Making Traction Visible',
+        id: 'traction', title: 'Making Traction Visible',
         text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL. Growth stories gave BD proof to use in allocator conversations as the combined total reached $60M.',
         evidence: [{
           src: '/work/compound/institutional-market-dashboard.png',
@@ -74,7 +74,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
         }],
       },
       {
-        title: 'AI & Agentic Workflows',
+        id: 'ai-workflows', title: 'AI & Agentic Workflows',
         text: 'I built an AI-assisted workflow that pulled Compound v3 data from the protocol API, Dune, and DeFiLlama, surfaced potential stories, and filtered out misleading signals. I reviewed candidates with Claude and turned selected stories into social cards in Figma. Separately, I built a Claude/Hermes workflow with MCP to compare post performance, track partner amplification, and produce weekly reports.',
         evidence: [{
           src: '/work/compound/v3-story-workflow.png',
@@ -97,51 +97,97 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     ],
   },
   {
-    slug: 'forse', title: 'Forse', summary: 'GTM for StableLab’s data product: naming, brand, launch, and repositioning.',
+    slug: 'stablelab', title: 'StableLab',
+    summary: 'Building a marketing function from zero, first for governance services, then for a data product.',
     company: 'StableLab', role: 'Head of Marketing',
-    image: { src: '/work/forse-rebrand-hero.png', alt: 'Forse: The Intelligence Layer Fueling Web3 Growth' },
-    intro: 'Forse was StableLab’s analytics product for tracking protocol incentives and growth programs. I led its naming, brand, and launch as the company expanded beyond governance services. When the buyers turned out to be foundations and protocol teams, we changed the positioning and how the product presented itself.',
+    image: { src: '/work/partners.jpg', alt: 'The StableLab logo surrounded by partner logos, including Uniswap, Aave, Arbitrum, Lido, and Sky.' },
+    intro: 'StableLab was a governance and data infrastructure company that worked with 40+ protocols, including Uniswap, Aave, and Arbitrum. As Head of Marketing, I built the marketing function from zero. In the services era, the job was to make StableLab known and trusted, so BD conversations started warm. Later, I took Forse, the company’s data product, to market.',
     sections: [
-      { title: 'A Different Buyer', text: 'The early positioning spoke to DAOs and their communities. We shifted toward growth intelligence for foundations and core protocol teams: the people making decisions about incentives and growth programs.' },
-      { title: 'My Part', text: 'I owned positioning, messaging, website structure and copy, and sales materials. I directed the visual refresh and worked with product and design through reviews and launch.' },
+      {
+        id: 'stablepod', kicker: 'Services Era', title: 'StablePod',
+        text: 'I produced and co-hosted 29 episodes of StablePod, a podcast on crypto protocols and governance. I handled guest coordination, episode planning, production, and promotion. Guests came from Morpho, Euler, Gnosis, the Uniswap Foundation, Optimism, dYdX, and Ethena. The show gave partners another channel for their launches, and one guest conversation turned into an active business discussion.',
+        evidence: [{
+          src: '/work/stablepod-cover.jpg',
+          alt: 'StablePod podcast cover.',
+          width: 600, height: 600,
+          href: 'https://stablepod.vercel.app',
+          linkLabel: 'Explore the episodes',
+        }],
+      },
+      {
+        id: 'governance-lab', title: 'Governance Lab',
+        text: 'I built Governance Lab, StableLab’s newsletter, from zero. I handled editorial direction, writing, curation, and distribution, and it doubled as our channel for research, announcements, and product launches. It ran for 121 issues, reached 920+ subscribers, and held a 38% average open rate, about twice the industry average.',
+        evidence: [{
+          src: '/work/governance-lab-cover.jpg',
+          alt: 'Governance Lab newsletter cover.',
+          size: 'wide',
+          width: 1280, height: 640,
+          href: 'https://stablelab.substack.com',
+          linkLabel: 'Read Governance Lab',
+        }],
+      },
+      {
+        id: 'proposal-amplification', title: 'Proposal Amplification',
+        text: 'Every governance proposal we submitted needed to pass, and each DAO had its own dynamics. I built a comms plan for each one across its lifecycle: forum post, temperature check, onchain vote, and outcome. We amplified 50+ proposals. Passed proposals meant renewed contracts, so this work directly supported revenue.',
+        evidence: [
+          { src: '/work/proposals/unichain.jpg', alt: 'StableLab governance proposal graphic for Unichain.', width: 800, height: 400 },
+          { src: '/work/proposals/gnosis.jpg', alt: 'StableLab governance proposal graphic for Gnosis.', width: 800, height: 400 },
+          { src: '/work/proposals/scroll.jpg', alt: 'StableLab governance proposal graphic for Scroll.', width: 800, height: 400 },
+          { src: '/work/proposals/compound.jpg', alt: 'StableLab governance proposal graphic for Compound.', width: 800, height: 400 },
+        ],
+      },
+      {
+        id: 'governance-gathering', title: 'Governance Gathering',
+        text: 'I led Governance Gathering, a business development side event at EthCC Brussels co-hosted with UMA, Wormhole, and Tally. I secured the co-sponsors and managed delivery. 258 people registered and 150+ attended, bringing partners and prospective clients into one room.',
+        evidence: [
+          { src: '/work/agg/event-5.jpg', alt: 'Guests at Governance Gathering during EthCC Brussels.', width: 800, height: 800, href: 'https://lu.ma/l5tvcrcb', linkLabel: 'View the event' },
+          { src: '/work/agg/event-6.jpg', alt: 'Conversations at Governance Gathering.', width: 800, height: 800 },
+        ],
+      },
+      {
+        id: 'forse-launch', kicker: 'GTM for a Data Product', title: 'Launching Forse',
+        text: 'Forse was StableLab’s analytics product for tracking protocol incentives and growth programs. It was our first product launch, with no brand or playbook to start from. I ran naming workshops with the CEO, Head of Product, and our designer, and we landed on Forse, inspired by forsker, the Danish word for researcher. I built the visual identity with our designer, framed the product as Built by StableLab to carry over the trust we had earned, and ran the launch across the website, blog, X, LinkedIn, and email. Going live before EthCC gave BD a reason to reach out.',
+        evidence: [{
+          src: '/work/forse-brand-system.jpg',
+          alt: 'Forse launch brand board: name origin, color palette, wordmark, and the first product interface.',
+          caption: 'The launch brand system: name, palette, wordmark, and product.',
+          size: 'wide',
+          width: 1920, height: 1080,
+          href: 'https://stablelab.xyz/blog/introducing-forse-by-stablelab',
+          linkLabel: 'Read the launch announcement',
+        }, {
+          src: '/work/forse-workshop.png',
+          alt: 'Forse naming and brand workshop in FigJam, covering vision, audience, competition, and brand heart.',
+          caption: 'Naming and brand workshop.',
+          size: 'wide',
+          width: 3024, height: 1686,
+        }],
+      },
+      {
+        id: 'forse-repositioning', title: 'Finding the Right Buyer',
+        text: 'The DAO-focused positioning wasn’t landing. The buyers with budget were foundations and core protocol teams, not DAOs. We repositioned Forse from DAO analytics to the intelligence layer fueling web3 growth. I pushed to keep everything under one brand instead of launching a third, directed a modern, minimal visual refresh, and owned the messaging, website structure, and copy.',
+        evidence: [{
+          src: '/work/forse-landing-hero.webp',
+          alt: 'Forse landing page: The Intelligence Layer Fueling Web3 Growth.',
+          size: 'wide',
+          width: 2992, height: 1680,
+          href: 'https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth',
+          linkLabel: 'Read the relaunch',
+        }],
+      },
+      {
+        id: 'forse-sales', title: 'Arming Sales',
+        text: 'Long B2B sales cycles meant every pitch needed targeted material. I wrote the copy for the Forse Insights one-pager and shaped the messaging for Grants Management and the Incentive Analyzer; product set the direction and our designer built them. They became the primary sales collateral. The positioning held up, but budgets shrank and sales cycles stretched past our runway.',
+        evidence: [
+          { src: '/work/forse-insights.jpg', alt: 'Forse Insights sales one-pager.', width: 800, height: 1351 },
+          { src: '/work/forse-incentive.jpg', alt: 'Forse Incentive Analyzer sales one-pager.', width: 800, height: 1633 },
+        ],
+      },
     ],
-    gallery: [
-      { src: '/work/forse-landing-hero.avif', alt: 'Forse landing page', caption: 'Website structure and messaging' },
-      { src: '/work/forse-workshop.png', alt: 'Forse brand workshop', caption: 'Naming and brand workshop' },
-      { src: '/work/forse-brand-architecture.png', alt: 'Forse brand architecture', caption: 'Brand architecture' },
-      { src: '/work/forse-insights.jpg', alt: 'Forse Insights sales one-pager', caption: 'Sales materials' },
+    links: [
+      { label: 'Explore StablePod', href: 'https://stablepod.vercel.app' },
+      { label: 'Read Governance Lab', href: 'https://stablelab.substack.com' },
+      { label: 'Read the Forse relaunch', href: 'https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth' },
     ],
-    links: [{ label: 'Read the relaunch', href: 'https://stablelab.xyz/blog/reintroducing-forse-the-intelligence-layer-fueling-web3-growth' }],
-  },
-  {
-    slug: 'governance-lab', title: 'Governance Lab', summary: 'A newsletter following governance across the crypto ecosystem.',
-    company: 'StableLab', role: 'Editorial Direction, Writing & Distribution',
-    image: { src: '/work/governance-lab-cover.jpg', alt: 'Governance Lab newsletter cover' },
-    intro: 'I built Governance Lab, StableLab’s newsletter, from zero as a recurring resource covering governance across the crypto ecosystem.',
-    sections: [
-      { title: 'The Work', text: 'I handled editorial direction, writing, curation, and distribution. The newsletter also gave StableLab a regular place to share research, announcements, and product launches.' },
-      { title: 'The Result', text: '121 issues, 920+ subscribers, and a 38% average open rate.' },
-    ],
-    links: [{ label: 'Read Governance Lab', href: 'https://stablelab.substack.com' }],
-  },
-  {
-    slug: 'stablepod', title: 'StablePod', summary: 'Conversations with the people building crypto protocols.',
-    company: 'StableLab', role: 'Producer & Co-Host',
-    image: { src: '/work/stablepod-cover.jpg', alt: 'StablePod podcast cover' }, imageStyle: 'contain',
-    intro: 'I produced and co-hosted 29 episodes of StablePod, a podcast covering crypto protocols and governance with founders and industry leaders.',
-    sections: [
-      { title: 'The Work', text: 'I handled guest coordination, episode planning, production, and promotion. Guests included teams from Morpho, Euler, Gnosis, and the Uniswap Foundation.' },
-      { title: 'Why It Mattered', text: 'The series gave guests another channel to share their work and launches. It helped the wider industry learn about their projects while deepening partner relationships and supporting business development.' },
-    ],
-    links: [{ label: 'Explore the episodes', href: 'https://stablepod.vercel.app' }, { label: 'Listen on Spotify', href: 'https://open.spotify.com/show/4LZVPrxKohIaLjgvQRbVwI' }],
-  },
-  {
-    slug: 'governance-gathering', title: 'Governance Gathering', summary: 'A side event at EthCC Brussels with 150+ attendees.',
-    company: 'StableLab', role: 'Event Lead',
-    image: { src: '/work/agg/event-4.jpg', alt: 'Guests at Governance Gathering in Brussels' },
-    intro: 'Governance Gathering was a sales and business development event during EthCC Brussels, co-hosted with UMA, Wormhole, and Tally. It brought 150+ industry partners and prospective clients into one venue to deepen relationships and find opportunities.',
-    sections: [{ title: 'My Part', text: 'I led the event, secured co-sponsors, and managed event delivery, bringing industry partners and prospective clients together for business development conversations.' }],
-    gallery: [{ src: '/work/agg/event-5.jpg', alt: 'Governance Gathering event', caption: 'EthCC Brussels' }, { src: '/work/agg/event-6.jpg', alt: 'Conversations at Governance Gathering', caption: 'Partners and guests' }],
-    links: [{ label: 'View the event', href: 'https://lu.ma/l5tvcrcb' }],
   },
 ]);
