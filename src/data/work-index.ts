@@ -11,14 +11,14 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
     name: 'Compound Foundation',
     role: 'Founding Social & Community Lead',
     years: 'May-Oct 2026',
-    summary: 'Product launches, partner co-marketing, and growth stories for the Institutional Market.',
-    stat: { value: '$60M', label: 'Market milestone' },
+    summary: 'First social hire. Launches, partner co-marketing, governance, and the reporting that showed what worked.',
+    stat: { value: '$60M', label: 'Institutional Market' },
     cover: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch' },
     intro:
-      'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I managed X and LinkedIn across product launches, ecosystem partnerships, and governance.',
+      'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance.',
     figures: [
       { value: '$60M', label: 'Institutional Market deposits and collateral' },
-      { value: '2.9×', label: 'Median X views for Partner Spotlight' },
+      { value: '2.9×', label: 'the median X views, for Partner Spotlight' },
     ],
     phases: [
       {
@@ -26,7 +26,7 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
         items: [
           {
             title: 'Institutional Market Launch',
-            text: 'Owned the social launch sequence and partner co-marketing.',
+            text: 'Owned the social launch and the partner co-marketing around it.',
             image: '/work/compound/institutional-market-launch.png',
             href: '/work/compound',
           },
@@ -39,14 +39,14 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
           },
           {
             title: 'Making Traction Visible',
-            text: 'A Dune dashboard built with Claude, turned into growth stories for BD.',
+            text: 'Built a Dune dashboard with Claude, then turned the numbers into growth stories for BD.',
             result: '$60M milestone',
             image: '/work/compound/institutional-market-dashboard.png',
             href: '/work/compound',
           },
           {
             title: 'AI & Agentic Workflows',
-            text: 'A shared social analytics workflow with Claude, Hermes, and MCP.',
+            text: 'A shared workflow with Claude, Hermes, and MCP for post performance and weekly reports.',
             image: '/work/compound/social-analytics-workflow.png',
             href: '/work/compound',
           },
@@ -64,30 +64,30 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
     stat: { value: '40+', label: 'Protocol partners' },
     cover: { src: '/work/partners.jpg', alt: 'The StableLab logo surrounded by partner logos, including Uniswap, Aave, Arbitrum, Lido, and Sky' },
     intro:
-      'StableLab is a governance and data infrastructure company serving 40+ protocol partners, including Uniswap, Aave, and Arbitrum. I built its marketing function from zero.',
+      'StableLab was a governance and data infrastructure company that worked with 40+ protocols, including Uniswap, Aave, and Arbitrum.',
     figures: [],
     phases: [
       {
         title: 'Services Era',
-        text: 'Making StableLab credible enough that business development conversations didn’t start from zero.',
+        text: 'The job was to make StableLab known and trusted, so BD conversations started warm.',
         items: [
           {
             title: 'StablePod',
-            text: 'Conversations with the people building crypto protocols.',
+            text: 'A podcast with builders from Morpho, Euler, Gnosis, and the Uniswap Foundation.',
             result: '29 episodes',
             image: '/work/stablepod-cover.jpg',
             href: '/work/stablepod',
           },
           {
             title: 'Governance Lab',
-            text: 'A newsletter following governance across the crypto ecosystem.',
-            result: '121 issues · 38% open rate',
+            text: 'A newsletter on governance across crypto.',
+            result: '121 issues · 920+ subscribers · 38% open rate',
             image: '/work/governance-lab-cover.jpg',
             href: '/work/governance-lab',
           },
           {
             title: 'Proposal Amplification',
-            text: 'Comms for every governance proposal the team submitted. Approvals kept contracts running.',
+            text: 'Comms for every governance proposal we submitted. Passed proposals meant renewed contracts.',
             result: '50+ proposals',
             image: '/work/proposals/unichain.jpg',
           },
@@ -102,19 +102,19 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
       },
       {
         title: 'GTM for a Data Product',
-        text: 'Taking Forse, StableLab’s analytics product, to market, then repositioning it for the right buyer.',
+        text: 'Launching Forse, StableLab’s analytics product, then repositioning it when the buyer turned out to be foundations, not DAOs.',
         items: [
           {
             title: 'Forse Launch',
             text: 'Naming, visual identity, and the launch campaign.',
-            result: 'From zero to launch',
+            result: 'Name to launch',
             image: '/work/forse-launch-hero.webp',
             href: '/work/forse',
           },
           {
             title: 'Repositioning',
             text: 'From DAO analytics to growth intelligence for foundations and protocol teams.',
-            result: 'New buyer, one brand',
+            result: 'DAOs → foundations',
             image: '/work/forse-landing-hero.webp',
             href: '/work/forse',
           },
