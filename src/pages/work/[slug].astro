@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
 import { workCases, type WorkCase } from '../../data/work';
 
 export function getStaticPaths() {
@@ -12,18 +13,20 @@ const next = workCases[(workCases.findIndex(item => item.slug === work.slug) + 1
 ---
 
 <Layout title={`${work.title} — Juan Esquivel`} description={work.summary} canonicalPath={`/work/${work.slug}`} wide>
+  <Nav active="work" />
   <article class="case-study">
     <nav class="case-nav" aria-label="Page navigation"><a href="/work">← All work</a><a href="/JUAN-ESQUIVEL-resume.pdf">Résumé <span aria-hidden="true">↗</span></a></nav>
     <header class="case-header"><p class="case-role">{work.company} · {work.role}</p><h1>{work.title}</h1><p class="case-intro">{work.intro}</p></header>
     {!hasEvidence && <div class:list={['case-cover', work.imageStyle === 'contain' && 'case-cover--contain']}><img src={work.image.src} alt={work.image.alt} decoding="async" /></div>}
     <div class:list={['case-content', hasEvidence && 'case-content--illustrated']}>
       {work.sections.map((section, sectionIndex) => (
-        <section>
-          <div class="case-copy"><h2>{section.title}</h2><p>{section.text}</p></div>
+        <section id={section.id}>
+          <div class="case-copy">{section.kicker && <p class="case-kicker">{section.kicker}</p>}<h2>{section.title}</h2><p>{section.text}</p></div>
           {section.evidence.length > 0 && (
-            <div class:list={[
+            <div style={`--pair-ratio: ${section.evidence[0].width} / ${section.evidence[0].height}`} class:list={[
               'case-evidence',
               section.evidence.length > 1 && section.evidence.every(item => item.size === 'standard') && 'case-evidence--pair',
+              section.evidence[0].height > section.evidence[0].width && 'case-evidence--portrait',
             ]}>
               {section.evidence.map(item => {
                 const EvidenceTag = item.href ? 'a' : 'div';
@@ -64,7 +67,9 @@ const next = workCases[(workCases.findIndex(item => item.slug === work.slug) + 1
   .case-content.case-content--illustrated section{margin-block-end:var(--space-xl)}
   .case-copy{max-width:680px;margin-inline:auto}
   .case-content section{margin-block-end:var(--space-lg)}
-  .case-content h2{font-family:var(--font-display);font-size:1.9rem;line-height:1.2;font-weight:400;text-transform:none;color:var(--text);margin:0 0 var(--space-sm);text-wrap:balance}
+  .case-content section{scroll-margin-top:2rem}
+  .case-content .case-kicker{margin:0 0 var(--space-sm);padding-top:var(--space-md);border-top:1px solid var(--line-strong);font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint)}
+  .case-content h2{font-family:var(--font-display);letter-spacing:-0.02em;font-size:1.9rem;line-height:1.2;font-weight:400;text-transform:none;color:var(--text);margin:0 0 var(--space-sm);text-wrap:balance}
   .case-content p{font-size:1rem;line-height:1.75;color:var(--text-soft);margin:0;text-wrap:pretty}
   .case-evidence{display:grid;gap:var(--space-lg);margin-block-start:var(--space-lg)}
   .case-evidence--pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);align-items:start}
@@ -72,7 +77,8 @@ const next = workCases[(workCases.findIndex(item => item.slug === work.slug) + 1
   .case-evidence figure.evidence--wide{max-width:none}
   .evidence-link{display:block;text-decoration:none}
   .evidence-link img{display:block;width:100%;height:auto;background:var(--bg)}
-  .case-evidence--pair img{aspect-ratio:776/731;object-fit:contain;object-position:top}
+  .case-evidence--portrait{max-width:680px;margin-inline:auto}
+  .case-evidence--pair img{aspect-ratio:var(--pair-ratio,776/731);object-fit:contain;object-position:top}
   .evidence-label{display:inline-flex;align-items:center;gap:.4em;min-height:44px;margin-block-start:var(--space-xs);font-size:.875rem;text-decoration:underline;text-underline-offset:5px}
   .case-evidence figcaption{font-size:.875rem;line-height:1.5;color:var(--text-soft);margin-block-start:var(--space-xs)}
   .case-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin-block:var(--space-xl)}

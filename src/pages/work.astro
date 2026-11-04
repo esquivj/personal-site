@@ -1,64 +1,466 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { workCases } from '../data/work';
+import Nav from '../components/Nav.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { workEmployers } from '../data/work-index';
 ---
 
-<Layout title="Work — Juan Esquivel" description="Selected marketing work at Compound Foundation and StableLab." canonicalPath="/work" wide>
-  <div class="portfolio">
-    <nav class="portfolio-nav" aria-label="Page navigation">
-      <a href="/">← Home</a>
-      <a href="/JUAN-ESQUIVEL-resume.pdf">Résumé <span aria-hidden="true">↗</span></a>
-    </nav>
-    <header class="portfolio-header">
-      <h1>Work</h1>
-      <p>Selected marketing work at Compound Foundation and StableLab.</p>
-    </header>
-    <div class="work-grid">
-      {workCases.map((work, index) => (
-        <article class:list={['work-item', index === 4 && 'work-item--wide']}>
-          <a class="work-link" href={`/work/${work.slug}`}>
-            <div class:list={['work-cover', work.imageStyle === 'contain' && 'work-cover--contain']}>
-              <img src={work.image.src} alt="" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
-              <span class="view-work" aria-hidden="true">View work ↗</span>
-            </div>
-            <div class="work-caption">
-              <h2>{work.title}<span aria-hidden="true">↗</span></h2>
-              <p>{work.summary}</p>
-            </div>
-          </a>
-        </article>
-      ))}
-    </div>
-    <footer class="portfolio-footer"><a href="/projects">Things I’m building <span aria-hidden="true">↗</span></a></footer>
+<Layout title="Work — Juan Esquivel" description="Selected marketing work at Compound Foundation and StableLab." canonicalPath="/work">
+  <Nav active="work" />
+  <PageHeader title="Work" subtitle="Selected marketing work at Compound Foundation and StableLab." />
+
+  <div class="work-list">
+    {workEmployers.map((employer, index) => (
+      <details class="work-row" id={employer.id}>
+        <summary class="work-head">
+          <span class="work-num">{String(index + 1).padStart(2, '0')}</span>
+          <span class="work-main">
+            <span class="work-name">{employer.name}</span>
+            <span class="work-role">{employer.role} · {employer.years}</span>
+            <span class="work-summary">{employer.summary}</span>
+          </span>
+          <span class="work-stat">
+            <span class="work-stat-value">{employer.stat.value}</span>
+            <span class="work-stat-label">{employer.stat.label}</span>
+          </span>
+          <span class="work-chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 5.25 7 9.25l4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+        </summary>
+
+        <div class="work-panel">
+          <figure class="work-cover"><img src={employer.cover.src} alt={employer.cover.alt} loading="lazy" decoding="async" /></figure>
+          <div class="work-intro">
+            <p>{employer.intro}</p>
+            {employer.figures.length > 0 && (
+              <dl class="work-figures">
+                {employer.figures.map((figure) => (
+                  <div><dt>{figure.label}</dt><dd>{figure.value}</dd></div>
+                ))}
+              </dl>
+            )}
+          </div>
+
+          {employer.phases.map((phase) => (
+            <section class="work-phase">
+              <h3 class="work-phase-title">{phase.title}</h3>
+              {phase.text && <p class="work-phase-text">{phase.text}</p>}
+              <ul class="work-items" role="list" style={`--cols: ${phase.items.length % 3 === 0 ? 3 : 2}`}>
+                {phase.items.map((item) => {
+                  const Tag = item.href ? 'a' : 'div';
+                  return (
+                    <li>
+                      <Tag class:list={['work-item', item.href && 'is-link']} href={item.href}>
+                        <span class="work-thumb"><img src={item.image} alt="" loading="lazy" decoding="async" /></span>
+                        <span class="work-item-title">{item.title}{item.href && <span class="work-item-arrow" aria-hidden="true"> →</span>}</span>
+                        <span class="work-item-text">{item.text}</span>
+                        {item.result && <span class="work-item-result">{item.result}</span>}
+                      </Tag>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          ))}
+
+          {employer.cta && <a class="work-cta" href={employer.cta.href}>{employer.cta.label} <span aria-hidden="true">→</span></a>}
+        </div>
+      </details>
+    ))}
   </div>
+
+  <p class="work-earlier">
+    Earlier: content at Boardroom, community at Orca Protocol and RabbitHole.
+    <a href="/JUAN-ESQUIVEL-resume.pdf">Full résumé <span aria-hidden="true">↗</span></a>
+  </p>
 </Layout>
 
+<script>
+  // /work#stablelab opens that row.
+  const openFromHash = () => {
+    const row = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (row instanceof HTMLDetailsElement) row.open = true;
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+</script>
+
 <style>
-  .portfolio{padding-block-end:var(--space-lg)}
-  .portfolio-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-block-end:var(--space-xl)}
-  .portfolio-nav a,.portfolio-footer a{display:inline-flex;align-items:center;gap:.4em;min-height:44px;font-size:.875rem;text-decoration:none}
-  .portfolio-header{margin-block-end:var(--space-xl)}
-  .portfolio-header h1{font-size:clamp(3.5rem,6vw,5rem);line-height:1.05;font-weight:400;margin:0 0 var(--space-sm);text-wrap:balance}
-  .portfolio-header p{font-size:1rem;line-height:1.6;color:var(--text-soft);margin:0;max-width:38rem;text-wrap:pretty}
-  .work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-xl) var(--space-lg)}
-  .work-item{min-width:0}
-  .work-link{display:block;text-decoration:none;color:inherit}
-  .work-cover{position:relative;aspect-ratio:8/5;overflow:hidden;background:var(--bg-raised)}
-  .work-cover img{display:block;width:100%;height:100%;object-fit:cover}
-  .work-cover--contain{background:#181b19}
-  .work-cover--contain img{object-fit:contain}
-  .view-work{position:absolute;inset-inline-end:16px;inset-block-end:16px;padding:9px 13px;background:var(--bg);color:var(--text);font-size:.8rem;opacity:0;pointer-events:none}
-  .work-caption{padding-block-start:var(--space-md)}
-  .work-caption h2{display:flex;align-items:baseline;gap:.4em;font-family:var(--font-display);font-size:clamp(1.75rem,2.4vw,2.25rem);font-weight:400;text-transform:none;color:var(--text);line-height:1.15;margin:0 0 var(--space-xs);text-wrap:balance}
-  .work-caption h2 span{font-family:var(--font-ui);font-size:.5em;flex-shrink:0}
-  .work-caption p{font-size:1rem;line-height:1.55;margin:0;color:var(--text-soft);max-width:45ch;text-wrap:pretty}
-  .work-item--wide{grid-column:1/-1}
-  .work-item--wide .work-cover{aspect-ratio:2.5}
-  .work-item--wide .work-cover img{object-position:center 44%}
-  .portfolio-footer{margin-block-start:var(--space-xl);padding-block-start:var(--space-md);border-block-start:1px solid var(--line)}
-  .portfolio-footer a{text-decoration:underline;text-underline-offset:5px}
-  a:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
-  .work-link:focus-visible .view-work{opacity:1}
-  @media(hover:hover) and (pointer:fine){.work-link:hover .view-work{opacity:1}.work-link:hover h2,.portfolio-nav a:hover,.portfolio-footer a:hover{color:var(--accent)}}
-  @media(max-width:640px){.portfolio-nav{margin-block-end:var(--space-lg)}.work-grid{grid-template-columns:minmax(0,1fr);gap:var(--space-xl)}.portfolio-header{margin-block-end:var(--space-lg)}.work-item--wide{grid-column:auto}.work-item--wide .work-cover{aspect-ratio:8/5}.work-caption h2{font-size:1.9rem}}
+  .work-list {
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .work-row {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .work-head {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto 2.75rem;
+    align-items: baseline;
+    gap: 0.4rem 1.5rem;
+    padding: 1.75rem 0 1.6rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .work-head::-webkit-details-marker {
+    display: none;
+  }
+  .work-head:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .work-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  .work-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .work-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4.5vw, 3.1rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    transition: color 160ms var(--ease-out);
+  }
+  .work-role {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .work-summary {
+    max-width: 52ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+
+  .work-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    text-align: right;
+  }
+  .work-stat-value {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+  .work-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .work-chevron {
+    align-self: center;
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--text-soft);
+    transition: transform 240ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+  }
+  .work-row[open] .work-chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .work-row[open] .work-name {
+    color: var(--accent);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .work-head:hover .work-name,
+    .work-head:hover .work-chevron {
+      color: var(--accent);
+    }
+    .work-head:hover .work-chevron {
+      border-color: var(--accent);
+    }
+  }
+
+  /* Expanded card */
+  .work-panel {
+    margin: 0 0 2rem calc(2.5rem + 1.5rem);
+    padding: 1.75rem;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    animation: work-open 260ms var(--ease-out);
+  }
+  @keyframes work-open {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .work-panel {
+      animation: none;
+    }
+    .work-chevron {
+      transition: none;
+    }
+  }
+
+  .work-cover {
+    margin: calc(-1 * 1.75rem) calc(-1 * 1.75rem) 1.75rem;
+    aspect-ratio: 2;
+    overflow: hidden;
+    background: #0b0f17;
+    border-bottom: 1px solid var(--line);
+  }
+  .work-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .work-intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem 2.5rem;
+    margin-bottom: 1.75rem;
+  }
+  .work-intro p {
+    flex: 1 1 26rem;
+    max-width: 58ch;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+  .work-figures {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+  }
+  .work-figures div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.35rem;
+    max-width: 11rem;
+  }
+  .work-figures dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+  .work-figures dt {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: var(--text-soft);
+  }
+
+  .work-phase {
+    margin: 0;
+  }
+  .work-phase + .work-phase {
+    margin-top: 2rem;
+  }
+  .work-phase-title {
+    margin: 0;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line-strong);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+  .work-phase-text {
+    margin: 0.75rem 0 0;
+    max-width: 60ch;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+
+  .work-items {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    gap: 1.5rem 1.25rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .work-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+  .work-thumb {
+    display: block;
+    aspect-ratio: 16 / 10;
+    margin-bottom: 0.35rem;
+    overflow: hidden;
+    background: var(--surface-strong);
+    border: 1px solid var(--line);
+  }
+  .work-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 400ms var(--ease-out);
+  }
+  .work-item-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .work-item-arrow {
+    color: var(--accent);
+    font-family: var(--font-ui);
+    font-size: 0.8em;
+  }
+  .work-item-text {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--text-soft);
+  }
+  .work-item-result {
+    margin-top: auto;
+    padding-top: 0.55rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .work-item.is-link:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .work-item.is-link:hover .work-item-title {
+      color: var(--accent);
+    }
+    .work-item.is-link:hover .work-thumb img {
+      transform: scale(1.03);
+    }
+  }
+
+  .work-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    min-height: 44px;
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .work-cta span {
+    color: var(--accent);
+  }
+  .work-cta:hover {
+    color: var(--accent);
+  }
+
+  .work-earlier {
+    margin: 2rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+  .work-earlier a {
+    color: var(--text);
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .work-head {
+      grid-template-columns: minmax(0, 1fr) 2.75rem;
+      gap: 0.75rem 1rem;
+    }
+    .work-num {
+      display: none;
+    }
+    .work-stat {
+      grid-column: 1;
+      grid-row: 2;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .work-stat-value {
+      font-size: 1.4rem;
+    }
+    .work-chevron {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: start;
+    }
+    .work-panel {
+      margin-left: 0;
+      padding: 1.25rem;
+    }
+    .work-cover {
+      margin: -1.25rem -1.25rem 1.25rem;
+      aspect-ratio: 2;
+    }
+    .work-figures dd {
+      font-size: 2.1rem;
+    }
+    .work-items {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+    /* On phones each item is a compact row: thumbnail beside its text. */
+    .work-item {
+      display: grid;
+      grid-template-columns: 6.5rem minmax(0, 1fr);
+      column-gap: 0.9rem;
+      row-gap: 0.3rem;
+      align-content: start;
+    }
+    .work-thumb {
+      grid-row: 1 / span 3;
+      margin: 0;
+      align-self: start;
+    }
+    .work-item-title {
+      font-size: 1.2rem;
+    }
+    .work-item-result {
+      margin-top: 0.15rem;
+      padding-top: 0;
+      border-top: 0;
+    }
+  }
 </style>

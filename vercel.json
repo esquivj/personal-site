@@ -1,5 +1,9 @@
 {
   "redirects": [
+    { "source": "/work/forse", "destination": "/work/stablelab#forse-launch", "permanent": true },
+    { "source": "/work/governance-lab", "destination": "/work/stablelab#governance-lab", "permanent": true },
+    { "source": "/work/stablepod", "destination": "/work/stablelab#stablepod", "permanent": true },
+    { "source": "/work/governance-gathering", "destination": "/work/stablelab#governance-gathering", "permanent": true },
     {
       "source": "/JUAN-ESQUIVEL-resume.html",
       "destination": "/JUAN-ESQUIVEL-resume.pdf",
