@@ -55,7 +55,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'traction', title: 'Making Traction Visible',
-        text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL, the usual headline number. Growth stories gave business development proof to use with institutional investors as the combined total reached $60M.',
+        text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL, the usual headline number. Growth stories gave business development proof to use with institutional capital allocators as the combined total reached $60M.',
         evidence: [{
           src: '/work/compound/institutional-market-dashboard.png',
           alt: 'Compound Institutional Market dashboard by cadena on Dune, tracking deposits, loans, utilization, rates, and deposits plus collateral.',
