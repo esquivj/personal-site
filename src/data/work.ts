@@ -9,11 +9,11 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
     summary: 'First social hire. Launches, partner co-marketing, governance, and the reporting that showed what worked.',
     company: 'Compound Foundation', role: 'Founding Social & Community Lead',
     image: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch.' },
-    intro: 'Compound is one of DeFi’s original lending protocols. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
+    intro: 'Compound is one of the original lending protocols in crypto: an open market where anyone can lend and borrow digital dollars and other assets, with no bank in the middle. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance votes. Partner co-marketing was a core part of the strategy, helping us reach relevant audiences through Compound’s existing relationships.',
     sections: [
       {
         title: 'Introducing Compound’s Institutional Strategy',
-        text: 'Compound announced a new leadership team and a $52M DAO-approved development program to build lending infrastructure for financial institutions. The roadmap included Compound v4, improvements to v3, and institutional integrations. Our Head of Marketing led the announcement campaign; I contributed social copy and helped with campaign execution. The lead X post reached 156.6K views.',
+        text: 'Compound announced a new leadership team and a $52M development program approved by Compound’s token holders to build lending infrastructure for financial institutions. The roadmap included Compound v4, improvements to v3, and institutional integrations. Our Head of Marketing led the announcement campaign; I contributed social copy and helped with campaign execution. The lead X post reached 156.6K views.',
         evidence: [{
           src: '/work/compound/52m-announcement.png',
           alt: 'Compound’s new leadership and $52M development program announcement, showing 156.6K views on X.',
@@ -24,7 +24,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'institutional-market', title: 'The Institutional Market Launch',
-        text: 'The Institutional Market introduced a USDC lending market with collateral requirements and risk parameters designed for institutional borrowers. I owned the social launch sequence and partner co-marketing: preparing partner-specific copy, coordinating publishing dates, managing direct outreach, and amplifying partner posts.',
+        text: 'The Institutional Market introduced a market for lending and borrowing USDC, a digital dollar, with collateral requirements and risk parameters designed for institutional borrowers. I owned the social launch sequence and partner co-marketing: preparing partner-specific copy, coordinating publishing dates, managing direct outreach, and amplifying partner posts.',
         evidence: [{
           src: '/work/compound/institutional-market-launch.png',
           alt: 'Compound Foundation post announcing the September 8 Institutional Market launch.',
@@ -35,7 +35,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'partner-spotlight', title: 'Partner Spotlight',
-        text: 'I developed and ran Partner Spotlight to show how longstanding integrations with Kiln, DeFi Saver, Chainlink, and Sky supported Compound’s markets. Partner amplification helped us reach beyond our own channels. The series earned 2.9× the median X views of other posts published during the same period, measured using cumulative views.',
+        text: 'I developed and ran Partner Spotlight to show how longtime partners Kiln, DeFi Saver, Chainlink, and Sky built on and supported Compound’s markets. Partner amplification helped us reach beyond our own channels. The series earned 2.9× the median X views of other posts published during the same period, measured using cumulative views.',
         evidence: [
           {
             src: '/work/compound/sky-spotlight.png',
@@ -55,7 +55,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'traction', title: 'Making Traction Visible',
-        text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL. Growth stories gave BD proof to use in allocator conversations as the combined total reached $60M.',
+        text: 'There wasn’t a centralized view of Institutional Market traction. I built a Dune dashboard with Claude and worked with the team to establish the metrics we wanted to show: deposits and collateral supplied, rather than TVL (total value locked), the usual crypto headline number. Growth stories gave business development proof to use with institutional investors as the combined total reached $60M.',
         evidence: [{
           src: '/work/compound/institutional-market-dashboard.png',
           alt: 'Compound Institutional Market dashboard by cadena on Dune, tracking deposits, loans, utilization, rates, and deposits plus collateral.',
@@ -98,14 +98,14 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
   },
   {
     slug: 'stablelab', title: 'StableLab',
-    summary: 'Building a marketing function from zero, first for governance services, then for a data product.',
+    summary: 'Built marketing from zero at a company that worked with 40+ crypto protocols, then took its data product to market.',
     company: 'StableLab', role: 'Head of Marketing',
     image: { src: '/work/partners.jpg', alt: 'The StableLab logo surrounded by partner logos, including Uniswap, Aave, Arbitrum, Lido, and Sky.' },
-    intro: 'StableLab was a governance and data infrastructure company that worked with 40+ protocols, including Uniswap, Aave, and Arbitrum. As Head of Marketing, I built the marketing function from zero. In the services era, the job was to make StableLab known and trusted, so BD conversations started warm. Later, I took Forse, the company’s data product, to market.',
+    intro: 'StableLab worked with 40+ crypto protocols, including Uniswap, Aave, and Arbitrum, on governance: how these networks propose, debate, and vote on changes. As Head of Marketing, I built the marketing function from zero. In the services era, the job was to make StableLab the name protocols knew and trusted, so sales conversations started warm. Later, I took Forse, the company’s data product, to market.',
     sections: [
       {
         id: 'stablepod', kicker: 'Services Era', title: 'StablePod',
-        text: 'I produced and co-hosted 29 episodes of StablePod, a podcast on crypto protocols and governance. I handled guest coordination, episode planning, production, and promotion. Guests came from Morpho, Euler, Gnosis, the Uniswap Foundation, Optimism, dYdX, and Ethena. The show gave partners another channel for their launches, and one guest conversation turned into an active business discussion.',
+        text: 'I produced and co-hosted 29 episodes of StablePod, a podcast on crypto protocols and governance. I handled guest coordination, episode planning, production, and promotion. Guests came from Morpho, Euler, Gnosis, the Uniswap Foundation, Optimism, dYdX, and Ethena, some of the biggest names in decentralized finance. The show gave partners another channel for their launches, and one guest conversation turned into an active business discussion.',
         evidence: [{
           src: '/work/stablepod-cover.jpg',
           alt: 'StablePod podcast cover.',
@@ -116,7 +116,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'governance-lab', title: 'Governance Lab',
-        text: 'I built Governance Lab, StableLab’s newsletter, from zero. I handled editorial direction, writing, curation, and distribution, and it doubled as our channel for research, announcements, and product launches. It ran for 121 issues, reached 920+ subscribers, and held a 38% average open rate, about twice the industry average.',
+        text: 'I built Governance Lab, StableLab’s newsletter on how crypto networks make decisions, from zero. I handled editorial direction, writing, curation, and distribution, and it doubled as our channel for research, announcements, and product launches. It became a go-to read for people tracking crypto governance: 121 issues, 920+ subscribers, and a 38% average open rate, about twice the industry average.',
         evidence: [{
           src: '/work/governance-lab-cover.jpg',
           alt: 'Governance Lab newsletter cover.',
@@ -128,7 +128,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'proposal-amplification', title: 'Proposal Amplification',
-        text: 'Every governance proposal we submitted needed to pass, and each DAO had its own dynamics. I built a comms plan for each one across its lifecycle: forum post, temperature check, onchain vote, and outcome. We amplified 50+ proposals. Passed proposals meant renewed contracts, so this work directly supported revenue.',
+        text: 'In crypto, changes to a protocol go through public proposals that token holders vote on. Every proposal we submitted for a client needed to pass, and each community had its own dynamics. I built a comms plan for each one across its lifecycle: forum post, temperature check, onchain vote, and outcome. We amplified 50+ proposals. Passed proposals meant renewed contracts, so this work directly supported revenue.',
         evidence: [
           { src: '/work/proposals/unichain.jpg', alt: 'StableLab governance proposal graphic for Unichain.', width: 800, height: 400 },
           { src: '/work/proposals/gnosis.jpg', alt: 'StableLab governance proposal graphic for Gnosis.', width: 800, height: 400 },
@@ -138,7 +138,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'governance-gathering', title: 'Governance Gathering',
-        text: 'I led Governance Gathering, a business development side event at EthCC Brussels co-hosted with UMA, Wormhole, and Tally. I secured the co-sponsors and managed delivery. 258 people registered and 150+ attended, bringing partners and prospective clients into one room.',
+        text: 'I led Governance Gathering, a business development side event at EthCC Brussels, Europe’s biggest Ethereum conference, co-hosted with UMA, Wormhole, and Tally. I secured the co-sponsors and managed delivery. 258 people registered and 150+ attended, bringing partners and prospective clients into one room.',
         evidence: [
           { src: '/work/agg/event-5.jpg', alt: 'Guests at Governance Gathering during EthCC Brussels.', width: 800, height: 800, href: 'https://lu.ma/l5tvcrcb', linkLabel: 'View the event' },
           { src: '/work/agg/event-6.jpg', alt: 'Conversations at Governance Gathering.', width: 800, height: 800 },
@@ -146,7 +146,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'forse-launch', kicker: 'GTM for a Data Product', title: 'Launching Forse',
-        text: 'Forse was StableLab’s analytics product for tracking protocol incentives and growth programs. It was our first product launch, with no brand or playbook to start from. I ran naming workshops with the CEO, Head of Product, and our designer, and we landed on Forse, inspired by forsker, the Danish word for researcher. I built the visual identity with our designer, framed the product as Built by StableLab to carry over the trust we had earned, and ran the launch across the website, blog, X, LinkedIn, and email. Going live before EthCC gave BD a reason to reach out.',
+        text: 'Forse was StableLab’s analytics product for measuring whether crypto growth programs, like token incentives and grants, actually worked. It was our first product launch, with no brand or playbook to start from. I ran naming workshops with the CEO, Head of Product, and our designer, and we landed on Forse, inspired by forsker, the Danish word for researcher. I built the visual identity with our designer, framed the product as Built by StableLab to carry over the trust we had earned, and ran the launch across the website, blog, X, LinkedIn, and email. Going live before EthCC gave BD a reason to reach out.',
         evidence: [{
           src: '/work/forse-brand-system.jpg',
           alt: 'Forse launch brand board: name origin, color palette, wordmark, and the first product interface.',
@@ -165,7 +165,7 @@ export const workCases: WorkCase[] = workCasesSchema.parse([
       },
       {
         id: 'forse-repositioning', title: 'Finding the Right Buyer',
-        text: 'The DAO-focused positioning wasn’t landing. The buyers with budget were foundations and core protocol teams, not DAOs. We repositioned Forse from DAO analytics to the intelligence layer fueling web3 growth. I pushed to keep everything under one brand instead of launching a third, directed a modern, minimal visual refresh, and owned the messaging, website structure, and copy.',
+        text: 'We first pitched Forse to DAOs, the community-run organizations that govern protocols. That wasn’t landing. The buyers with budget were the foundations and core teams behind those protocols. We repositioned Forse from DAO analytics to the intelligence layer fueling web3 growth. I pushed to keep everything under one brand instead of launching a third, directed a modern, minimal visual refresh, and owned the messaging, website structure, and copy.',
         evidence: [{
           src: '/work/forse-landing-hero.webp',
           alt: 'Forse landing page: The Intelligence Layer Fueling Web3 Growth.',
