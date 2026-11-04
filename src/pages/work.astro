@@ -7,7 +7,9 @@ import { workEmployers } from '../data/work-index';
 
 <Layout title="Work — Juan Esquivel" description="Selected marketing work at Compound Foundation and StableLab." canonicalPath="/work">
   <Nav active="work" />
-  <PageHeader title="Work" subtitle="Selected marketing work at Compound Foundation and StableLab." />
+  <PageHeader title="Work" subtitle="Selected marketing work at Compound Foundation and StableLab.">
+    <a class="work-resume" href="/JUAN-ESQUIVEL-resume.pdf">Résumé <span aria-hidden="true">↗</span></a>
+  </PageHeader>
 
   <div class="work-list">
     {workEmployers.map((employer, index) => (
@@ -69,10 +71,6 @@ import { workEmployers } from '../data/work-index';
     ))}
   </div>
 
-  <p class="work-earlier">
-    Earlier: content at Boardroom, community at Orca Protocol and RabbitHole.
-    <a href="/JUAN-ESQUIVEL-resume.pdf">Full résumé <span aria-hidden="true">↗</span></a>
-  </p>
 </Layout>
 
 <script>
@@ -392,15 +390,23 @@ import { workEmployers } from '../data/work-index';
     color: var(--accent);
   }
 
-  .work-earlier {
-    margin: 2rem 0 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-soft);
-  }
-  .work-earlier a {
+  .work-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    min-height: 44px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text);
-    text-underline-offset: 4px;
+    text-decoration: none;
+  }
+  .work-resume span {
+    color: var(--accent);
+  }
+  .work-resume:hover {
+    color: var(--accent);
   }
 
   @media (max-width: 640px) {
