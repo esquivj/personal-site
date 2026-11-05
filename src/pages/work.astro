@@ -13,7 +13,7 @@ import { workEmployers } from '../data/work-index';
 
   <div class="work-list">
     {workEmployers.map((employer, index) => (
-      <details class="work-row" id={employer.id}>
+      <details class="work-row" id={employer.id} style={employer.accent && `--row-accent: ${employer.accent}`}>
         <summary class="work-head">
           <span class="work-banner"><img src={employer.cover.src} alt={employer.cover.alt} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /></span>
           <span class="work-num">{String(index + 1).padStart(2, '0')}</span>
@@ -129,7 +129,7 @@ import { workEmployers } from '../data/work-index';
     display: none;
   }
   .work-head:focus-visible {
-    outline: 1px solid var(--accent);
+    outline: 1px solid var(--row-accent, var(--accent));
     outline-offset: 4px;
   }
 
@@ -204,19 +204,19 @@ import { workEmployers } from '../data/work-index';
   }
   .work-row[open] .work-chevron {
     transform: rotate(180deg);
-    color: var(--accent);
-    border-color: var(--accent);
+    color: var(--row-accent, var(--accent));
+    border-color: var(--row-accent, var(--accent));
   }
   .work-row[open] .work-name {
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
   }
   @media (hover: hover) and (pointer: fine) {
     .work-head:hover .work-name,
     .work-head:hover .work-chevron {
-      color: var(--accent);
+      color: var(--row-accent, var(--accent));
     }
     .work-head:hover .work-chevron {
-      border-color: var(--accent);
+      border-color: var(--row-accent, var(--accent));
     }
   }
 
@@ -276,7 +276,7 @@ import { workEmployers } from '../data/work-index';
     font-size: 2.6rem;
     line-height: 1;
     letter-spacing: -0.03em;
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
   }
   .work-figures dt {
     font-size: 0.78rem;
@@ -349,7 +349,7 @@ import { workEmployers } from '../data/work-index';
     color: var(--text);
   }
   .work-item-arrow {
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
     font-family: var(--font-ui);
     font-size: 0.8em;
   }
@@ -369,12 +369,12 @@ import { workEmployers } from '../data/work-index';
     color: var(--text-faint);
   }
   .work-item.is-link:focus-visible {
-    outline: 1px solid var(--accent);
+    outline: 1px solid var(--row-accent, var(--accent));
     outline-offset: 4px;
   }
   @media (hover: hover) and (pointer: fine) {
     .work-item.is-link:hover .work-item-title {
-      color: var(--accent);
+      color: var(--row-accent, var(--accent));
     }
     .work-item.is-link:hover .work-thumb img {
       transform: scale(1.03);
@@ -395,10 +395,10 @@ import { workEmployers } from '../data/work-index';
     text-decoration: none;
   }
   .work-cta span {
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
   }
   .work-cta:hover {
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
   }
 
   .work-resume {
@@ -414,10 +414,10 @@ import { workEmployers } from '../data/work-index';
     text-decoration: none;
   }
   .work-resume span {
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
   }
   .work-resume:hover {
-    color: var(--accent);
+    color: var(--row-accent, var(--accent));
   }
 
   @media (max-width: 640px) {

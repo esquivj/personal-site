@@ -101,6 +101,7 @@ const isAbout = canonicalPath === '/about';
           </div>
           <div class="footer-meta">
             <p>© 2026 Juan Esquivel</p>
+            <p><span class="footer-clock"><span class="footer-clock-dot" aria-hidden="true"></span>Los Angeles <time class="footer-clock-time" data-la-clock></time></span></p>
             <div class="footer-links">
               <a href="/privacy">Privacy</a>
               <a href="/contact">Contact</a>
@@ -109,7 +110,7 @@ const isAbout = canonicalPath === '/about';
         </footer>
       ) : (
         <footer class:list={['footer-minimal', isAbout && 'footer-minimal--no-mark']}>
-          <p class="footer-colophon">Build your way in · Los Angeles · 2026</p>
+          <p class="footer-colophon">Build your way in · <span class="footer-clock"><span class="footer-clock-dot" aria-hidden="true"></span>Los Angeles <time class="footer-clock-time" data-la-clock></time></span> · 2026</p>
         </footer>
       )}
     </div>
@@ -119,6 +120,29 @@ const isAbout = canonicalPath === '/about';
     <script>
       import { inject } from '@vercel/analytics';
       inject();
+    </script>
+    <script>
+      // Live 24-hour Los Angeles time in the footer, ticking on the second.
+      const clocks = document.querySelectorAll<HTMLTimeElement>('[data-la-clock]');
+      if (clocks.length) {
+        const format = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'America/Los_Angeles',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hourCycle: 'h23',
+        });
+        const tick = () => {
+          const now = new Date();
+          const text = format.format(now);
+          clocks.forEach((clock) => {
+            clock.textContent = text;
+            clock.dateTime = now.toISOString();
+          });
+          setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+        };
+        tick();
+      }
     </script>
     <script>
       const fitFooterWordmark = () => {
@@ -184,6 +208,10 @@ const isAbout = canonicalPath === '/about';
     --accent-soft: rgba(194, 74, 45, 0.08);
     --accent-glow: rgba(194, 74, 45, 0.16);
     --accent-secondary: #c24a2d;
+    /* Green marks what's live or current. Rust stays the brand and link color. */
+    --live: #1f5c3a;
+    --live-signal: #3f8f5a;
+    --live-soft: #e7eee6;
     --shadow: 0 18px 48px rgba(18, 14, 10, 0.06);
     --space-2xs: 0.35rem;
     --space-xs: 0.6rem;
@@ -788,6 +816,29 @@ const isAbout = canonicalPath === '/about';
     color: var(--text-faint);
     text-align: center;
     margin-top: 0.35rem;
+  }
+
+  .footer-clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    color: var(--live);
+    white-space: nowrap;
+  }
+
+  .footer-clock-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--live-signal);
+  }
+
+  .footer-clock-time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer-clock-time:empty {
+    display: none;
   }
 
   .footer-minimal::after {

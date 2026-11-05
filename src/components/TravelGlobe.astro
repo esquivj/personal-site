@@ -39,7 +39,7 @@ const cityList = cities.map((c) => c.name).join(', ');
       {routeLines.map((line) => <path d={path(line)} fill="none" stroke="var(--globe-accent)" stroke-width="0.7" opacity="0.35" />)}
       {visibleCities.map(({ c, p }) =>
         c.name === homes.current ? (
-          <g><circle cx={p![0]} cy={p![1]} r="8" fill="none" stroke="var(--globe-accent)" stroke-width="1.2" /><circle cx={p![0]} cy={p![1]} r="3.6" fill="var(--globe-accent)"><title>{c.name}, {c.country} (home)</title></circle></g>
+          <g><circle cx={p![0]} cy={p![1]} r="8" fill="none" stroke="var(--globe-live)" stroke-width="1.2" /><circle cx={p![0]} cy={p![1]} r="3.6" fill="var(--globe-live)"><title>{c.name}, {c.country} (home)</title></circle></g>
         ) : c.name === homes.previous ? (
           <circle cx={p![0]} cy={p![1]} r="4.5" fill="none" stroke="var(--globe-accent)" stroke-width="1.4"><title>{c.name}, {c.country} (once home)</title></circle>
         ) : (
@@ -88,6 +88,7 @@ const cityList = cities.map((c) => c.name).join(', ');
     /* The globe always sits on a dark stage. */
     --globe-ink: #f3f1eb;
     --globe-accent: #e0694a;
+    --globe-live: #62b87f;
     --globe-line: rgba(243, 241, 235, 0.16);
     margin: 0;
     width: 100%;
@@ -194,7 +195,7 @@ const cityList = cities.map((c) => c.name).join(', ');
     font-size: 0.58rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--globe-ink);
+    color: var(--globe-live);
     white-space: nowrap;
   }
   .globe-home-tag.is-previous {

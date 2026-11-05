@@ -5,7 +5,7 @@ export type WorkCase = z.infer<typeof workCaseSchema>;
 
 export const workCases: WorkCase[] = workCasesSchema.parse([
   {
-    slug: 'compound', title: 'Compound Foundation',
+    slug: 'compound', title: 'Compound Foundation', accent: '#1f5c3a',
     summary: 'First social hire. Launches, partner co-marketing, governance, and the reporting that showed what worked.',
     company: 'Compound Foundation', role: 'Founding Social & Community Lead',
     image: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch.' },
