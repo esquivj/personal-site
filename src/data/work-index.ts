@@ -13,6 +13,7 @@ export const workEmployers: WorkEmployer[] = workEmployersSchema.parse([
     years: 'May-Oct 2026',
     summary: 'First social hire. Launches, partner co-marketing, governance, and the reporting that showed what worked.',
     stat: { value: '$60M', label: 'Institutional Market' },
+    accent: '#1f5c3a',
     cover: { src: '/work/compound/institutional-market-cover.jpg', alt: 'Artwork from the Compound Institutional Market launch' },
     intro:
       'Compound is one of crypto’s original lending protocols, where anyone can lend and borrow without a bank. As the foundation’s first dedicated social hire, I ran X and LinkedIn through product launches, partnerships, and governance votes.',

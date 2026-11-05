@@ -299,29 +299,29 @@ const websiteSchema = {
   }
 
   .availability {
-    --availability-green: #3f8f5a;
+    --availability-green: var(--live-signal);
     display: flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.6rem;
+    width: max-content;
     margin-top: 1rem;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid rgba(31, 92, 58, 0.3);
+    background: var(--live-soft);
     font-family: var(--font-mono);
     font-size: 0.66rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-soft);
-  }
-
-  .availability {
-    width: max-content;
     white-space: nowrap;
-    color: inherit;
+    color: var(--live);
     text-decoration: none;
+    transition: border-color 150ms var(--ease-out), background-color 150ms var(--ease-out);
   }
 
   .availability:hover,
   .availability:focus-visible {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    border-color: var(--live);
+    background: #dde8db;
   }
 
   .availability-arrow {

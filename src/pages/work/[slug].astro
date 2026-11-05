@@ -14,7 +14,7 @@ const next = workCases[(workCases.findIndex(item => item.slug === work.slug) + 1
 
 <Layout title={`${work.title} — Juan Esquivel`} description={work.summary} canonicalPath={`/work/${work.slug}`} wide>
   <Nav active="work" />
-  <article class="case-study">
+  <article class="case-study" style={work.accent && `--accent: ${work.accent}`}>
     <nav class="case-nav" aria-label="Page navigation"><a href="/work">← All work</a><a href="/JUAN-ESQUIVEL-resume.pdf">Résumé <span aria-hidden="true">↗</span></a></nav>
     <header class="case-header"><p class="case-role">{work.company} · {work.role}</p><h1>{work.title}</h1><p class="case-intro">{work.intro}</p></header>
     {!hasEvidence && <div class:list={['case-cover', work.imageStyle === 'contain' && 'case-cover--contain']}><img src={work.image.src} alt={work.image.alt} decoding="async" /></div>}

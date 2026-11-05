@@ -168,6 +168,7 @@ export const workCaseSchema = z.object({
   role: nonEmptyString,
   image: workImageSchema,
   imageStyle: z.enum(['cover', 'contain']).default('cover'),
+  accent: z.string().regex(/^#[0-9a-f]{6}$/i).optional(),
   intro: nonEmptyString,
   sections: z.array(z.object({
     id: z.string().regex(/^[a-z0-9-]+$/).optional(),
@@ -197,6 +198,8 @@ export const workEmployerSchema = z.object({
   summary: nonEmptyString,
   stat: z.object({ value: nonEmptyString, label: nonEmptyString }),
   cover: z.object({ src: nonEmptyString, alt: nonEmptyString }),
+  // A brand-colored accent for this employer's row and case page; rust when unset.
+  accent: z.string().regex(/^#[0-9a-f]{6}$/i).optional(),
   intro: nonEmptyString,
   figures: z.array(z.object({ value: nonEmptyString, label: nonEmptyString })).default([]),
   phases: z.array(z.object({

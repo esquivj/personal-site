@@ -309,6 +309,7 @@ const shelves = stackSections
             data-index={i}
             data-name={item.name}
             data-category={item.category}
+            data-live={item.live ? '' : undefined}
             data-desc={item.desc}
             data-note={item.note ?? ''}
             data-href={item.href ?? ''}
@@ -339,7 +340,7 @@ const shelves = stackSections
   <section class="dock-detail" aria-live="polite" data-dock-detail>
     <img src={picked.icon} alt="" width="96" height="96" class:list={['dock-detail-icon', { 'is-cover': picked.dial }]} data-detail-icon />
     <div class="dock-detail-body">
-      <span class="dock-detail-category" data-detail-category>{picked.category}</span>
+      <span class="dock-detail-meta"><span class="dock-detail-category" data-detail-category>{picked.category}</span><span class="dock-detail-live" data-detail-live hidden={!picked.live}><span aria-hidden="true"></span>Live</span></span>
       <span class="dock-detail-name" data-detail-name>{picked.name}</span>
       <span class="dock-detail-desc" data-detail-desc>{picked.desc}</span>
     </div>
@@ -393,6 +394,7 @@ const shelves = stackSections
     const items = [...dockRoot.querySelectorAll<HTMLButtonElement>('.dock-item')];
     const icon = detail.querySelector<HTMLImageElement>('[data-detail-icon]')!;
     const category = detail.querySelector<HTMLElement>('[data-detail-category]')!;
+    const live = detail.querySelector<HTMLElement>('[data-detail-live]')!;
     const name = detail.querySelector<HTMLElement>('[data-detail-name]')!;
     const desc = detail.querySelector<HTMLElement>('[data-detail-desc]')!;
     const note = detail.querySelector<HTMLElement>('[data-detail-note]')!;
@@ -407,6 +409,7 @@ const shelves = stackSections
       icon.src = img?.src ?? d.icon ?? '';
       icon.classList.toggle('is-cover', d.name === 'Dial');
       category.textContent = d.category ?? '';
+      live.hidden = d.live === undefined;
       name.textContent = d.name ?? '';
       desc.textContent = d.desc ?? '';
       note.textContent = d.note ?? '';
@@ -727,6 +730,35 @@ const shelves = stackSections
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+  }
+
+  .dock-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+  }
+
+  .dock-detail-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--live);
+  }
+
+  .dock-detail-live[hidden] {
+    display: none;
+  }
+
+  .dock-detail-live span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--live-signal);
   }
 
   .dock-detail-category {
