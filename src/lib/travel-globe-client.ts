@@ -38,6 +38,7 @@ const POINT_FS = `
 precision mediump float;
 uniform vec3 uInk;
 uniform vec3 uAcc;
+uniform vec3 uLive;
 uniform float uTime;
 uniform float uPulse;
 varying float vF;
@@ -61,7 +62,7 @@ void main() {
     float r = mix(0.16, 0.48, t);
     float wave = smoothstep(0.04, 0.0, abs(d - r)) * (1.0 - t) * uPulse;
     float a = max(core, max(halo * 0.9, wave * 0.8));
-    vec3 col = halo > 0.5 ? vec3(0.98, 0.97, 0.95) : uAcc;
+    vec3 col = halo > 0.5 ? vec3(0.98, 0.97, 0.95) : uLive;
     gl_FragColor = vec4(col, a * front);
   } else if (vK > 0.5) {
     float body = smoothstep(0.5, 0.44, d);
@@ -282,6 +283,8 @@ export function initTravelGlobe(root: HTMLElement) {
   const styles = getComputedStyle(root);
   const ink = hex(styles.getPropertyValue('--globe-ink'), [0.95, 0.94, 0.92]);
   const accent = hex(styles.getPropertyValue('--globe-accent'), [0.88, 0.41, 0.29]);
+  // Home is where Juan is now, so it takes the site's live green.
+  const live = hex(styles.getPropertyValue('--globe-live'), [0.38, 0.72, 0.5]);
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const start = performance.now();
@@ -326,6 +329,7 @@ export function initTravelGlobe(root: HTMLElement) {
     pZ: gl.getUniformLocation(program, 'uZ'),
     pInk: gl.getUniformLocation(program, 'uInk'),
     pAcc: gl.getUniformLocation(program, 'uAcc'),
+    pLive: gl.getUniformLocation(program, 'uLive'),
     pHover: gl.getUniformLocation(program, 'uHover'),
     pFocus: gl.getUniformLocation(program, 'uFocus'),
     pTime: gl.getUniformLocation(program, 'uTime'),
@@ -459,6 +463,7 @@ export function initTravelGlobe(root: HTMLElement) {
     gl.uniform2fv(loc.pFit, fit);
     gl.uniform3fv(loc.pInk, ink);
     gl.uniform3fv(loc.pAcc, accent);
+    gl.uniform3fv(loc.pLive, live);
     gl.uniform1f(loc.pHover, hover ? hover.index : -10);
     gl.uniform1f(loc.pFocus, focusId);
     gl.uniform1f(loc.pTime, time);
